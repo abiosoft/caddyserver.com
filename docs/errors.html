@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>errors - Caddy Directives</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/common.css">
+		<link rel="stylesheet" href="/resources/css/docs.css">
+		<link rel="icon" href="/favicon.ico">
+		<script src="/resources/js/common.js"></script>
+	</head>
+	<body>
+		<main>
+			<h1>errors</h1>
+
+			<p>
+				errors allows you to set custom error pages and enable error logging.
+			</p>
+
+			<p>
+				By default, error responses (HTTP status >= 400) are not logged and the client receives a plaintext error message.
+			</p>
+
+			<p>
+				Using an error log, the text of each error will be recorded so you can determine what is going wrong without exposing those details to the clients. With error pages, you can present custom error messages and instruct your visitor what to do.
+			</p>
+
+			<h3>Syntax</h3>
+			
+			<code class="block"><span class="hl-directive">errors</span> <span class="hl-arg"><i>logfile</i></span></code>
+
+			<ul>
+				<li><b>logfile</b> is the path to the error log file to create (or append to). It can also be <code>stdout</code> or <code>stderr</code> to write to the console.</li>
+			</ul>
+
+			<p>
+				The above syntax will simply enable error logging on the server. To specify custom error pages, open a block:
+			</p>
+
+			<code class="block"><span class="hl-directive">errors</span> {
+    <span class="hl-subdirective"><i>what</i></span> <i>where</i>
+}</code>
+
+			<ul>
+				<li><b>what</b> can be an HTTP status code (4xx, 5xx) or log.</li>
+				<li><b>where</b> depends on what. If an error page, it is the HTML file of the error page (path is relative to site root). If log, it is the path to the log file (relative to Caddy executable).
+			</ul>
+
+
+
+			<h3>Examples</h3>
+
+			<p>
+				Log errors outside of the site's root:
+			</p>
+
+			<code class="block"><span class="hl-directive">errors</span> <span class="hl-arg">../error.log</span></code>
+
+			<p>
+				Log errors but also serve some custom error pages:
+			</p>
+
+			<code class="block"><span class="hl-directive">errors</span> {
+	<span class="hl-subdirective">log</span> ../error.log
+	<span class="hl-subdirective">404</span> 404.html <span class="hl-comment"># Not Found</span>
+	<span class="hl-subdirective">500</span> 500.html <span class="hl-comment"># Internal Server Error</span>
+}</code>
+
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		<nav>
+			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
+			<a href="/download">Download</a>
+			<a href="/docs">User Guide</a>
+			<a href="/docs/faq">FAQ</a>
+			<a href="https://github.com/mholt/caddy">GitHub</a>
+		</nav>
+
+		<div class="nav">
+			<h6>Caddy</h6>
+			<ul>
+				<li><a href="/docs/getting-started">Getting Started</a></li>
+				<li><a href="/docs/faq">FAQ</a></li>
+				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
+			</ul>
+
+			<h6>Directives</h6>
+			<ul>
+				<li><a href="/docs/basicauth">basicauth</a></li>
+				<li><a href="/docs/bind">bind</a></li>
+				<li><a href="/docs/browse">browse</a></li>
+				<li><a href="/docs/errors">errors</a></li>
+				<li><a href="/docs/ext">ext</a></li>
+				<li><a href="/docs/fastcgi">fastcgi</a></li>
+				<li><a href="/docs/git">git</a></li>
+				<li><a href="/docs/gzip">gzip</a></li>
+				<li><a href="/docs/header">header</a></li>
+				<li><a href="/docs/import">import</a></li>
+				<li><a href="/docs/internal">internal</a></li>
+				<li><a href="/docs/log">log</a></li>
+				<li><a href="/docs/markdown">markdown</a></li>
+				<li><a href="/docs/proxy">proxy</a></li>
+				<li><a href="/docs/redir">redir</a></li>
+				<li><a href="/docs/rewrite">rewrite</a></li>
+				<li><a href="/docs/root">root</a></li>
+				<li><a href="/docs/shutdown">shutdown</a></li>
+				<li><a href="/docs/startup">startup</a></li>
+				<li><a href="/docs/templates">templates</a></li>
+				<li><a href="/docs/tls">tls</a></li>
+				<li><a href="/docs/websocket">websocket</a></li>
+			</ul>
+
+		</div>
+	</body>
+</html>

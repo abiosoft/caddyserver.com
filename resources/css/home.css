@@ -1,0 +1,116 @@
+h1 {
+	color: #FFF;
+	font-size: 32px;
+	font-weight: normal;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .8);
+	max-width: 850px;
+	margin: 50px auto;
+}
+
+header {
+	background-image: url('/resources/images/datacore-right.jpg');
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+header .logo {
+	max-width: 500px;
+	width: 100%;
+}
+
+#spinner {
+	display: inline-block;
+	text-align: left;
+	width: 180px;
+	height: 1.5em;
+	overflow: hidden;
+	vertical-align: top;
+	position: relative;
+}
+
+#spinner-item-container {
+	position: relative;
+	width: 2000px;
+}
+
+#spinner .item {
+	display: block;
+	float: left;
+	width: 200px;
+}
+
+main {
+	background: #FFF;
+}
+
+.features h3 {
+	font-size: 18px;
+}
+
+.features h3 .fa {
+	margin-right: .5em;
+}
+
+.features p {
+	font-family: 'Roboto';
+	font-size: 14px;
+	margin-bottom: 2em;
+}
+
+
+.featurettes {
+	display: -webkit-flex;
+	display: flex;
+}
+
+.featurette {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	padding: 100px 35px;
+	width: 33.3333%;
+	box-sizing: border-box;
+}
+
+.featurette h3 {
+	text-transform: uppercase;
+	color: #FFF;
+	text-shadow: 0 0 16px #000;
+	font-size: 42px;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.featurette p {
+	color: #FFF;
+	font-size: 18px;
+	text-shadow: 0 0 15px rgba(0, 0, 0, .8);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+
+@media (min-width: 1200px) {
+	h1 {
+		left: 30px;
+	}
+}
+
+@media (min-width: 1000px) {
+	h1 {
+		position: relative;
+	}
+}
+
+
+@media (max-width: 1000px) {
+	.featurettes {
+		-webkit-flex-direction: column;
+		flex-direction: column;
+	}
+	.featurette {
+		width: 100%;
+	}
+}

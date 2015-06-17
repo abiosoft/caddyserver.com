@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>basicauth - Caddy Directives</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/common.css">
+		<link rel="stylesheet" href="/resources/css/docs.css">
+		<link rel="icon" href="/favicon.ico">
+		<script src="/resources/js/common.js"></script>
+	</head>
+	<body>
+		<main>
+			<h1>basicauth</h1>
+
+			<p>
+				basicauth implements HTTP Basic Authentication. Basic Authentication can be used to protect directories and files with a username and password. Note that basic auth is <i>not secure</i> over plain HTTP. Even with HTTPS which encrypts the header including the credentials, the security of basic auth is disputed. Use discretion when deciding what to protect with HTTP Basic Authentication.
+			</p>
+
+			<p>
+				When a user requests a resource that is protected, the browser will prompt the user for a username and password if they have not already supplied one. If the proper credentials are present in the Authorization header, the server will grant access to the resource. If the header is missing or the credentials are incorrect, the server will respond with HTTP 401 Unauthorized.
+			</p>
+
+
+			<h3>Syntax</h3>
+			
+			<code class="block"><span class="hl-directive">basicauth</span> <span class="hl-arg"><i>path username password</i></span></code>
+
+			<ul>
+				<li><b>path</b> is the file or directory to protect</li>
+				<li><b>username</b> is the username</li>
+				<li><b>password</b> is the password</li>
+			</ul>
+
+			<p>
+				This syntax is convenient for protecting a single file or base path/directory. For multiple resources, consider the following variation:
+			</p>
+
+			<code class="block"><span class="hl-directive">basicauth</span> <span class="hl-arg"><i>username password</i></span> {
+    <span class="hl-subdirective"><i>resources</i></span>
+}</code>
+
+			<ul>
+				<li><b>username</b> is the username</li>
+				<li><b>password</b> is the password</li>
+				<li><b>resources</b> is a list of files/directories to protect, one per line</li>
+			</ul>
+
+
+			<h3>Examples</h3>
+
+			<p>
+				Protect all files in /secret so only Bob can access them with the password "hiccup":
+			</p>
+
+			<code class="block"><span class="hl-directive">basicauth</span> <span class="hl-arg">/secret Bob hiccup</span></code>
+
+
+			<p>
+				Protect multiple files and directories so Mary Lou has access with her password "milkshakes":
+			</p>
+
+			<code class="block"><span class="hl-directive">basicauth</span> <span class="hl-arg">"Mary Lou" milkshakes</span> {
+    <span class="hl-subdirective">/notes-for-mary-lou.txt</span>
+    <span class="hl-subdirective">/marylou-files</span>
+    <span class="hl-subdirective">/another-file.txt</span>
+}</code>
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		<nav>
+			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
+			<a href="/download">Download</a>
+			<a href="/docs">User Guide</a>
+			<a href="/docs/faq">FAQ</a>
+			<a href="https://github.com/mholt/caddy">GitHub</a>
+		</nav>
+
+		<div class="nav">
+			<h6>Caddy</h6>
+			<ul>
+				<li><a href="/docs/getting-started">Getting Started</a></li>
+				<li><a href="/docs/faq">FAQ</a></li>
+				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
+			</ul>
+
+			<h6>Directives</h6>
+			<ul>
+				<li><a href="/docs/basicauth">basicauth</a></li>
+				<li><a href="/docs/bind">bind</a></li>
+				<li><a href="/docs/browse">browse</a></li>
+				<li><a href="/docs/errors">errors</a></li>
+				<li><a href="/docs/ext">ext</a></li>
+				<li><a href="/docs/fastcgi">fastcgi</a></li>
+				<li><a href="/docs/git">git</a></li>
+				<li><a href="/docs/gzip">gzip</a></li>
+				<li><a href="/docs/header">header</a></li>
+				<li><a href="/docs/import">import</a></li>
+				<li><a href="/docs/internal">internal</a></li>
+				<li><a href="/docs/log">log</a></li>
+				<li><a href="/docs/markdown">markdown</a></li>
+				<li><a href="/docs/proxy">proxy</a></li>
+				<li><a href="/docs/redir">redir</a></li>
+				<li><a href="/docs/rewrite">rewrite</a></li>
+				<li><a href="/docs/root">root</a></li>
+				<li><a href="/docs/shutdown">shutdown</a></li>
+				<li><a href="/docs/startup">startup</a></li>
+				<li><a href="/docs/templates">templates</a></li>
+				<li><a href="/docs/tls">tls</a></li>
+				<li><a href="/docs/websocket">websocket</a></li>
+			</ul>
+
+		</div>
+	</body>
+</html>

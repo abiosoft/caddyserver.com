@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>browse - Caddy Directives</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/resources/css/highlight/atelier-lakeside.light.css">
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/common.css">
+		<link rel="stylesheet" href="/resources/css/docs.css">
+		<link rel="icon" href="/favicon.ico">
+		<script src="/resources/js/common.js"></script>
+		<script src="/resources/js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+	</head>
+	<body>
+		<main>
+			<h1>browse</h1>
+
+			<p>
+				browse enables directory browsing within the specified base path. It displays a file listing for directories which don't have an index file in them. In other server software, this is often called indexing.
+			</p>
+
+			<p>
+				By default, file listings are disabled and a request to a directory path (where no index file is present) will result in a 404 for obscurity reasons.
+			</p>
+
+			<h3>Syntax</h3>
+			
+			<code class="block"><span class="hl-directive">browse</span> <span class="hl-arg">[<i>path</i> [<i>tplfile</i>]]</span></code>
+
+			<ul>
+				<li><b>path</b> is the base path to match. Any directories in this base path become browsable.</li>
+				<li><b>tplfile</b> is the location of a template file to use.</li>
+			</ul>
+
+			<p>
+				A default template will be used if no template file is specified. Without any arguments, browsing is enabled on the entire site (path=/).
+			</p>
+
+			<h3>Template Format</h3>
+
+			<p>
+				A template is simply an HTML file with <i>actions</i> in it. The actions are parsed and executed to display dynamic content. You can make your own template file according to Go's <a href="http://golang.org/pkg/html/template/">html/template</a> <a href="http://golang.org/pkg/text/template/">syntax</a>  to render <a href="https://github.com/mholt/caddy/blob/29fec4742e5c09277324c8a01a28a976c5c8edc2/middleware/browse/browse.go#L34-L65">this struct type</a> (notice that some helper methods are available).
+			</p>
+
+			<p>
+				Here is a very simple example template:
+			</p>
+
+			<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;{{.Name}}&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		{{if .CanGoUp}}&lt;a href=".."&gt;Up one level&lt;/a&gt;&lt;br&gt;{{end}}
+		&lt;h1&gt;{{.Path}}&lt;/h1&gt;
+		{{range .Items}}
+		&lt;a href="{{.URL}}"&gt;{{.Name}}&lt;/a&gt;&lt;br&gt;
+		{{end}}
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+			<p>
+				... but the default template is nicer.
+			</p>
+
+			<h3>Examples</h3>
+
+			<p>
+				Allow directory listings in all folders that don't have an index file:
+			</p>
+
+			<code class="block"><span class="hl-directive">browse</span></code>
+
+			<p>
+				Show photo album contents (in /photos) via a custom template:
+			</p>
+
+			<code class="block"><span class="hl-directive">browse</span> <span class="hl-arg">/photos ../photo_album.tpl</span></code>
+
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		<nav>
+			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
+			<a href="/download">Download</a>
+			<a href="/docs">User Guide</a>
+			<a href="/docs/faq">FAQ</a>
+			<a href="https://github.com/mholt/caddy">GitHub</a>
+		</nav>
+
+		<div class="nav">
+			<h6>Caddy</h6>
+			<ul>
+				<li><a href="/docs/getting-started">Getting Started</a></li>
+				<li><a href="/docs/faq">FAQ</a></li>
+				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
+			</ul>
+
+			<h6>Directives</h6>
+			<ul>
+				<li><a href="/docs/basicauth">basicauth</a></li>
+				<li><a href="/docs/bind">bind</a></li>
+				<li><a href="/docs/browse">browse</a></li>
+				<li><a href="/docs/errors">errors</a></li>
+				<li><a href="/docs/ext">ext</a></li>
+				<li><a href="/docs/fastcgi">fastcgi</a></li>
+				<li><a href="/docs/git">git</a></li>
+				<li><a href="/docs/gzip">gzip</a></li>
+				<li><a href="/docs/header">header</a></li>
+				<li><a href="/docs/import">import</a></li>
+				<li><a href="/docs/internal">internal</a></li>
+				<li><a href="/docs/log">log</a></li>
+				<li><a href="/docs/markdown">markdown</a></li>
+				<li><a href="/docs/proxy">proxy</a></li>
+				<li><a href="/docs/redir">redir</a></li>
+				<li><a href="/docs/rewrite">rewrite</a></li>
+				<li><a href="/docs/root">root</a></li>
+				<li><a href="/docs/shutdown">shutdown</a></li>
+				<li><a href="/docs/startup">startup</a></li>
+				<li><a href="/docs/templates">templates</a></li>
+				<li><a href="/docs/tls">tls</a></li>
+				<li><a href="/docs/websocket">websocket</a></li>
+			</ul>
+
+		</div>
+	</body>
+</html>

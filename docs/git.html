@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>git - Caddy Directives</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/common.css">
+		<link rel="stylesheet" href="/resources/css/docs.css">
+		<link rel="icon" href="/favicon.ico">
+		<script src="/resources/js/common.js"></script>
+	</head>
+	<body>
+		<main>
+			<h1>git</h1>
+
+			<p>
+				git clones a <a href="http://git-scm.com/">git</a> repository into the site. This makes it possible to deploy your site with a simple <code>git push</code>.
+			</p>
+
+			<p>
+				The git directive does not chain in a handler. Instead, it starts a service routine that runs during the lifetime of the server. When the server starts, it clones the repository. While the server is still up, it pulls the latest every so often. In regular git fashion, a download only includes changes so it is very efficient.
+			</p>
+
+			<p>
+				If a pull fails, the service will retry up to three times. If the pull was not successful by then, it won't try again until the next interval.
+			</p>
+
+			<p>
+				<b>Requirements:</b> This directive requires git to be installed. Also, private repositories may only be accessed from Linux or Mac systems. (Contributions are welcome that make private repositories work on Windows.)
+			</p>
+
+			<h3>Syntax</h3>
+			
+			<code class="block"><span class="hl-directive">git</span> <span class="hl-arg"><i>repo</i> [<i>path</i>]</span></code>
+
+			<ul>
+				<li><b>repo</b> is the URL to the repository; SSH and HTTPS URLs are supported</li>
+				<li><b>path</b> is the path, relative to site root, to clone the repository into; default is site root</li>
+			</ul>
+
+			<p>
+				This simplified syntax pulls from master every 3600 seconds (1 hour) and only works for public repositories.
+			</p>
+
+			<p>
+				For more control or to use a private repository, use the following syntax:
+			</p>
+
+			<code class="block"><span class="hl-directive">git</span> <span class="hl-arg">[<i>repo path</i>]</span> {
+	<span class="hl-subdirective">repo</span>     <i>repo</i>
+	<span class="hl-subdirective">path</span>     <i>path</i>
+	<span class="hl-subdirective">branch</span>   <i>branch</i>
+	<span class="hl-subdirective">key</span>      <i>key</i>
+	<span class="hl-subdirective">interval</span> <i>interval</i>
+	<span class="hl-subdirective">then</span>     <i>command</i> [<i>args...</i>]
+}</code>
+
+			<ul>
+				<li><b>repo</b> is the URL to the repository; SSH and HTTPS URLs are supported</li>
+				<li><b>path</b> is the path, relative to site root, to clone the repository into; default is site root</li>
+				<li><b>branch</b> is the branch or tag to pull; default is master branch</li>
+				<li><b>key</b> is the path to the SSH private key; only required for private repositories</li>
+				<li><b>interval</b> is the number of seconds between pulls; default is 3600 (1 hour), minimum 5</li>
+				<li><b>command</b> is a command to execute after successful pull; followed by <b>args</b> which are any arguments to pass to the command</li>
+			</ul>
+
+			<p>
+				Each property in the block is optional. The path and repo may be specified on the first line, as in the first syntax, or they may be specified in the block with other values.
+			</p>
+
+
+			<h3>Examples</h3>
+
+			<p>
+				Public repository pulled into site root every hour:
+			</p>
+
+			<code class="block"><span class="hl-directive">git</span> <span class="hl-arg">github.com/user/myproject</span></code>
+
+			<p>
+				Public repository pulled into the "subfolder" directory in the site root:
+			</p>
+
+			<code class="block"><span class="hl-directive">git</span> <span class="hl-arg">github.com/user/myproject /subfolder</span></code>
+
+			<p>
+				Private repository pulled into the "subfolder" directory with tag v1.0 once per day:
+			</p>
+
+			<code class="block"><span class="hl-directive">git</span> {
+	<span class="hl-subdirective">repo</span>     git@github.com:user/myproject
+	<span class="hl-subdirective">branch</span>   v1.0
+	<span class="hl-subdirective">key</span>      /home/user/.ssh/id_rsa
+	<span class="hl-subdirective">path</span>     subfolder
+	<span class="hl-subdirective">interval</span> 86400
+}</code>
+
+			<p>
+				Generate a static site with <a href="http://gohugo.io">Hugo</a> after each pull:
+			</p>
+			<code class="block"><span class="hl-directive">git</span> <span class="hl-arg">github.com/user/site</span> {
+	<span class="hl-subdirective">path</span>  ../
+	<span class="hl-subdirective">then</span>  hugo --destination=/home/user/hugosite/public
+}</code>
+
+			<p>
+				Part of a Caddyfile for a PHP site that gets changes from a private repo:
+			</p>
+
+			<code class="block"><span class="hl-directive">git</span> <span class="hl-arg">git@github.com:user/myphpsite</span> {
+	<span class="hl-subdirective">key</span> /home/user/.ssh/id_rsa
+}
+<span class="hl-directive">fastcgi</span> <span class="hl-arg">/ 127.0.0.1:9000 php</span></code>
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		<nav>
+			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
+			<a href="/download">Download</a>
+			<a href="/docs">User Guide</a>
+			<a href="/docs/faq">FAQ</a>
+			<a href="https://github.com/mholt/caddy">GitHub</a>
+		</nav>
+
+		<div class="nav">
+			<h6>Caddy</h6>
+			<ul>
+				<li><a href="/docs/getting-started">Getting Started</a></li>
+				<li><a href="/docs/faq">FAQ</a></li>
+				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
+			</ul>
+
+			<h6>Directives</h6>
+			<ul>
+				<li><a href="/docs/basicauth">basicauth</a></li>
+				<li><a href="/docs/bind">bind</a></li>
+				<li><a href="/docs/browse">browse</a></li>
+				<li><a href="/docs/errors">errors</a></li>
+				<li><a href="/docs/ext">ext</a></li>
+				<li><a href="/docs/fastcgi">fastcgi</a></li>
+				<li><a href="/docs/git">git</a></li>
+				<li><a href="/docs/gzip">gzip</a></li>
+				<li><a href="/docs/header">header</a></li>
+				<li><a href="/docs/import">import</a></li>
+				<li><a href="/docs/internal">internal</a></li>
+				<li><a href="/docs/log">log</a></li>
+				<li><a href="/docs/markdown">markdown</a></li>
+				<li><a href="/docs/proxy">proxy</a></li>
+				<li><a href="/docs/redir">redir</a></li>
+				<li><a href="/docs/rewrite">rewrite</a></li>
+				<li><a href="/docs/root">root</a></li>
+				<li><a href="/docs/shutdown">shutdown</a></li>
+				<li><a href="/docs/startup">startup</a></li>
+				<li><a href="/docs/templates">templates</a></li>
+				<li><a href="/docs/tls">tls</a></li>
+				<li><a href="/docs/websocket">websocket</a></li>
+			</ul>
+
+		</div>
+	</body>
+</html>

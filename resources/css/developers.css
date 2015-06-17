@@ -1,0 +1,14 @@
+.bg h1 {
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	padding: 50px 0 25px;
+	text-align: center;
+}
+
+.bg p {
+  margin: 0 auto;
+  color: #FFF;
+  text-align: center;
+  font-size: 18px;
+  text-shadow: 0 0 5px #000;
+}

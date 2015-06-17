@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>rewrite - Caddy Directives</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/common.css">
+		<link rel="stylesheet" href="/resources/css/docs.css">
+		<link rel="icon" href="/favicon.ico">
+		<script src="/resources/js/common.js"></script>
+	</head>
+	<body>
+		<main>
+			<h1>rewrite</h1>
+
+			<p>
+				rewrite performs internal URL rewriting. This allows the client to request one resource but actually be served another without an HTTP redirect. Rewrites are invisible to the client.
+			</p>
+
+			<p>
+				This directive supports regular expressions for more advanced rewrite tasks. <mark>Note: Regular expression support is experimental at this time. High-load servers should avoid using regular expressions.</mark>
+			</p>
+
+
+			<h3>Syntax</h3>
+
+			<code class="block"><span class="hl-directive">rewrite</span> <span class="hl-arg"><i>from to</i></span></code>
+
+			<ul>
+				<li><b>from</b> is the path to match exactly</li>
+				<li><b>to</b> is the destination path to rewrite to (the resource to respond with)</li>
+			</ul>
+
+			<p>
+				Advanced users may use regular expressions with a settings block:
+			</p>
+
+			<code class="block"><span class="hl-directive">rewrite</span> <span class="hl-arg">[<i>basepath</i>]</span> {
+    <span class="hl-subdirective">regexp</span> <i>pattern</i>
+    <span class="hl-subdirective">ext</span>    <i>extensions...</i>
+    <span class="hl-subdirective">to</span>     <i>to</i>
+}</code>
+
+			<ul>
+				<li><b>basepath</b> is the base path to match before rewriting with regular expression. Default is /.
+				<li><b>regexp</b> (shorthand: <b>r</b>) will match the path with the given regular expression <b>pattern</b>.</li>
+				<li><b>extensions...</b> is a space-separated list of file extensions to include or ignore. Prefix an extension with <code>!</code> to exclude an extension. The forward slash <code>/</code> symbol matches paths without file extensions.</li>
+				<li><b>to</b> is the path to rewrite to. Can use some variables like {path} (request path without leading /), {query} (query string without leading ?), {file} (last part of the request path), {dir} (the request path before the last part) and {frag} (URL after # symbol).</li>
+			</ul>
+
+			<p>
+				Regular expression support is experimental. We want advanced users to try it and <a href="https://github.com/mholt/caddy/issues">give us feedback</a>.
+			</p>
+
+			<h3>Examples</h3>
+
+			<p>
+				When requests come in for /images/photo.jpg, actually serve /images/drawing.jpg.
+			</p>
+
+			<code class="block"><span class="hl-directive">rewrite</span> <span class="hl-arg">/images/photo.jpg /images/drawing.jpg</span></code>
+
+			<p>
+				Prevent access to hidden files (hidden files start with a dot):
+			</p>
+
+			<code class="block"><span class="hl-directive">rewrite</span> {
+    <span class="hl-subdirective">r</span>   ^\.(.*)
+    <span class="hl-subdirective">to</span>  /403.html
+}</code>
+
+			<p>
+				Forward request path to index.php when no file extension is specified (applicable for PHP frameworks like <a href="http://phalconphp.com/en/">Phalcon</a>):
+			</p>
+
+			<code class="block"><span class="hl-directive">rewrite</span> {
+    <span class="hl-subdirective">regexp</span> .*
+    <span class="hl-subdirective">ext</span>    /
+    <span class="hl-subdirective">to</span>     /index.php?_url=/{path}&amp;{query}
+}</code>
+
+
+
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		<nav>
+			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
+			<a href="/download">Download</a>
+			<a href="/docs">User Guide</a>
+			<a href="/docs/faq">FAQ</a>
+			<a href="https://github.com/mholt/caddy">GitHub</a>
+		</nav>
+
+		<div class="nav">
+			<h6>Caddy</h6>
+			<ul>
+				<li><a href="/docs/getting-started">Getting Started</a></li>
+				<li><a href="/docs/faq">FAQ</a></li>
+				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
+			</ul>
+
+			<h6>Directives</h6>
+			<ul>
+				<li><a href="/docs/basicauth">basicauth</a></li>
+				<li><a href="/docs/bind">bind</a></li>
+				<li><a href="/docs/browse">browse</a></li>
+				<li><a href="/docs/errors">errors</a></li>
+				<li><a href="/docs/ext">ext</a></li>
+				<li><a href="/docs/fastcgi">fastcgi</a></li>
+				<li><a href="/docs/git">git</a></li>
+				<li><a href="/docs/gzip">gzip</a></li>
+				<li><a href="/docs/header">header</a></li>
+				<li><a href="/docs/import">import</a></li>
+				<li><a href="/docs/internal">internal</a></li>
+				<li><a href="/docs/log">log</a></li>
+				<li><a href="/docs/markdown">markdown</a></li>
+				<li><a href="/docs/proxy">proxy</a></li>
+				<li><a href="/docs/redir">redir</a></li>
+				<li><a href="/docs/rewrite">rewrite</a></li>
+				<li><a href="/docs/root">root</a></li>
+				<li><a href="/docs/shutdown">shutdown</a></li>
+				<li><a href="/docs/startup">startup</a></li>
+				<li><a href="/docs/templates">templates</a></li>
+				<li><a href="/docs/tls">tls</a></li>
+				<li><a href="/docs/websocket">websocket</a></li>
+			</ul>
+
+		</div>
+	</body>
+</html>

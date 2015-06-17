@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Getting Started - Caddy</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/common.css">
+		<link rel="stylesheet" href="/resources/css/docs.css">
+		<link rel="icon" href="/favicon.ico">
+		<script src="/resources/js/common.js"></script>
+	</head>
+	<body>
+		<main>
+			<h1>Getting Started with Caddy</h1>
+
+			<p>
+				This page will help you get up and running with Caddy on your local machine or on a remote server. You'll want to be familiar with the command line since Caddy is not a visual application.
+			</p>
+
+			<h3>Quick Start</h3>
+
+			<ol>
+				<li><a href="/download">Download Caddy</a> for your platform and put it in your PATH.</li>
+				<li><code>cd</code> to the folder containing your website.</li>
+				<li>Run <code>caddy</code>.</li> 
+			</ol>
+
+			<p>
+				Open your browser to <a href="http://localhost:2015">http://localhost:2015</a> to see it working.
+			</p>
+
+			<p>
+				If you see a message like "404 Not Found" then Caddy is working but the directory from which you are running Caddy probably doesn't have an index file (index.html).
+			</p>
+
+			<h3>Configuring Caddy</h3>
+
+			<p>
+				Customize how Caddy serves your site by placing a text file called Caddyfile next to your site. You can actually name the file anything and put it anywhere, but this is the norm.
+			</p>
+
+			<p>
+				The first line of a Caddyfile is the address to listen on, for example:
+			</p>
+
+			<code class="block"><span class="hl-vhost">localhost:8080</span></code>
+
+			<p>
+				When you save that in a file called <code>Caddyfile</code>, Caddy will automatically find it when you start it:
+			</p>
+
+			<pre><code class="bash">$ caddy</code></pre>
+
+			<p>
+				If the Caddyfile is in a different location or has a different name, tell Caddy where it is:
+			</p>
+
+			<pre><code class="bash">$ caddy -conf="../path/to/Caddyfile"</code></pre>
+
+			<p>
+				The Caddyfile is really easy to use. Take a few minutes to learn the <a href="/docs/caddyfile">syntax of the Caddyfile</a>.
+			</p>
+
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		<nav>
+			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
+			<a href="/download">Download</a>
+			<a href="/docs">User Guide</a>
+			<a href="/docs/faq">FAQ</a>
+			<a href="https://github.com/mholt/caddy">GitHub</a>
+		</nav>
+
+		<div class="nav">
+			<h6>Caddy</h6>
+			<ul>
+				<li><a href="/docs/getting-started">Getting Started</a></li>
+				<li><a href="/docs/faq">FAQ</a></li>
+				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
+			</ul>
+
+			<h6>Directives</h6>
+			<ul>
+				<li><a href="/docs/basicauth">basicauth</a></li>
+				<li><a href="/docs/bind">bind</a></li>
+				<li><a href="/docs/browse">browse</a></li>
+				<li><a href="/docs/errors">errors</a></li>
+				<li><a href="/docs/ext">ext</a></li>
+				<li><a href="/docs/fastcgi">fastcgi</a></li>
+				<li><a href="/docs/git">git</a></li>
+				<li><a href="/docs/gzip">gzip</a></li>
+				<li><a href="/docs/header">header</a></li>
+				<li><a href="/docs/import">import</a></li>
+				<li><a href="/docs/internal">internal</a></li>
+				<li><a href="/docs/log">log</a></li>
+				<li><a href="/docs/markdown">markdown</a></li>
+				<li><a href="/docs/proxy">proxy</a></li>
+				<li><a href="/docs/redir">redir</a></li>
+				<li><a href="/docs/rewrite">rewrite</a></li>
+				<li><a href="/docs/root">root</a></li>
+				<li><a href="/docs/shutdown">shutdown</a></li>
+				<li><a href="/docs/startup">startup</a></li>
+				<li><a href="/docs/templates">templates</a></li>
+				<li><a href="/docs/tls">tls</a></li>
+				<li><a href="/docs/websocket">websocket</a></li>
+			</ul>
+
+		</div>
+	</body>
+</html>

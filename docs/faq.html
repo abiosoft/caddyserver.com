@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>FAQ - Caddy</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/common.css">
+		<link rel="stylesheet" href="/resources/css/docs.css">
+		<link rel="icon" href="/favicon.ico">
+		<script src="/resources/js/common.js"></script>
+	</head>
+	<body>
+		<main>
+			<h1>FAQ</h1>
+
+			<h3>What is Caddy?</h3>
+			<p>
+				Caddy is a web server like Apache, nginx, or lighttpd, but with different goals, features, and advantages.
+			</p>
+			<p>
+				The goal of Caddy is to streamline an authentic web development, deployment, and hosting workflow so that anyone can host their own web sites without requiring special technical understanding.
+			</p>
+
+			<h3>How is Caddy different from Apache, nginx, and lighttpd?</h3>
+			<p>
+				Fundamentally, Caddy aims to make websites easier by lowering the barrier to entry. Like other web servers, Caddy is for system administrators and web developers, but Caddy is also tailored for designers and writers who don't want to deal with a lot of the technical cruft that traditionally comes along with setting up a server.
+			</p>
+			<p>
+				Caddy has different goals and advantages. Nginx is first and foremost a capable reverse proxy, whereas Caddy's primary goal is to be an easy-to-use static file web server. Caddy desires cross-platform independence and portability without the need for custom builds.
+			</p>
+
+			<!--<h3>I ran Caddy but &lt;some feature&gt; didn't work. How do I use Caddy's features?</h3>
+			<p>
+				Use a <a href="/docs/caddyfile">Caddyfile</a> to configure Caddy and use its features. By default, extra features are turned off. You will need to turn them on in order to use them. This gives you a great degree of clarity and control over your web server.
+			</p>-->
+
+			<h3>What's on the roadmap for Caddy?</h3>
+			<p>
+				Exciting things. Here's what's coming:
+			</p>
+			<ul>
+				<li><a href="https://letsencrypt.org">Let's Encrypt</a> integration</li>
+				<li>Remote configuration/management API</li>
+				<li>Deployment services (both self-hosted and managed hosting)</li>
+				<li>Web-based control panel</li>
+			</ul>
+			<p>
+				These aren't in any particular order and are subject to change, but Caddy is well on its way to making these things happen.
+			</p>
+
+			<h3>You say Caddy is for a less-technical audience, but... it's still technical.</h3>
+			<p>
+				You're right, it's not for Grandma (yet). For now, Caddy's target audience is a more tech-savvy crowd: developers, bloggers who set up their own WordPress sites, or graphic artists who host their own stuff. This will contribute to further development so a wider audience can make and deploy their own websites without having to know anything about server administration or web hosting. At that point, we expect Grandma to show Grandpa how it's done.
+			</p>
+
+			<h3>Do I have to run Caddy as root to serve on port 80 or 443?</h3>
+			<p>
+				No. On Linux, you can use setcap to give Caddy permission to bind to low ports. Something like <code>setcap cap_net_bind_service=+ep ./caddy</code> should work. Consult the man pages of your OS to be certain. You could also use iptables to forward to higher ports.
+			</p>
+			<p>
+				Privilege de-escalation is another option, but <a href="https://github.com/golang/go/issues/1435">it is not yet a reliable solution</a>. It will be implemented as soon as this becomes a robust possibility. Concerned readers are encouraged to get involved to help this become a reality.
+			</p>
+
+			<h3>What's the deal with HTTP/2?</h3>
+			<p>
+				HTTP/2 is a new version of HTTP that makes your website load faster. HTTP/2 is enabled by default when the connection is served over HTTPS. Plaintext HTTP/2 is not supported. You can disable HTTP/2 by using the flag <code>-http2=false</code> (this flag will be removed in the future). HTTP/2 will never be served to a client that can only support HTTP/1.
+			</p>
+
+			<h3>Who makes and maintains Caddy?</h3>
+			<p>
+				Caddy was written by <a href="http://matt.life">Matt Holt</a> (<a href="https://twitter.com/mholt6">@mholt6</a>), who maintains it. The community is also encouraged to contribute. The FastCGI middleware initially received significant contributions from <a href="http://thomashansen.me">Thomas Hansen</a>. The rest of the contributors can be seen on the <a href="https://github.com/mholt/caddy/graphs/contributors">Contributors</a> page on GitHub.
+			</p>
+
+			<h3>How does Caddy perform compared to nginx or Apache?</h3>
+			<p>
+				This is a hard question to answer correctly for everyone because the performance of any web server depends on so many factors and the needs of the user. Basically, Caddy is fast. It's fast enough for most websites. It's faster than Apache. In fact, it's comparably fast to nginx, but slightly slower. What follows is a sample benchmark "comparing" nginx, Apache, and Caddy using default, out-of-the-box configurations (except that nginx's worker processes were changed to match the number of CPU cores allocated to Caddy):
+			</p>
+
+			<pre> # nginx
+
+$ wrk -t12 -c400 -d10m http://127.0.0.1:8080
+Running 10m test @ http://127.0.0.1:8080
+  12 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   276.85ms  709.25ms   2.18s    87.79%
+    Req/Sec     2.84k     1.16k    6.03k    85.43%
+  20003921 requests in 10.00m, 15.82GB read
+  Socket errors: connect 0, read 251, write 0, timeout 375
+Requests/sec:  33340.08
+Transfer/sec:     26.99MB
+
+
+ # apache
+
+$ wrk -t12 -c400 -d10m http://127.0.0.1:8082
+Running 10m test @ http://127.0.0.1:8082
+  12 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    26.07ms   56.20ms   1.55s    99.39%
+    Req/Sec     1.51k   418.17     4.76k    72.73%
+  10685170 requests in 10.00m, 9.30GB read
+  Socket errors: connect 0, read 254, write 0, timeout 0
+Requests/sec:  17808.51
+Transfer/sec:     15.87MB
+
+
+ # caddy
+
+$ wrk -t12 -c400 -d10m http://127.0.0.1:8081
+Running 10m test @ http://127.0.0.1:8081
+  12 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    12.92ms    3.56ms 163.68ms   85.09%
+    Req/Sec     2.64k   295.00     4.70k    73.90%
+  18550491 requests in 10.00m, 15.13GB read
+  Socket errors: connect 0, read 260, write 0, timeout 0
+Requests/sec:  30917.56
+Transfer/sec:     25.83MB</pre>
+
+			<p>
+				The usual benchmark disclaimers apply: actual mileage will vary, and these benchmarks are not absolute nor conclusive. It would be unwise to consider these benchmarks universally applicable or even correct, since the goals of a software configuration or benchmark are all so different depending on the situation.
+			</p>
+
+			<p>
+				Anyway, Caddy does well enough for most things. If you are concerned about top-notch performance and want to contribute, you are invited to run your own benchmarks, then submit issues and pull requests to help make Caddy faster.
+			</p>
+
+
+			<h3>Can Caddy be used to serve PHP sites?</h3>
+			<p>
+				Yep, Caddy has a <a href="/docs/fastcgi">fastcgi</a> directive that makes it really easy to serve PHP sites.
+			</p>
+
+
+
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		<nav>
+			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
+			<a href="/download">Download</a>
+			<a href="/docs">User Guide</a>
+			<a href="/docs/faq">FAQ</a>
+			<a href="https://github.com/mholt/caddy">GitHub</a>
+		</nav>
+
+		<div class="nav">
+			<h6>Caddy</h6>
+			<ul>
+				<li><a href="/docs/getting-started">Getting Started</a></li>
+				<li><a href="/docs/faq">FAQ</a></li>
+				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
+			</ul>
+
+			<h6>Directives</h6>
+			<ul>
+				<li><a href="/docs/basicauth">basicauth</a></li>
+				<li><a href="/docs/bind">bind</a></li>
+				<li><a href="/docs/browse">browse</a></li>
+				<li><a href="/docs/errors">errors</a></li>
+				<li><a href="/docs/ext">ext</a></li>
+				<li><a href="/docs/fastcgi">fastcgi</a></li>
+				<li><a href="/docs/git">git</a></li>
+				<li><a href="/docs/gzip">gzip</a></li>
+				<li><a href="/docs/header">header</a></li>
+				<li><a href="/docs/import">import</a></li>
+				<li><a href="/docs/internal">internal</a></li>
+				<li><a href="/docs/log">log</a></li>
+				<li><a href="/docs/markdown">markdown</a></li>
+				<li><a href="/docs/proxy">proxy</a></li>
+				<li><a href="/docs/redir">redir</a></li>
+				<li><a href="/docs/rewrite">rewrite</a></li>
+				<li><a href="/docs/root">root</a></li>
+				<li><a href="/docs/shutdown">shutdown</a></li>
+				<li><a href="/docs/startup">startup</a></li>
+				<li><a href="/docs/templates">templates</a></li>
+				<li><a href="/docs/tls">tls</a></li>
+				<li><a href="/docs/websocket">websocket</a></li>
+			</ul>
+
+		</div>
+	</body>
+</html>

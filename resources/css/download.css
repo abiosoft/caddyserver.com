@@ -1,0 +1,61 @@
+header {
+	background-image: url('/resources/images/stargazing.jpg');
+	background-position: center 20%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 160px 0 150px;
+}
+
+h1 {
+	color: #FFF;
+	font-size: 34px;
+	font-weight: normal;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .8);
+	max-width: 800px;
+	margin: 50px auto 25px;
+}
+
+header h2 {
+	font-size: 16px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .8);
+	color: #FFF;
+	max-width: 550px;
+	margin: 0 auto;
+	font-weight: 300;
+	letter-spacing: 1px;
+}
+
+.version {
+	text-align: center;
+	font-size: 14px;
+	max-width: 400px;
+	margin: 50px auto 0;
+	color: #444;
+}
+
+.icon-container {
+	text-align: center;
+}
+
+.icon-container .icon {
+	display: block;
+	font-size: 80px;
+	margin: 0px 0 20px;
+}
+
+.icon-container img.icon {
+	margin: 5px auto 20px;
+}
+
+.download-link {
+	display: block;
+	padding: 7px 0;
+	border: 1px solid #EEE;
+	margin: 5px auto;
+	max-width: 160px;
+	text-decoration: none;
+}
+
+.download-link:hover {
+	background: #FAFAFA;
+}

@@ -1,0 +1,139 @@
+nav {
+	overflow: hidden;
+}
+
+nav .menu {
+	position: absolute;
+	right: 0;
+	top: 5px;
+}
+
+.nav {
+	position: fixed;
+	top: 65px;
+	bottom: 0;
+	overflow-y: scroll;
+	width: 25%;
+	max-width: 300px;
+	border-right: 1px solid #E0E0E0;
+	background: #FAFAFA;
+	padding: 20px;
+	font-size: 14px;
+	color: #555;
+	box-sizing: border-box;
+}
+
+.nav li {
+	padding: .25em;
+}
+
+.nav h6 {
+	color: #333;
+	font-size: 14px;
+}
+
+.nav a {
+	color: #888;
+	text-decoration: none;
+	display: block;
+}
+
+.nav a:hover {
+	color: #3BADE3;
+}
+
+.nav h6 {
+	font-weight: 500;
+}
+
+h1 {
+	font-size: 40px;
+	margin-bottom: 20px;
+}
+
+h2 {
+	margin-top: 50px;
+}
+
+h3 {
+	margin: 20px 0 10px;
+	font-weight: 600;
+}
+
+h3 + code,
+h3 + pre {
+	margin-top: 20px;
+}
+
+code + h3,
+pre + h3 {
+	margin-top: 40px;
+}
+
+main {
+	box-sizing: border-box;
+	margin: 65px 0 50px 25%;
+	padding: 50px 5%;
+	max-width: 800px;
+}
+
+footer {
+	color: #888;
+	text-align: center;
+	font-family: sans-serif;
+	font-size: 12px;
+	margin-top: 50px;
+	background: #FFF;
+	box-shadow: none;
+}
+
+@media (max-width: 900px) {
+	nav {
+		height: 50px;
+	}
+
+	nav .logo {
+		max-width: 85px;
+	}
+
+	nav a {
+		padding: 17px 15px;
+	}
+
+	.nav {
+		top: 50px;
+	}
+
+	main {
+		padding: 3%;
+		font-size: 16px;
+	}
+
+	h1 {
+		font-size: 30px;
+		margin-bottom: 10px;
+	}
+}
+
+@media (max-width: 600px) {
+	nav {
+		text-align: left;
+	}
+
+	.nav {
+		position: relative;
+		width: 100%;
+		max-width: none;
+		top: 0;
+	}
+
+	main {
+		margin-left: 0;
+		padding: 20px;
+		margin-bottom: 0;
+	}
+
+	h1 {
+		font-size: 24px;
+	}
+}

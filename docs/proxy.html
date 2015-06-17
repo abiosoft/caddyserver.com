@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>proxy - Caddy Directives</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/common.css">
+		<link rel="stylesheet" href="/resources/css/docs.css">
+		<link rel="icon" href="/favicon.ico">
+		<script src="/resources/js/common.js"></script>
+	</head>
+	<body>
+		<main>
+			<h1>proxy</h1>
+
+			<p>
+				proxy facilitates both a basic reverse proxy and a robust load balancer. The proxy has support for multiple backends and adding custom headers. The load balancing features include multiple policies, health checks, and failovers. Caddy can also proxy WebSocket connections.
+			</p>
+
+
+
+			<h3>Syntax</h3>
+
+			In its most basic form, a simple reverse proxy uses this syntax:
+
+			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg"><i>from to</i></span></code>
+
+			<ul>
+				<li><b>from</b> is the base path to match for the request to be proxied</li>
+				<li><b>to</b> is the destination endpoint to proxy to</li>
+			</ul>
+
+			However, advanced features including load balancing can be utilized with an expanded syntax:
+
+			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg"><i>from to...</i></span> {
+	<span class="hl-subdirective">policy</span> random | least_conn | round_robin
+	<span class="hl-subdirective">fail_timeout</span> <i>duration</i>
+	<span class="hl-subdirective">max_fails</span> <i>integer</i>
+	<span class="hl-subdirective">health_check</span> <i>path</i> [<i>duration</i>]
+	<span class="hl-subdirective">proxy_header</span> <i>name value</i>
+	<span class="hl-subdirective"><i>preset</i></span>
+}</code>
+
+			<ul>
+				<li><b>from</b> is the base path to match for the request to be proxied.</li>
+				<li><b>to</b> is the destination endpoint to proxy to. At least one is required, but multiple may be specified. If a scheme (http/https) is not specified, http is used.</li>
+				<li><b>policy</b> is the load balancing policy to use; applies only with multiple backends. May be one of random, least_conn, or round_robin. Default is random.</li>
+				<li><b>fail_timeout</b> specifies how long to consider a backend as down after it has failed. While it is down, requests will not be routed to that backend. A backend is "down" if Caddy fails to communicate with it. The default value is 10 seconds ("10s").</li>
+				<li><b>max_fails</b> is the number of failures within fail_timeout that are needed before considering a backend to be down. If 0, the backend will never be marked as down. Default is 1.</li>
+				<li><b>health_check</b> will check <i>path</i> on each backend. If a backend returns a status code of 200-399, then that backend is healthy. If it doesn't, the backend is marked as unhealthy for <i>duration</i> and no requests are routed to it. If this option is not provided then health checks are disabled. The default duration is 10 seconds ("10s").</li>
+				<li><b>proxy_header</b> sets headers to be passed to the backend. The field name is <i>name</i> and the value is <i>value</i>. This option can be specified multiple times for multiple headers, and dynamic values can also be inserted (documentation forthcoming).</li>
+				<li><b>preset</b> is an optional shorthand way of configuring the proxy to meet certain conditions. See presets below.</li>
+			</ul>
+
+			<p>
+				Everything after the first <i>to</i> is optional, including the block of properties enclosed by curly braces.
+			</p>
+
+
+			<h3>Presets</h3>
+
+			<p>
+				The following presets are available:
+			</p>
+
+			<ul>
+				<li>
+					<b>websocket</b>
+					<br>
+					Indicates this proxy is forwarding WebSocket connections. It is shorthand for:
+					<code class="block"><span class="hl-subdirective">proxy_header</span> Connection {>Connection}
+<span class="hl-subdirective">proxy_header</span> Upgrade    {>Upgrade}</code>
+				</li>
+			</ul>
+
+
+
+			<h3>Policies</h3>
+
+			<p>
+				There are three load balancing policies available:
+			</p>
+
+			<ul>
+				<li><b>random</b> (default) - Randomly select a backend</li>
+				<li><b>least_conn</b> - Select backend with the fewest active connections</li>
+				<li><b>round_robin</b> - Select backend in round-robin fashion</li>
+			</ul>
+
+
+
+			<h3>Examples</h3>
+
+			<p>
+				Proxy all requests within /api to a backend system:
+			</p>
+
+			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg">/api localhost:9005</span></code>
+
+			<p>
+				Load-balance all requests between three backends (using random policy):
+			</p>
+
+			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg">/ web1.local:80 web2.local:90 web3.local:100</span></code>
+
+			<p>
+				Same as above, but round-robin style:
+			</p>
+
+			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg">/ web1.local:80 web2.local:90 web3.local:100</span> {
+	<span class="hl-subdirective">policy</span> round_robin
+}</code>
+
+			<p>
+				With health checks and proxy headers:
+			</p>
+
+			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg">/ web1.local:80 web2.local:90 web3.local:100</span> {
+	<span class="hl-subdirective">policy</span> round_robin
+	<span class="hl-subdirective">health_check</span> /health
+	<span class="hl-subdirective">proxy_header</span> Host {host}
+	<span class="hl-subdirective">proxy_header</span> X-Caddy-When server-{when}
+}</code>
+
+			<p>
+				Proxy WebSocket connections:
+			</p>
+
+			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg">/ localhost:8080</span> {
+	<span class="hl-subdirective">websocket</span>
+}</code>
+
+
+
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		<nav>
+			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
+			<a href="/download">Download</a>
+			<a href="/docs">User Guide</a>
+			<a href="/docs/faq">FAQ</a>
+			<a href="https://github.com/mholt/caddy">GitHub</a>
+		</nav>
+
+		<div class="nav">
+			<h6>Caddy</h6>
+			<ul>
+				<li><a href="/docs/getting-started">Getting Started</a></li>
+				<li><a href="/docs/faq">FAQ</a></li>
+				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
+			</ul>
+
+			<h6>Directives</h6>
+			<ul>
+				<li><a href="/docs/basicauth">basicauth</a></li>
+				<li><a href="/docs/bind">bind</a></li>
+				<li><a href="/docs/browse">browse</a></li>
+				<li><a href="/docs/errors">errors</a></li>
+				<li><a href="/docs/ext">ext</a></li>
+				<li><a href="/docs/fastcgi">fastcgi</a></li>
+				<li><a href="/docs/git">git</a></li>
+				<li><a href="/docs/gzip">gzip</a></li>
+				<li><a href="/docs/header">header</a></li>
+				<li><a href="/docs/import">import</a></li>
+				<li><a href="/docs/internal">internal</a></li>
+				<li><a href="/docs/log">log</a></li>
+				<li><a href="/docs/markdown">markdown</a></li>
+				<li><a href="/docs/proxy">proxy</a></li>
+				<li><a href="/docs/redir">redir</a></li>
+				<li><a href="/docs/rewrite">rewrite</a></li>
+				<li><a href="/docs/root">root</a></li>
+				<li><a href="/docs/shutdown">shutdown</a></li>
+				<li><a href="/docs/startup">startup</a></li>
+				<li><a href="/docs/templates">templates</a></li>
+				<li><a href="/docs/tls">tls</a></li>
+				<li><a href="/docs/websocket">websocket</a></li>
+			</ul>
+
+		</div>
+	</body>
+</html>

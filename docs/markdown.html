@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>markdown - Caddy Directives</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/resources/css/highlight/atelier-lakeside.light.css">
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/common.css">
+		<link rel="stylesheet" href="/resources/css/docs.css">
+		<link rel="icon" href="/favicon.ico">
+		<script src="/resources/js/common.js"></script>
+		<script src="/resources/js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+	</head>
+	<body>
+		<main>
+			<h1>markdown</h1>
+
+			<p>
+				markdown serves <a href="http://daringfireball.net/projects/markdown/">Markdown</a> files as HTML pages on demand, but it can also generate a static site from Markdown so it doesn't have to render on-the-fly. You can specify custom templates or just CSS and JavaScript files to be used on the pages to give them a custom look and behavior.
+			</p>
+
+
+			<h3>Syntax</h3>
+
+			<code class="block"><span class="hl-directive">markdown</span> <span class="hl-arg"><i>basepath</i></span> {
+    <span class="hl-subdirective">ext</span>      <i>extensions...</i>
+    <span class="hl-subdirective">[css|js]</span> <i>file</i>
+    <span class="hl-subdirective">template</span> [<i>name</i>] <i>path</i>
+    <span class="hl-subdirective">sitegen</span>  [<i>static_path</i>]
+}</code>
+
+			<ul>
+				<li><b>basepath</b> is the base path to match. Markdown will not activate if the request URL is not prefixed with this path.</li>
+				<li><b>extensions...</b> is a space-delimited list of file extensions to treat as Markdown (usually .md, which is the default if not specified).</li>
+				<li><b>css</b> indicates that the next argument is a CSS file to use on the page.</li>
+				<li><b>js</b> indicates that the next argument is a JavaScript file to include on the page.</li>
+				<li><b>file</b> is the JS or CSS file to add to the page.</li>
+				<li><b>template</b> defines a template with the given <b>name</b> to be at the given <b>path</b>. To specify the default template, omit <i>name</i>.</li>
+				<li><b>sitegen</b> enables static site generation. Static (HTML) files will be dumped to <b>static_path</b>. If the path is omitted, generated_site is used. The path is relative to site root. This directory will be deleted (if it exists) every time the static site is generated.</li>
+			</ul>
+
+			<p>
+				You can use the js and css arguments more than once to add more files to the default template. If you want to accept defaults, you should completely omit the curly braces.
+			</p>
+
+
+			<h3>Static Site Generation</h3>
+
+			<p>
+				If you specify <i>sitegen</i> in the Caddyfile, this directive will convert your Markdown files into static HTML. When the server starts, it will delete the existing generated static site (if it exists), then sweep all files in the base path for Markdown files and convert them to HTML. After Markdown files are changed, the static HTML file will be regenerated the next time that file is requested. <mark>Warning: If it exists, the entire static site directory is deleted before regenerating the site.</mark>
+			</p>
+
+
+			<h3>Front Matter and Templates</h3>
+
+			<p>
+				Markdown files may begin with <i>front matter</i>, which is a specially-formatted block of metadata about the file. For example, it could describe the HTML template to use to render the file, or define the contents of the title tag. Front matter can be in YAML, TOML, or JSON formats.
+			</p>
+
+			<p>
+				TOML front matter starts and ends with <code>+++</code>:
+			</p>
+
+			<code class="block">+++
+template = "blog"
+title = "Blog Homepage"
+[variables]
+sitename = "A Caddy site"
++++</code>
+
+			<p>
+				YAML is surrounded by <code>---</code>:
+			</p>
+
+			<code class="block">---
+template: blog
+title: Blog Homepage
+variables:
+    sitename : A Caddy site
+---</code>
+
+
+			<p>
+				JSON is simply <code>{</code> and <code>}</code>:
+			</p>
+
+			<code class="block">{
+    "template": "blog",
+    "title": "Blog Homepage",
+    "variables":  {
+        "sitename": "A Caddy site"
+    }
+}</code>
+
+			<p>
+				Your template files are HTML files with placeholders, called actions, that can insert dynamic content depending on the file being served. The variables defined in metadata can be accessed from the templates like <code>{{.varName}}</code> where varName is the name of the variable. Variable <code>.markdown</code> prints the body of the markdown file and <code>{{.title}}</code> holds the title of the page.
+			</p>
+
+			<p>
+				Here is a simple example template (contrived):
+			</p>
+
+			<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;{{.title}}&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		Welcome to {{.sitename}}!
+		&lt;br&gt;&lt;br&gt;
+		{{.markdown}}
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+			<h3>Examples</h3>
+
+			<p>
+				Serve Markdown pages in /blog with no special formatting (assumes .md is the Markdown extension):
+			</p>
+			<code class="block"><span class="hl-directive">markdown</span> <span class="hl-arg">/blog</span></code>
+
+
+			<p>
+				Same as above, but with custom CSS and JS files:
+			</p>
+			<code class="block"><span class="hl-directive">markdown</span> <span class="hl-arg">/blog</span> {
+	<span class="hl-subdirective">ext</span> .md .txt
+	<span class="hl-subdirective">css</span> /resources/css/blog.css
+	<span class="hl-subdirective">js</span>  /resources/js/blog.js
+}</code>
+
+
+			<p>
+				With custom templates:
+			</p>
+			<code class="block"><span class="hl-directive">markdown</span> <span class="hl-arg">/blog</span> {
+	<span class="hl-subdirective">template</span> blog  blog.html
+	<span class="hl-subdirective">template</span> about about.html
+	<span class="hl-subdirective">template</span> default.html
+}</code>
+
+
+			<p>
+				Generate a static website which gets placed into the generated_site folder:
+			</p>
+			<code class="block"><span class="hl-directive">markdown</span> <span class="hl-arg">/blog</span> {
+	sitegen
+}</code>
+
+
+
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		<nav>
+			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
+			<a href="/download">Download</a>
+			<a href="/docs">User Guide</a>
+			<a href="/docs/faq">FAQ</a>
+			<a href="https://github.com/mholt/caddy">GitHub</a>
+		</nav>
+
+		<div class="nav">
+			<h6>Caddy</h6>
+			<ul>
+				<li><a href="/docs/getting-started">Getting Started</a></li>
+				<li><a href="/docs/faq">FAQ</a></li>
+				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
+			</ul>
+
+			<h6>Directives</h6>
+			<ul>
+				<li><a href="/docs/basicauth">basicauth</a></li>
+				<li><a href="/docs/bind">bind</a></li>
+				<li><a href="/docs/browse">browse</a></li>
+				<li><a href="/docs/errors">errors</a></li>
+				<li><a href="/docs/ext">ext</a></li>
+				<li><a href="/docs/fastcgi">fastcgi</a></li>
+				<li><a href="/docs/git">git</a></li>
+				<li><a href="/docs/gzip">gzip</a></li>
+				<li><a href="/docs/header">header</a></li>
+				<li><a href="/docs/import">import</a></li>
+				<li><a href="/docs/internal">internal</a></li>
+				<li><a href="/docs/log">log</a></li>
+				<li><a href="/docs/markdown">markdown</a></li>
+				<li><a href="/docs/proxy">proxy</a></li>
+				<li><a href="/docs/redir">redir</a></li>
+				<li><a href="/docs/rewrite">rewrite</a></li>
+				<li><a href="/docs/root">root</a></li>
+				<li><a href="/docs/shutdown">shutdown</a></li>
+				<li><a href="/docs/startup">startup</a></li>
+				<li><a href="/docs/templates">templates</a></li>
+				<li><a href="/docs/tls">tls</a></li>
+				<li><a href="/docs/websocket">websocket</a></li>
+			</ul>
+
+		</div>
+	</body>
+</html>

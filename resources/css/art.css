@@ -1,0 +1,79 @@
+body {
+	background: #444;
+	color: #FFF;
+}
+
+nav {
+	background: #222;
+}
+
+nav .logo {
+	opacity: .7;
+}
+
+nav #logo-link:hover .logo {
+	opacity: 1;
+}
+
+.perspective-container {
+	overflow-x: hidden;
+	padding: 10% 0;
+}
+
+.perspective-container .perspective-side {
+	padding-top: 5%;
+}
+
+
+#top-bg {
+	position: relative;
+	top: 0px;
+	left: -50px;
+	width: 150%;
+	max-width: none;
+	display: block;
+	border-radius: 5px;
+	box-shadow: 0 0 100px rgba(0, 0, 0, .5);
+	transform: perspective(5in) rotateY(-10deg);
+}
+
+h1,
+h2,
+h3,
+h4 {
+
+}
+
+h1 {
+	margin: 20% auto 0;
+	font-weight: normal;
+	text-align: center;
+	font-size: 45px;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+}
+
+h3 {
+	font-size: 28px;
+}
+
+h4 {
+	font-size: 28px;
+	text-align: center;
+	font-weight: normal;
+	margin-bottom: 50px;
+}
+
+p {
+	color: #D8D8D8;
+	font-size: 18px;
+}
+
+li {
+	color: #FFF;
+	font-size: 16px;
+}
+
+code {
+	background: rgba(223, 242, 247, 0.8);
+}

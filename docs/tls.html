@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>tls - Caddy Directives</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/common.css">
+		<link rel="stylesheet" href="/resources/css/docs.css">
+		<link rel="icon" href="/favicon.ico">
+		<script src="/resources/js/common.js"></script>
+	</head>
+	<body>
+		<main>
+			<h1>tls</h1>
+
+			<p>
+				tls enables HTTPS connections.
+			</p>
+
+			<p>
+				Caddy supports SNI (Server Name Indication), so you can serve multiple HTTPS sites from the same port on your machine.
+			</p>
+
+			<p>
+				The tls directive will not activate TLS for sites that are explicitly defined to be plaintext http:// unless a port is also defined which will force HTTPS (regardless of the port number). This allows you to serve both plaintext and secure HTTP using the same server block.
+			</p>
+
+			<h3>Syntax</h3>
+
+			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg"><i>cert key</i></span></code>
+
+			<ul>
+				<li><b>cert</b> is the certificate file. If the certificate is signed by a CA, this certificate file should be a concatenation of the server's certificate followed by the CA's certificate.</li>
+				<li><b>key</b> is the server's private key file which matches the certificate file.</li>
+			</ul>
+
+			<p>
+				The above syntax uses Caddy's default TLS settings, which should be fine in most cases.
+			</p>
+
+			<p>
+				Advanced users may open a settings block for more control:
+			</p>
+
+			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg"><i>cert key</i></span> {
+    <span class="hl-subdirective">protocols</span> <i>min max</i>
+    <span class="hl-subdirective">ciphers</span>   <i>ciphers...</i>
+    <span class="hl-subdirective">clients</span>   <i>clientcas...</i>
+}</code>
+
+			<ul>
+				<li><b>cert</b> and <b>key</b> are the same as above.</li>
+				<li><b>min</b> and <b>max</b> are the minimum and maximum protocol versions to support, respectively. See below for valid values.</li>
+				<li><b>ciphers...</b> is a list of space-separated ciphers that will be supported. If you list any, only the ones you specify will be allowed. See below for valid values.</li>
+				<li><b>clientcas...</b> is a list of space-separated client root CAs used for verification during TLS client authentication. If used, clients will be asked to present their certificate by their browser, which will be verified against this list of client certificate authorities. A client will not be allowed to connect if their certificate was not signed by one of these root CAs.</li>
+			</ul>
+
+
+
+			<h3>Protocols</h3>
+
+			<p>
+				The following protocols are supported, in descending order of preference:
+			</p>
+
+			<ul>
+				<li>tls1.2 (default <b>max</b>)</li>
+				<li>tls1.1</li>
+				<li>tls1.0 (default <b>min</b>)</li>
+				<li>ssl3.0 <mark>Note: SSL 3.0 is insecure and should not be used.</mark></li>
+			</ul>
+
+			<p>
+				Note that setting the minimum protocol version too high will restrict the clients which are able to connect.
+			</p>
+
+			<p>
+				Supported protocols and default protocol versions may be changed at any time.
+			</p>
+
+
+			<h3>Cipher Suites</h3>
+
+			<p>
+				The following cipher suites are currently supported, in descending order of preference:
+			</p>
+
+			<ul>
+				<li>ECDHE-RSA-AES128-GCM-SHA256</li>
+				<li>ECDHE-ECDSA-AES128-GCM-SHA256</li>
+				<li>ECDHE-RSA-AES128-CBC-SHA</li>
+				<li>ECDHE-RSA-AES256-CBC-SHA</li>
+				<li>ECDHE-ECDSA-AES256-CBC-SHA</li>
+				<li>ECDHE-ECDSA-AES128-CBC-SHA</li>
+				<li>RSA-AES128-CBC-SHA</li>
+				<li>RSA-AES256-CBC-SHA</li>
+				<li>ECDHE-RSA-3DES-EDE-CBC-SHA</li>
+				<li>RSA-3DES-EDE-CBC-SHA</li>
+			</ul>
+
+			<p>
+				<mark class="block">Note: The HTTP/2 spec blacklists over 275 cipher suites for security reasons. Unless you know what you're doing, it's best to accept the default cipher suite settings.</mark>
+			</p>
+
+			<p>
+				Cipher suites may be added or removed from Caddy at any time.
+			</p>
+
+
+
+			<h3>Examples</h3>
+
+			<p>
+				Serve with HTTPS using a certificate and private key located one folder up:
+			</p>
+
+			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg">../cert.pem ../key.pem</span></code>
+
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		<nav>
+			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
+			<a href="/download">Download</a>
+			<a href="/docs">User Guide</a>
+			<a href="/docs/faq">FAQ</a>
+			<a href="https://github.com/mholt/caddy">GitHub</a>
+		</nav>
+
+		<div class="nav">
+			<h6>Caddy</h6>
+			<ul>
+				<li><a href="/docs/getting-started">Getting Started</a></li>
+				<li><a href="/docs/faq">FAQ</a></li>
+				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
+			</ul>
+
+			<h6>Directives</h6>
+			<ul>
+				<li><a href="/docs/basicauth">basicauth</a></li>
+				<li><a href="/docs/bind">bind</a></li>
+				<li><a href="/docs/browse">browse</a></li>
+				<li><a href="/docs/errors">errors</a></li>
+				<li><a href="/docs/ext">ext</a></li>
+				<li><a href="/docs/fastcgi">fastcgi</a></li>
+				<li><a href="/docs/git">git</a></li>
+				<li><a href="/docs/gzip">gzip</a></li>
+				<li><a href="/docs/header">header</a></li>
+				<li><a href="/docs/import">import</a></li>
+				<li><a href="/docs/internal">internal</a></li>
+				<li><a href="/docs/log">log</a></li>
+				<li><a href="/docs/markdown">markdown</a></li>
+				<li><a href="/docs/proxy">proxy</a></li>
+				<li><a href="/docs/redir">redir</a></li>
+				<li><a href="/docs/rewrite">rewrite</a></li>
+				<li><a href="/docs/root">root</a></li>
+				<li><a href="/docs/shutdown">shutdown</a></li>
+				<li><a href="/docs/startup">startup</a></li>
+				<li><a href="/docs/templates">templates</a></li>
+				<li><a href="/docs/tls">tls</a></li>
+				<li><a href="/docs/websocket">websocket</a></li>
+			</ul>
+
+		</div>
+	</body>
+</html>

@@ -1,0 +1,97 @@
+nav {
+	background: rgba(0, 33, 50, .9);
+	box-shadow: none;
+	height: 65px;
+	overflow: hidden;
+}
+
+nav a {
+	color: rgba(164, 220, 255, 0.6);
+}
+
+nav a:hover {
+	color: rgba(164, 220, 255, 1);
+}
+
+section {
+	padding: 100px 5%;
+	box-shadow: 0 0 50px 10px rgba(0, 0, 0, .7);
+	z-index: 2;
+	position: relative;
+}
+
+h2 {
+	color: #2A4A6A;
+	font-weight: bold;
+	font-size: 52px;
+	text-align: center;
+}
+
+h3 {
+	font: 600 24px/1.25em 'Lato', sans-serif;
+}
+
+p + h3 {
+	margin-top: 1em;
+}
+
+p {
+	max-width: 500px;
+}
+
+p.subheader {
+	font-size: 18px;
+	max-width: 620px;
+	margin: 0 auto 50px;
+	text-align: center;
+}
+
+
+
+
+
+
+.bg {
+	padding: 170px 5%;
+	background-position: 100% center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	box-shadow: none;
+	z-index: 1;
+}
+
+.bg h1,
+.bg h2 {
+	font-size: 52px;
+	font-weight: normal;
+	color: #FFF;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .8);
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+
+.bg1 {
+	background-image: url('/resources/images/atomicthing2.jpg');
+}
+
+.bg2 {
+	background-image: url('/resources/images/crystalpines.jpg');
+}
+
+.bg3 {
+	background-image: url('/resources/images/allthatglitters.jpg');
+}
+
+.bg4 {
+	background-image: url('/resources/images/circuitboard.jpg');
+}
+
+
+
+@media (max-width: 767px) {
+	footer img {
+		margin-top: 30px;
+	}
+}

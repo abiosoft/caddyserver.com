@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Caddy for Writers and Bloggers</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<meta name="theme-color" content="#F0F0F0">
+		<link rel="icon" href="/favicon.ico">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Lato|Open+Sans:300,400,700">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/common.css">
+		<link rel="stylesheet" href="/resources/css/frontpages.css">
+		<link rel="stylesheet" href="/resources/css/blogging.css">
+		<script src="/resources/js/jquery-2.1.3.min.js"></script>
+		<script src="/resources/js/common.js"></script>
+	</head>
+	<body>
+
+		<h1>Write Anytime. Preview Anywhere.<div class="block-cursor"></div></h1>
+		<main>
+			<p>
+				Caddy is a web server that makes it easy for writers to work on their articles offline. Whether it's HTML, Markdown, or even a WordPress blog, Caddy can serve it up to your browser. Caddy can be used both on your own computer and your public web host.
+			</p>
+
+			<h2>Complements Any Workflow</h2>
+			<p>
+				When you sit down to write, start up Caddy and leave it running for as long as you want to be able to preview your work in your web browser. It doesn't matter whether you're writing in WordPress, Drupal, or Markdown files&mdash;Caddy supports it.
+			</p>
+			<p>
+				Caddy can also be deployed to a public web host to serve your site to the world. Caddy works the same on your server as it does on your computer so the transition is painless.
+			</p>
+
+			<h2>How It Works</h2>
+			<p>
+				Place a <a href="/docs/caddyfile">Caddyfile</a> with your site. Run <code>caddy</code> on the command line, and leave it running while you work on your site. While Caddy is running, you can open your site in a web browser, allowing you to see it just as if it were published on a public web host for everyone to see.
+			</p>
+			<p>
+				Running on your public server is the same: upload your site along with a Caddyfile, run <code>caddy</code>, and Caddy will do what it does best. You don't have to restart Caddy when you make changes to your site's files.
+			</p>
+			<p>
+				If you want to use your own domain name on your computer (like "my.blog"), all you need to do is <a href="http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/">add a line to your hosts file</a>.
+			</p>
+
+			<h2>Sample Caddyfiles</h2>
+
+			<code class="block"><span class="hl-vhost">my.blog:8080</span>
+
+<span class="hl-directive">fastcgi</span> <span class="hl-arg">/ 127.0.0.1:9000 php</span>
+</code>
+			<ul>
+				<li>Site's URL is my.blog:8080 ("my.blog" was added to hosts file)</li>
+				<li>Since the blog is powered by WordPress, proxy all requests (under the path /) to FastCGI with preset configurations for serving PHP sites</li>
+			</ul>
+			<br>
+
+
+			<code class="block"><span class="hl-vhost">http://example-site.com</span>
+
+<span class="hl-directive">markdown</span> <span class="hl-arg">/articles</span> {
+    <span class="hl-subdirective">css</span> /articles.css
+    <span class="hl-subdirective">js</span>  /interactions.js
+}
+</code>
+			<ul>
+				<li>Site's domain is "example-site.com" - this Caddyfile is serving a production website</li>
+				<li>Markdown files in the /articles folder are rendered as HTML with custom CSS and JS files</li>
+			</ul>
+
+			<br><br>
+
+			<div style="text-align: center;">
+				<a href="/download" class="button"><i class="fa fa-download fa-lg"></i> Download Caddy</a>
+			</div>
+		</main>
+
+
+		<footer>
+			<div class="grid-container">
+				<div class="grid-25 mobile-grid-50">
+					<img src="/resources/images/caddy-boxed.png" style="max-width: 150px;">
+					<br><br>
+					Brought to you by <a href="https://twitter.com/mholt6">Matt Holt</a>
+				</div>
+				<div class="grid-25 mobile-grid-50 links">
+					<h6>Caddy For</h6>
+					<a href="/art">Designers/Artists</a>
+					<a href="/blogging">Bloggers</a>
+					<a href="/developers">Developers</a>
+				</div>
+				<div class="grid-25 mobile-grid-50 links">
+					<h6>The Project</h6>
+					<a href="/download">Download</a>
+					<a href="/docs">Documentation</a>
+					<a href="https://github.com/mholt/caddy">GitHub</a>
+				</div>
+				<div class="grid-25 mobile-grid-50 links">
+					<h6>Guides</h6>
+					<a href="/docs/getting-started">Getting Started</a>
+					<a href="/docs/caddyfile">The Caddyfile</a>
+					<a href="https://github.com/mholt/caddy/wiki">Development</a>
+				</div>
+				<div class="clear"></div>
+			</div>
+
+			<div class="copyright">
+				&copy; 2015
+			</div>
+		</footer>
+		
+		
+		<nav>
+			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
+			<a href="/download"><i class="fa fa-download"></i> Download</a>
+			<a href="/docs"><i class="fa fa-book"></i> User Guide</a>
+			<a href="/docs/faq"><i class="fa fa-question-circle"></i> FAQ</a>
+			<a href="https://github.com/mholt/caddy"><i class="fa fa-github"></i> GitHub</a>
+		</nav>
+
+	</body>
+</html>

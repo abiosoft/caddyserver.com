@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>fastcgi - Caddy Directives</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/common.css">
+		<link rel="stylesheet" href="/resources/css/docs.css">
+		<link rel="icon" href="/favicon.ico">
+		<script src="/resources/js/common.js"></script>
+	</head>
+	<body>
+		<main>
+			<h1>fastcgi</h1>
+
+			<p>
+				fastcgi proxies requests to a FastCGI server. Even though the most common use for this directive is to serve PHP sites, it is by default a generic FastCGI proxy.
+			</p>
+
+
+
+			<h3>Syntax</h3>
+			
+			<code class="block"><span class="hl-directive">fastcgi</span> <span class="hl-arg"><i>path endpoint</i> [<i>preset</i>]</span> {
+    <span class="hl-subdirective">ext</span>   <i>extension</i>
+    <span class="hl-subdirective">split</span> <i>splitval</i>
+    <span class="hl-subdirective">index</span> <i>indexfile</i>
+    <span class="hl-subdirective">env</span>   <i>key value</i>
+}</code>
+
+			<ul>
+				<li><b>path</b> is the base path to match before the request will be forwarded</li>
+				<li><b>endpoint</b> is the address or Unix socket of the FastCGI server</li>
+				<li><b>preset</b> is an optional preset name (see below)</li>
+				<li><b>extension</b> specifies the extension which, if the request URL has it, would proxy the request to FastCGI</li>
+				<li><b>splitval</b> specifies how to split the URL; the split value becomes the end of the first part and anything in the URL after it becomes part of the PATH_INFO CGI variable</li>
+				<li><b>indexfile</b> specifies the default file to try if a file is not specified by the URL</li>
+				<li><b>key value</b> sets an environment variable named <i>key</i> with the given <i>value</i>; the <b>env</b> property can be used multiple times</li>
+			</ul>
+
+			<h3>Presets</h3>
+
+			<p>
+				This directive can be customized to work with a variety of FastCGI applications. To make things easier for proxying to common types of sites, some presets have been configured:
+			</p>
+
+			<ul>
+				<li>
+					<b>php</b>
+					<br>
+					<code class="block"><span class="hl-subdirective">ext</span>   .php
+<span class="hl-subdirective">split</span> .php
+<span class="hl-subdirective">index</span> index.php</code>
+				</li>
+			</ul>
+
+			<p>
+				If a preset is used, its values can be overwritten if needed by declaring them manually inside the block.
+			</p>
+
+
+			<h3>Examples</h3>
+
+			<p>
+				Proxy all requests to a FastCGI responder listening at 127.0.0.1:9000:
+			</p>
+
+			<code class="block"><span class="hl-directive">fastcgi</span> <span class="hl-arg">/ 127.0.0.1:9000</span></code>
+
+			<p>
+				Forward all requests in /blog to a PHP site (like WordPress) being served with php-fpm:
+			</p>
+
+			<code class="block"><span class="hl-directive">fastcgi</span> <span class="hl-arg">/blog 127.0.0.1:9000 php</span></code>
+
+			<p>
+				With custom FastCGI configuration:
+			</p>
+
+			<code class="block"><span class="hl-directive">fastcgi</span> <span class="hl-arg">/ 127.0.0.1:9001</span> {
+	<span class="hl-subdirective">split</span> .html
+}</code>
+
+			<p>
+				With PHP preset, but overriding the ext property:
+			</p>
+
+			<code class="block"><span class="hl-directive">fastcgi</span> <span class="hl-arg">/ 127.0.0.1:9001 php</span> {
+	<span class="hl-subdirective">ext</span> .html
+}</code>
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		<nav>
+			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
+			<a href="/download">Download</a>
+			<a href="/docs">User Guide</a>
+			<a href="/docs/faq">FAQ</a>
+			<a href="https://github.com/mholt/caddy">GitHub</a>
+		</nav>
+
+		<div class="nav">
+			<h6>Caddy</h6>
+			<ul>
+				<li><a href="/docs/getting-started">Getting Started</a></li>
+				<li><a href="/docs/faq">FAQ</a></li>
+				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
+			</ul>
+
+			<h6>Directives</h6>
+			<ul>
+				<li><a href="/docs/basicauth">basicauth</a></li>
+				<li><a href="/docs/bind">bind</a></li>
+				<li><a href="/docs/browse">browse</a></li>
+				<li><a href="/docs/errors">errors</a></li>
+				<li><a href="/docs/ext">ext</a></li>
+				<li><a href="/docs/fastcgi">fastcgi</a></li>
+				<li><a href="/docs/git">git</a></li>
+				<li><a href="/docs/gzip">gzip</a></li>
+				<li><a href="/docs/header">header</a></li>
+				<li><a href="/docs/import">import</a></li>
+				<li><a href="/docs/internal">internal</a></li>
+				<li><a href="/docs/log">log</a></li>
+				<li><a href="/docs/markdown">markdown</a></li>
+				<li><a href="/docs/proxy">proxy</a></li>
+				<li><a href="/docs/redir">redir</a></li>
+				<li><a href="/docs/rewrite">rewrite</a></li>
+				<li><a href="/docs/root">root</a></li>
+				<li><a href="/docs/shutdown">shutdown</a></li>
+				<li><a href="/docs/startup">startup</a></li>
+				<li><a href="/docs/templates">templates</a></li>
+				<li><a href="/docs/tls">tls</a></li>
+				<li><a href="/docs/websocket">websocket</a></li>
+			</ul>
+
+		</div>
+	</body>
+</html>
