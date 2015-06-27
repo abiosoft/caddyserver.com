@@ -5,3 +5,16 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 ga('create', 'UA-86578-24', 'auto');
 ga('send', 'pageview');
+
+
+function suppress(event)
+{
+	if (!event)
+		return false;
+	if (event.preventDefault)
+		event.preventDefault();
+	if (event.stopPropagation)
+		event.stopPropagation();
+	event.cancelBubble = true;
+	return false;
+}

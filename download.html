@@ -9,11 +9,13 @@
 		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Lato|Open+Sans:300,400,700">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/animate.css">
 		<link rel="stylesheet" href="/resources/css/common.css">
 		<link rel="stylesheet" href="/resources/css/frontpages.css">
 		<link rel="stylesheet" href="/resources/css/download.css">
 		<script src="/resources/js/jquery-2.1.3.min.js"></script>
 		<script src="/resources/js/common.js"></script>
+		<script src="/resources/js/download.js"></script>
 	</head>
 	<body>
 		<header>
@@ -22,9 +24,98 @@
 		</header>
 
 		<main>
+
 			<section>
 
 				<div class="grid-container">
+					<div class="grid-100">
+						<h3>1.&nbsp; Select Features</h3>
+					</div>
+					<div class="grid-100 grid-parent" id="features">
+						<div class="grid-25 mobile-grid-50">
+							<label class="checked">
+								<span class="directive">
+									<input type="checkbox" checked disabled> Caddy Core
+								</span>
+								<span class="description">
+									Everything most sites need.
+								</span>
+							</label>
+						</div>
+						<div class="grid-25 mobile-grid-50">
+							<label>
+								<span class="directive">
+									<input type="checkbox"> git
+								</span>
+								<span class="description">
+									Deploy your site with git push.
+								</span>
+							</label>
+						</div>
+						<div class="grid-25 mobile-grid-50">
+							<label>
+								<span class="directive">
+									<input type="checkbox"> replace
+								</span>
+								<span class="description">
+									Replace text in response bodies.
+								</span>
+							</label>
+						</div>
+						<div class="grid-25 mobile-grid-50">
+							<label>
+								<span class="directive">
+									<input type="checkbox"> search
+								</span>
+								<span class="description">
+									Site search with an easy GET endpoint.
+								</span>
+							</label>
+						</div>
+					</div>
+
+				</div>
+				<div class="clear" style="margin-bottom: 70px;"></div>
+
+
+				<div class="grid-container">
+					<div class="grid-100">
+						<h3>2.&nbsp; Choose Platform</h3>
+					</div>
+
+					<div class="grid-20 mobile-grid-50 icon-container">
+						<i class="fa fa-windows icon"></i>
+						<a href="javascript:" class="download-link" data-os="windows-64"><span class="label">Windows 64-bit</span></a>
+						<a href="javascript:" class="download-link" data-os="windows-32"><span class="label">Windows 32-bit</span></a>
+					</div>
+					<div class="grid-20 mobile-grid-50 icon-container">
+						<i class="fa fa-apple icon"></i>
+						<a href="javascript:" class="download-link" data-os="osx-64"><span class="label">OS X 64-bit</span></a>
+					</div>
+					<div class="clear hide-on-desktop"></div>
+					<div class="grid-20 mobile-grid-50 icon-container">
+						<i class="fa fa-linux icon"></i>
+						<a href="javascript:" class="download-link" data-os="linux-64"><span class="label">Linux 64-bit</span></a>
+						<a href="javascript:" class="download-link" data-os="linux-32"><span class="label">Linux 32-bit</span></a>
+						<a href="javascript:" class="download-link" data-os="linux-arm"><span class="label">Linux ARM*</span></a>
+						<span style="font-size: 12px;"><a href="https://github.com/mholt/caddy/wiki/Running-Caddy-on-Android">* Runs on Android</a></span>
+					</div>
+					<div class="grid-20 mobile-grid-50 icon-container">
+						<img src="/resources/images/freebsd.png" alt="FreeBSD" class="icon" style="max-width: 65px;">
+						<a href="javascript:" class="download-link" data-os="freebsd-64"><span class="label">FreeBSD 64-bit</span></a>
+						<a href="javascript:" class="download-link" data-os="freebsd-32"><span class="label">FreeBSD 32-bit</span></a>
+						<a href="javascript:" class="download-link" data-os="freebsd-arm"><span class="label">FreeBSD ARM</span></a>
+					</div>
+					<div class="clear hide-on-desktop"></div>
+					<div class="grid-20 mobile-grid-50 icon-container">
+						<img src="/resources/images/openbsd.png" alt="FreeBSD" class="icon" style="max-width: 75px;">
+						<a href="javascript:" class="download-link" data-os="openbsd-64"><span class="label">OpenBSD 64-bit</span></a>
+						<a href="javascript:" class="download-link" data-os="openbsd-32"><span class="label">OpenBSD 32-bit</span></a>
+					</div>
+
+
+					<!--
+
 					<div class="grid-20 mobile-grid-50 icon-container">
 						<i class="fa fa-windows icon"></i>
 						<a href="https://github.com/mholt/caddy/releases/download/v0.7.1/caddy_windows_amd64.zip" class="download-link" data-os="windows-64">Windows 64-bit</a>
@@ -43,17 +134,18 @@
 						<span style="font-size: 12px;"><a href="https://github.com/mholt/caddy/wiki/Running-Caddy-on-Android">* Runs on Android</a></span>
 					</div>
 					<div class="grid-20 mobile-grid-50 icon-container">
-						<img src="/resources/images/freebsd.png" alt="FreeBSD" class="icon" style="max-width: 75px;">
+						<img src="/resources/images/freebsd.png" alt="FreeBSD" class="icon" style="max-width: 65px;">
 						<a href="https://github.com/mholt/caddy/releases/download/v0.7.1/caddy_freebsd_amd64.zip" class="download-link" data-os="freebsd-64">FreeBSD 64-bit</a>
 						<a href="https://github.com/mholt/caddy/releases/download/v0.7.1/caddy_freebsd_386.zip" class="download-link" data-os="freebsd-32">FreeBSD 32-bit</a>
 						<a href="https://github.com/mholt/caddy/releases/download/v0.7.1/caddy_freebsd_arm.zip" class="download-link" data-os="freebsd-arm">FreeBSD ARM</a>
 					</div>
 					<div class="clear hide-on-desktop"></div>
 					<div class="grid-20 mobile-grid-50 icon-container">
-						<img src="/resources/images/openbsd.png" alt="FreeBSD" class="icon" style="max-width: 85px;">
+						<img src="/resources/images/openbsd.png" alt="FreeBSD" class="icon" style="max-width: 75px;">
 						<a href="https://github.com/mholt/caddy/releases/download/v0.7.1/caddy_openbsd_amd64.zip" class="download-link" data-os="openbsd-64">OpenBSD 64-bit</a>
 						<a href="https://github.com/mholt/caddy/releases/download/v0.7.1/caddy_openbsd_386.zip" class="download-link" data-os="openbsd-32">OpenBSD 32-bit</a>
 					</div>
+					-->
 				</div>
 
 				<div class="version">Version 0.7.1</div>
@@ -101,15 +193,6 @@
 			<a href="/docs/faq"><i class="fa fa-question-circle"></i> FAQ</a>
 			<a href="https://github.com/mholt/caddy"><i class="fa fa-github"></i> GitHub</a>
 		</nav>
-
-<script>
-$(function() {
-	$('.download-link').click(function() {
-		var label = $(this).data('os') || "";
-		ga('send', 'event', 'Software', 'Download', label);
-	});
-});
-</script>
 
 	</body>
 </html>

@@ -25,6 +25,11 @@ header h2 {
 	letter-spacing: 1px;
 }
 
+h3 {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
 .version {
 	text-align: center;
 	font-size: 14px;
@@ -39,7 +44,7 @@ header h2 {
 
 .icon-container .icon {
 	display: block;
-	font-size: 80px;
+	font-size: 70px;
 	margin: 0px 0 20px;
 }
 
@@ -54,8 +59,120 @@ header h2 {
 	margin: 5px auto;
 	max-width: 160px;
 	text-decoration: none;
+	transition: transform .25s ease;
 }
 
 .download-link:hover {
 	background: #FAFAFA;
+}
+
+.download-link:active {
+	transform: scale(.9);
+}
+
+.download-link.downloading {
+	cursor: default;
+	background: #FAFAFA;
+	border-color: transparent;
+}
+
+.download-link > span {
+	display: block;
+	-webkit-animation-duration: .5s;
+	animation-duration: .5s;
+}
+
+.download-link .spin-text {
+	color: #777;
+	font-size: 12px;
+	text-transform: uppercase;
+	margin-left: 15px;
+}
+
+
+#features {
+	width: 100%;
+}
+
+#features label {
+	display: block;
+	font-size: 14px;
+	cursor: pointer;
+	padding: 10px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+
+	transition: transform .1s ease;
+}
+
+#features label:hover {
+	border-color: #DDD;
+}
+
+#features label:active {
+	transform: scale(.97);
+}
+
+#features .directive {
+	display: block;
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+
+#features input[type=checkbox] {
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+#features .description {
+	color: #777;
+	font-size: 13px;
+}
+
+
+
+
+
+.spinner {
+  margin: 100px auto 0;
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > span {
+  width: 10px;
+  height: 10px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
 }
