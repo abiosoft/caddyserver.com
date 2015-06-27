@@ -27,18 +27,18 @@ h1,
 h2,
 h3 {
 	font-family: Georgia;
+	font-weight: normal;
 }
 
 h1 {
 	margin: 150px 0 100px;
 	color: #000;
-	font-weight: normal;
 	text-align: center;
 	font-size: 65px;
 }
 
 h2 {
-	font-size: 32px;
+	font-size: 38px;
 	text-align: left;
 	color: #000;
 	margin: 50px 0 20px;

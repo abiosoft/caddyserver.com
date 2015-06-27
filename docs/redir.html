@@ -29,14 +29,14 @@
 			<ul>
 				<li><b>from</b> is the request path to match (it must match exactly)</li>
 				<li><b>to</b> is the path to redirect to</li>
-				<li><b>code</b> is the HTTP status code to respond with; must be in the range [300-308] excluding 306.</li>
+				<li><b>code</b> is the HTTP status code to respond with; must be in the range [300-308] excluding 306. May also be <code>meta</code> to issue meta tag redirect.</li>
 			</ul>
 
 			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg"><i>to</i> [<i>code</i>]</span></code>
 
 			<ul>
 				<li><b>to</b> is the path to redirect to</li>
-				<li><b>code</b> is the HTTP status code to respond with; must be in the range [300-308] excluding 306 (default is 301 Moved Permanently)</li>
+				<li><b>code</b> is the HTTP status code to respond with, as above; default is 301 Moved Permanently</li>
 			</ul>
 
 			<p>
