@@ -30,13 +30,68 @@ h3 {
 	margin-bottom: 30px;
 }
 
-.version {
-	text-align: center;
-	font-size: 14px;
-	max-width: 400px;
-	margin: 50px auto 0;
-	color: #444;
+
+#features {
+	width: 100%;
 }
+
+#features label,
+#features .label {
+	display: block;
+	font-size: 14px;
+	cursor: pointer;
+	padding: 10px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	margin-bottom: 10px;
+	transition: transform .1s ease;
+	text-decoration: none;
+}
+
+#features label:hover,
+#features .label:hover {
+	border-color: #DDD;
+}
+
+#features label:active,
+#features .label:active {
+	transform: scale(.97);
+}
+
+#features .directive {
+	display: block;
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+
+#features input[type=checkbox] {
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+#features .description {
+	color: #777;
+	font-size: 13px;
+}
+
+#features .add-yours {
+	border: 1px dashed #CCC;
+}
+
+#features .add-yours:hover {
+	border-color: #0EADFF;
+}
+
+#features .add-yours .directive,
+#features .add-yours .description {
+	color: #888;
+}
+
+#features .add-yours:hover .directive,
+#features .add-yours:hover .description {
+	color: #0EADFF;
+}
+
 
 .icon-container {
 	text-align: center;
@@ -89,45 +144,14 @@ h3 {
 	margin-left: 15px;
 }
 
-
-#features {
-	width: 100%;
-}
-
-#features label {
-	display: block;
+.version {
+	text-align: center;
 	font-size: 14px;
-	cursor: pointer;
-	padding: 10px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-
-	transition: transform .1s ease;
+	max-width: 400px;
+	margin: 50px auto 0;
+	color: #444;
 }
 
-#features label:hover {
-	border-color: #DDD;
-}
-
-#features label:active {
-	transform: scale(.97);
-}
-
-#features .directive {
-	display: block;
-	font-size: 16px;
-	margin-bottom: 5px;
-}
-
-#features input[type=checkbox] {
-	margin-right: 5px;
-	cursor: pointer;
-}
-
-#features .description {
-	color: #777;
-	font-size: 13px;
-}
 
 
 
