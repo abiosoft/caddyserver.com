@@ -61,8 +61,8 @@
 				<li><b>path</b> is the path, relative to site root, to clone the repository into; default is site root.</li>
 				<li><b>branch</b> is the branch or tag to pull; default is master branch. Can be {latest} for most recent tag.</li>
 				<li><b>key</b> is the path to the SSH private key; only required for private repositories.</li>
-				<li><b>interval</b> is the number of seconds between pulls; default is 3600 (1 hour), minimum 5.</li>
 				<li><b>path</b> and <b>secret</b> are used to create a webhook which pulls the latest right after a push. The git service provider must support webhooks.</li>
+				<li><b>interval</b> is the number of seconds between pulls; default is 3600 (1 hour), minimum 5.</li>
 				<li><b>command</b> is a command to execute after successful pull; followed by <b>args</b> which are any arguments to pass to the command.</li>
 			</ul>
 

@@ -125,48 +125,6 @@
 			</div>
 		</main>
 
-
-		<footer>
-			<div class="grid-container">
-				<div class="grid-25 mobile-grid-50">
-					<img src="/resources/images/caddy-boxed.png" style="max-width: 150px;">
-					<br><br>
-					Brought to you by <a href="https://twitter.com/mholt6">Matt Holt</a>
-				</div>
-				<div class="grid-25 mobile-grid-50 links">
-					<h6>Caddy For</h6>
-					<a href="/art">Designers/Artists</a>
-					<a href="/blogging">Bloggers</a>
-					<a href="/developers">Developers</a>
-				</div>
-				<div class="grid-25 mobile-grid-50 links">
-					<h6>The Project</h6>
-					<a href="/download">Download</a>
-					<a href="/docs">Documentation</a>
-					<a href="https://github.com/mholt/caddy">GitHub</a>
-				</div>
-				<div class="grid-25 mobile-grid-50 links">
-					<h6>Guides</h6>
-					<a href="/docs/getting-started">Getting Started</a>
-					<a href="/docs/caddyfile">The Caddyfile</a>
-					<a href="https://github.com/mholt/caddy/wiki">Development</a>
-				</div>
-				<div class="clear"></div>
-			</div>
-
-			<div class="copyright">
-				&copy; 2015
-			</div>
-		</footer>
-		
-		
-		<nav>
-			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed-white.png" alt="Caddy" class="logo"></a>
-			<a href="/download"><i class="fa fa-download"></i> Download</a>
-			<a href="/docs"><i class="fa fa-book"></i> User Guide</a>
-			<a href="/docs/faq"><i class="fa fa-question-circle"></i> FAQ</a>
-			<a href="https://github.com/mholt/caddy"><i class="fa fa-github"></i> GitHub</a>
-		</nav>
-
+		{{.Include "/includes/footer-and-nav.html"}}
 	</body>
 </html>
