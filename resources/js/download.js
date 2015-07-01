@@ -1,6 +1,10 @@
 var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 
 $(function() {
+	var buildServerDown = false;
+
+	updateDownloadLinks();
+
 
 	// Get list of features
 	$.get("/features.json", function(data, status, jqxhr) {
@@ -26,10 +30,27 @@ $(function() {
 			var $elem = $(featHTML);
 			$elem.insertBefore('#add-yours-container');
 		}
+	}).fail(function() {
+		$('.buildserver-down').show();
+		$('.custom-builds').hide();
+
+		$('.download-link').each(function() {
+			buildServerDown = true;
+			var target = $(this).data('platform').replace("-", "").replace("osx", "mac").replace("windows", "win");
+			$(this).attr('href', "/download/"+target);
+		});
+	});
+
+	// Update download URLs when features are selected
+	$('#features').on('click', 'label', function() {
+		updateDownloadLinks();
 	});
 
 	// Download when link clicked
 	$('.download-link').click(function(event) {
+		if (buildServerDown)
+			return;
+
 		if ($(this).hasClass('downloading')) {
 			return suppress(event);
 		}
@@ -41,14 +62,8 @@ $(function() {
 		// Fade in a spinner
 		transformIntoSpinner(this);
 
-		// Prepare request parameters
-		var os = $(this).data('os'),
-			arch = $(this).data('arch'),
-			url = "/download/build?os="+encodeURIComponent(os)
-					+"&arch="+encodeURIComponent(arch)
-					+"&features="+encodeURIComponent(featureList());
-
 		// Make request
+		var url = $(this).attr('href');
 		var thisDownloadLink = this;
 		$.ajax(url, { method: "HEAD" }).done(function(data, status, jqxhr) {
 			window.location = jqxhr.getResponseHeader("Location");
@@ -102,3 +117,15 @@ function transformBack(link)
 	}).addClass('animated zoomOut');
 }
 
+
+function updateDownloadLinks()
+{
+	$('.download-link').each(function() {
+		var os = $(this).data('os'),
+			arch = $(this).data('arch'),
+			url = "/download/build?os="+encodeURIComponent(os)
+					+"&arch="+encodeURIComponent(arch)
+					+"&features="+encodeURIComponent(featureList());
+		$(this).attr('href', url);
+	});
+}

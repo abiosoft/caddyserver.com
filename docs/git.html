@@ -31,11 +31,11 @@
 
 			<h3>Syntax</h3>
 			
-			<code class="block"><span class="hl-directive">git</span> <span class="hl-arg"><i>repo</i> [<i>path</i>]</span></code>
+			<code class="block"><span class="hl-directive">git</span> <span class="hl-arg"><i>repo</i> [<i>clonepath</i>]</span></code>
 
 			<ul>
 				<li><b>repo</b> is the URL to the repository; SSH and HTTPS URLs are supported</li>
-				<li><b>path</b> is the path, relative to site root, to clone the repository into; default is site root</li>
+				<li><b>clonepath</b> is the path, relative to site root, to clone the repository into; default is site root</li>
 			</ul>
 
 			<p>
@@ -46,9 +46,9 @@
 				For more control or to use a private repository, use the following syntax:
 			</p>
 
-			<code class="block"><span class="hl-directive">git</span> <span class="hl-arg">[<i>repo path</i>]</span> {
+			<code class="block"><span class="hl-directive">git</span> <span class="hl-arg"><i>repo</i> [<i>clonepath</i>]</span> {
 	<span class="hl-subdirective">repo</span>     <i>repo</i>
-	<span class="hl-subdirective">path</span>     <i>path</i>
+	<span class="hl-subdirective">path</span>     <i>clonepath</i>
 	<span class="hl-subdirective">branch</span>   <i>branch</i>
 	<span class="hl-subdirective">key</span>      <i>key</i>
 	<span class="hl-subdirective">hook</span>     <i>path secret</i>
@@ -58,7 +58,7 @@
 
 			<ul>
 				<li><b>repo</b> is the URL to the repository; SSH and HTTPS URLs are supported.</li>
-				<li><b>path</b> is the path, relative to site root, to clone the repository into; default is site root.</li>
+				<li><b>clonepath</b> is the path, relative to site root, to clone the repository into; default is site root.</li>
 				<li><b>branch</b> is the branch or tag to pull; default is master branch. Can be {latest} for most recent tag.</li>
 				<li><b>key</b> is the path to the SSH private key; only required for private repositories.</li>
 				<li><b>path</b> and <b>secret</b> are used to create a webhook which pulls the latest right after a push. The git service provider must support webhooks.</li>
