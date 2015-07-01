@@ -48,9 +48,7 @@ $(function() {
 
 	// Download when link clicked
 	$('.download-link').click(function(event) {
-		if (buildServerDown)
-			return;
-
+		// Don't overlap downloads
 		if ($(this).hasClass('downloading')) {
 			return suppress(event);
 		}
@@ -58,6 +56,10 @@ $(function() {
 		// Send event to Analaytics
 		var label = $(this).data('platform') || "";
 		ga('send', 'event', 'Software', 'Download', label);
+
+		// Let the browser just download the static file
+		if (buildServerDown)
+			return;
 
 		// Fade in a spinner
 		transformIntoSpinner(this);
