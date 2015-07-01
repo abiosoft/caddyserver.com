@@ -2,18 +2,10 @@
 <html>
 	<head>
 		<title>templates - Caddy Directives</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
-		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		{{.Include "/includes/docs-head.html"}}
 		<link rel="stylesheet" href="/resources/css/highlight/atelier-lakeside.light.css">
-		<link rel="stylesheet" href="/resources/css/unsemantic.css">
-		<link rel="stylesheet" href="/resources/css/common.css">
-		<link rel="stylesheet" href="/resources/css/docs.css">
-		<link rel="icon" href="/favicon.ico">
-		<script src="/resources/js/common.js"></script>
 		<script src="/resources/js/highlight.pack.js"></script>
-		<script>hljs.initHighlightingOnLoad();</script>
+		<script>hljs.initHighlightingOnLoad();</script>		
 	</head>
 	<body>
 		<main>
@@ -48,16 +40,16 @@
 			<h3>Template Format</h3>
 
 			<p><b>Include another file:</b></p>
-			<pre><code class="html">{{.Include "path/to/file.html"}}</code></pre>
+			<pre><code class="html">{&#123;.Include "path/to/file.html"}}</code></pre>
 
 			<p><b>Current date:</b> (<a href="https://github.com/golang/go/blob/f06795d9b742cf3292a0f254646c23603fc6419b/src/time/format.go#L9-L41">format</a>)</p>
-			<pre><code class="html">{{.Date "Monday, 2 Jan 2006"}}</code></pre>
+			<pre><code class="html">{&#123;.Date "Monday, 2 Jan 2006"}}</code></pre>
 
 			<p><b>Visitor's IP:</b></p>
-			<pre><code class="html">{{.RemoteAddr}}</code></pre>
+			<pre><code class="html">{&#123;.RemoteAddr}}</code></pre>
 
 			<p><b>Request query string:</b></p>
-			<pre><code class="html">{{.URL.RawQuery}}</code></pre>
+			<pre><code class="html">{&#123;.URL.RawQuery}}</code></pre>
 
 			<p>
 				Other functions and values are available on the <a href="https://github.com/mholt/caddy/blob/master/middleware/templates/context.go">context</a> type.
@@ -88,48 +80,6 @@
 			</footer>
 		</main>
 
-		<nav>
-			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
-			<a href="/download">Download</a>
-			<a href="/docs">User Guide</a>
-			<a href="/docs/faq">FAQ</a>
-			<a href="https://github.com/mholt/caddy">GitHub</a>
-		</nav>
-
-		<div class="nav">
-			<h6>Caddy</h6>
-			<ul>
-				<li><a href="/docs/getting-started">Getting Started</a></li>
-				<li><a href="/docs/faq">FAQ</a></li>
-				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
-			</ul>
-
-			<h6>Directives</h6>
-			<ul>
-				<li><a href="/docs/basicauth">basicauth</a></li>
-				<li><a href="/docs/bind">bind</a></li>
-				<li><a href="/docs/browse">browse</a></li>
-				<li><a href="/docs/errors">errors</a></li>
-				<li><a href="/docs/ext">ext</a></li>
-				<li><a href="/docs/fastcgi">fastcgi</a></li>
-				<li><a href="/docs/git">git</a></li>
-				<li><a href="/docs/gzip">gzip</a></li>
-				<li><a href="/docs/header">header</a></li>
-				<li><a href="/docs/import">import</a></li>
-				<li><a href="/docs/internal">internal</a></li>
-				<li><a href="/docs/log">log</a></li>
-				<li><a href="/docs/markdown">markdown</a></li>
-				<li><a href="/docs/proxy">proxy</a></li>
-				<li><a href="/docs/redir">redir</a></li>
-				<li><a href="/docs/rewrite">rewrite</a></li>
-				<li><a href="/docs/root">root</a></li>
-				<li><a href="/docs/shutdown">shutdown</a></li>
-				<li><a href="/docs/startup">startup</a></li>
-				<li><a href="/docs/templates">templates</a></li>
-				<li><a href="/docs/tls">tls</a></li>
-				<li><a href="/docs/websocket">websocket</a></li>
-			</ul>
-
-		</div>
+		{{.Include "/includes/docs-nav.html"}}
 	</body>
 </html>

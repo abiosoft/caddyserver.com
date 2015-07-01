@@ -2,26 +2,23 @@
 <html>
 	<head>
 		<title>git - Caddy Directives</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
-		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/resources/css/unsemantic.css">
-		<link rel="stylesheet" href="/resources/css/common.css">
-		<link rel="stylesheet" href="/resources/css/docs.css">
-		<link rel="icon" href="/favicon.ico">
-		<script src="/resources/js/common.js"></script>
+		{{.Include "/includes/docs-head.html"}}
 	</head>
 	<body>
 		<main>
-			<h1>git</h1>
+			<h1>git <div class="tag addon">Addon</div></h1>
+
+			<div class="addon-message">
+				<div class="heading"><i class="fa fa-plus-circle"></i> Addon</div>
+				This directive is a Caddy extension. Questions should be directed to its maintainer. <a href="https://github.com/abiosoft/caddy-git">github.com/abiosoft/caddy-git</a>
+			</div>
 
 			<p>
 				git clones a <a href="http://git-scm.com/">git</a> repository into the site. This makes it possible to deploy your site with a simple <code>git push</code>.
 			</p>
 
 			<p>
-				The git directive does not chain in a handler. Instead, it starts a service routine that runs during the lifetime of the server. When the server starts, it clones the repository. While the server is still up, it pulls the latest every so often. In regular git fashion, a download only includes changes so it is very efficient.
+				The git directive starts a service routine that runs during the lifetime of the server. When the service starts, it clones the repository. While the server is still up, it pulls the latest every so often. You can also set up a webhook to pull immediately after a push. In regular git fashion, a pull only includes changes, so it is very efficient.
 			</p>
 
 			<p>
@@ -54,19 +51,19 @@
 	<span class="hl-subdirective">path</span>     <i>path</i>
 	<span class="hl-subdirective">branch</span>   <i>branch</i>
 	<span class="hl-subdirective">key</span>      <i>key</i>
-	<span class="hl-subdirective">interval</span> <i>interval</i>
 	<span class="hl-subdirective">hook</span>     <i>path secret</i>
+	<span class="hl-subdirective">interval</span> <i>interval</i>
 	<span class="hl-subdirective">then</span>     <i>command</i> [<i>args...</i>]
 }</code>
 
 			<ul>
-				<li><b>repo</b> is the URL to the repository; SSH and HTTPS URLs are supported</li>
-				<li><b>path</b> is the path, relative to site root, to clone the repository into; default is site root</li>
-				<li><b>branch</b> is the branch or tag to pull; default is master branch</li>
-				<li><b>key</b> is the path to the SSH private key; only required for private repositories</li>
-				<li><b>interval</b> is the number of seconds between pulls; default is 3600 (1 hour), minimum 5</li>
+				<li><b>repo</b> is the URL to the repository; SSH and HTTPS URLs are supported.</li>
+				<li><b>path</b> is the path, relative to site root, to clone the repository into; default is site root.</li>
+				<li><b>branch</b> is the branch or tag to pull; default is master branch. Can be {latest} for most recent tag.</li>
+				<li><b>key</b> is the path to the SSH private key; only required for private repositories.</li>
+				<li><b>interval</b> is the number of seconds between pulls; default is 3600 (1 hour), minimum 5.</li>
 				<li><b>path</b> and <b>secret</b> are used to create a webhook which pulls the latest right after a push. The git service provider must support webhooks.</li>
-				<li><b>command</b> is a command to execute after successful pull; followed by <b>args</b> which are any arguments to pass to the command</li>
+				<li><b>command</b> is a command to execute after successful pull; followed by <b>args</b> which are any arguments to pass to the command.</li>
 			</ul>
 
 			<p>
@@ -121,48 +118,6 @@
 			</footer>
 		</main>
 
-		<nav>
-			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
-			<a href="/download">Download</a>
-			<a href="/docs">User Guide</a>
-			<a href="/docs/faq">FAQ</a>
-			<a href="https://github.com/mholt/caddy">GitHub</a>
-		</nav>
-
-		<div class="nav">
-			<h6>Caddy</h6>
-			<ul>
-				<li><a href="/docs/getting-started">Getting Started</a></li>
-				<li><a href="/docs/faq">FAQ</a></li>
-				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
-			</ul>
-
-			<h6>Directives</h6>
-			<ul>
-				<li><a href="/docs/basicauth">basicauth</a></li>
-				<li><a href="/docs/bind">bind</a></li>
-				<li><a href="/docs/browse">browse</a></li>
-				<li><a href="/docs/errors">errors</a></li>
-				<li><a href="/docs/ext">ext</a></li>
-				<li><a href="/docs/fastcgi">fastcgi</a></li>
-				<li><a href="/docs/git">git</a></li>
-				<li><a href="/docs/gzip">gzip</a></li>
-				<li><a href="/docs/header">header</a></li>
-				<li><a href="/docs/import">import</a></li>
-				<li><a href="/docs/internal">internal</a></li>
-				<li><a href="/docs/log">log</a></li>
-				<li><a href="/docs/markdown">markdown</a></li>
-				<li><a href="/docs/proxy">proxy</a></li>
-				<li><a href="/docs/redir">redir</a></li>
-				<li><a href="/docs/rewrite">rewrite</a></li>
-				<li><a href="/docs/root">root</a></li>
-				<li><a href="/docs/shutdown">shutdown</a></li>
-				<li><a href="/docs/startup">startup</a></li>
-				<li><a href="/docs/templates">templates</a></li>
-				<li><a href="/docs/tls">tls</a></li>
-				<li><a href="/docs/websocket">websocket</a></li>
-			</ul>
-
-		</div>
+		{{.Include "/includes/docs-nav.html"}}
 	</body>
 </html>

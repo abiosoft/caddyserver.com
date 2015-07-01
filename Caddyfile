@@ -1,4 +1,10 @@
 localhost:2015
 
 ext .html
-errors error.log
+errors {
+	log error.log
+	404 /404.html
+}
+templates / .html
+proxy /download/build localhost:5050
+proxy /features.json localhost:5050

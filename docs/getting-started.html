@@ -2,15 +2,7 @@
 <html>
 	<head>
 		<title>Getting Started - Caddy</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
-		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Open+Sans:300,400">
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/resources/css/unsemantic.css">
-		<link rel="stylesheet" href="/resources/css/common.css">
-		<link rel="stylesheet" href="/resources/css/docs.css">
-		<link rel="icon" href="/favicon.ico">
-		<script src="/resources/js/common.js"></script>
+		{{.Include "/includes/docs-head.html"}}
 	</head>
 	<body>
 		<main>
@@ -69,48 +61,6 @@
 			</footer>
 		</main>
 
-		<nav>
-			<a href="/" id="logo-link"><img src="/resources/images/caddy-boxed.png" alt="Caddy" class="logo"></a>
-			<a href="/download">Download</a>
-			<a href="/docs">User Guide</a>
-			<a href="/docs/faq">FAQ</a>
-			<a href="https://github.com/mholt/caddy">GitHub</a>
-		</nav>
-
-		<div class="nav">
-			<h6>Caddy</h6>
-			<ul>
-				<li><a href="/docs/getting-started">Getting Started</a></li>
-				<li><a href="/docs/faq">FAQ</a></li>
-				<li><a href="/docs/caddyfile">The Caddyfile</a></li>
-			</ul>
-
-			<h6>Directives</h6>
-			<ul>
-				<li><a href="/docs/basicauth">basicauth</a></li>
-				<li><a href="/docs/bind">bind</a></li>
-				<li><a href="/docs/browse">browse</a></li>
-				<li><a href="/docs/errors">errors</a></li>
-				<li><a href="/docs/ext">ext</a></li>
-				<li><a href="/docs/fastcgi">fastcgi</a></li>
-				<li><a href="/docs/git">git</a></li>
-				<li><a href="/docs/gzip">gzip</a></li>
-				<li><a href="/docs/header">header</a></li>
-				<li><a href="/docs/import">import</a></li>
-				<li><a href="/docs/internal">internal</a></li>
-				<li><a href="/docs/log">log</a></li>
-				<li><a href="/docs/markdown">markdown</a></li>
-				<li><a href="/docs/proxy">proxy</a></li>
-				<li><a href="/docs/redir">redir</a></li>
-				<li><a href="/docs/rewrite">rewrite</a></li>
-				<li><a href="/docs/root">root</a></li>
-				<li><a href="/docs/shutdown">shutdown</a></li>
-				<li><a href="/docs/startup">startup</a></li>
-				<li><a href="/docs/templates">templates</a></li>
-				<li><a href="/docs/tls">tls</a></li>
-				<li><a href="/docs/websocket">websocket</a></li>
-			</ul>
-
-		</div>
+		{{.Include "/includes/docs-nav.html"}}
 	</body>
 </html>
