@@ -1,3 +1,4 @@
-_gitignore
+.vagrant/
+_gitignore/
 *.log
 google4ec903*.html
