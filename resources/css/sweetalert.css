@@ -52,10 +52,9 @@ body.stop-scrolling {
   .sweet-alert p {
     color: #797979;
     font-size: 16px;
-    text-align: center;
+    text-align: left;
     font-weight: 300;
     position: relative;
-    text-align: inherit;
     float: none;
     margin: 0;
     padding: 0;

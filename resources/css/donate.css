@@ -1,0 +1,131 @@
+.bg {
+	padding: 100px 5%;
+}
+
+.bg h1 {
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	padding: 50px 0 25px;
+	text-align: center;
+}
+
+.bg p {
+  margin: 0 auto;
+  color: #FFF;
+  text-align: center;
+  font-size: 18px;
+  text-shadow: 0 0 5px #000;
+  max-width: 600px;
+}
+
+section {
+	padding: 50px 5% 100px;
+}
+
+hr {
+	border: 0;
+	border-top: 4px dotted #2A4A6A;
+}
+
+section h2 {
+	margin: 50px auto;
+}
+
+.contrib-stats-link {
+	max-width: none;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.team-member img {
+	border-radius: 50%;
+	margin: 0 auto;
+	display: block;
+	width: 100%;
+	max-width: 200px;
+}
+
+.team-member a {
+	outline: none;
+}
+
+.team-member h3 {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.team-member h4 {
+	text-align: center;
+	font-weight: normal;
+	font-size: 18px;
+	font-style: italic;
+}
+
+.team-member table {
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 100px;
+}
+
+.team-member th,
+.team-member td {
+	border: 1px solid #CCC;
+	color: #000;
+	text-align: center;
+}
+
+.team-member th {
+	background: #EEE;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: normal;
+	padding: 5px;
+}
+
+.team-member td {
+	width: 50%;
+	padding: 10px;
+}
+
+.team-member .github-link {
+	color: #000;
+	font-weight: bold;
+}
+
+.team-member .github-link .fa {
+	margin-right: 3px;
+}
+
+.team-member .icon img {
+	max-width: 30px;
+	max-height: 30px;
+	display: inline;
+	vertical-align: middle;
+	border-radius: 0;
+	margin-right: 5px;
+}
+
+.team-member .paypal.icon a { color: #0088C8; }
+.team-member .cash.icon a { color: #27B802; }
+.team-member .wallet.icon a { color: #C00D0D; }
+
+.team-member img.pp-button {
+	max-width: 75px !important;
+}
+
+#thank-you {
+	font-size: 150px;
+	color: #EEE;
+	margin-top: 50px;
+	text-transform: uppercase;
+	text-align: center;
+	word-wrap: break-word;
+	font-weight: bold;
+	line-height: 1em;
+}
+
+@media (max-width: 900px) {
+	#thank-you {
+		font-size: 75px;
+	}
+}

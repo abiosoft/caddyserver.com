@@ -7,6 +7,12 @@ ga('create', 'UA-86578-24', 'auto');
 ga('send', 'pageview');
 
 
+$(function() {
+	$('nav .menu-link').click(function() {
+		$('nav').toggleClass('expanded');
+	});
+});
+
 function suppress(event)
 {
 	if (!event)

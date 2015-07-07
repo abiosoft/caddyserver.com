@@ -13,6 +13,53 @@ nav a:hover {
 	color: rgba(164, 220, 255, 1);
 }
 
+nav .logo-container {
+	text-align: left;
+}
+
+nav .nav-menu {
+	margin-top: 0;
+	text-align: right;
+	transform-origin: 50% 0;
+	transition: 350ms;
+}
+
+nav.expanded {
+	overflow: visible;
+	height: auto;
+	max-height: 1000px;
+}
+
+nav.expanded .nav-menu {
+	transform: perspective(400) rotate3d(0,0,0,0);
+	margin-top: 0;
+	padding: 0;
+}
+
+nav .menu-link {
+	color: #FFF;
+	display: none;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	font-size: 24px;
+	cursor: pointer;
+}
+
+nav .menu-link:hover {
+	color: rgba(164, 220, 255, 1);
+}
+
+.donate-link {
+	background-color: rgba(39, 195, 5, 0.72);
+	color: #FFF;
+}
+
+.donate-link:hover {
+	background-color: rgba(46, 255, 0, 0.72);
+	color: #FFF;
+}
+
 section {
 	padding: 100px 5%;
 	box-shadow: 0 0 50px 10px rgba(0, 0, 0, .7);
@@ -89,6 +136,22 @@ p.subheader {
 }
 
 
+@media (max-width: 900px) {
+	nav .nav-menu {
+		margin-top: 65px;
+		transform: perspective(400) rotate3d(1,0,0,90deg);
+	}
+
+	nav .nav-menu a {
+		display: block;
+		text-align: left;
+		padding: 15px;
+	}
+
+	nav .menu-link {
+		display: block;
+	}
+}
 
 @media (max-width: 767px) {
 	footer img {
