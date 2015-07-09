@@ -17,13 +17,14 @@
 		<script src="/resources/js/common.js"></script>
 		<script src="/resources/js/sweetalert.min.js"></script>
 		<script src="/resources/js/donate.js"></script>
+		<script src="http://coinwidget.com/widget/coin.js"></script>
 	</head>
 	<body>
 
 		<main>
 			<section class="bg" style="background-attachment: initial; background-color: #004057;">
 				<div class="grid-100">
-					<h1>Your Donations Matter!</h1>
+					<h1>Your Donations Matter</h1>
 					<p>
 						Thousands of voluntary development hours are poured into Caddy. If your company uses Caddy, please consider regular payments to help fund the project. Individual donations are welcome too.
 					</p>
@@ -34,18 +35,18 @@
 				<p class="contrib-stats-link">
 					<a href="https://github.com/mholt/caddy/graphs/contributors">View Contribution Stats</a>
 					<br>
-					<small>(Note: Not all invested time is reflected in commit history.)</small>
+					<small>(Note: Not all time invested is reflected in commit history.)</small>
 				</p>
 
 				<div class="grid-container">
 				
 					<div class="grid-30 suffix-5">
 						<div class="team-member">
-							<img src="/resources/images/donations/team/matt-holt.jpg" alt="Matt Holt">
+							<img src="/resources/images/donations/team/matt-holt.jpg" alt="Matt Holt" class="profile-pic">
 							<h3>Matt Holt</h3>
-							<h4>Owner</h4>
+							<h4>Author</h4>
 							<p>
-								<a href="https://github.com/mholt" class="github-link"><i class="fa fa-github"></i>mholt</a> designed and built Caddy, its website, and most of the build server from the ground up. Fixes bugs, builds new features, and coordinates the efforts of other developers.
+								<a href="https://github.com/mholt" class="github-link"><i class="fa fa-github"></i>mholt</a> created Caddy with a passion for simplifying the Web. He fixes bugs and builds new features with close attention to detail and user experience.
 							</p>
 							<table>
 								<tr>
@@ -71,22 +72,63 @@
 
 					<div class="grid-30 suffix-5">
 						<div class="team-member">
-							<img src="/resources/images/donations/team/abiola-ibrahim.jpg" alt="Abiola Ibrahim">
+							<img src="/resources/images/donations/team/abiola-ibrahim.jpg" alt="Abiola Ibrahim" class="profile-pic">
 							<h3>Abiola Ibrahim</h3>
 							<h4>Core Contributor</h4>
 							<p>
-								<a href="https://github.com/abiosoft" class="github-link"><i class="fa fa-github"></i>abiosoft</a> made the caddydev tool and the git middleware, and has improved many of Caddy's features. Supports other developers and fixes lots of bugs.
+								<a href="https://github.com/abiosoft" class="github-link"><i class="fa fa-github"></i>abiosoft</a> built the caddydev tool and the git middleware and has improved many of Caddy's features. Supports other developers and fixes lots of bugs.
 							</p>
 							<table>
 								<tr>
 									<th colspan="3">Donate to Abiola</th>
 								</tr>
 								<tr>
-									
+									<td>
+										<script>
+										CoinWidgetCom.go({
+											wallet_address: "1GTHYEDiy2C7RzXn5nY4wVRaEN2GvLjwZN"
+											, currency: "bitcoin"
+											, counter: "hide"
+											, alignment: "bl"
+											, qrcode: true
+											, auto_show: false
+											, lbl_button: "Bitcoin"
+											, lbl_address: "Abiola's Bitcoin Address:"
+											, lbl_count: "donations"
+											, lbl_amount: "BTC"
+										});
+										</script>
+									</td>
 								</tr>
 							</table>
 						</div>
 					</div>
+
+
+					<div class="grid-30">
+						<div class="team-member">
+							<img src="/resources/images/donations/team/karthic-rao.jpg" alt="Karthic Rao" class="profile-pic">
+							<h3>Karthic Rao</h3>
+							<h4>Contributor</h4>
+							<p>
+								<a href="https://github.com/Karthic-Hackintosh" class="github-link"><i class="fa fa-github"></i>Karthic-Hackintosh</a> writes tests for Caddy so that we catch more bugs before they affect you.
+							</p>
+							<table>
+								<tr>
+									<th colspan="3">Donate to Karthic</th>
+								</tr>
+								<tr>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+
+
+
+
+
+
 
 					<div class="clear"></div>
 
@@ -96,26 +138,26 @@
 					</div>
 
 					<div class="grid-50">
-						<h3>Can I donate to the project itself?</h3>
-						<p>
-							No. The project doesn't need funding&mdash;the individuals building it do. To keep things simple, there is no collective pool of money for the whole project. Your money goes straight to the individual contributors to whom you donate&mdash;no extra overhead.
-						</p>
-
-						<h3>Are my donations tax-deductable?</h3>
-						<p>
-							Probably not. We're individuals, not non-profit organizations. But you'll feel good inside.
-						</p>
-					</div>
-
-					<div class="grid-50">
 						<h3>Are my donations private?</h3>
 						<p>
 							<b>Yes.</b> Your donations are completely private and are not recorded or tracked by the Caddy project in any way. It's simply person-to-person.
 						</p>
 
+						<h3>Can I donate to the project itself?</h3>
+						<p>
+							No. The project doesn't need funding&mdash;the individuals building it do. To keep things simple, there is no collective pool of money for the whole project. Your money goes straight to the individual contributors to whom you donate&mdash;no extra overhead.
+						</p>
+					</div>
+
+					<div class="grid-50">
+						<h3>Are my donations tax-deductable?</h3>
+						<p>
+							Probably not. We're individuals, not non-profit organizations. But you'll still feel good inside.
+						</p>
+
 						<h3>What do you do with my donations?</h3>
 						<p>
-							That depends on the recipient. Some have day jobs, others don't. Those who don't will use your donation to cover living expenses. Those who do will find more motivation to work on the project, which improves quality of the software.
+							That depends on the recipient. Some have day jobs, others don't. Those who don't will use your donation to cover living expenses so they can continue to build Caddy. Those who do will find more motivation to work on the project, thus improving the quality of the software.
 						</p>
 					</div>
 

@@ -37,7 +37,7 @@ section h2 {
 	margin-bottom: 50px;
 }
 
-.team-member img {
+.team-member .profile-pic {
 	border-radius: 50%;
 	margin: 0 auto;
 	display: block;
