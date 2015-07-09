@@ -13,7 +13,7 @@
 			</p>
 
 			<p>
-				This directive supports regular expressions for more advanced rewrite tasks. <mark>Note: Regular expression support is experimental at this time. High-load servers should avoid using regular expressions.</mark>
+				This directive has experimental support for regular expressions which allow more advanced rewrite tasks.
 			</p>
 
 
@@ -42,6 +42,8 @@
 				<li><b>extensions...</b> is a space-separated list of file extensions to include or ignore. Prefix an extension with <code>!</code> to exclude an extension. The forward slash <code>/</code> symbol matches paths without file extensions.</li>
 				<li><b>to</b> is the path to rewrite to. Can use some variables like {path} (request path without leading /), {query} (query string without leading ?), {file} (last part of the request path), {dir} (the request path before the last part) and {frag} (URL after # symbol).</li>
 			</ul>
+
+			<mark class="block">Note: This advanced syntax is experimental at this time. High-load servers should avoid using regular expressions.</mark>
 
 			<p>
 				Regular expression support is experimental. We want advanced users to try it and <a href="https://github.com/mholt/caddy/issues">give us feedback</a>.
