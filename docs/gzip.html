@@ -19,15 +19,15 @@
 			The plain gzip config is good enough for most things, but you can gain more control if needed:
 
 			<code class="block"><span class="hl-directive">gzip</span> {
-	<span class="hl-subdirective">mimes</span> <i>types...</i>
-	<span class="hl-subdirective">ext</span>   <i>extensions...</i>
+	<!--<span class="hl-subdirective">mimes</span> <i>types...</i>
+	--><span class="hl-subdirective">ext</span>   <i>extensions...</i>
 	<span class="hl-subdirective">not</span>   <i>paths</i>
 	<span class="hl-subdirective">level</span> <i>compression_level</i>
 }</code>
 
 			<ul>
-				<li><b>types...</b> is a space-separated list of MIME types to compress. All other types will not be gzipped. MIME type filter overrides extension filter.</li>
-				<li><b>extensions...</b> is a space-separated list of file extensions to compress. Supports wildcard <code>*</code> to match all extensions. If you set MIME types, do not filter by extensions.</li>
+				<!--<li><b>types...</b> is a space-separated list of MIME types to compress. All other types will not be gzipped. MIME type filter overrides extension filter.</li>-->
+				<li><b>extensions...</b> is a space-separated list of file extensions to compress. Supports wildcard <code>*</code> to match all extensions.</li>
 				<li><b>paths</b> is a space-separated list of paths in which <i>not</i> to compress.</li>
 				<li><b>compression_level</b> is a number from 1 (best speed) to 9 (best compression). Default is 9.</li>
 			</ul>
@@ -40,20 +40,20 @@
 			<code class="block"><span class="hl-directive">gzip</span></code>
 
 			<p>
-				Enable very fast but minimal compression except in the /images and /videos folders:
+				Enable very fast but minimal compression except in the /images and /videos folders (note, however, that images and videos will not be gzipped anyway):
 			</p>
 			<code class="block"><span class="hl-directive">gzip</span> {
 	<span class="hl-subdirective">level</span> 1
 	<span class="hl-subdirective">not</span>   /images /videos
 }</code>
-
+<!--
 			<p>
 				Enable gzip compression only for text/html and application/json files:
 			</p>
 			<code class="block"><span class="hl-directive">gzip</span> {
 	<span class="hl-subdirective">mimes</span> text/html application/json
 }</code>
-
+-->
 			<footer>
 				&copy; 2015
 			</footer>
