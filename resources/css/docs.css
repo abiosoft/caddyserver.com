@@ -8,6 +8,10 @@ nav .menu {
 	top: 5px;
 }
 
+#logo-link {
+	padding-left: 10px;
+}
+
 .nav {
 	position: fixed;
 	top: 65px;
