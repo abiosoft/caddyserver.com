@@ -108,6 +108,7 @@ section h2 {
 .team-member .paypal.icon a { color: #0088C8; }
 .team-member .cash.icon a { color: #27B802; }
 .team-member .wallet.icon a { color: #C00D0D; }
+.team-member .bitcoin.icon { font-size: 12px; }
 
 .team-member img.pp-button {
 	max-width: 75px !important;
