@@ -7,4 +7,4 @@ errors {
 }
 templates / .html
 proxy /download/build localhost:5050
-proxy /features.json localhost:5050
+proxy /features.json  localhost:5050
