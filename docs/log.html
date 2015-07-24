@@ -48,26 +48,8 @@
 			<h3>Log Format</h3>
 
 			<p>
-				You can specify a custom log format with any of these placeholders:
+				You can specify a custom log format with any <a href="/docs/placeholders">placeholder</a> values. Log supports both request and response placeholders.
 			</p>
-
-			<ul>
-				<li><b>{fragment}</b> - The part of the URL after <code>#</code></li>
-				<li><b>{host}</b> - The hostname in the request</li>
-				<li><b>{latency}</b> - Approximate time the server spent handling the request</li>
-				<li><b>{method}</b> - The request method</li>
-				<li><b>{path}</b> - The path portion of the URL</li>
-				<li><b>{port}</b> - The port</li>
-				<li><b>{proto}</b> - The protocol string (e.g. "HTTP/1.1")</li>
-				<li><b>{query}</b> - The query string portion of the URL</li>
-				<li><b>{remote}</b> - The client's IP address</li>
-				<li><b>{scheme}</b> - The protocol/scheme used (usually http or https)</li>
-				<li><b>{size}</b> - The size of the response body</li>
-				<li><b>{status}</b> - The HTTP status code of the response</li>
-				<li><b>{uri}</b> - The request URI</li>
-				<li><b>{when}</b> - Timestamp in the format <code>02/Jan/2006:15:04:05 -0700</code></li>
-			</ul>
-
 
 
 			<h3>Examples</h3>
@@ -83,7 +65,7 @@
 				Custom log format:
 			</p>
 
-			<code class="block"><span class="hl-directive">log</span> <span class="hl-arg">/ ../access.log "{method} {proto} {path}"</span></code>
+			<code class="block"><span class="hl-directive">log</span> <span class="hl-arg">/ ../access.log "{proto} Request: {method} {path}"</span></code>
 
 
 
