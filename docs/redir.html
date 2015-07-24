@@ -21,40 +21,58 @@
 			<ul>
 				<li><b>from</b> is the request path to match (it must match exactly)</li>
 				<li><b>to</b> is the path to redirect to</li>
-				<li><b>code</b> is the HTTP status code to respond with; must be in the range [300-308] excluding 306. May also be <code>meta</code> to issue meta tag redirect.</li>
-			</ul>
-
-			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg"><i>to</i> [<i>code</i>]</span></code>
-
-			<ul>
-				<li><b>to</b> is the path to redirect to</li>
-				<li><b>code</b> is the HTTP status code to respond with, as above; default is 301 Moved Permanently</li>
+				<li><b>code</b> is the HTTP status code to respond with; must be in the range [300-308] excluding 306. May also be <code>meta</code> to issue meta tag redirect for browsers. Default is 301 Moved Permanently.</li>
 			</ul>
 
 			<p>
-				Omitting the <code>from</code> argument creates a "catch-all" redirect: <i>any</i> request will be redirected to the destination while preserving the URL's suffix.
+				To create a "catch-all" redirect, omit the <i>from</i> value:
+			</p>
+
+			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg"><i>to</i> [<i>code</i>]</span></code>
+
+			<p>
+				If you have a lot of redirects, share a redirect code by making a table:
+			</p>
+
+			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg">[<i>code</i>]</span> {
+	<i>from</i> <i>to</i> [<i>code</i>]
+}
+</code>
+
+			<p>
+				Each line defines a redirect and may optionally overwrite the redirect code defined at the top of the table. If no redirect code is specified, the default is used.
+			</p>
+
+			<h3>Preserving Path</h3>
+
+			<p>
+				By default, redirects are from precisely matching paths to the precise location you've defined. You can preserve the path or other portions of the request URL by using any replaceable values, such as {uri} or {query}.
 			</p>
 
 
 			<h3>Examples</h3>
 
 			<p>
-				When a request comes in for /images/photo.jpg, redirect to /images/drawing.jpg with a HTTP 301 (Moved Permanently) status code:
+				When a request comes in for /images/photo.jpg, redirect to /images/drawing.jpg with HTTP 307 (Temporary Redirect) status code:
 			</p>
 
-			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg">/images/photo.jpg /images/drawing.jpg 301</span></code>
+			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg">/images/photo.jpg /images/drawing.jpg 307</span></code>
 
 			<p>
-				When any request comes in, redirect to https://mysite.com with a HTTP 301 Moved Permanently status code:
+				Redirect all requests to https://newsite.com while preserving the request URI:
 			</p>
 
-			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg">https://mysite.com</span></code>
+			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg">https://newsite.com{uri}</span></code>
 
 			<p>
-				Redirect any requests to /under-construction.html with a 307 Temporary Redirect status code.
+				Defining multiple redirections that share a 307 status code, except the last one:
 			</p>
 
-			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg">/under-construction.html 307</span></code>
+			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg">307</span> {
+	/foo     /info/foo
+	/todo    /notes
+	/api-dev /api       meta
+}</code>
 
 			<footer>
 				&copy; 2015
