@@ -35,7 +35,7 @@
 			<h3>Template Format</h3>
 
 			<p>
-				A template is simply an HTML file with <i>actions</i> in it. The actions are parsed and executed to display dynamic content. You can make your own template file according to Go's <a href="http://golang.org/pkg/html/template/">html/template</a> <a href="http://golang.org/pkg/text/template/">syntax</a>  to render <a href="https://github.com/mholt/caddy/blob/29fec4742e5c09277324c8a01a28a976c5c8edc2/middleware/browse/browse.go#L34-L65">this struct type</a> (notice that some helper methods are available).
+				A template is simply an HTML file with <i>actions</i> in it. The actions are parsed and executed to display dynamic content. This directive supports <a href="/docs/template-actions">Caddy's template actions</a> as well as some additional actions specific to the browse directive. You may use template actions that render <a href="https://github.com/mholt/caddy/blob/29fec4742e5c09277324c8a01a28a976c5c8edc2/middleware/browse/browse.go#L34-L65">this struct type</a> (notice that some helper methods are available).
 			</p>
 
 			<p>

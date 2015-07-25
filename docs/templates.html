@@ -12,11 +12,7 @@
 			<h1>templates</h1>
 
 			<p>
-				templates allows you to add template actions to your pages. Templates can be a convenient way to render the current timestamp, request URL, visitor's IP address, and more. You also get basic control statements like <code>if</code> and <code>range</code>.
-			</p>
-
-			<p>
-				The templates directive uses the syntax defined in Go's <a href="http://golang.org/pkg/text/template/">text/template</a> package.
+				templates allows you to add template actions to your pages. Templates can be a convenient way to render the current timestamp, request URL, visitor's IP address, and more. You also get basic control statements like <code>if</code> and <code>range</code>. See <a href="/docs/template-actions">Template Actions</a> for instructions on how to use templates.
 			</p>
 
 			<p>
@@ -39,21 +35,25 @@
 
 			<h3>Template Format</h3>
 
-			<p><b>Include another file:</b></p>
-			<pre><code class="html">{&#123;.Include "path/to/file.html"}}</code></pre>
-
-			<p><b>Current date:</b> (<a href="https://github.com/golang/go/blob/f06795d9b742cf3292a0f254646c23603fc6419b/src/time/format.go#L9-L41">format</a>)</p>
-			<pre><code class="html">{&#123;.Date "Monday, 2 Jan 2006"}}</code></pre>
-
-			<p><b>Visitor's IP:</b></p>
-			<pre><code class="html">{&#123;.RemoteAddr}}</code></pre>
-
-			<p><b>Request query string:</b></p>
-			<pre><code class="html">{&#123;.URL.RawQuery}}</code></pre>
-
 			<p>
-				Other functions and values are available on the <a href="https://github.com/mholt/caddy/blob/master/middleware/templates/context.go">context</a> type.
+				See <a href="/docs/template-actions">Template Actions</a>.
 			</p>
+
+			<h3>Example Template File</h3>
+
+			<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;Example Templated File&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		{&#123;.Include "/includes/header.html"}}
+		&lt;p&gt;
+			Welcome {&#123;.IP}}! You're visiting {&#123;.URI}}.
+		&lt;/p&gt;
+		{&#123;.Include "/includes/footer.html"}}
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
 
 			<h3>Examples</h3>
 
