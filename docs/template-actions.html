@@ -31,8 +31,8 @@
 			<p><b>Include another file:</b></p>
 			<pre><code class="html">{&#123;.Include "path/to/file.html"}}</code></pre>
 
-			<p><b>Show current date:</b> (<a href="https://github.com/golang/go/blob/f06795d9b742cf3292a0f254646c23603fc6419b/src/time/format.go#L9-L41">format</a>)</p>
-			<pre><code class="html">{&#123;.Date "Monday, 2 Jan 2006"}}</code></pre>
+			<p><b>Show current timestamp:</b> (<a href="https://github.com/golang/go/blob/f06795d9b742cf3292a0f254646c23603fc6419b/src/time/format.go#L9-L41">format</a>)</p>
+			<pre><code class="html">{&#123;.Now "Monday, 2 Jan 2006"}}</code></pre>
 
 			<p><b>Cookie value:</b></p>
 			<pre><code class="html">{&#123;.Cookie "name"}}</code></pre>
@@ -65,7 +65,11 @@
 				RawQuery returns the query string. You can replace RawQuery with Host, Scheme, Fragment, String, or Query.Get "parameter".
 			</p>
 
-			
+			<p><b>Truncate value to certain length:</b></p>
+			<pre><code class="html">{&#123;.Truncate "value" 3}}</code></pre>
+
+			<p><b>String replacement:</b></p>
+			<pre><code class="html">{&#123;.Replace "haystack" "needle" "replacement"}}</code></pre>
 
 			<h3>Control Statements</h3>
 
@@ -107,6 +111,14 @@
 				<li><code>le</code> Less than or equal
 				<li><code>gt</code> Greater than
 				<li><code>ge</code> Greater than or equal
+			</ul>
+
+			<p>Or these logic functions:</p>
+
+			<ul>
+				<li><code>not</code> Reverses the if condition
+				<li><code>or</code> Returns first non-empty argument or the last argument
+				<li><code>and</code> Returns first empty argument or the last argument
 			</ul>
 
 
