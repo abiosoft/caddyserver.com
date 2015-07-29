@@ -1,0 +1,171 @@
+#logo-link {
+	padding-right: 10px;
+}
+
+#logo-blog {
+	color: #FFF;
+	text-transform: uppercase;
+	padding: 0;
+}
+
+.content {
+	padding-top: 100px;
+}
+
+code {
+	word-break: normal;
+}
+
+code.block,
+pre code,
+.hljs {
+	padding: 20px 20%;
+}
+
+p code.block,
+p pre code,
+p .hljs {
+	padding: 20px;
+}
+
+main li p {
+	margin-left: 0;
+	margin-right: 0;
+	padding: 10px 0;
+}
+
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6,
+main p,
+main blockquote,
+main li,
+main .meta {
+	-webkit-font-smoothing: antialiased;
+	margin: 0 20%;
+}
+
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6 {
+	font-family: 'Helvetica Neue', Arial, sans-serif;
+	font-weight: bold;
+	text-align: left;
+	color: #000;
+	margin-top: .5em;
+}
+
+main h1 {
+	font-family: Lato;
+	font-weight: normal;
+	font-size: 80px;
+	margin: .5em 0;
+	text-align: center;
+}
+
+main h2 {
+	font-size: 36px;
+	font-weight: normal;
+	margin-top: .5em;
+}
+
+main h5 {
+	text-transform: uppercase;
+}
+
+p {
+	color: #000;
+	max-width: none;
+	font-family: 'Helvetica Neue', Helvetica;
+	font-size: 16px;
+	line-height: 1.5em;
+}
+
+main blockquote {
+	background: #F3F3F3;
+	border-left: 10px solid #E0E0E0;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+main blockquote p {
+	margin: 0 20px;
+}
+
+main .meta {
+	color: #888;
+	font-size: 14px;
+	text-transform: uppercase;
+	border-bottom: 1px solid #CCC;
+	padding-bottom: 15px;
+	margin-bottom: 20px;
+}
+
+main .post-footer {
+	border-top: 3px dotted #CCC;
+	padding-top: 50px;
+	margin-top: 50px;
+	text-align: center;
+}
+
+main hr {
+	border: 0;
+	border-top: 1px solid #CCC;
+	margin: 25px auto;
+}
+
+
+@media (max-width: 1000px) {
+	main h1,
+	main h2,
+	main h3,
+	main h4,
+	main h5,
+	main h6,
+	main p,
+	main blockquote,
+	main li,
+	main .meta {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	code.block,
+	pre code,
+	.hljs {
+		padding: 15px;
+	}
+
+	main h2,
+	main h3,
+	main h4,
+	main h5,
+	main h6,
+	main p,
+	main li,
+	main .meta {
+		max-width: 600px;
+	}
+}
+
+@media (max-width: 760px) {
+	main h1 {
+		font-size: 60px;
+	}
+	
+	main ul,
+	main ol {
+		margin-right: 0;
+	}
+
+	section {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
