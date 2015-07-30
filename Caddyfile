@@ -1,10 +1,18 @@
 localhost
 
-ext .html
+root public/
+ext .html .md
+templates
 errors {
 	log error.log
-	404 /404.html
+	404 ../404.html
 }
-templates / .html
+markdown /blog {
+	sitegen  /blog_generated
+	template ../blog_post_template.html
+	template index ../blog_index_template.html
+}
+
+# build server
 proxy /download/build localhost:5050
 proxy /features.json  localhost:5050
