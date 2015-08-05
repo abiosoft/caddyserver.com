@@ -1,7 +1,7 @@
 ---
 title: Welcome to the Caddy Blog
 author: Matt Holt
-date: 2015-08-01 12:00:00
+date: 2015-08-05 12:00:00
 ---
 
 Welcome to the new blog for the Caddy project! Since [its announcement](https://news.ycombinator.com/item?id=9452606) in April 2015, Caddy has grown significantly with numerous pull requests from [contributors around the world](https://github.com/mholt/caddy/graphs/contributors). To help promote [the Caddy community](https://gophers.slack.com/messages/caddy) and foster project growth, we're starting this blog which will feature posts from contributors as well as guest posts from anyone who uses Caddy that has something to share.

@@ -8,7 +8,7 @@ errors {
 	404 ../404.html
 }
 markdown /blog {
-	sitegen  /blog_generated
+	dev
 	template ../blog_post_template.html
 	template index ../blog_index_template.html
 }

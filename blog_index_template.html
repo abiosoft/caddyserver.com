@@ -57,7 +57,7 @@
 
 					<div class="links">
 					{{range .Links}}
-						{{if not .Date.IsZero}}
+						{{if and (.Date.Before $.NowDate) (not .Date.IsZero) }}
 							<div class="date">{{.Date.Format "January 2, 2006"}}</div>
 							<div class="blog-link"><a href="{{$.Replace .URL ".md" ""}}">{{.Title}}</a></div>
 							{{.Summary}}... <a href="{{$.Replace .URL ".md" ""}}">continue reading</a>

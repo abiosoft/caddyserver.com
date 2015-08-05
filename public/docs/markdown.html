@@ -23,6 +23,7 @@
     <span class="hl-subdirective">[css|js]</span> <i>file</i>
     <span class="hl-subdirective">template</span> [<i>name</i>] <i>path</i>
     <span class="hl-subdirective">sitegen</span>  [<i>static_path</i>]
+    <span class="hl-subdirective">dev</span>
 }</code>
 
 			<ul>
@@ -33,6 +34,7 @@
 				<li><b>file</b> is the JS or CSS file to add to the page.</li>
 				<li><b>template</b> defines a template with the given <b>name</b> to be at the given <b>path</b>. To specify the default template, omit <i>name</i>. Markdown files can choose a template by using the name in its front matter.</li>
 				<li><b>sitegen</b> enables static site generation. Static (HTML) files will be dumped to <b>static_path</b>. If the path is omitted, generated_site is used. The path is relative to site root. This directory will be deleted (if it exists) every time the static site is generated.</li>
+				<li><b>dev</b> disables caching of the Markdown index. This is useful for local development when you want immediate updates to pages, but this may slow down large, busy sites in production.
 			</ul>
 
 			<p>
@@ -43,7 +45,7 @@
 			<h3>Static Site Generation</h3>
 
 			<p>
-				If you specify <i>sitegen</i> in the Caddyfile, this directive will convert your Markdown files into static HTML. When the server starts, it will delete the existing generated static site (if it exists), then sweep all files in the base path for Markdown files and convert them to HTML. After Markdown files are changed, the static HTML file will be regenerated the next time that file is requested. <mark>Warning: If it exists, the entire static site directory is deleted before regenerating the site.</mark>
+				If you specify <i>sitegen</i> in the Caddyfile, this directive will convert your Markdown files into static HTML. When the server starts, it will delete the existing generated static site (if it exists), then sweep all files in the base path for Markdown files and convert them to HTML. After Markdown files are changed, the static HTML file will be regenerated at intervals of 60 seconds (unless dev is used, in which case it happens immediately at request-time). <mark>Warning: If it exists, the entire static site directory is deleted before regenerating the site.</mark>
 			</p>
 
 
