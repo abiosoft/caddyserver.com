@@ -9,7 +9,7 @@
 			<h1>bind</h1>
 
 			<p>
-				bind overrides the host to which the server should bind. Normally, the server binds to the IP address to which the hostname resolves. For example, if your Caddyfile is for mysite.com, Caddy will look up the host mysite.com to know the IP address to bind to. However, that does not work well in all environments, so you can force Caddy to try binding to another IP address instead.
+				bind overrides the host to which the server should bind. Normally, the listener binds to the wildcard host (0.0.0.0). However, you may force the listener to bind to another hostname or IP instead. This directive accepts only a host, not a port.
 			</p>
 
 			<h3>Syntax</h3>
@@ -23,10 +23,10 @@
 			<h3>Examples</h3>
 
 			<p>
-				To bind to IP 0.0.0.0 (wildcard host) no matter what the hostname is in the server address:
+				To make your server accessible only to that machine, bind to IP 127.0.0.1 (localhost):
 			</p>
 
-			<code class="block"><span class="hl-directive">bind</span> <span class="hl-arg">0.0.0.0</span></code>
+			<code class="block"><span class="hl-directive">bind</span> <span class="hl-arg">127.0.0.1</span></code>
 
 			<footer>
 				&copy; 2015
