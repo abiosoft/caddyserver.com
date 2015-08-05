@@ -16,6 +16,10 @@
 				Each command that is executed at startup is blocking, unless you suffix the command with <code>&amp;</code>, which will cause the command to be run in the background. The output and error of the command go to stdout and stderr, respectively. There is no stdin.
 			</p>
 
+			<p>
+				Even if this directive is shared by more than one host, the command will only execute once.
+			</p>
+
 			<h3>Syntax</h3>
 
 			<code class="block"><span class="hl-directive">startup</span> <span class="hl-arg"><i>command</i></span></code>
