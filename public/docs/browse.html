@@ -60,6 +60,20 @@
 				... but the default template is nicer.
 			</p>
 
+			<h3>JSON Response</h3>
+
+			<p> 
+				You can ask for a JSON representation instead of a browse page by having <b>application/json</b> in your <b>Accept</b> header:
+			</p>
+
+<pre><code class="block">$ curl -H "Accept: application/json" 'localhost:2015/?limit=1'
+[{"IsDir":true,"Name":".git","Size":476,"URL":".git/","ModTime":"2015-09-11T03:20:09+03:00","Mode":2147484141}]
+</code></pre>
+
+			<p>
+				The above example demonstrate how to ask for JSON, As well as the ability to limit the number of entries that we want in our JSON via a query called <b>limit</b>, The absence of that query will yeild a JSON with the whole listing. 
+			</p>
+
 			<h3>Examples</h3>
 
 			<p>
