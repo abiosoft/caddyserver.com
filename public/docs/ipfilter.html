@@ -14,45 +14,47 @@
 			</div>
 
 			<p>
-				ipfilter reads a predefined rules from <code>Caddyfile</code> to either block or allow a request based on its IP origin.
+				ipfilter blocks or allows requests based on the client's IP origin.
 			</p>
 
 			<p>
-				<b>Requirements:</b> This directive requires having a local copy of <a href="https://maxmind.com">MaxMind</a>'s <b>GeoLite2 Country</b> database, it's free and can be found <a href="https://dev.maxmind.com/geoip/geoip2/geolite2/">here</a>.
+				<b>Requirements:</b> This directive requires having a local copy of  <a href="https://dev.maxmind.com/geoip/geoip2/geolite2/">MaxMind's GeoLite2 Country database</a> (it's free).
 			</p>
 
 			<h3>Syntax</h3>
 			
-			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg"><i>path[s]</i></span> {
-	<span class="hl-subdirective">database</span>             <i>path to database</i>
-	<span class="hl-subdirective">[blockpage</span>           <i>path to html file]</i>
-	<span class="hl-subdirective">allow OR block</span>       <i>countries ISO CODES</i>
+			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg"><i>paths...</i></span> {
+	<span class="hl-subdirective">database</span>  <i>db_path</i>
+	<span class="hl-subdirective">blockpage</span> <i>block_page</i>
+	<span class="hl-subdirective">allow</span>     <i>countries...</i>
+	<span class="hl-subdirective">block</span>     <i>countries...</i>
 }</code>
 			<ul>
-				<li><b>paths</b> are the base pathes that ipfilter will apply to, we can have a minimum of one path, e.g. <code>"/"</code> will match everything.</li>
-				<li><b>blockpage</b> optional file that will be shown to blocked clients.</li>
-				<li><b>allow</b> OR <b>block</b> the rule that will be applied to the countries codes, for a complete list of codes refer to <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">Wikipedia</a>.</li>
+				<li><b>paths...</b> is a list of space-separated base paths to which to apply this filter rule (use / to match everything).</li>
+				<li><b>db_path</b> is the path to the geo-IP database (relative to working directory).</li>
+				<li><b>block_page</b> is an optional file that will be shown to blocked clients (relative to working directory).</li>
+				<li><b>countries...</b> is a list of space-separated country ISO codes; they will be either blocked or allowed based on the keyword in front of them. For a complete list of codes, refer to <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">Wikipedia</a>.</li>
 			</ul>
 
 			<h3>Examples</h3>
 
 			<p>
-				Only serve clients from the <code>US</code> or <code>JP</code>:
+				Only serve clients from the United States or Japan:
 			</p>
 
 			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg">/</span> {
-	<span class="hl-subdirective">database</span>    /local/data/GeoLite2-Country.mmdb 
-	<span class="hl-subdirective">allow</span>       US JP
+	<span class="hl-subdirective">database</span> /local/data/GeoLite2-Country.mmdb 
+	<span class="hl-subdirective">allow</span>    US JP
 }</code>
 
 			<p>
-				Block requests coming from <code>US</code> or <code>JP</code> but only to <code>/notglobal</code> or <code>/secret</code> and show them <code>default.html</code> instead:
+				Block requests coming from the US or Japan but only to /notglobal and /secret, showing them default.html instead:
 			</p>
 
 			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg">/notglobal /secret</span> {
-	<span class="hl-subdirective">database</span>    /local/data/GeoLite2-Country.mmdb 
-	<span class="hl-subdirective">blockpage</span>   /local/data/default.html
-	<span class="hl-subdirective">block</span>       US JP
+	<span class="hl-subdirective">database</span>  /local/data/GeoLite2-Country.mmdb 
+	<span class="hl-subdirective">blockpage</span> /local/data/default.html
+	<span class="hl-subdirective">block</span>     US JP
 }</code>
 			<footer>
 				&copy; 2015
