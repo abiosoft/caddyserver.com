@@ -24,16 +24,15 @@
 			<h3>Syntax</h3>
 			
 			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg"><i>paths...</i></span> {
-	<span class="hl-subdirective">database</span>  <i>db_path</i>
-	<span class="hl-subdirective">blockpage</span> <i>block_page</i>
-	<span class="hl-subdirective">allow</span>     <i>countries...</i>
-	<span class="hl-subdirective">block</span>     <i>countries...</i>
+	<span class="hl-subdirective">database</span>      <i>db_path</i>
+	<span class="hl-subdirective">blockpage</span>     <i>block_page</i>
+	<span class="hl-subdirective">allow | block</span> <i>countries...</i>
 }</code>
 			<ul>
 				<li><b>paths...</b> is a list of space-separated base paths to which to apply this filter rule (use / to match everything).</li>
 				<li><b>db_path</b> is the path to the geo-IP database (relative to working directory).</li>
 				<li><b>block_page</b> is an optional file that will be shown to blocked clients (relative to working directory).</li>
-				<li><b>countries...</b> is a list of space-separated country ISO codes; they will be either blocked or allowed based on the keyword in front of them. For a complete list of codes, refer to <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">Wikipedia</a>.</li>
+				<li><b>countries...</b> is a list of space-separated country ISO codes. They will be either blocked or allowed based on the keyword in front of them. You cannot use both allow <i>and</i> block in the same filter. For a complete list of country codes, refer to <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">Wikipedia</a>.</li>
 			</ul>
 
 			<h3>Examples</h3>
