@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jsonp - Caddy Directives</title>
+		{{.Include "/includes/docs-head.html"}}
+	</head>
+	<body>
+		<main>
+			<h1>jsonp</h1>
+
+			<p>
+				jsonp allows for JSONP GET requests.  The GET must be returing JSON.  If it has the parameter, "callback"
+				it will be wraped in the callback function name.
+			</p>
+
+			<h3>Syntax</h3>
+			
+			<code class="block"><span class="hl-directive">jsonp</span> <span class="hl-arg"><i>path</i></span></code>
+
+			<ul>
+				<li><b>path</b> is a path that will get converted to a JSONP response </li>
+			</ul>
+
+			<h3>Examples</h3>
+
+			<p> To have the /api/status support JSONP: </p>
+			<code class="block"><span class="hl-directive">jsonp</span> <span class="hl-arg">/api/status</span></code>
+
+			<p> Assuming you have the server running on loalhost that normally returns {"status":"ok"} </p>
+			<code class="block">$ wget 'http://localhost/api/status?callback=func1212221' </code>
+			<p> would return func1212221({"status":"ok"});
+			</p>
+
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		{{.Include "/includes/docs-nav.html"}}
+	</body>
+</html>
