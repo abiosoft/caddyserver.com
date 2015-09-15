@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ipfilter - Caddy Directives</title>
+		{{.Include "/includes/docs-head.html"}}
+	</head>
+	<body>
+		<main>
+			<h1>ipfilter <div class="tag addon">Addon</div></h1>
+
+			<div class="addon-message">
+				<div class="heading"><i class="fa fa-plus-circle"></i> Addon</div>
+				This directive is a Caddy extension. Questions should be directed to its maintainer. <a href="https://github.com/pyed/ipfilter">github.com/pyed/ipfilter</a>
+			</div>
+
+			<p>
+				ipfilter reads a predefined rules from <code>Caddyfile</code> to either block or allow a request based on its IP origin.
+			</p>
+
+			<p>
+				<b>Requirements:</b> This directive requires having a local copy of <a href="https://maxmind.com">MaxMind</a>'s <b>GeoLite2 Country</b> database, it's free and can be found <a href="https://dev.maxmind.com/geoip/geoip2/geolite2/">here</a>.
+			</p>
+
+			<h3>Syntax</h3>
+			
+			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg"><i>path[s]</i></span> {
+	<span class="hl-subdirective">database</span>             <i>path to database</i>
+	<span class="hl-subdirective">[blockpage</span>           <i>path to html file]</i>
+	<span class="hl-subdirective">allow OR block</span>       <i>countries ISO CODES</i>
+}</code>
+			<ul>
+				<li><b>paths</b> are the base pathes that ipfilter will apply to, we can have a minimum of one path, e.g. <code>"/"</code> will match everything.</li>
+				<li><b>blockpage</b> optional file that will be shown to blocked clients.</li>
+				<li><b>allow</b> OR <b>block</b> the rule that will be applied to the countries codes, for a complete list of codes refer to <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">Wikipedia</a>.</li>
+			</ul>
+
+			<h3>Examples</h3>
+
+			<p>
+				Only serve clients from the <code>US</code> or <code>JP</code>:
+			</p>
+
+			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg">/</span> {
+	<span class="hl-subdirective">database</span>    /local/data/GeoLite2-Country.mmdb 
+	<span class="hl-subdirective">allow</span>       US JP
+}</code>
+
+			<p>
+				Block requests coming from <code>US</code> or <code>JP</code> but only to <code>/notglobal</code> or <code>/secret</code> and show them <code>default.html</code> instead:
+			</p>
+
+			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg">/notglobal /secret</span> {
+	<span class="hl-subdirective">database</span>    /local/data/GeoLite2-Country.mmdb 
+	<span class="hl-subdirective">blockpage</span>   /local/data/default.html
+	<span class="hl-subdirective">block</span>       US JP
+}</code>
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		{{.Include "/includes/docs-nav.html"}}
+	</body>
+</html>
