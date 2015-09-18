@@ -28,7 +28,6 @@
 		}
 
 		.blog-link {
-			margin-bottom: 15px;
 			font-size: 28px;
 			font-family: 'Helvetica Neue', sans-serif;
 		}
@@ -41,6 +40,8 @@
 			color: #AAA;
 			font-size: 14px;
 			text-transform: uppercase;
+			margin-top: 5px;
+			margin-bottom: 10px;
 		}
 		</style>
 	</head>
@@ -58,8 +59,8 @@
 					<div class="links">
 					{{range .Links}}
 						{{if and (.Date.Before $.NowDate) (not .Date.IsZero) }}
-							<div class="date">{{.Date.Format "January 2, 2006"}}</div>
 							<div class="blog-link"><a href="{{$.Replace .URL ".md" ""}}">{{.Title}}</a></div>
+							<div class="date">{{.Date.Format "January 2, 2006"}}</div>
 							{{.Summary}}... <a href="{{$.Replace .URL ".md" ""}}">continue reading</a>
 							<hr>
 						{{end}}
