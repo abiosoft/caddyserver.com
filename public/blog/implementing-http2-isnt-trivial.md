@@ -27,7 +27,7 @@ In other words, server push is like the cherry on top to simplify your build pro
 
 ## Server Push is Hard
 
-Another reason you don't see a lot of servers with server push yet is because it's a hard function to implement well. The HTTP/2 specification doesn't go into detail about how to implement server push, only how the protocol facilitates it.
+Another reason you don't see a lot of servers with server push yet is because it's [a hard function to implement](https://github.com/bradfitz/http2/pull/39) well. The HTTP/2 specification doesn't go into detail about how to implement server push, only how the protocol facilitates it.
 
 The [spec says](https://httpwg.github.io/specs/rfc7540.html#PushRequests):
 
