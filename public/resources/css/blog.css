@@ -48,6 +48,11 @@ main .meta {
 	margin: 0 20%;
 }
 
+main iframe {
+	margin: 0 auto;
+	max-width: 800px;
+}
+
 main h1,
 main h2,
 main h3,
