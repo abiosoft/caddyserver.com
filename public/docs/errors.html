@@ -22,14 +22,14 @@
 
 			<h3>Syntax</h3>
 			
-			<code class="block"><span class="hl-directive">errors</span> <span class="hl-arg"><i>logfile</i></span></code>
+			<code class="block"><span class="hl-directive">errors</span> <span class="hl-arg">[<i>logfile</i>]</span></code>
 
 			<ul>
-				<li><b>logfile</b> is the path to the error log file to create (or append to). It can also be <code>stdout</code> or <code>stderr</code> to write to the console, or <code>syslog</code> to write to the system log (except on Windows).</li>
+				<li><b>logfile</b> is the path to the error log file to create (or append to), relative to the current working directory. It can also be <code>stdout</code> or <code>stderr</code> to write to the console, <code>syslog</code> to write to the system log (except on Windows), or <code>visible</code> to write the error (including full stack trace, if applicable) to the response. Writing errors to the response is NOT advised except in local debug situations. Default is <code>stderr</code>.</li>
 			</ul>
 
 			<p>
-				The above syntax will simply enable error logging on the server. To specify custom error pages, open a block:
+				The above syntax will simply enable error reporting on the server. To specify custom error pages, open a block:
 			</p>
 
 			<code class="block"><span class="hl-directive">errors</span> {
@@ -38,7 +38,7 @@
 
 			<ul>
 				<li><b>what</b> can be an HTTP status code (4xx, 5xx) or log.</li>
-				<li><b>where</b> depends on what. If an error page, it is the HTML file of the error page (path is relative to site root). If log, it is the path to the log file (relative to Caddy executable).
+				<li><b>where</b> depends on what. If an error page, it is the HTML file of the error page (path is relative to site root). If log, it is the path to the log file (as described above) and you can enable <a href="/docs/log#rotate">rotation</a> to manage the log files.
 			</ul>
 
 
@@ -46,19 +46,38 @@
 			<h3>Examples</h3>
 
 			<p>
-				Log errors outside of the site's root:
+				Log errors into a file in the parent directory:
 			</p>
 
 			<code class="block"><span class="hl-directive">errors</span> <span class="hl-arg">../error.log</span></code>
 
 			<p>
-				Log errors but also serve some custom error pages:
+				Log errors but also serve custom error pages:
 			</p>
 
 			<code class="block"><span class="hl-directive">errors</span> {
 	<span class="hl-subdirective">log</span> ../error.log
 	<span class="hl-subdirective">404</span> 404.html <span class="hl-comment"># Not Found</span>
 	<span class="hl-subdirective">500</span> 500.html <span class="hl-comment"># Internal Server Error</span>
+}</code>
+
+
+			<p>
+				Make errors visible to the client (for debugging only):
+			</p>
+
+			<code class="block"><span class="hl-directive">errors</span> <span class="hl-arg">visible</span></code>
+
+			<p>
+				Maintain error log files automatically:
+			</p>
+
+			<code class="block"><span class="hl-directive">errors</span> {
+	<span class="hl-subdirective">log</span> error.log {
+		<span class="hl-subdirective">size</span> 50 <span class="hl-comment"># Rotate after 50 MB</span>
+		<span class="hl-subdirective">age</span>  30 <span class="hl-comment"># Keep rotated files for 30 days</span>
+		<span class="hl-subdirective">keep</span> 5  <span class="hl-comment"># Keep at most 5 log files</span>
+	}
 }</code>
 
 			<footer>
