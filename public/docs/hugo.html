@@ -19,7 +19,7 @@
 
       <p>This plugin will regenerate your website everytime you publish some content page or when you schedule a post.</p>
 
-      <p>The admin interface will be available at '/admin/' on your website.</p>
+      <p>The admin interface will be available at <code>/admin/</code> on your website.</p>
 
       <p>
         <b>Requirements:</b> the only requirement you need is to have a functional Hugo website already created. You don't need to have Hugo installed on your computer because it is bundled with this plugin.
@@ -28,7 +28,7 @@
 			<h3>Syntax</h3>
 
       <code class="block"><span class="hl-directive">hugo</span> {
-	<span class="hl-subdirective">styles</span>      <i>file</i>
+	<span class="hl-subdirective">styles</span>    <i>file</i>
 	<span class="hl-subdirective">flags</span>     <i>flags...</i>
 }</code>
 
@@ -37,7 +37,7 @@
 				<li><b>flags</b> are the Hugo flags (those which can be set in the command line) and they must follow one of these syntaxes: <code>-f=value</code> or <code>--flag=value</code></li>
 			</ul>
 
-      <p>To schedule a post, its "date" field must be in "2006-01-02 15:04:05-07:00" format.</p>
+      <p>To schedule a post, its <code>date</code> field must be in '2006-01-02 15:04:05-07:00' format.</p>
 
       <p>hugo plugin should be used with <a href="/docs/root">root</a>, <a href="/docs/basicauth">basicauth</a> and <a href="/docs/errors">errors</a> middleware to have the best experience. See the examples to know more.</p>
 
@@ -49,14 +49,14 @@
 
       <code class="block"><span class="hl-directive">localhost:8080</span>  # website URL and port
 
-	<span class="hl-directive">root</span>          public            # the folder where Hugo generates the website
-	<span class="hl-directive">basicauth</span>     /admin user pass  # protect the admin area using HTTP basic auth
+<span class="hl-directive">root</span>       public            # the folder where Hugo generates the website
+<span class="hl-directive">basicauth</span>  /admin user pass  # protect the admin area using HTTP basic auth
 
-  <span class="hl-directive">errors</span> {
-    <span class="hl-subdirective">404</span>      404.html          # errors page (relative to root folder)
-  }
+<span class="hl-directive">errors</span> {
+  <span class="hl-subdirective">404</span>	404.html  # errors page (relative to root folder)
+}
 
-  <span class="hl-directive">hugo</span></code>
+<span class="hl-directive">hugo</span></code>
 
 			<p>
 				A fully functional website with all of the functions:
@@ -64,17 +64,17 @@
 
 			<code class="block"><span class="hl-directive">localhost:8080</span>  # website URL and port
 
-	<span class="hl-directive">root</span>          public
-	<span class="hl-directive">basicauth</span>     /admin user pass
+<span class="hl-directive">root</span>       public
+<span class="hl-directive">basicauth</span>  /admin user pass
 
-  <span class="hl-directive">errors</span> {
-    <span class="hl-subdirective">404</span>      404.html
-  }
+<span class="hl-directive">errors</span> {
+  <span class="hl-subdirective">404</span>	404.html
+}
 
-  <span class="hl-directive">hugo</span> {
-    <span class="hl-subdirective">styles</span>   public/css/admin.css  # additional admin styles
-    <span class="hl-subdirective">flags</span>    --theme="mytheme"     # hugo flags
-  }</code>
+<span class="hl-directive">hugo</span> {
+  <span class="hl-subdirective">styles</span>   public/css/admin.css  # additional admin styles
+  <span class="hl-subdirective">flags</span>    --theme="mytheme"     # hugo flags
+}</code>
 
 			<footer>
 				&copy; 2015
