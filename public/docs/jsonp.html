@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jsonp - Caddy Directives</title>
+		{{.Include "/includes/docs-head.html"}}
+	</head>
+	<body>
+		<main>
+			<h1>jsonp</h1>
+
+			<div class="addon-message">
+				<div class="heading"><i class="fa fa-plus-circle"></i> Addon</div>
+				This directive is a Caddy extension. Questions should be directed to its maintainer. <a href="https://github.com/pschlump/caddy-jsonp">github.com/pschlump/caddy-jsonp</a>
+			</div>
+
+			<p>
+				jsonp allows for JSONP GET requests.  The GET must be returing JSON.  If it has the parameter, "callback"
+				it will be wraped in the callback function name.
+			</p>
+
+			<h3>Syntax</h3>
+			
+			<code class="block"><span class="hl-directive">jsonp</span> <span class="hl-arg"><i>path</i></span></code>
+
+			<ul>
+				<li><b>path</b> is a path that will get converted to a JSONP response </li>
+			</ul>
+
+			<h3>Examples</h3>
+
+			<p>
+				To have the /api/status support JSONP:
+			</p>
+
+			<code class="block"><span class="hl-directive">jsonp</span> <span class="hl-arg">/api/status</span></code>
+
+			<p>
+				Assuming you have the server running on loalhost that normally returns {"status":"ok"}
+			</p>
+			<code class="block">$ wget 'http://localhost/api/status?callback=func1212221' </code>
+			<p> would return func1212221({"status":"ok"});
+			</p>
+
+			<h3>Things to note</h3>
+
+			<p>
+				This directive is not compatible with streaming calls.  This should not be a
+				problem because streaming is not compatible with JSONP to start off with.
+				JSONP requires that the complete set of data be in the parameters to the
+				callback function.  Streaming only returns the data in chunks.
+			</p>
+
+			<p>
+				The code internally buffers the entire response in memory before sending
+				it back.  Very large responses should be avoided.
+			</p>
+
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		{{.Include "/includes/docs-nav.html"}}
+	</body>
+</html>
