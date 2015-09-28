@@ -37,7 +37,7 @@
 			<p>
 				For more control over the search engine, use the expanded form:
 			</p>
-			
+
 			<code class="block"><span class="hl-directive">search</span> <span class="hl-arg">[<i>directory</i>]</span> {
 	<span class="hl-subdirective">engine</span>        <i>engine</i>
 	<span class="hl-subdirective">datadir</span>       <i>datadir</i>
@@ -47,7 +47,7 @@
 }</code>
 			<ul>
 				<li><b>engine</b> is the indexing engine to use. Default is bleve.</li>
-				<li><b>datadir</b> is the absolute path in which the index will be stored. Default is index.</li>
+				<li><b>datadir</b> is the absolute path in which the index will be stored. Default is /tmp/caddyIndex.</li>
 				<li><b>endpoint</b> is the path to the search endpoint. Default is /search.</li>
 				<li><b>tpl</b> is the path to the HTML template used to render search results. Default is a simple, built-in template.</li>
 				<li><b>path</b> is a path within the site to include (+path) or exclude (-path) from the index. Default is to include site root. You can repeat these properties to specify multiple paths.</li>
@@ -101,7 +101,7 @@
 	<span class="hl-subdirective">-path</span> robots.txt
 }</code>
 
-			
+
 			<footer>
 				&copy; 2015
 			</footer>
