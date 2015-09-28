@@ -14,30 +14,30 @@
 			</div>
 
 			<p>
-				cms allows you to deploy your static website and enjoy of a CMS-like admin interface where you can edit content, schedule posts, upload files, etc. The admin interface will be available at <code>/admin/</code> on your website.
+				cms allows you to deploy and manage a static site with a web-based admin interface where you can edit content, schedule posts, upload files, etc. The admin interface will be available at /admin on your website.
 			</p>
 
 			<p>
 				By default, it uses <a href="http://gohugo.io/">Hugo</a> - which is bundled with the plugin so you don't have to install it separately - but you can use any other static website generator.
 			</p>
 
-      <p>
-        <b>Requirements:</b> if you wan't to use Hugo (which is the default and the recommended), you only need to have an already created functional website for Hugo. If you want to use an external static website generator, is must be in your <code>PATH</code>.
-      </p>
+			<p>
+				<b>Requirements:</b> This add-on does not create a new Hugo site for you; you'll need to run <code>hugo new site</code> if you don't already have a Hugo site. If you want to use an external static website generator, is must be in your <code>$PATH</code>.
+			</p>
 
 			<h3>Syntax</h3>
 
       <code class="block"><span class="hl-directive">cms</span> {
-	<span class="hl-subdirective">styles</span>      <i>file</i>
-	<span class="hl-subdirective">args</span>        <i>args...</i>
-	<span class="hl-subdirective">command</span>     <i>name</i>
-	<span class="hl-subdirective">content</span>     <i>folder</i>          <span class="hl-comment"># default is content</span>
+	<span class="hl-subdirective">styles</span>  <i>file</i>
+	<span class="hl-subdirective">command</span> <i>cmd</i>
+	<span class="hl-subdirective">args</span>    <i>args...</i>
+	<span class="hl-subdirective">content</span> <i>folder</i>
 }</code>
 
 			<ul>
 				<li><b>file</b> is the relative path to <code>public</code> folder of the admin UI styles. These styles won't replace the defaults, they will be added.</li>
-				<li><b>args</b> are the command line arguments you usually set when using the static website generator.</li>
-				<li><b>command</b> is the command name of the static website generator you want to use. If you don't set this directive, Hugo will be used.</li>
+				<li><b>cmd</b> is the command name of the static website generator you want to use. If you don't set this directive, Hugo will be used.</li>
+				<li><b>args...</b> are the command line arguments you usually set when using the static website generator.</li>
 				<li><b>content</b> is the folder where the main content of the website is placed. It affects the 'Content' link on navigation bar. By default it is 'content', but if you are using a static website generator which is not Hugo, you will probably need to change this variable.</li>
 			</ul>
 
@@ -50,42 +50,36 @@
 			</p>
 
       <p>
-				hugo plugin should be used with <a href="/docs/root">root</a>, <a href="/docs/basicauth">basicauth</a> and <a href="/docs/errors">errors</a> middleware to have the best experience. See the examples to know more.
+				This directive should be used with <a href="/docs/root">root</a>, <a href="/docs/basicauth">basicauth</a> and <a href="/docs/errors">errors</a> middleware to have the best experience. See the examples to know more.
 			</p>
 
-			<h3>Examples</h3>
-
-      <p>
-        A simple configuration to use with Hugo static website generator:
-      </p>
-
-      <code class="block"><span class="hl-directive">localhost:8080</span>  <span class="hl-comment"># website URL and port</span>
-
-<span class="hl-directive">root</span>       public            <span class="hl-comment"># the folder where Hugo generates the website</span>
-<span class="hl-directive">basicauth</span>  /admin user pass  <span class="hl-comment"># protect the admin area using HTTP basic auth</span>
-
-<span class="hl-directive">errors</span> {
-  <span class="hl-subdirective">404</span>	404.html  <span class="hl-comment"># errors page (relative to root folder)</span>
-}
-
-<span class="hl-directive">cms</span></code>
+			<h3 id="examples">Examples</h3>
 
 			<p>
-				A functional <a href="https://jekyllrb.com/">Jekyll</a> configuration:
+				A simple configuration to use with Hugo static website generator:
+			</p>
+
+     		<code class="block"><span class="hl-directive">localhost:8080</span>  <span class="hl-comment"># website URL and port</span>
+
+<span class="hl-directive">root</span>      public           <span class="hl-comment"># the folder where Hugo generates the website</span>
+<span class="hl-directive">basicauth</span> /admin user pass <span class="hl-comment"># protect the admin area using HTTP basic auth</span>
+<span class="hl-directive">cms</span> <span class="hl-comment"># enable the admin panel</span></code>
+
+
+			<p>
+				Full Caddyfile of a functional <a href="https://jekyllrb.com/">Jekyll</a> configuration:
 			</p>
 
 			<code class="block"><span class="hl-directive">localhost:8080</span>
 
-<span class="hl-directive">root</span>       public
-<span class="hl-directive">basicauth</span>  /admin user pass
-
+<span class="hl-directive">root</span>      public
+<span class="hl-directive">basicauth</span> /admin user pass
 <span class="hl-directive">errors</span> {
-  <span class="hl-subdirective">404</span>	404.html
+  <span class="hl-subdirective">404</span> 404.html
 }
-
 <span class="hl-directive">cms</span> {
-  <span class="hl-subdirective">command</span>   jekyll
-  <span class="hl-subdirective">content</span>   _posts
+  <span class="hl-subdirective">command</span> jekyll
+  <span class="hl-subdirective">content</span> _posts
 }</code>
 
 			<footer>

@@ -14,34 +14,8 @@
 			</div>
 
 			<p>
-				jsonp allows for JSONP GET requests.  The GET must be returing JSON.  If it has the parameter, "callback"
-				it will be wraped in the callback function name.
+				jsonp allows for JSONP GET requests. The GET must be returing JSON. If the query string contains a "callback" parameter, it will be wrapped in the callback function name.
 			</p>
-
-			<h3>Syntax</h3>
-			
-			<code class="block"><span class="hl-directive">jsonp</span> <span class="hl-arg"><i>path</i></span></code>
-
-			<ul>
-				<li><b>path</b> is a path that will get converted to a JSONP response </li>
-			</ul>
-
-			<h3>Examples</h3>
-
-			<p>
-				To have the /api/status support JSONP:
-			</p>
-
-			<code class="block"><span class="hl-directive">jsonp</span> <span class="hl-arg">/api/status</span></code>
-
-			<p>
-				Assuming you have the server running on loalhost that normally returns {"status":"ok"}
-			</p>
-			<code class="block">$ wget 'http://localhost/api/status?callback=func1212221' </code>
-			<p> would return func1212221({"status":"ok"});
-			</p>
-
-			<h3>Things to note</h3>
 
 			<p>
 				This directive is not compatible with streaming calls.  This should not be a
@@ -53,6 +27,32 @@
 			<p>
 				The code internally buffers the entire response in memory before sending
 				it back.  Very large responses should be avoided.
+			</p>
+
+			<h3 id="syntax">Syntax</h3>
+			
+			<code class="block"><span class="hl-directive">jsonp</span> <span class="hl-arg"><i>path</i></span></code>
+
+			<ul>
+				<li><b>path</b> is a path that will get converted to a JSONP response.</li>
+			</ul>
+
+			<h3 id="examples">Example</h3>
+
+			<p>
+				To have /api/status support JSONP:
+			</p>
+
+			<code class="block"><span class="hl-directive">jsonp</span> <span class="hl-arg">/api/status</span></code>
+
+			<p>
+				So for an endpoint that normally returns raw JSON like <code>{"status":"ok"}</code>, the following request:
+			</p>
+
+			<code class="block">$ wget 'http://example.com/api/status?callback=func3022933'</code>
+			
+			<p>
+				would return <code>func3022933({"status":"ok"});</code>.
 			</p>
 
 			<footer>
