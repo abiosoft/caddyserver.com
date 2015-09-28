@@ -1,7 +1,7 @@
 ---
 title: Implementing HTTP/2 Isn't Trivial
 author: Matt Holt
-date: 2015-09-22 08:00:00
+date: 2015-09-28 08:00:00
 ---
 
 There's been a lot of interest in HTTP/2 lately, particularly the server push function. While it is certainly exciting to finally supersede the 16-year-old, plain text HTTP/1.1 protocol with a shiny, new binary protocol, it is important to remember that this transition will take time.

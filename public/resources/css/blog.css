@@ -84,12 +84,23 @@ main h5 {
 	text-transform: uppercase;
 }
 
-p {
+p,
+li {
 	color: #000;
 	max-width: none;
 	font-family: 'Helvetica Neue', Helvetica;
 	font-size: 16px;
 	line-height: 1.5em;
+}
+
+main ul,
+main ol {
+	padding-left: 2em;
+}
+
+main li {
+	padding-top: 1px;
+	padding-bottom: 1px;
 }
 
 main blockquote {

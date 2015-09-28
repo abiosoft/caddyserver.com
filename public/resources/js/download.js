@@ -29,6 +29,8 @@ $(function() {
 			                  .replace("{{DESCRIPTION}}", data[i].description);
 			var $elem = $(featHTML);
 			$elem.insertBefore('#add-yours-container');
+			if ((i % 4) - 1 == 1)
+			 	$('#add-yours-container').before('<div class="clear"></div>');
 		}
 	}).fail(function() {
 		$('.buildserver-down').show();
