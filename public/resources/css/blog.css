@@ -114,6 +114,11 @@ main blockquote p {
 	margin: 0 20px;
 }
 
+main img {
+	box-shadow: 0 20px 70px rgba(0, 0, 0, .4);
+	margin: 20px auto;
+}
+
 main .meta {
 	color: #888;
 	font-size: 14px;
@@ -178,6 +183,11 @@ main hr {
 	main ul,
 	main ol {
 		margin-right: 0;
+	}
+
+	main img {
+		box-shadow: 0 10px 40px rgba(0, 0, 0, .5);
+		margin: 10px auto;
 	}
 
 	section {
