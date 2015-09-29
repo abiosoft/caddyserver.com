@@ -4,7 +4,7 @@ author: Matt Holt
 date: 2015-09-29 08:00:00
 ---
 
-This week, Caddy 0.7.6 is released. It's been over a month since the last update but when you see why, you'll agree it was worth the wait. The latest version of Caddy is the result of many contributors' handiwork and not all the improvements are in the core; several are add-ons. Plus, we've begun laying the foundation for future Caddy features like Let's Encrypt; and other changes that aren't visible to the user.
+This week, [Caddy 0.7.6](https://github.com/mholt/caddy/releases/tag/v0.7.6) is released ([download](/download)). It's been over a month since the last update but when you see why, you'll agree it was worth the wait. The latest version of Caddy is the result of many contributors' handiwork and not all the improvements are in the core; several are add-ons. Plus, we've begun laying the foundation for future Caddy features like Let's Encrypt; and other changes that aren't visible to the user.
 
 ## Credits
 
