@@ -26,19 +26,19 @@
 			</p>
 
 			<h3>Syntax</h3>
-
-      <code class="block"><span class="hl-directive">cms</span> {
+      <code class="block"><span class="hl-directive">root</span>  <span class="hl-subdirective">public</span>
+      <code class="block"><span class="hl-directive">cms</span>  <span class="hl-subdirective">workingdir</span></span> {
 	<span class="hl-subdirective">styles</span>  <i>file</i>
 	<span class="hl-subdirective">command</span> <i>cmd</i>
-	<span class="hl-subdirective">args</span>    <i>args...</i>
 	<span class="hl-subdirective">content</span> <i>folder</i>
 }</code>
 
 			<ul>
+				<li><b>public</b> is the folder with the public content.</li>
+				<li><b>workingdir</b> is the folder where the commands are going to be executed. By default, it is the current working directory.</li>
 				<li><b>file</b> is the relative path to <code>public</code> folder of the admin UI styles. These styles won't replace the defaults, they will be added.</li>
-				<li><b>cmd</b> is the command name of the static website generator you want to use. If you don't set this directive, Hugo will be used.</li>
-				<li><b>args...</b> are the command line arguments you usually set when using the static website generator.</li>
-				<li><b>folder</b> is the folder where the main content of the website is placed. It affects the 'Content' link on navigation bar. By default it is 'content', but if you are using a static website generator which is not Hugo, you will probably need to change this variable.</li>
+				<li><b>cmd</b> is the command you want to execute. It must be surrounded by double quotes and, if the content is only flags, they are parsed as Hugo arguments, if it begins with something else, it will execute the whole command. You can use it to use another static website generator.</li>
+				<li><b>folder</b> is the folder where the posts and pages are placed.</li>
 			</ul>
 
 			<p>
