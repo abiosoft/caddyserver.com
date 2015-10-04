@@ -16,6 +16,7 @@ A very big thanks to all contributors!
 
 Here's the change list:
 
+- Pass in simple Caddyfile as command line arguments
 - basicauth: Support for legacy htpasswd files
 - browse: JSON response with file listing
 - core: Caddyfile as command line argument
