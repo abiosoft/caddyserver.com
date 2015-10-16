@@ -22,7 +22,7 @@ Whenever you embed an image, script, or style sheet directly into your page, you
 
 So missing out on server push&mdash;at least for now&mdash;isn't that disappointing. If you consider the most significant features of HTTP/2 (binary format, stream multiplexing, header compression, and prioritization), server push is only mildly interesting in comparison.
 
-In other words, server push is like the cherry on top to simplify your build process and abstract more of the network details away from web developers.
+In other words, server push is like the cherry on top to simplify your build process and abstract more of the network details away from web developers. (However, [it was pointed out to me](https://twitter.com/bagder/status/648851772585455616) that server push still has notable improvements on performance in some cases.)
 
 
 ## Server Push is Hard
