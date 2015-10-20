@@ -51,6 +51,7 @@ main .meta {
 main iframe {
 	margin: 0 auto;
 	max-width: 800px;
+	border: 0;
 }
 
 main h1,

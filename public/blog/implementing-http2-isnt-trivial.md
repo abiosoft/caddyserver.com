@@ -14,11 +14,11 @@ I would like to [make a few comments](https://twitter.com/mholt6/status/64458486
 To be fair, Caddy does not have server push yet, either. And neither do most HTTP/2 servers. Allow me to suggest why.
 
 
-## You Already Do Server Push
+## You Already Do Server Push (kind of)
 
-"Server push" is a new feature in HTTP/2 that allows the web server to send resources to the client right away so it doesn't have to make separate requests to ask for them later. Sound familiar? You probably already do it on your site. It's effectively the same thing as inlining resources into your style sheets and HTML pages.
+"Server push" is a new feature in HTTP/2 that allows the web server to send resources to the client right away so it doesn't have to make separate requests to ask for them later. Sound familiar? You probably already do it on your site. It's effectively the same thing as inlining resources into your style sheets and HTML pages. Push still has some specific advantages (optimized client-side caching of resources, for instance) but the concept is similar.
 
-Whenever you embed an image, script, or style sheet directly into your page, you save the client an extra HTTP 1.1 request (which amounts to many TCP-level round trips). Well, this is what server push does too.
+Whenever you embed an image, script, or style sheet directly into your page, you save the client an extra HTTP 1.1 request (which amounts to many TCP-level round trips). Well, this is what server push does too. 
 
 So missing out on server push&mdash;at least for now&mdash;isn't that disappointing. If you consider the most significant features of HTTP/2 (binary format, stream multiplexing, header compression, and prioritization), server push is only mildly interesting in comparison.
 
