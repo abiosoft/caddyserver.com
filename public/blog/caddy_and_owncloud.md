@@ -113,6 +113,12 @@ The following Caddyfile should work with ownCloud.
             regexp /index.php/.*
             to /index.php?{query}
         }
+        
+        # Rewrites for WebDav (i.e. desktop clients)
+        rewrite {
+            regexp /remote.php/.*
+            to /remote.php?{query}
+        }
     }
 
 Feel free to check my personal blog if you need help [generating a self-signed certificate](https://denbeke.be/blog/servers/creating-a-self-signed-ssl-certificate-on-linux/).
