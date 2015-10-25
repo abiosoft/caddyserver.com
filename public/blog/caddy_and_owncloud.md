@@ -1,8 +1,8 @@
-    ---
-    title: Running ownCloud with Caddy
-    author: Mathias Beke
-    date: 2015-09-15 12:00:00
-    ---
+---
+title: Running ownCloud with Caddy
+author: Mathias Beke
+date: 2015-09-15 12:00:00
+---
 
 Running ownCloud with Caddy
 ===========================
@@ -55,7 +55,8 @@ Now you have a user `owncloud` with password `somepassword` which has access to 
 Installing PHP-FPM
 ------------------
 
-Note: install PHP >= 5.6, ownCloud doesn't play well with PHP-FPM 5.5.9.
+* Note: Install PHP >= 5.6, ownCloud doesn't play well with PHP-FPM 5.5.9.  
+* Note: At the time of writing PHP 7 isn't there yet, but it soon will be. Apparently [ownCloud does support](https://github.com/owncloud/core/issues/16641) PHP 7.
 
 You also need to install PHP-FPM before you can actually install ownCloud.
 
@@ -85,6 +86,8 @@ If you need previews for videos and documents you also need to install the follo
 To secure your PHP-FPM installation you better disable path fixing.  
 Add the line `fix.pathinfo=0` to the `/etc/php5/fpm/php.ini` file.
 
+*Don't forget to restart PHP-FPM: `sudo service php5-fpm restart`.*
+
 Caddyfile
 ---------
 
@@ -98,11 +101,18 @@ The following Caddyfile should work with ownCloud.
         root owncloud
         tls server.crt server.key
         log access.log
+        errors error.log
     
         # PHP-FPM with Unix socket
-        fastcgi / /var/run/php5-fpm.sock php
+        fastcgi / /var/run/php5-fpm.sock php {
+            env PATH /bin
+        }
         
-        # TODO: add routes
+        # Rewrites for ownCloud
+        rewrite {
+            regexp /index.php/.*
+            to /index.php?{query}
+        }
     }
 
 Feel free to check my personal blog if you need help [generating a self-signed certificate](https://denbeke.be/blog/servers/creating-a-self-signed-ssl-certificate-on-linux/).
@@ -111,8 +121,8 @@ If you want to test your Caddyfile / PHP installation, you can create a `phpinfo
 
     <?php phpinfo(); ?>
 
-Navigate then to `https://my-owncloud-site.com/phpinfo.php` with your browser and check if the default PHP info page is displayed. (of course after Caddy is running with your Caddyfile)   
-*Don't forget to delete this file after everything is working!*
+Then navigate to `https://my-owncloud-site.com/phpinfo.php` with your browser and check if the default PHP info page is displayed. (of course after Caddy is running with your Caddyfile)   
+*Don't forget to delete this file after everything is working! Other people don't need to know your exact PHP installation with limits and extensions.*
 
 
 Installing & Configuring ownCloud
@@ -135,6 +145,4 @@ If everything works fine, you will see the ownCloud configuration screen.
 However, you need to create a `data` folder for ownCloud and give ownCloud (i.e. `www-data` user) write/read access to it.
 
     $ mkdir owncloud/data
-    $ chgrp www-data owncloud/data/
-    $ chmod 770 owncloud/data/
-
+    $ sudo chown -R www-data owncloud
