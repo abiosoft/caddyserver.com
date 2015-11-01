@@ -42,17 +42,17 @@
 				These aren't in any particular order and are subject to change, but Caddy is well on its way to making these things happen.
 			</p>
 
-			<h3>You say Caddy is for a less-technical audience, but... it's still technical.</h3>
-			<p>
-				You're right, it's not for Grandma (yet). For now, Caddy's target audience is a more tech-savvy crowd: developers, bloggers who set up their own WordPress sites, or graphic artists who host their own stuff. This will contribute to further development so a wider audience can make and deploy their own websites without having to know anything about server administration or web hosting. At that point, we expect Grandma to show Grandpa how it's done.
-			</p>
-
 			<h3>Do I have to run Caddy as root to serve on port 80 or 443?</h3>
 			<p>
 				No. On Linux, you can use setcap to give Caddy permission to bind to low ports. Something like <code>setcap cap_net_bind_service=+ep ./caddy</code> should work. Consult the man pages of your OS to be certain. You could also use iptables to forward to higher ports.
 			</p>
 			<p>
 				Privilege de-escalation is another option, but <a href="https://github.com/golang/go/issues/1435">it is not yet a reliable solution</a>. It will be implemented as soon as this becomes a robust possibility. Concerned readers are encouraged to get involved to help this become a reality.
+			</p>
+
+			<h3>You say Caddy is for a less-technical audience, but... it's still technical.</h3>
+			<p>
+				A graphical UI will soon be available. Caddy's roadmap takes it to an audience that does not need to know how to use the command line. Right now, Caddy is already a great fit for bloggers who set up their own WordPress sites, graphic artists who host their own stuff, developers, etc.
 			</p>
 
 			<h3>What's the deal with HTTP/2?</h3>
