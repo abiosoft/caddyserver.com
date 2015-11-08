@@ -15,19 +15,13 @@
 			<h3>Introduction</h3>
 
 			<p>
-				The term "Caddyfile" describes a text file that changes how an instance of Caddy works. It's similar to httpd.conf or nginx.conf from other server software. This file can be named anything, but by default, Caddy will look for a file called Caddyfile in the current directory. You may specify the location of the Caddyfile using the <code>-conf</code> flag:
+				The term "Caddyfile" describes a text file that changes how an instance of Caddy works. It's similar in purpose to httpd.conf or nginx.conf. The Caddyfile file can be named anything, but by default, Caddy will look for a file called Caddyfile in the current directory. You can specify another location for the Caddyfile using the <code>-conf</code> <a href="/docs/cli">flag</a>:
 			</p>
 
 			<pre><code class="bash">$ caddy -conf="/path/to/Caddyfile"</code></pre>
 
 			<p>
-				You can also pipe a Caddyfile into Caddy:
-			</p>
-
-			<pre><code class="bash">$ cat Caddyfile | caddy</code></pre>
-
-			<p>
-				If your Caddyfile is within the root of your site, don't worry. Caddy will respond with 404 Not Found to requests for the Caddyfile.
+				If your Caddyfile is within the root of your site, don't worry. Caddy will respond with "404 Not Found" to keep it hidden for you.
 			</p>
 
 			<h3>Syntax</h3>
@@ -99,7 +93,7 @@
 			</p>
 
 			<p>
-				For sites which share the same configuration, you may specify multiple addresses:
+				For sites which share the same configuration, specify multiple addresses:
 			</p>
 
 			<code class="block"><span class="hl-vhost">localhost:2020, https://site.com, http://mysite.com</span> {
@@ -108,14 +102,15 @@
 
 			<h3>Addresses</h3>
 			<p>
-				Addresses are specified in the form <code><span class="hl-vhost">scheme</span>://<span class="hl-vhost">host</span>:<span class="hl-vhost">port</span></code>, where scheme and port are optional. The host portion is usually localhost or the domain name. The default port is 2015. The scheme portion is merely another way to specify the port. Valid schemes are "http" or "https" which represent, respectively, ports 80 and 443. If both a scheme and port are specified, the port will override the scheme. For example:
+				Addresses are specified in the form <code><span class="hl-vhost">scheme</span>://<span class="hl-vhost">host</span>:<span class="hl-vhost">port</span></code>, where all but one are optional. The host portion is usually localhost or the domain name. The default port is 2015. The scheme portion is merely another way to specify the port. Valid schemes are "http" or "https" which represent, respectively, ports 80 and 443. If both a scheme and port are specified, the port will override the scheme. For example:
 			</p>
 
-			<code class="block"><span class="hl-vhost">localhost</span>              <span class="hl-comment"># Host: localhost, Port: 2015</span>
-<span class="hl-vhost">localhost:8080</span>         <span class="hl-comment"># Host: localhost, Port: 8080</span>
-<span class="hl-vhost">http://mysite.com</span>      <span class="hl-comment"># Host: mysite.com, Port: 80</span>
-<span class="hl-vhost">https://mysite.com</span>     <span class="hl-comment"># Host: mysite.com, Port: 443</span>
-<span class="hl-vhost">http://mysite.com:1234</span> <span class="hl-comment"># Host: mysite.com, Port: 1234</span>
+			<code class="block"><span class="hl-vhost">:2015</span>                   <span class="hl-comment"># Host: 0.0.0.0, Port: 2015</span>
+<span class="hl-vhost">localhost</span>               <span class="hl-comment"># Host: localhost, Port: 2015</span>
+<span class="hl-vhost">localhost:8080</span>          <span class="hl-comment"># Host: localhost, Port: 8080</span>
+<span class="hl-vhost">http://mysite.com</span>       <span class="hl-comment"># Host: mysite.com, Port: 80</span>
+<span class="hl-vhost">https://mysite.com</span>      <span class="hl-comment"># Host: mysite.com, Port: 443</span>
+<span class="hl-vhost">http://mysite.com:1234</span>  <span class="hl-comment"># Host: mysite.com, Port: 1234</span>
 </code>
 
 			<h3>Directives</h3>
@@ -136,11 +131,6 @@
 
 			<p>
 				Some directives accept an argument that specifies a <i>base path</i> to match. A base path is a prefix, so if the URL starts with the base path, it will be a match. For example, a base path of <code>/foo</code> will match requests to <code>/foo</code>, <code>/foo.html</code>, <code>/foobar</code>, and <code>/foo/bar.html</code>. If you want to limit a base path to match a specific directory only, then suffix it with a forward slash like <code>/foo/</code>, which will <i>not</i> match <code>/foobar</code>.
-			</p>
-
-			<h3>For Go Programmers</h3>
-			<p>
-				By the way, if you're a Go programmer, any of these middleware can be imported and used by your application. <a href="https://github.com/mholt/caddy/wiki">Learn how.</a>
 			</p>
 
 			<footer>

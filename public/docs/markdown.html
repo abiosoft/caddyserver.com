@@ -18,7 +18,7 @@
 
 			<h3>Syntax</h3>
 
-			<code class="block"><span class="hl-directive">markdown</span> <span class="hl-arg"><i>basepath</i></span> {
+			<code class="block"><span class="hl-directive">markdown</span> <span class="hl-arg">[<i>basepath</i>]</span> {
     <span class="hl-subdirective">ext</span>      <i>extensions...</i>
     <span class="hl-subdirective">[css|js]</span> <i>file</i>
     <span class="hl-subdirective">template</span> [<i>name</i>] <i>path</i>
@@ -27,7 +27,7 @@
 }</code>
 
 			<ul>
-				<li><b>basepath</b> is the base path to match. Markdown will not activate if the request URL is not prefixed with this path.</li>
+				<li><b>basepath</b> is the base path to match. Markdown will not activate if the request URL is not prefixed with this path. Default is site root.</li>
 				<li><b>extensions...</b> is a space-delimited list of file extensions to treat as Markdown (usually .md, which is the default if not specified).</li>
 				<li><b>css</b> indicates that the next argument is a CSS file to use on the page.</li>
 				<li><b>js</b> indicates that the next argument is a JavaScript file to include on the page.</li>

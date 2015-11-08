@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Automatic HTTPS - Caddy</title>
+		{{.Include "/includes/docs-head.html"}}
+		<style>
+		h4 { margin-top: 15px; margin-bottom: -10px; }
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1>Automatic HTTPS</h1>
+
+			<p>
+				Caddy automatically enables HTTPS for all your sites, given that some reasonable criteria are met:
+			</p>
+
+			<ul>
+				<li>The host does not look like localhost or 127.*</li>
+				<li>The port is not explicitly 80</li>
+				<li>The scheme is not explicitly http</li>
+				<li>The site's configuration does not turn off TLS explicitly</li>
+				<li>A certificate and key are not manually specified</li>
+				<li>Caddy is able to bind to port 443</li>
+			</ul>
+
+			<p>
+				Caddy will also redirect all HTTP requests to their HTTPS equivalent if the plaintext variant of the hostname is not defined in the Caddyfile.
+			</p>
+
+			<h2>Things to Know / FAQ</h2>
+
+			<p>
+				In order to fully enjoy this feature, please read the following.
+			</p>
+
+			<h4>Binding to ports 80 and 443</h4>
+			<p>
+				This usually requires privilege escalation. On Linux systems, you can give Caddy permission to bind to port 80 and 443 without being root using <a href="http://man7.org/linux/man-pages/man8/setcap.8.html">setcap</a>, like so: <code>setcap cap_net_bind_service=+ep caddy</code>
+			</p>
+
+			<h4>The .caddy folder</h4>
+			<p>
+				Caddy will create a folder in your home directory called <code>.caddy</code>. It uses this to store and manage cryptographic assets required to serve your site privately over HTTPS. <mark>Your site's private keys are stored here. Take care to back up and protect this folder.</mark>
+			</p>
+
+			<h4>Load balancing</h4>
+			<p>
+				If Caddy is behind a load balancer, Caddy may have trouble validating the domain and obtaining certificates. It is your responsibility, then, to ensure SSL certificates are obtained and properly set up on all machines when load balancing with software other than Caddy.
+			</p>
+
+
+			<p>
+				The rest of this page explains more details about this flagship feature, but it is not required knowledge for using Caddy.
+			</p>
+
+			<h2>Obtaining Certificates</h2>
+
+			<p>
+				To serve a site over HTTPS, a valid SSL certificate is required from a trusted certificate authority (CA). When Caddy starts, it obtains certificates for eligible sites from <a href="https://letsencrypt.org">Let's Encrypt</a>. The following process is nearly entirely <i>automatic</i> and <i>on by default</i>.
+			</p>
+
+			<p>
+				If necessary, Caddy creates an account on the CA's server with (or without) your email address. Caddy may have to prompt you for an email address if it is not able to find one from the Caddyfile, in the command line flags, or on disk from a previous run. Also, if the CA's Terms of Service have changed, you may be prompted to agree to them if you did not already do so with the <code>-agree</code> flag.
+			</p>
+
+			<p>
+				Once the formalities are taken care of, Caddy generates a private key and a Certificate Signing Request (CSR) for each site. The private key never leaves the server and is safely stowed on the file system.
+			</p>
+
+			<p>
+				Port 443 is opened on your machine and Caddy opens a secure link with the CA's server. A brief cryptographic transaction takes place to prove that Caddy really is serving the sites it says it is. Once the CA's server verifies this, it sends the certificate for that site over the wire to Caddy, which tucks it neatly away in the .caddy folder.
+			</p>
+
+			<p>
+				This process usually takes a few seconds per domain, so once a certificate has been obtained for a site, it is simply loaded from disk and reused the next time Caddy is run. In other words, this delayed startup is a one-time event. If an existing certificate needs to be renewed, Caddy takes care of it right away.
+			</p>
+
+
+			<h2>Renewing Certificates</h2>
+
+			<p>
+				Certificates are only valid for a limited time, so Caddy checks each certificate on a regular basis and automatically renews certificates that expire soon. If renewal fails, Caddy will keep trying.
+			</p>
+
+			<p>
+				Once Caddy gets the new certificate, it swaps out the old certificate with the new one and restarts the listener to use it. On POSIX-compatible systems, this restart is graceful and incurs zero downtime. On Windows, the restart is forceful but very quick.
+			</p>
+
+
+			<h2>Revoking Certificates</h2>
+
+			<p>
+				Caddy does not automatically revoke a certificate, but you can do this with the <code>-revoke</code> option, specifying the domain name. This is only necessary if your site's private key or the certificate authority was compromised. Upon revocation, Caddy deletes the certificate file from disk to prevent it from being used at next run.
+			</p>
+
+
+			<h2>OCSP Stapling</h2>
+
+			<p>
+				Caddy staples OCSP information to protect the privacy of your sites' clients. The cached OCSP status is checked on a regular basis, and if there was a change, the server will be restarted with the new information.
+			</p>
+			
+
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		{{.Include "/includes/docs-nav.html"}}
+	</body>
+</html>
