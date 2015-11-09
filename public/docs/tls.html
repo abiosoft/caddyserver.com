@@ -9,7 +9,7 @@
 			<h1>tls</h1>
 
 			<p>
-				tls enables HTTPS connections.
+				tls configures HTTPS connections. Since HTTPS is enabled automatically, this directive is used to override defaults if necessary.
 			</p>
 
 			<p>
@@ -20,17 +20,38 @@
 				The tls directive will not activate TLS for sites that are explicitly defined to be plaintext http:// unless a port is also defined which will force HTTPS (regardless of the port number). This allows you to serve both plaintext and secure HTTP using the same server block.
 			</p>
 
+
 			<h3>Syntax</h3>
+
+			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg">off</span></code>
+
+			<p>
+				Disables TLS for the server block. Not recommended unless you have a good reason.
+			</p>
+
+			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg"><i>email</i></span></code>
+
+			<ul>
+				<li><b>email</b> is the email address to use with which to generate a certificate with a trusted CA. By providing an email here you will not be prompted when you run Caddy.</li>
+			</ul>
+
+			<p>
+				This syntax enables TLS with the default settings and Caddy will still auto-configure HTTPS for this site, but it will use the email address you provide instead of prompting for one or using another one from a previous run.
+			</p>
+
+			<p>
+				To use Caddy with your own certificate and key:
+			</p>
 
 			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg"><i>cert key</i></span></code>
 
 			<ul>
-				<li><b>cert</b> is the certificate file. If the certificate is signed by a CA, this certificate file should be a concatenation of the server's certificate followed by the CA's certificate.</li>
+				<li><b>cert</b> is the certificate file. If the certificate is signed by a CA, this certificate file should be a bundle: a concatenation of the server's certificate followed by the CA's certificate.</li>
 				<li><b>key</b> is the server's private key file which matches the certificate file.</li>
 			</ul>
 
 			<p>
-				The above syntax uses Caddy's default TLS settings, which should be fine in most cases.
+				The above syntax uses Caddy's default TLS settings with your own certificate and key, which should be sufficient in most cases.
 			</p>
 
 			<p>

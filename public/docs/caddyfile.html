@@ -78,12 +78,12 @@
 				You may configure multiple servers (like virtual hosts) with a single Caddyfile using curly braces around the server block:
 			</p>
 
-			<code class="block"><span class="hl-vhost">http://localhost</span> {
-	<span class="hl-directive">redir</span> <span class="hl-arg">https://localhost</span>
+			<code class="block"><span class="hl-vhost">mysite.com</span> {
+	<span class="hl-directive">root</span> <span class="hl-arg">/www/mysite.com</span>
 }
 
-<span class="hl-vhost">https://localhost</span> {
-	<span class="hl-directive">tls</span> <span class="hl-arg">cert.pem key.pem</span>
+<span class="hl-vhost">sub.mysite.com</span> {
+	<span class="hl-directive">root</span> <span class="hl-arg">/www/sub.mysite.com</span>
 	<span class="hl-directive">gzip</span>
 	<span class="hl-directive">log</span> <span class="hl-arg">../access.log</span>
 }</code>
