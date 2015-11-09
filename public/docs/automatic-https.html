@@ -49,6 +49,11 @@
 				If Caddy is behind a load balancer, it may have trouble validating the domain and obtaining certificates. It is your responsibility, then, to ensure SSL certificates are obtained and properly set up on all machines when load balancing with software other than Caddy.
 			</p>
 
+			<h4>Transparency reports</h4>
+			<p>
+				When Caddy obtains a certificate from a CA that publishes certificate transparency logs, it is requisite that your domain name and/or IP address will be included in those logs, as they are not considered private information. (Let's Encrypt is one such CA.) This is a good thing; certificate transparency reports <a href="https://googleonlinesecurity.blogspot.com/2015/10/sustaining-digital-certificate-security.html">keep the CAs accountable</a>.
+			</p>
+
 
 			<p>
 				The rest of this page explains more details about this flagship feature, but it is not required knowledge for using Caddy.
