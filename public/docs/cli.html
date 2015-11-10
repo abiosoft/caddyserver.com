@@ -95,10 +95,20 @@
 			</p>
 
 
-			<h3 id="reload">Graceful Reload</h3>
+			<h3 id="signals">Signals</h3>
 
 			<p>
-				On POSIX-compatible systems (ie. not Windows), you can signal Caddy with SIGUSR1. This will cause Caddy to reload its configuration with zero downtime.
+				On POSIX-compliant systems (ie. not Windows), you can send Caddy signals.
+			</p>
+
+			<h4 id="revoke">SIGUSR1</h4>
+			<p>
+				Reloads the configuration (Caddyfile) from disk. This triggers a graceful restart; the parent process might hang around for a few seconds to wait for existing connections to close.
+			</p>
+
+			<h4 id="revoke">SIGINT</h4>
+			<p>
+				Stops the server gracefully and quits the process.
 			</p>
 
 
@@ -139,13 +149,13 @@
 			<h3 id="pipe">Pipe a Caddyfile</h3>
 
 			<p>
-				Advanced users may wish to pipe the contents of a Caddyfile into Caddy. You can do this, for example:
+				Advanced users may wish to pipe the contents of a Caddyfile into Caddy from programmed environments. If you pipe in the Caddyfile, you must use the <code>-conf</code> flag with a value of <code>stdin</code> - for example:
 			</p>
 
-			<pre><code class="bash">$ cat Caddyfile | caddy</code></pre>
+			<pre><code class="bash">$ echo "localhost:1234" | caddy -conf stdin</code></pre>
 
 			<p>
-				Piping the Caddyfile is convenient when starting Caddy using a dynamically-generated Caddyfile.
+				Piping the Caddyfile is convenient when starting Caddy using a dynamically-generated Caddyfile from a parent process you have control over.
 			</p>
 
 			<mark class="block">
