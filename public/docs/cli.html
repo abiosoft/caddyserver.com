@@ -69,6 +69,11 @@
 				Enable the process log. The value must be either the path to a log file, stdout, or stderr. Caddy will create the log file if it does not already exist. This file will be used to log information, warnings, and errors that occur during runtime.
 			</p>
 
+			<h4 id="pidfile">-pidfile</h4>
+			<p>
+				The pidfile to write. Used with automated environments. Caddy will write a file containing the process ID which is updated when Caddy restarts and the PID changes.
+			</p>
+
 			<h4 id="port">-port</h4>
 			<p>
 				The default port to listen on.
