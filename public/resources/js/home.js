@@ -1,5 +1,5 @@
 $(function() {
-
+/*
 	var $spinner = $('#spinner-item-container');
 
 	var slideCount = $('#spinner .item').length;
@@ -27,5 +27,5 @@ $(function() {
 			slideIdx = 0;
 		}
 	}, 2000);
-
+*/
 });

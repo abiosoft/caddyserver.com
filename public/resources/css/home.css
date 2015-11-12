@@ -93,9 +93,9 @@ main {
 
 
 @media (min-width: 1200px) {
-	h1 {
+	/*h1 {
 		left: 30px;
-	}
+	}*/
 }
 
 @media (min-width: 1000px) {
