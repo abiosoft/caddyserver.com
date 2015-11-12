@@ -22,21 +22,19 @@
 			</p>
 
 			<h3>Syntax</h3>
-      <code class="block"><span class="hl-directive">root</span>  <span class="hl-subdirective">public</span>
-<span class="hl-directive">hugo</span>  <span class="hl-subdirective">dir</span> {
-	<span class="hl-subdirective">styles</span>  <i>file</i>
-	<span class="hl-subdirective">args</span>    <i>cmd</i>
+      <code class="block"><span class="hl-directive">hugo</span> <span class="hl-arg">[<i>dir</i>]</span> {
+	<span class="hl-subdirective">styles</span> <i>file</i>
+	<span class="hl-subdirective">args</span>   <i>cmd</i>
 }</code>
 
 			<ul>
-				<li><b>public</b> is the folder with the public content.</li>
 				<li><b>dir</b> is the folder where the commands are going to be executed. By default, it is the current working directory.</li>
-				<li><b>file</b> is the relative path to <code>public</code> folder of the admin UI styles. These styles won't replace the defaults, they will be added.</li>
+				<li><b>file</b> is the relative path to public folder of the admin UI styles. These styles won't replace the defaults, they will be added.</li>
 				<li><b>cmd</b> must be surrounded by double quotes and it corresponds to the Hugo flags you want to use.</li>
 			</ul>
 
 			<p>
-				All of the directives above are optional.
+				All of the values above are optional.
 			</p>
 
       <p>
@@ -50,13 +48,11 @@
 			<h3 id="examples">Examples</h3>
 
 			<p>
-				A simple configuration to use with Hugo static website generator:
+				A simple Caddyfile to use with Hugo static website generator:
 			</p>
 
-     		<code class="block"><span class="hl-directive">localhost:8080</span>  <span class="hl-comment"># website URL and port</span>
-
-<span class="hl-directive">root</span>      public           <span class="hl-comment"># the folder where Hugo generates the website</span>
-<span class="hl-directive">basicauth</span> /admin user pass <span class="hl-comment"># protect the admin area using HTTP basic auth</span>
+     		<code class="block"><span class="hl-directive">root</span>      <span class="hl-arg">public</span>           <span class="hl-comment"># the folder where Hugo generates the website</span>
+<span class="hl-directive">basicauth</span> <span class="hl-arg">/admin user pass</span> <span class="hl-comment"># protect the admin area using HTTP basic auth</span>
 <span class="hl-directive">hugo</span>                       <span class="hl-comment"># enable the admin panel</span></code>
 
 			<footer>
