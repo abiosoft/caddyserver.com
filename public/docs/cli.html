@@ -13,6 +13,15 @@
 			margin-top: 10px;
 			margin-bottom: -5px;
 		}
+
+		.auto-recommend {
+			font-size: 12px;
+			font-weight: normal;
+			margin-left: 10px;
+			background: #E4DBFF;
+			color: #440F92;
+			padding: 0 4px;
+		}
 		</style>
 	</head>
 	<body>
@@ -29,7 +38,9 @@
 
 			<h3 id="flags">Flags</h3>
 
-			<h4 id="agree">-agree</h4>
+			<p><span class="auto-recommend" style="margin: 0">AUTO</span> = recommended in automated environments</p>
+
+			<h4 id="agree">-agree <span class="auto-recommend">AUTO</span></h4>
 			<p>
 				Indicates that you have read and agree to the Let's Encrypt Subscriber Agreement. If this flag is not specified, it is possible that Caddy will prompt you to agree to terms during runtime. Thus, this flag is recommended in automated environments.
 			</p>
@@ -49,9 +60,14 @@
 				CPU cap. Can be a percentage (e.g. "75%") or a number indicating how many cores to use (e.g. 3).
 			</p>
 
-			<h4 id="email">-email</h4>
+			<h4 id="email">-email <span class="auto-recommend">AUTO</span></h4>
 			<p>
-				Email address to use for SSL certificate generation if not specified for a site in the Caddyfile. It is not required, but is strongly recommended so you can recover your account if you lose your private key. If an email is not available, Caddy may prompt you for an email address during runtime. Thus, this option is recommended in automated environments if not specified in the Caddyfile.
+				Email address to use for SSL certificate generation if not specified for a site in the Caddyfile. It is not required, but is strongly recommended so you can recover your account if you lose your private key. If an email is not available, Caddy may prompt you for an email address during runtime. This option is recommended in automated environments if not specified in the Caddyfile.
+			</p>
+
+			<h4 id="cpu">-grace</h4>
+			<p>
+				Duration of the graceful shutdown period. If you reload extremely frequently (multiple times per second), make this duration short. Syntax is same as Go's <a href="https://golang.org/pkg/time/#ParseDuration">time.ParseDuration</a> function (5s, 1m30s, etc).
 			</p>
 
 			<h4 id="host">-host</h4>
@@ -64,12 +80,12 @@
 				HTTP/2 support. Disable it by setting to false.
 			</p>
 
-			<h4 id="log">-log</h4>
+			<h4 id="log">-log <span class="auto-recommend">AUTO</span></h4>
 			<p>
 				Enable the process log. The value must be either the path to a log file, stdout, or stderr. Caddy will create the log file if it does not already exist. This file will be used to log information, warnings, and errors that occur during runtime.
 			</p>
 
-			<h4 id="pidfile">-pidfile</h4>
+			<h4 id="pidfile">-pidfile <span class="auto-recommend">AUTO</span></h4>
 			<p>
 				The pidfile to write. Used with automated environments. Caddy will write a file containing the process ID which is updated when Caddy restarts and the PID changes.
 			</p>
@@ -79,7 +95,7 @@
 				The default port to listen on.
 			</p>
 
-			<h4 id="quiet">-quiet</h4>
+			<h4 id="quiet">-quiet <span class="auto-recommend">AUTO</span></h4>
 			<p>
 				Quiet mode. If quiet, Caddy will not print informational initialization output, only the addresses being served.
 			</p>
@@ -103,17 +119,32 @@
 			<h3 id="signals">Signals</h3>
 
 			<p>
-				On POSIX-compliant systems (ie. not Windows), you can send Caddy signals.
+				On POSIX-compliant systems, Caddy can be controlled with signals. Here we list them roughly in order from the most forceful action to most graceful.
 			</p>
 
-			<h4 id="revoke">SIGUSR1</h4>
+			<h4 id="sigterm">TERM</h4>
 			<p>
-				Reloads the configuration (Caddyfile) from disk. This triggers a graceful restart; the parent process might hang around for a few seconds to wait for existing connections to close.
+				Forcefully exits the process without executing shutdown hooks.
 			</p>
 
-			<h4 id="revoke">SIGINT</h4>
+			<h4 id="sigint">INT</h4>
 			<p>
-				Stops the server gracefully and quits the process.
+				Forcefully exits the process after executing shutdown hooks. This is the only "signal" that works on Windows (Ctrl+C). A second SIGINT forces immediate termination, even if shutdown hooks are still running.
+			</p>
+
+			<h4 id="sighup">HUP</h4>
+			<p>
+				Gracefully stops the server, but does not execute shutdown hooks.
+			</p>
+
+			<h4 id="sigquit">QUIT</h4>
+			<p>
+				Gracefully stops the server after executing shutdown hooks.
+			</p>
+
+			<h4 id="sigusr1">USR1</h4>
+			<p>
+				Reloads the configuration file, then gracefully restarts the server. This spins up a process with a different process ID.
 			</p>
 
 
