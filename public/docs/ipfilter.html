@@ -14,36 +14,70 @@
 			</div>
 
 			<p>
-				ipfilter blocks or allows requests based on the client's IP origin.
+				ipfilter blocks or allows requests based on the client's IP.
 			</p>
 
 			<p>
-				<b>Requirements:</b> This directive requires having a local copy of  <a href="https://dev.maxmind.com/geoip/geoip2/geolite2/">MaxMind's GeoLite2 Country database</a> (it's free).
+				<b>Requirements:</b> To filter clients based on countries codes, This directive will require having a local copy of  <a href="https://dev.maxmind.com/geoip/geoip2/geolite2/">MaxMind's GeoLite2 Country database</a> (it's free).
 			</p>
 
 			<h3>Syntax</h3>
 			
 			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg"><i>paths...</i></span> {
+	<span class="hl-subdirective">rule</span>          <i>block | allow</i>
+	<span class="hl-subdirective">ip</span>            <i>list or/and range of IPs...</i>
+	<span class="hl-subdirective">country</span>       <i>countries ISO codes...</i>
 	<span class="hl-subdirective">database</span>      <i>db_path</i>
 	<span class="hl-subdirective">blockpage</span>     <i>block_page</i>
-	<span class="hl-subdirective">allow | block</span> <i>countries...</i>
 }</code>
 			<ul>
 				<li><b>paths...</b> is a list of space-separated base paths to which to apply this filter rule (use / to match everything).</li>
-				<li><b>db_path</b> is the path to the geo-IP database (relative to working directory).</li>
+				<li><b>rule</b> either block or allow.</li>
+				<li><b>ip...</b> list or/and ranges of space-separated IPs to apply the rule to.</li>
+				<li><b>country...</b> list of space-separated country ISO codes. For a complete list of country codes, refer to <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assign">Wikipedia</a>.</li>
+				<li><b>db_path</b> is the path to the geo-IP database (relative to working directory). required only if the subdirective 'country' is used.</li>
 				<li><b>block_page</b> is an optional file that will be shown to blocked clients (relative to working directory).</li>
-				<li><b>countries...</b> is a list of space-separated country ISO codes. They will be either blocked or allowed based on the keyword in front of them. You cannot use both allow <i>and</i> block in the same filter. For a complete list of country codes, refer to <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">Wikipedia</a>.</li>
 			</ul>
 
 			<h3>Examples</h3>
+
+			<p>
+				Only serve one IP address, and block everyone else.
+			</p>
+
+			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg">/</span> {
+	<span class="hl-subdirective">rule</span>	allow
+	<span class="hl-subdirective">ip</span>		93.168.247.245
+}</code>
+
+			<p>
+				Block two ranges of IPs as well as one specific IP, and show them default.html instead. Ranges are inclusive.
+			</p>
+
+			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg">/</span> {
+	<span class="hl-subdirective">rule</span>	    block
+	<span class="hl-subdirective">ip</span>		    212.10.15.0-255 213.10.15.0-10 5.23.4.24
+	<span class="hl-subdirective">blockpage</span>  /local/data/default.html
+}</code>
+			<p>
+				Only allow clients from France as well as two specific IP addresses
+			</p>
+
+			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg">/</span> {
+	<span class="hl-subdirective">rule</span>		allow
+	<span class="hl-subdirective">country</span>     FR
+	<span class="hl-subdirective">database</span>	/local/data/GeoLite2-Country.mmdb 
+	<span class="hl-subdirective">ip</span>			99.23.4.24 201.22.3.12
+}</code>
 
 			<p>
 				Only serve clients from the United States or Japan:
 			</p>
 
 			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg">/</span> {
-	<span class="hl-subdirective">database</span> /local/data/GeoLite2-Country.mmdb 
-	<span class="hl-subdirective">allow</span>    US JP
+	<span class="hl-subdirective">rule</span>      allow
+	<span class="hl-subdirective">country</span>   US JP
+	<span class="hl-subdirective">database</span>  /local/data/GeoLite2-Country.mmdb 
 }</code>
 
 			<p>
@@ -51,9 +85,10 @@
 			</p>
 
 			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg">/notglobal /secret</span> {
-	<span class="hl-subdirective">database</span>  /local/data/GeoLite2-Country.mmdb 
-	<span class="hl-subdirective">blockpage</span> /local/data/default.html
-	<span class="hl-subdirective">block</span>     US JP
+	<span class="hl-subdirective">rule</span>       block
+	<span class="hl-subdirective">country</span>    US JP
+	<span class="hl-subdirective">database</span>   /local/data/GeoLite2-Country.mmdb 
+	<span class="hl-subdirective">blockpage</span>  /local/data/default.html
 }</code>
 			<footer>
 				&copy; 2015
