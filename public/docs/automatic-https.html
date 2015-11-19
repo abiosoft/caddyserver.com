@@ -20,12 +20,16 @@
 				<li>The port is not explicitly 80</li>
 				<li>The scheme is not explicitly http</li>
 				<li>The site's configuration does not explicitly turn off TLS</li>
-				<li>Certificate and key files are not specified for the site</li>
-				<li>Caddy is able to bind to port 443</li>
+				<li>Certificate and key files are not already specified by you</li>
+				<li>Caddy is able to bind to ports 80 and 443</li>
 			</ul>
 
 			<p>
 				Caddy will also redirect all HTTP requests to their HTTPS equivalent if the plaintext variant of the hostname is not defined in the Caddyfile.
+			</p>
+
+			<p>
+				All pertinent assets are fully managed, including renewals&mdash;no action is required by you.
 			</p>
 
 			<h2>Things to Know / FAQ</h2>
@@ -36,17 +40,17 @@
 
 			<h4>Binding to ports 80 and 443</h4>
 			<p>
-				This usually requires privilege escalation. On Linux systems, you can give Caddy permission to bind to port 80 and 443 without being root using <a href="http://man7.org/linux/man-pages/man8/setcap.8.html">setcap</a>, like so: <code>setcap cap_net_bind_service=+ep caddy</code>
+				This usually requires privilege escalation. On Linux systems, you can give Caddy permission to bind to port 80 and 443 without being root using <a href="http://man7.org/linux/man-pages/man8/setcap.8.html">setcap</a>, like so: <code>setcap cap_net_bind_service=+ep caddy</code>. Don't forget to configure all relevant firewalls to allow Caddy to use these ports for incoming and outgoing connections! And keep these ports free so Caddy can have claim on them.
 			</p>
 
 			<h4>The .caddy folder</h4>
 			<p>
-				Caddy will create a folder in your home directory called <code>.caddy</code>. It uses this to store and manage cryptographic assets required to serve your site privately over HTTPS. <mark>Your site's private keys are stored here. Take care to back up and protect this folder.</mark> If there is no home folder, the .caddy folder is created in the current working directory.
+				Caddy will create a folder in your home directory called <code>.caddy</code>. It uses this to store and manage cryptographic assets required to serve your site privately over HTTPS. <mark>Your sites' private keys are stored here. Take care to back up and protect this folder.</mark> If there is no home folder, the .caddy folder is created in the current working directory.
 			</p>
 
 			<h4>Load balancing</h4>
 			<p>
-				If Caddy is behind a load balancer, it may have trouble validating the domain and obtaining certificates. It is your responsibility, then, to ensure SSL certificates are obtained and properly set up on all machines when load balancing with software other than Caddy.
+				If Caddy is behind a load balancer, it may have trouble validating the domain and obtaining certificates. It is your responsibility, then, to ensure SSL certificates are obtained and properly set up on all machines.
 			</p>
 
 			<h4>Transparency reports</h4>
@@ -66,15 +70,15 @@
 			</p>
 
 			<p>
-				If necessary, Caddy creates an account on the CA's server with (or without) your email address. Caddy may have to prompt you for an email address if it is not able to find one from the Caddyfile, in the command line flags, or on disk from a previous run. Also, if the CA's Terms of Service have changed, you may be prompted to agree to them if you did not already do so with the <code>-agree</code> flag.
+				If necessary, Caddy creates an account on the CA's server with (or without) your email address. Caddy may have to prompt you for an email address if it is not able to find one from the Caddyfile, in the command line flags, or on disk from a previous run. Also, if the CA's legal agreements have changed, you may be prompted to agree to them if you did not already do so with the <code>-agree</code> flag.
 			</p>
 
 			<p>
-				Once the formalities are taken care of, Caddy generates a private key and a Certificate Signing Request (CSR) for each site. The private key never leaves the server and is safely stowed on the file system.
+				Once the formalities are taken care of, Caddy generates a private key and a Certificate Signing Request (CSR) for each site. The private keys never leave the server and are safely stowed on your file system.
 			</p>
 
 			<p>
-				Port 443 is opened on your machine and Caddy opens a secure link with the CA's server. A brief cryptographic transaction takes place to prove that Caddy really is serving the sites it says it is. Once the CA's server verifies this, it sends the certificate for that site over the wire to Caddy, which tucks it neatly away in the .caddy folder.
+				Caddy establishes a link with the CA's server. A brief cryptographic transaction takes place to prove that Caddy really is serving the sites it says it is. Once the CA server verifies this, it sends the certificate for that site over the wire to Caddy, which tucks it neatly away in the .caddy folder.
 			</p>
 
 			<p>
@@ -105,7 +109,8 @@
 			<p>
 				Caddy staples OCSP information to protect the privacy of your sites' clients. The cached OCSP status is checked on a regular basis, and if there was a change, the server will be restarted with the new information.
 			</p>
-			
+
+
 
 			<footer>
 				&copy; 2015
