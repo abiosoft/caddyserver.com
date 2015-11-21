@@ -4,7 +4,7 @@ author: Matt Holt
 date: 2015-10-20 08:00:00
 ---
 
-As of this week on the [letsencrypt dev branch](https://github.com/mholt/caddy/tree/letsencrypt), Caddy serves all non-loopback hosts over HTTPS automatically. This makes Caddy the first web server to fully manage encryption assets for all your sites *and use them by default*.
+As of this week on the letsencrypt dev branch, Caddy serves all non-loopback hosts over HTTPS automatically. This makes Caddy the first web server to fully manage encryption assets for all your sites *and use them by default*.
 
 For example:
 
@@ -15,7 +15,7 @@ For example:
 This Caddyfile serves **<span style="color: #10A210;">https</span>://example.com** and redirects all requests for **http://example.com** to the HTTPS version. *You don't have to configure anything.*
 
 <br>
-<div style="text-align: center;"><iframe width="640" height="372" src="https://www.youtube-nocookie.com/embed/9WAn4Q2-Amw?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></div>
+<div style="text-align: center;"><iframe style="max-width: 640px;" width="100%" height="372" src="https://www.youtube-nocookie.com/embed/9WAn4Q2-Amw?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></div>
 <br>
 
 How is this possible? We've been closely monitoring the progress of [Let's Encrypt](https://letsencrypt.org), who have been [developing](https://letsencrypt.org/howitworks/technology/) a new protocol for the automatic issuance, renewal, and revocation of free, trusted SSL certificates. The [ACME specification](https://github.com/letsencrypt/acme-spec) is nearly ready, and just [yesterday](https://letsencrypt.org/2015/10/19/lets-encrypt-is-trusted.html), Let's Encrypt got [cross-signed](https://letsencrypt.org/2015/06/04/isrg-ca-certs.html) by a widely-trusted CA, making free encryption a possibility for anyone with an email address. (Their general availability is slated for next month.)
