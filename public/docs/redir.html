@@ -35,7 +35,7 @@
 			</p>
 
 			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg">[<i>code</i>]</span> {
-	<i>from</i> <i>to</i> [<i>code</i>]
+	<span class="hl-subdirective"><i>from</i></span> <i>to</i> [<i>code</i>]
 }
 </code>
 
@@ -69,9 +69,9 @@
 			</p>
 
 			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg">307</span> {
-	/foo     /info/foo
-	/todo    /notes
-	/api-dev /api       meta
+	<span class="hl-subdirective">/foo</span>     /info/foo
+	<span class="hl-subdirective">/todo</span>    /notes
+	<span class="hl-subdirective">/api-dev</span> /api       meta
 }</code>
 
 			<footer>
