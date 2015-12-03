@@ -59,6 +59,7 @@
 	<span class="hl-subdirective">hook</span>     <i>path [secret]</i>
 	<span class="hl-subdirective">interval</span> <i>interval</i>
 	<span class="hl-subdirective">then</span>     <i>command</i> [<i>args...</i>]
+	<span class="hl-subdirective">then_long</span><i>command</i> [<i>args...</i>]
 }</code>
 
 			<ul>
@@ -70,8 +71,9 @@
 					<b>Gitlab</b>, <b>BitBucket</b> and a <a href="#payloadsample">generic format</a> for others. <b>secret</b> is currently
 					supported for GitHub hooks only. </li>
 				<li><b>interval</b> is the number of seconds between pulls; default is 3600 (1 hour), minimum 5.</li>
-				<li><b>command</b> is a command to execute after successful pull; followed by <b>args</b> which are any arguments to pass
-					to the command. You can have multiple lines of <b>then</b> to use multiple commands.</li>
+				<li><b>command</b> is a command to execute after successful pull; followed by <b>args</b> which are any arguments to pass 
+				to the command. <br /><b>then_long</b> is for long executing commands that should run in background. <br />You can have multiple 
+				lines of <b>then</b> and <b>then_long</b> to use multiple commands and they are executed in the order specified.</li>
 			</ul>
 
 			<p>
