@@ -36,17 +36,16 @@
 		<meta property="article:published_time" content="{{html .Doc.date}}">
 		<!--<meta property="article:modified_time" content="">
 		<meta property="og:updated_time" content="">-->
-		<meta property="og:image" content="https://caddyserver.com/resources/images/blog-cover.png">
+		<meta property="og:image" content="{{if .Doc.cover}}{{.Doc.cover}}{{else}}https://caddyserver.com/resources/images/blog-cover.png{{end}}">
 		<meta name="twitter:card" content="summary_large_image">
 		<meta name="twitter:description" content="{{$description}}">
 		<meta name="twitter:title" content="{{html .Doc.title}}">
-		<meta name="twitter:site" content="@mholt6"> <!-- Not always true, but the site attribute is required... -->
-		<!--<meta name="twitter:domain" content="via @mholt6">-->
-		<meta name="twitter:image" content="https://caddyserver.com/resources/images/blog-cover.png">
-		<!--<meta name="twitter:creator" content="@mholt6">-->
+		<meta name="twitter:site" content="@caddyserver">
+		<meta name="twitter:image" content="{{if .Doc.cover}}{{.Doc.cover}}{{else}}https://caddyserver.com/resources/images/blog-cover.png{{end}}">
+		<meta name="twitter:creator" content="@caddyserver">
 		<meta itemprop="name" content="{{html .Doc.title}}">
 		<meta itemprop="description" content="{{$description}}">
-		<meta itemprop="image" content="https://caddyserver.com/resources/images/blog-cover.png">
+		<meta itemprop="image" content="{{if .Doc.cover}}{{.Doc.cover}}{{else}}https://caddyserver.com/resources/images/blog-cover.png{{end}}">
 	</head>
 	<body>
 

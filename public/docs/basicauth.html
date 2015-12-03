@@ -16,6 +16,10 @@
 				When a user requests a resource that is protected, the browser will prompt the user for a username and password if they have not already supplied one. If the proper credentials are present in the Authorization header, the server will grant access to the resource. If the header is missing or the credentials are incorrect, the server will respond with HTTP 401 Unauthorized.
 			</p>
 
+			<p>
+				This directive allows use of .htpasswd files by prefixing the password argument with <code>htpasswd=</code> and the path to the .htpasswd file to use. <mark>This feature is for legacy sites only and may be removed in the future; do not use with new sites.</mark>
+			</p>
+
 
 			<h3>Syntax</h3>
 			
