@@ -2,3 +2,4 @@
 _gitignore/
 *.log
 *_generated/
+.DS_Store
