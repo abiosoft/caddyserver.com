@@ -96,7 +96,7 @@ We've made a lot of other improvements and added other features, such as a proce
 
 > "I think this is revolutionary, putting a website automatically on https. This is sooooo easy \o/"
 
-&mdash;Maxime Leserre, [stargraph.co](https://stargraph.co)
+&mdash;Maxime Lasserre, [stargraph.co](https://stargraph.co)
 
 > "we have a winner! You guys friggin RULE. this is huge."
 
