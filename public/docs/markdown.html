@@ -28,7 +28,7 @@
 
 			<ul>
 				<li><b>basepath</b> is the base path to match. Markdown will not activate if the request URL is not prefixed with this path. Default is site root.</li>
-				<li><b>extensions...</b> is a space-delimited list of file extensions to treat as Markdown (defaults to .md, .markdown, and .mdown).</li>
+				<li><b>extensions...</b> is a space-delimited list of file extensions to treat as Markdown (defaults to .md, .markdown, and .mdown); this is different from the <a href="/docs/ext">ext</a> directive which assumes a missing file extension.</li>
 				<li><b>css</b> indicates that the next argument is a CSS file to use on the page.</li>
 				<li><b>js</b> indicates that the next argument is a JavaScript file to include on the page.</li>
 				<li><b>file</b> is the JS or CSS file to add to the page.</li>
@@ -47,6 +47,12 @@
 			<p>
 				If you specify <i>sitegen</i> in the Caddyfile, this directive will convert your Markdown files into static HTML. When the server starts, it will delete the existing generated static site (if it exists), then sweep all files in the base path for Markdown files and convert them to HTML. After Markdown files are changed, the static HTML file will be regenerated at intervals of 60 seconds (unless dev is used, in which case it happens immediately at request-time). <mark>Warning: If it exists, the entire static site directory is deleted before regenerating the site.</mark>
 			</p>
+
+			<p>
+				Static site generation is <i>not</i> required, but might be useful for very busy sites where rendering the template is computationally expensive.
+			</p>
+
+			<mark class="block">Static site generation is not recommended when using <a href="/docs/template-actions">templates</a> that access data out of requests, since the files are pre-generated before any requests happen. Thus, those values will be empty.</mark>
 
 
 			<h3>Front Matter (Document Metadata)</h3>
