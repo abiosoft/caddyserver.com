@@ -14,24 +14,19 @@
 			</div>
 
 			<p>
-				git clones a <a href="http://git-scm.com/">git</a> repository into the site. This makes it possible to deploy your site
-				with a simple <code>git push</code>.
+				git clones a <a href="http://git-scm.com/">git</a> repository into the site. This makes it possible to deploy your site with a simple <code>git push</code>.
 			</p>
 
 			<p>
-				The git directive starts a service routine that runs during the lifetime of the server. When the service starts, it clones
-				the repository. While the server is still up, it pulls the latest every so often. You can also set up a webhook to pull
-				immediately after a push. In regular git fashion, a pull only includes changes, so it is very efficient.
+				The git directive starts a service routine that runs during the lifetime of the server. When the service starts, it clones the repository. While the server is still up, it pulls the latest every so often. You can also set up a webhook to pull immediately after a push. In regular git fashion, a pull only includes changes, so it is very efficient.
 			</p>
 
 			<p>
-				If a pull fails, the service will retry up to three times. If the pull was not successful by then, it won't try again until
-				the next interval.
+				If a pull fails, the service will retry up to three times. If the pull was not successful by then, it won't try again until the next interval.
 			</p>
 
 			<p>
-				<b>Requirements:</b> This directive requires git to be installed. Also, private repositories may only be accessed from
-				Linux or Mac systems. (Contributions are welcome that make private repositories work on Windows.)
+				<b>Requirements:</b> This directive requires git to be installed. Also, private repositories may only be accessed from Linux or Mac systems. (Contributions are welcome that make private repositories work on Windows.)
 			</p>
 
 			<h3>Syntax</h3>
@@ -56,7 +51,7 @@
 	<span class="hl-subdirective">path</span>     <i>clonepath</i>
 	<span class="hl-subdirective">branch</span>   <i>branch</i>
 	<span class="hl-subdirective">key</span>      <i>key</i>
-	<span class="hl-subdirective">hook</span>     <i>path [secret]</i>
+	<span class="hl-subdirective">hook</span>     <i>path</i> [<i>secret</i>]
 	<span class="hl-subdirective">interval</span> <i>interval</i>
 	<span class="hl-subdirective">then</span>     <i>command</i> [<i>args...</i>]
 	<span class="hl-subdirective">then_long</span><i>command</i> [<i>args...</i>]
@@ -67,13 +62,10 @@
 				<li><b>clonepath</b> is the path, relative to site root, to clone the repository into; default is site root.</li>
 				<li><b>branch</b> is the branch or tag to pull; default is master branch. Can be {latest} for most recent tag.</li>
 				<li><b>key</b> is the path to the SSH private key; only required for private repositories.</li>
-				<li><b>path</b> and <b>secret</b> are used to create a webhook which pulls the latest right after a push. This supports <b>Github</b>,
-					<b>Gitlab</b>, <b>BitBucket</b> and a <a href="#payloadsample">generic format</a> for others. <b>secret</b> is currently
-					supported for GitHub hooks only. </li>
+				<li><b>path</b> and <b>secret</b> are used to create a webhook which pulls the latest right after a push. This supports GitHub, GitLab, BitBucket and a <a href="#payloadsample">generic format</a> for others. <b>secret</b> is currently supported for GitHub hooks only.</li>
 				<li><b>interval</b> is the number of seconds between pulls; default is 3600 (1 hour), minimum 5.</li>
-				<li><b>command</b> is a command to execute after successful pull; followed by <b>args</b> which are any arguments to pass 
-				to the command. <br /><b>then_long</b> is for long executing commands that should run in background. <br />You can have multiple 
-				lines of <b>then</b> and <b>then_long</b> to use multiple commands and they are executed in the order specified.</li>
+				<li><b>command</b> is a command to execute after successful pull; followed by <b>args</b> which are any arguments to pass to the command. If multiple "then" lines are used, they will be executed in order.</li>
+				<li><b>then_long</b> is for long-running commands that should run in the background.</li>
 			</ul>
 
 			<p>

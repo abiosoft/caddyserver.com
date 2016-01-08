@@ -13,7 +13,7 @@
 			</p>
 
 			<p>
-				Caddy supports SNI (Server Name Indication), so you can serve multiple HTTPS sites from the same port on your machine.
+				Caddy supports SNI (Server Name Indication), so you can serve multiple HTTPS sites from the same port on your machine. In addition, Caddy implements OCSP stapling for all applicable certificates.
 			</p>
 
 			<p>
@@ -26,7 +26,7 @@
 			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg">off</span></code>
 
 			<p>
-				Disables TLS for the server block. Not recommended unless you have a good reason.
+				Disables TLS for the site. Not recommended unless you have a good reason.
 			</p>
 
 			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg"><i>email</i></span></code>
@@ -46,7 +46,7 @@
 			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg"><i>cert key</i></span></code>
 
 			<ul>
-				<li><b>cert</b> is the certificate file. If the certificate is signed by a CA, this certificate file should be a bundle: a concatenation of the server's certificate followed by the CA's certificate.</li>
+				<li><b>cert</b> is the certificate file. If the certificate is signed by a CA, this certificate file should be a bundle: a concatenation of the server's certificate followed by the CA's certificate (root certificate usually not necessary).</li>
 				<li><b>key</b> is the server's private key file which matches the certificate file.</li>
 			</ul>
 
@@ -55,10 +55,10 @@
 			</p>
 
 			<p>
-				Advanced users may open a settings block for more control:
+				Advanced users may open a settings block for more control, optionally specifying their own certificate and key:
 			</p>
 
-			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg"><i>cert key</i></span> {
+			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg">[<i>cert key</i>]</span> {
     <span class="hl-subdirective">protocols</span> <i>min max</i>
     <span class="hl-subdirective">ciphers</span>   <i>ciphers...</i>
     <span class="hl-subdirective">clients</span>   <i>clientcas...</i>
