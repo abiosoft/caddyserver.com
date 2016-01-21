@@ -111,14 +111,15 @@
 }</code>
 
 			<p>
-				With health checks and proxy headers:
+				With health checks and proxy headers to pass hostname, IP, and scheme upstream:
 			</p>
 
 			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg">/ web1.local:80 web2.local:90 web3.local:100</span> {
 	<span class="hl-subdirective">policy</span> round_robin
 	<span class="hl-subdirective">health_check</span> /health
 	<span class="hl-subdirective">proxy_header</span> Host {host}
-	<span class="hl-subdirective">proxy_header</span> X-Caddy-When server-{when}
+	<span class="hl-subdirective">proxy_header</span> X-Real-IP {remote}
+	<span class="hl-subdirective">proxy_header</span> X-Forwarded-Proto {scheme}
 }</code>
 
 			<p>
