@@ -49,7 +49,7 @@ Caddy is a solid static file server and you can build upon it in nearly limitles
 
 Community, usability, performance, and security. Indeed, these are the values that Caddy esteems as most important. Without a great community, everything else will collapse as maintenance would decline. A web server that is hard to use or ill-performing will never be adopted. And these days, security is paramount (the current state of affairs is rather sad&mdash;no pun intended on [the latest major breach](https://en.wikipedia.org/wiki/Ashley_Madison_data_breach)).
 
-[Caddy's community](https://gophers.slack.com/messages/caddy/) is active and inviting for both contributors and users (and lurkers) alike. Please feel free to join us.
+[Caddy's community](https://gitter.im/mholt/caddy) is active and inviting for both contributors and users (and lurkers) alike. Please feel free to join us.
 
 Caddy is already the easiest web server to use&mdash;because I said so. You have my word.
 
