@@ -44,6 +44,21 @@ main {
 	background: #FFF;
 }
 
+.spons {
+	margin-bottom: 50px;
+	text-align: center;
+	border: 1px dotted #CCC;
+	border-radius: 15px;
+	padding: 15px;
+}
+
+.spons-text {
+	margin-bottom: 15px;
+	color: #AAA;
+	text-transform: uppercase;
+	font-size: 12px;
+}
+
 .features h3 {
 	font-size: 18px;
 }
@@ -90,12 +105,10 @@ main {
 	margin-right: auto;
 }
 
-
-
 @media (min-width: 1200px) {
-	h1 {
+	/*h1 {
 		left: 30px;
-	}
+	}*/
 }
 
 @media (min-width: 1000px) {

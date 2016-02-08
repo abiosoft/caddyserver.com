@@ -30,7 +30,7 @@
 			</p>
 
 			<h3>Syntax</h3>
-			
+
 			<code class="block"><span class="hl-directive">git</span> <span class="hl-arg"><i>repo</i> [<i>clonepath</i>]</span></code>
 
 			<ul>
@@ -51,9 +51,10 @@
 	<span class="hl-subdirective">path</span>     <i>clonepath</i>
 	<span class="hl-subdirective">branch</span>   <i>branch</i>
 	<span class="hl-subdirective">key</span>      <i>key</i>
-	<span class="hl-subdirective">hook</span>     <i>path secret</i>
+	<span class="hl-subdirective">hook</span>     <i>path</i> [<i>secret</i>]
 	<span class="hl-subdirective">interval</span> <i>interval</i>
 	<span class="hl-subdirective">then</span>     <i>command</i> [<i>args...</i>]
+	<span class="hl-subdirective">then_long</span><i>command</i> [<i>args...</i>]
 }</code>
 
 			<ul>
@@ -61,13 +62,15 @@
 				<li><b>clonepath</b> is the path, relative to site root, to clone the repository into; default is site root.</li>
 				<li><b>branch</b> is the branch or tag to pull; default is master branch. Can be {latest} for most recent tag.</li>
 				<li><b>key</b> is the path to the SSH private key; only required for private repositories.</li>
-				<li><b>path</b> and <b>secret</b> are used to create a webhook which pulls the latest right after a push. The git service provider must support webhooks.</li>
+				<li><b>path</b> and <b>secret</b> are used to create a webhook which pulls the latest right after a push. This supports GitHub, GitLab, BitBucket and a <a href="#payloadsample">generic format</a> for others. <b>secret</b> is currently supported for GitHub hooks only.</li>
 				<li><b>interval</b> is the number of seconds between pulls; default is 3600 (1 hour), minimum 5.</li>
-				<li><b>command</b> is a command to execute after successful pull; followed by <b>args</b> which are any arguments to pass to the command.</li>
+				<li><b>command</b> is a command to execute after successful pull; followed by <b>args</b> which are any arguments to pass to the command. If multiple "then" lines are used, they will be executed in order.</li>
+				<li><b>then_long</b> is for long-running commands that should run in the background.</li>
 			</ul>
 
 			<p>
-				Each property in the block is optional. The path and repo may be specified on the first line, as in the first syntax, or they may be specified in the block with other values.
+				Each property in the block is optional. The path and repo may be specified on the first line, as in the first syntax, or
+				they may be specified in the block with other values.
 			</p>
 
 
@@ -113,6 +116,24 @@
 	<span class="hl-subdirective">key</span> /home/user/.ssh/id_rsa
 }
 <span class="hl-directive">fastcgi</span> <span class="hl-arg">/ 127.0.0.1:9000 php</span></code>
+
+			<p>
+				Specifying a webhook:
+			</p>
+
+			<code class="block"><span class="hl-directive">git</span> <span class="hl-arg">git@github.com:user/site</span> {
+	<span class="hl-subdirective">hook</span> /webhook secret-password
+}</code>
+
+			<p id="payloadsample">
+				Generic webhook payload:
+			</p>
+
+			<code class="block">{
+	<span class="hl-subdirective">"ref" : "refs/heads/branch"</span>
+}</code>
+
+
 			<footer>
 				&copy; 2015
 			</footer>
@@ -120,4 +141,5 @@
 
 		{{.Include "/includes/docs-nav.html"}}
 	</body>
+
 </html>

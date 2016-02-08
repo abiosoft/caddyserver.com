@@ -31,12 +31,8 @@
 			<code class="block"><span class="hl-directive">shutdown</span> <span class="hl-arg"><i>command</i></span></code>
 
 			<ul>
-				<li><b>command</b> is the command to execute</li>
+				<li><b>command</b> is the command to execute; it may be followed by arguments</li>
 			</ul>
-
-			<p>
-				The command may be passed arguments/flags, but remember that if there are any spaces, the command and its arguments must enclosed with quotes. See the example.
-			</p>
 
 
 
@@ -46,7 +42,7 @@
 				Stop php-fpm when the server quits:
 			</p>
 
-			<code class="block"><span class="hl-directive">shutdown</span> <span class="hl-arg">"/etc/init.d/php-fpm stop"</span></code>
+			<code class="block"><span class="hl-directive">shutdown</span> <span class="hl-arg">/etc/init.d/php-fpm stop</span></code>
 
 			<footer>
 				&copy; 2015

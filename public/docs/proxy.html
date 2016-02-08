@@ -34,6 +34,7 @@
 	<span class="hl-subdirective">health_check</span> <i>path</i> [<i>duration</i>]
 	<span class="hl-subdirective">proxy_header</span> <i>name value</i>
 	<span class="hl-subdirective">without</span> <i>prefix</i>
+	<span class="hl-subdirective">except</span> <i>ignored_paths...</i>
 	<span class="hl-subdirective"><i>preset</i></span>
 }</code>
 
@@ -46,6 +47,7 @@
 				<li><b>health_check</b> will check <i>path</i> on each backend. If a backend returns a status code of 200-399, then that backend is healthy. If it doesn't, the backend is marked as unhealthy for <i>duration</i> and no requests are routed to it. If this option is not provided then health checks are disabled. The default duration is 10 seconds ("10s").</li>
 				<li><b>proxy_header</b> sets headers to be passed to the backend. The field name is <i>name</i> and the value is <i>value</i>. This option can be specified multiple times for multiple headers, and dynamic values can also be inserted using <a href="/docs/placeholders">request placeholders</a>.</li>
 				<li><b>prefix</b> is a URL prefix to trim before proxying the request upstream. A request to /api/foo without /api, for example, will result in a proxy request to /foo.</li>
+				<li><b>ignored_paths...</b> is a space-separated list of paths to exclude from proxying. Requests that match any of these paths will be passed thru.</li>
 				<li><b>preset</b> is an optional shorthand way of configuring the proxy to meet certain conditions. See presets below.</li>
 			</ul>
 
@@ -109,14 +111,15 @@
 }</code>
 
 			<p>
-				With health checks and proxy headers:
+				With health checks and proxy headers to pass hostname, IP, and scheme upstream:
 			</p>
 
 			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg">/ web1.local:80 web2.local:90 web3.local:100</span> {
 	<span class="hl-subdirective">policy</span> round_robin
 	<span class="hl-subdirective">health_check</span> /health
 	<span class="hl-subdirective">proxy_header</span> Host {host}
-	<span class="hl-subdirective">proxy_header</span> X-Caddy-When server-{when}
+	<span class="hl-subdirective">proxy_header</span> X-Real-IP {remote}
+	<span class="hl-subdirective">proxy_header</span> X-Forwarded-Proto {scheme}
 }</code>
 
 			<p>
@@ -125,6 +128,15 @@
 
 			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg">/ localhost:8080</span> {
 	<span class="hl-subdirective">websocket</span>
+}</code>
+
+
+			<p>
+				Proxy everything except requests to /static or /robots.txt:
+			</p>
+
+			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg">/ backend:1234</span> {
+	<span class="hl-subdirective">except</span> /static /robots.txt
 }</code>
 
 

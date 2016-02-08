@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>search - Caddy Directives</title>
+		{{.Include "/includes/docs-head.html"}}
+		<link rel="stylesheet" href="/resources/css/highlight/atelier-lakeside.light.css">
+		<script src="/resources/js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+	</head>
+	<body>
+		<main>
+			<h1>search <div class="tag addon">Addon</div></h1>
+
+			<div class="addon-message">
+				<div class="heading"><i class="fa fa-plus-circle"></i> Addon</div>
+				This directive is a Caddy extension. Questions should be directed to its maintainer. <a href="https://github.com/pedronasser/caddy-search">github.com/pedronasser/caddy-search</a>
+			</div>
+
+			<p>
+				search activates a site search engine that includes a search page and JSON API.
+			</p>
+
+			<p>
+				The search engine is powered by <a href="http://blevesearch.com/">bleve</a>. Only HTML, Markdown, and .txt files are indexed at this time.
+			</p>
+
+			<mark class="block">Note: This addon is still experimental. Please report bugs and submit your feedback to the maintainer.</mark>
+
+
+			<h3 id="syntax">Syntax</h3>
+
+			<code class="block"><span class="hl-directive">search</span> <span class="hl-arg">[<i>directory</i>] <i>endpoint</i></span></code>
+
+			<ul>
+				<li><b>directory</b> is a path within the site (can be a regular expression) that should be indexed. Default is site root.</li>
+				<li><b>endpoint</b> is the path to the search endpoint. Default is /search.</li>
+			</ul>
+
+			<p>
+				For more control over the search engine, use the expanded form:
+			</p>
+
+			<code class="block"><span class="hl-directive">search</span> <span class="hl-arg">[<i>directory</i>]</span> {
+	<span class="hl-subdirective">engine</span>        <i>engine</i>
+	<span class="hl-subdirective">datadir</span>       <i>datadir</i>
+	<span class="hl-subdirective">endpoint</span>      <i>endpoint</i>
+	<span class="hl-subdirective">template</span>      <i>tpl</i>
+	<span class="hl-subdirective">+path | -path</span> <i>path</i>
+}</code>
+			<ul>
+				<li><b>engine</b> is the indexing engine to use. Default is bleve.</li>
+				<li><b>datadir</b> is the absolute path in which the index will be stored. Default is /tmp/caddyIndex.</li>
+				<li><b>endpoint</b> is the path to the search endpoint. Default is /search.</li>
+				<li><b>tpl</b> is the path to the HTML template used to render search results. Default is a simple, built-in template.</li>
+				<li><b>path</b> is a path within the site to include (+path) or exclude (-path) from the index. Default is to include site root. You can repeat these properties to specify multiple paths.</li>
+			</ul>
+
+
+			<h3 id="template">Search Template</h3>
+
+			<p>
+				You can access the search query with <code>{&#123;.Query}}</code>. You can loop through the results and access properties of each like this:
+			</p>
+
+			<pre><code class="html">{&#123;range .Results}}
+	&lt;a href="{&#123;.Path}}"&gt;{&#123;.Title}}&lt;/a&gt;
+	{&#123;.Body}}
+	&lt;br&gt;&lt;br&gt;
+{&#123;end}}</code></pre>
+
+
+			<h3 id="json">JSON API</h3>
+
+			<p>
+				You can query the search endpoint with application/json in the Accept header. This allows you to write your own search interface or application. An example JSON output for a GET request to <code>/search?q=deploy+with+git</code> is:
+			</p>
+
+			<pre><code class="json">[
+    {
+        "Path": "/docs/git.html",
+        "Title": "git - Caddy Directives",
+        "Body": "&lt;mark&gt;git&lt;/mark&gt; clones a &lt;mark&gt;git&lt;/mark&gt; repository into the site. This makes it possible to &lt;mark&gt;deploy&lt;/mark&gt; your site with a simple &lt;mark&gt;git&lt;/mark&gt; push.\n\t\t\t\n\n\t\t\t\n\t\t\t\tThe &lt;mark&gt;git&lt;/mark&gt; directive starts a service…",
+        "Modified": "2015-09-27T16:08:43-06:00"
+    },
+    // ... 9 more results ...
+]</code></pre>
+
+			<h3 id="examples">Examples</h3>
+
+			<p>
+				Index the whole site and expose a search endpoint at /search with the default HTML template:
+			</p>
+
+			<code class="block"><span class="hl-directive">search</span></code>
+
+			<p>
+				Index only the blog and documentation, but not the admin panel or robots.txt:
+			</p>
+
+			<code class="block"><span class="hl-directive">search</span> <span class="hl-arg">^/blog/</span> {
+	<span class="hl-subdirective">+path</span> /static/docs
+	<span class="hl-subdirective">-path</span> ^/blog/admin/
+	<span class="hl-subdirective">-path</span> robots.txt
+}</code>
+
+
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		{{.Include "/includes/docs-nav.html"}}
+	</body>
+</html>

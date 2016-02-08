@@ -19,10 +19,10 @@
 			The plain gzip config is good enough for most things, but you can gain more control if needed:
 
 			<code class="block"><span class="hl-directive">gzip</span> {
-	<!--<span class="hl-subdirective">mimes</span> <i>types...</i>
-	--><span class="hl-subdirective">ext</span>   <i>extensions...</i>
-	<span class="hl-subdirective">not</span>   <i>paths</i>
-	<span class="hl-subdirective">level</span> <i>compression_level</i>
+    <span class="hl-subdirective">ext</span>        <i>extensions...</i>
+    <span class="hl-subdirective">not</span>        <i>paths</i>
+    <span class="hl-subdirective">level</span>      <i>compression_level</i>
+    <span class="hl-subdirective">min_length</span> <i>min_bytes</i>
 }</code>
 
 			<ul>
@@ -30,6 +30,7 @@
 				<li><b>extensions...</b> is a space-separated list of file extensions to compress. Supports wildcard <code>*</code> to match all extensions.</li>
 				<li><b>paths</b> is a space-separated list of paths in which <i>not</i> to compress.</li>
 				<li><b>compression_level</b> is a number from 1 (best speed) to 9 (best compression). Default is 9.</li>
+				<li><b>min_bytes</b> is the minimum number of bytes in a response needed before compression will happen. Default is no minimum length.</li>
 			</ul>
 
 			<h3>Examples</h3>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Caddy - The HTTP/2 Web Server Made for Humans</title>
+		<title>Caddy - The HTTP/2 Web Server with Fully Managed SSL</title>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="theme-color" content="#002132">
 		<link rel="icon" href="/favicon.ico">
 		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Muli|Lato|Roboto|Open+Sans:300,400,700">
@@ -25,7 +25,7 @@
 				<img src="/resources/images/caddy-open-white.png" class="logo">
 			</div>
 
-			<h1>The HTTP/2 web server made for <div id="spinner">
+			<h1>The HTTP/2 web server <!--made for <div id="spinner">
 				<div id="spinner-item-container">
 					<span class="item">developers</span>
 					<span class="item">designers</span>
@@ -34,7 +34,7 @@
 					<span class="item">you</span>
 					<span class="item">anyone</span>
 				</div>
-			</div></h1>
+			</div>-->with automatic HTTPS</h1>
 
 			<a href="/download" class="button white"><i class="fa fa-download fa-lg"></i> Download</a>
 			<a href="/docs" class="button white"><i class="fa fa-book fa-lg"></i> User Guide</a>
@@ -45,10 +45,15 @@
 		<main>
 
 			<section>
-				<h2>Serve The Web Like It's 2015</h2>
+				<h2>Serve The Web Like It's 2016</h2>
 				<p class="subheader">
 					Caddy is an alternative web server that is easy to configure and use.
 				</p>
+
+				<div class="spons">
+					<div class="spons-text">Sponsored By</div>
+					<a href="https://www.arroyonetworks.com"><img src="/resources/images/sponsors/arroyo-networks.png" style="max-width: 300px;"></a>
+				</div>
 
 				<div class="grid-container">
 					<div class="grid-50 push-50" style="padding-top: 75px;">
@@ -125,7 +130,7 @@
 						</p>
 					</div>
 					<div class="grid-50">
-						<code class="block"><span class="hl-vhost">http://matt.life</span>   <span class="hl-comment"># Your site's address</span>
+						<code class="block"><span class="hl-vhost">matt.life</span>   <span class="hl-comment"># Your site's address</span>
 
 <span class="hl-directive">ext</span> <span class="hl-arg">.html</span>   <span class="hl-comment"># Clean URLs</span>
 <span class="hl-directive">errors</span> {
@@ -155,10 +160,10 @@
 					<div class="grid-50">
 						<h3>3. Open Your Browser</h3>
 						<p>
-							Just type the address of your site to see it in action.
+							Just type the address of your site to see it in action. Live sites are <a href="/docs/automatic-https">served over HTTPS automatically</a>.
 						</p>
 						<p>
-							You can do this on your own computer as you build your site or on a public web host to serve your site to the world. <a href="/docs">More info</a>
+							Do this on your own computer as you build your site or on a public web host to serve your site to the world. <a href="/docs">More info</a>
 						</p>
 						<p class="text-center">
 							<a href="/download" class="button"><i class="fa fa-download fa-lg"></i> Download Caddy</a>
@@ -192,9 +197,9 @@
 						</p>
 					</div>
 					<div class="grid-25">
-						<h3><i class="fa fa-lock"></i> TLS 1.2</h3>
+						<h3><i class="fa fa-lock"></i> Automatic HTTPS</h3>
 						<p>
-							Direct integration with <a href="https://letsencrypt.org/">Let's Encrypt</a> is on its way, or use your own certs and keys. Supports <a href="http://en.wikipedia.org/wiki/Server_Name_Indication" title="Server Name Indication">SNI</a>.
+							Caddy uses <a href="https://letsencrypt.org/">Let's Encrypt</a> to serve your sites over HTTPS without any hassle. Supports <a href="http://en.wikipedia.org/wiki/Server_Name_Indication" title="Server Name Indication">SNI</a>.
 						</p>
 					</div>
 					<div class="grid-25">

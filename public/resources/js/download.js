@@ -29,16 +29,11 @@ $(function() {
 			                  .replace("{{DESCRIPTION}}", data[i].description);
 			var $elem = $(featHTML);
 			$elem.insertBefore('#add-yours-container');
+			if ((i % 4) - 1 == 1)
+			 	$('#add-yours-container').before('<div class="clear"></div>');
 		}
 	}).fail(function() {
-		$('.buildserver-down').show();
-		$('.custom-builds').hide();
-
-		$('.download-link').each(function() {
-			buildServerDown = true;
-			var target = $(this).data('platform').replace("-", "").replace("osx", "mac").replace("windows", "win");
-			$(this).attr('href', "/download/"+target);
-		});
+		showBuildServerDown();
 	});
 
 	// Update download URLs when features are selected
@@ -48,6 +43,8 @@ $(function() {
 
 	// Download when link clicked
 	$('.download-link').click(function(event) {
+		var $self = $(this);
+
 		// Don't overlap downloads
 		if ($(this).hasClass('downloading')) {
 			return suppress(event);
@@ -71,10 +68,17 @@ $(function() {
 			window.location = jqxhr.getResponseHeader("Location");
 		}).fail(function(jqxhr, status, error) {
 			swal({
-				title: "Oops.",
-				text: "Something went wrong: "+error,
 				type: "error",
-				confirmButtonText: "OK"
+				title: "Error: " + error,
+				text: "Sorry about that. You can try again or download Caddy core from our backup site (without any extra features).",
+				showCancelButton: true,
+				confirmButtonText: "Download Core Now",
+				cancelButtonText: "I'll Try Again"
+			}, function(choseDownloadCore) {
+				if (choseDownloadCore) {
+					showBuildServerDown();
+					window.location = $self.attr('href');
+				}
 			});
 		}).always(function(data, status, jqxhr) {
 			transformBack(thisDownloadLink);
@@ -82,8 +86,26 @@ $(function() {
 
 		return suppress(event);
 	});
+
+
+
+	// hides feature selection and changes all links to static file downloads
+	// so user can still download Caddy core from GitHub. Must be inside
+	// the closure where buildServerDown is defined.
+	function showBuildServerDown() {
+		buildServerDown = true;
+		$('.buildserver-down').show();
+		$('.custom-builds').hide();
+
+		$('.download-link').each(function() {
+			var target = $(this).data('platform').replace("-", "").replace("osx", "mac").replace("windows", "win");
+			$(this).attr('href', "/download/"+target);
+		});
+	}
 });
 
+// produces a comma-separated feature list based on selected features
+// the return value is not url-encoded
 function featureList() {
 	var feat = "";
 	$('#features :checked').each(function() {
@@ -94,7 +116,7 @@ function featureList() {
 	return feat.substr(0, feat.length-1);
 }
 
-
+// transforms a download link into a spinner
 function transformIntoSpinner(link)
 {
 	$(link).addClass('downloading');
@@ -107,7 +129,7 @@ function transformIntoSpinner(link)
 	}).addClass('animated zoomOut');
 }
 
-
+// transforms a download link from a spinner back to its regular, clickable state
 function transformBack(link)
 {
 	$('.label', link).removeClass('zoomOut');

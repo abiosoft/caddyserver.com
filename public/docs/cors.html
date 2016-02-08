@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>cors - Caddy Directives</title>
+		{{.Include "/includes/docs-head.html"}}
+	</head>
+	<body>
+		<main>
+			<h1>cors <div class="tag addon">Addon</div></h1>
+
+			<div class="addon-message">
+				<div class="heading"><i class="fa fa-plus-circle"></i> Addon</div>
+				This directive is a Caddy extension. Questions should be directed to its maintainer. <a href="https://github.com/captncraig/cors">https://github.com/captncraig/cors</a>
+			</div>
+
+			<p>
+				cors gives you easy control over Cross Origin Resource Sharing for your site.
+			</p>
+
+			<p>
+				It allows you to whitelist particular domains per route, or to simply allow all domains <code>*</code>. If desired you may customize nearly every aspect of the specification.
+			</p>
+
+			<h3>Syntax</h3>
+			
+<code class="block"><span class="hl-directive">cors</span> <span class="hl-arg">[<i>path</i>] [<i>domains</i>]</span> { 
+	<span class="hl-subdirective">origin</span>           <i>origin</i>
+	<span class="hl-subdirective">methods</span>          <i>methods</i>
+	<span class="hl-subdirective">allowCredentials</span> <i>allowCredentials</i>
+	<span class="hl-subdirective">maxAge</span>           <i>maxAge</i>
+	<span class="hl-subdirective">allowedHeaders</span>   <i>allowedHeaders</i>
+	<span class="hl-subdirective">exposedHeaders</span>   <i>exposedHeaders</i>
+}</code>
+			<ul>
+				<li><b>path</b> is the file or directory this applies to (default is /).</li>
+				<li><b>domains</b> is a space-seperated list of domains to allow. If ommitted, all domains will be granted access.</li>
+				<li><b>origin</b> is a domain to grant access to. May be specified multiple times or ommitted.</li>
+				<li><b>methods</b> is set of http methods to allow. Default is these: POST,GET,OPTIONS,PUT,DELETE.</li>
+				<li><b>allowCredentials</b> sets the value of the Access-Control-Allow-Credentials header. Can be true or false. By default, header will not be included.</li>
+				<li><b>maxAge</b> is the length of time in seconds to cache preflight info. Not set by default.</li>
+				<li><b>allowedHeaders</b> is a comma-seperated list of request headers a client may send.</li>
+				<li><b>exposedHeaders</b> is a comma-seperated list of response headers a client may access.</li>
+			</ul>
+
+
+			<h3>Examples</h3>
+
+			<p>
+				Simply allow all domains to request any path:
+			</p>
+
+			<code class="block"><span class="hl-directive">cors</span></code>
+
+
+			<p>
+				Protect specific paths only, and only allow a few domains:
+			</p>
+			
+			<code class="block"><span class="hl-directive">cors</span> <span class="hl-arg">/foo http://mysite.com http://anothertrustedsite.com</span></code>
+
+			<p>
+				Full configuration:
+			</p>
+			
+			<code class="block"><span class="hl-directive">cors</span> <span class="hl-arg">/</span> {
+    <span class="hl-subdirective">origin</span>           http://allowedSite.com
+	<span class="hl-subdirective">origin</span>           http://anotherSite.org https://anotherSite.org
+    <span class="hl-subdirective">methods</span>          POST,PUT
+    <span class="hl-subdirective">allowCredentials</span> false
+	<span class="hl-subdirective">maxAge</span>           3600
+	<span class="hl-subdirective">allowedHeaders</span>   X-Custom-Header,X-Foobar
+	<span class="hl-subdirective">exposedHeaders</span>   X-Something-Special,SomethingElse
+}</code>
+			<footer>
+				&copy; 2015
+			</footer>
+		</main>
+
+		{{.Include "/includes/docs-nav.html"}}
+	</body>
+</html>

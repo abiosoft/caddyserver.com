@@ -13,7 +13,7 @@
 			</p>
 
 			<p>
-				Each command that is executed at startup is blocking, unless you suffix the command with <code>&amp;</code>, which will cause the command to be run in the background. The output and error of the command go to stdout and stderr, respectively. There is no stdin.
+				Each command that is executed at startup is blocking, unless you suffix the command with a space and <code>&amp;</code>, which will cause the command to be run in the background. The output and error of the command go to stdout and stderr, respectively. There is no stdin.
 			</p>
 
 			<p>
@@ -25,13 +25,8 @@
 			<code class="block"><span class="hl-directive">startup</span> <span class="hl-arg"><i>command</i></span></code>
 
 			<ul>
-				<li><b>command</b> is the command to execute</li>
+				<li><b>command</b> is the command to execute; it may be followed by arguments</li>
 			</ul>
-
-			<p>
-				The command may be passed arguments/flags, but remember that if there are any spaces, the command and its arguments must enclosed with quotes. See the example.
-			</p>
-
 
 
 			<h3>Examples</h3>
@@ -40,7 +35,7 @@
 				Start php-fpm before the server starts listening:
 			</p>
 
-			<code class="block"><span class="hl-directive">startup</span> <span class="hl-arg">"/etc/init.d/php-fpm start"</span></code>
+			<code class="block"><span class="hl-directive">startup</span> <span class="hl-arg">/etc/init.d/php-fpm start</span></code>
 
 			<footer>
 				&copy; 2015

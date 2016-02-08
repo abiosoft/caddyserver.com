@@ -13,38 +13,18 @@
 				Caddy is a web server like Apache, nginx, or lighttpd, but with different goals, features, and advantages.
 			</p>
 			<p>
-				The goal of Caddy is to streamline an authentic web development, deployment, and hosting workflow so that anyone can host their own web sites without requiring special technical understanding.
+				The purpose of Caddy is to streamline an authentic web development, deployment, and hosting workflow so that anyone can host their own web sites without requiring special technical knowledge.
+			</p>
+			<p>
+				Caddy is also the first and only web server to serve all live sites over <a href="/docs/automatic-https">HTTPS by default</a>.
 			</p>
 
 			<h3>How is Caddy different from Apache, nginx, and lighttpd?</h3>
 			<p>
-				Fundamentally, Caddy aims to make websites easier by lowering the barrier to entry. Like other web servers, Caddy is for system administrators and web developers, but Caddy is also tailored for designers and writers who don't want to deal with a lot of the technical cruft that traditionally comes along with setting up a server.
+				Fundamentally, Caddy aims to make websites easier by lowering the barrier to entry. Like other web servers, Caddy is for system administrators and web developers, but Caddy is also tailored to designers and writers who don't want to deal with a lot of the technical cruft that traditionally comes along with setting up a server.
 			</p>
 			<p>
-				Caddy has different goals and advantages. Nginx is first and foremost a capable reverse proxy, whereas Caddy's primary goal is to be an easy-to-use static file web server. Caddy desires cross-platform independence and portability without the need for custom builds.
-			</p>
-
-			<!--<h3>I ran Caddy but &lt;some feature&gt; didn't work. How do I use Caddy's features?</h3>
-			<p>
-				Use a <a href="/docs/caddyfile">Caddyfile</a> to configure Caddy and use its features. By default, extra features are turned off. You will need to turn them on in order to use them. This gives you a great degree of clarity and control over your web server.
-			</p>-->
-
-			<h3>What's on the roadmap for Caddy?</h3>
-			<p>
-				Exciting things. Here's what's coming:
-			</p>
-			<ul>
-				<li><a href="https://letsencrypt.org">Let's Encrypt</a> integration</li>
-				<li>Remote configuration/management API</li>
-				<li>Web-based control panel</li>
-			</ul>
-			<p>
-				These aren't in any particular order and are subject to change, but Caddy is well on its way to making these things happen.
-			</p>
-
-			<h3>You say Caddy is for a less-technical audience, but... it's still technical.</h3>
-			<p>
-				You're right, it's not for Grandma (yet). For now, Caddy's target audience is a more tech-savvy crowd: developers, bloggers who set up their own WordPress sites, or graphic artists who host their own stuff. This will contribute to further development so a wider audience can make and deploy their own websites without having to know anything about server administration or web hosting. At that point, we expect Grandma to show Grandpa how it's done.
+				Caddy has different goals and advantages. Nginx is first and foremost a capable reverse proxy, whereas Caddy's primary goal is to be an easy-to-use static file web server. Caddy desires cross-platform independence and portability without the need for custom builds. And Caddy <a href="/docs/automatic-https">defaults to HTTPS</a> which is pretty cool.
 			</p>
 
 			<h3>Do I have to run Caddy as root to serve on port 80 or 443?</h3>
@@ -53,6 +33,28 @@
 			</p>
 			<p>
 				Privilege de-escalation is another option, but <a href="https://github.com/golang/go/issues/1435">it is not yet a reliable solution</a>. It will be implemented as soon as this becomes a robust possibility. Concerned readers are encouraged to get involved to help this become a reality.
+			</p>
+
+			<h3>Does Caddy really serve my site over HTTPS by default?</h3>
+			<p>
+				Yes. You can <a href="/docs/automatic-https">read more about automatic HTTPS</a> and try it for yourself if you don't believe it.
+			</p>
+
+			<h3>What's on the roadmap for Caddy?</h3>
+			<p>
+				Exciting things. Here's what's coming:
+			</p>
+			<ul>
+				<li>API for remote management</li>
+				<li>Web-based control panel</li>
+			</ul>
+			<p>
+				These aren't in any particular order and are subject to change, but Caddy is well on its way to making these things happen.
+			</p>
+
+			<h3>You say Caddy is for a less-technical audience, but... it's still technical.</h3>
+			<p>
+				A graphical UI will soon be available. Caddy's roadmap takes it to an audience that does not need to know how to use the command line. Right now, Caddy is already a great fit for bloggers who set up their own WordPress sites, graphic artists who host their own stuff, developers, etc.
 			</p>
 
 			<h3>What's the deal with HTTP/2?</h3>

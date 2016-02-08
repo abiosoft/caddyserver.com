@@ -80,7 +80,7 @@
 
 			<section class="bg bg3">
 				<div class="grid-100">
-					<h2>Middleware you can use</h2>
+					<h2>Use Caddy in your programs</h2>
 				</div>
 			</section>
 
@@ -88,32 +88,33 @@
 			<section>
 				<div class="grid-container">
 					<div class="grid-50">
-						<h3>Middleware Packages for Go</h3>
+						<h3>Caddy as a Service</h3>
 						<p>
-							Nearly every directive for the <a href="/docs/caddyfile">Caddyfile</a> invokes an independent middleware. A middleware is a small code library that does one thing really well, like logging or adding response headers. <a href="https://github.com/mholt/caddy/tree/master/middleware">See available middleware.</a>
+							Caddy can be used in your own Go programs simply by importing the caddy package. This is ideal for programs with Web endpoints that need a high degree of configurability. It's easy to set up and use - just a few lines of code.
 						</p>
 
 						<h3>Extend Caddy</h3>
 
 						<p>
-							Anyone can <a href="https://github.com/mholt/caddy/wiki/Writing-Middleware">write middleware</a> for Caddy (or adapt existing middleware) to add functionality and integrate with 3rd-party services. For example, wouldn't it be cool if you could push a commit to a branch on GitHub to deploy your site? <!--<a href="#">Example!</a>-->
+							Anyone can <a href="https://github.com/mholt/caddy/wiki/Writing-Middleware">write middleware</a> for Caddy (or adapt existing middleware) to add functionality and integrate with 3rd-party services. Such extensions are available as plugins from the <a href="/download">Download</a> page already!
 						</p>
 
 					</div>
 
 					<div class="grid-50">
-						<h3>Middleware in Your Programs</h3>
+						<h3>Usage Example</h3>
 						<p>
-							Caddy's middleware can be imported into any Go program since each one is a separate package: (<a href="https://github.com/mholt/caddy/wiki/Using-Caddy-Middleware-in-Your-Own-Programs">Learn how</a>)
+							You can start, restart, and stop Caddy very easily:
 						</p>
 
-						<pre><code class="go">// Example: Gzip
-import "github.com/mholt/caddy/middleware/gzip"
+						<pre><code class="go">import "github.com/mholt/caddy/caddy"
 
-// ...
+caddyfile := caddy.CaddyfileInput{ /* ... */ }
 
-handler := errorHandler(gzip.Gzip{Next: myHandler})
-http.ListenAndServe("localhost:8081", handler)
+// error checking omitted for brevity
+err := caddy.Start(caddyfile)
+err = caddy.Restart(nil)
+err = caddy.Stop()
 </code></pre>
 					</div>
 				</div>

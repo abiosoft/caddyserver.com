@@ -13,7 +13,7 @@
 			</p>
 
 			<p>
-				This directive has experimental support for regular expressions which allow more advanced rewrite tasks.
+				There are simple rewrites (fast) and complex rewrites (slower), but they're powerful enough to accommodate most dynamic back-end applications.
 			</p>
 
 
@@ -22,58 +22,90 @@
 			<code class="block"><span class="hl-directive">rewrite</span> <span class="hl-arg"><i>from to</i></span></code>
 
 			<ul>
-				<li><b>from</b> is the path to match exactly</li>
+				<li><b>from</b> is the exact path to match</li>
 				<li><b>to</b> is the destination path to rewrite to (the resource to respond with)</li>
 			</ul>
 
 			<p>
-				Advanced users may use regular expressions with a settings block:
+				Advanced users may open a block and make a complex rewrite rule:
 			</p>
 
 			<code class="block"><span class="hl-directive">rewrite</span> <span class="hl-arg">[<i>basepath</i>]</span> {
     <span class="hl-subdirective">regexp</span> <i>pattern</i>
     <span class="hl-subdirective">ext</span>    <i>extensions...</i>
-    <span class="hl-subdirective">to</span>     <i>to</i>
+    <span class="hl-subdirective">if</span>     <i>a cond b</i>
+    <span class="hl-subdirective">status</span> <i>code</i>
+    <span class="hl-subdirective">to</span>     <i>destinations...</i>
 }</code>
 
 			<ul>
 				<li><b>basepath</b> is the base path to match before rewriting with regular expression. Default is /.
-				<li><b>regexp</b> (shorthand: <b>r</b>) will match the path with the given regular expression <b>pattern</b>.</li>
+				<li><b>regexp</b> (shorthand: <b>r</b>) will match the path with the given regular expression <b>pattern</b>. <mark>Extremely high-load servers should avoid using regular expressions.</mark></li>
 				<li><b>extensions...</b> is a space-separated list of file extensions to include or ignore. Prefix an extension with <code>!</code> to exclude an extension. The forward slash <code>/</code> symbol matches paths without file extensions.</li>
-				<li><b>to</b> is the path to rewrite to. Can use some variables like {path} (request path without leading /), {query} (query string without leading ?), {file} (last part of the request path), {dir} (the request path before the last part) and {frag} (URL after # symbol).</li>
+				<li><b>if</b> specifies a rewrite condition. Multiple ifs are AND-ed together. <b>a</b> and <b>b</b> are any string and may use <a href="/docs/placeholders">request placeholders</a>. <b>cond</b> is the condition, with possible values explained below.</li>
+				<li><b>status</b> will respond with the given status <b>code</b> instead of performing a rewrite. In other words, use either "status" or "to" in your rule, but not both. The code must be a number in the format 4xx.
+				<li><b>destinations...</b> is one or more space-separated paths to rewrite to, with support for <a href="/docs/placeholders">request placeholders</a> as well as numbered regular expression captures such as {1}, {2}, etc. Rewrite will check each destination in order and rewrite to the first destination that exists. Each one is checked as a file or, if ends with /, as a directory. The last destination will act as default if no other destination exists.</li>
 			</ul>
 
-			<mark class="block">Note: This advanced syntax is experimental at this time. High-load servers should avoid using regular expressions.</mark>
+			<h3>"if" Conditions</h3>
 
 			<p>
-				Regular expression support is experimental. We want advanced users to try it and <a href="https://github.com/mholt/caddy/issues">give us feedback</a>.
+				The if keyword is a powerful way to describe your rule. It takes the format <code>a cond b</code>, where the values <code>a</code> and <code>b</code> are separated by <code>cond</code>, a condition. The condition can be any of these:
 			</p>
+
+			<ul>
+				<li><code>is</code> = a equals b</li>
+				<li><code>not</code> = a does NOT equal b</li>
+				<li><code>has</code> = a has b as a substring (b is a substring of a)</li>
+				<li><code>not_has</code> = b is NOT a substring of a</li>
+				<li><code>starts_with</code> = b is a prefix of a</li>
+				<li><code>ends_with</code> = b is a suffix of a</li>
+				<li><code>match</code> = a matches b, where b is a regular expression</li>
+				<li><code>not_match</code> = a does NOT match b, where b is a regular expression</li>
+			</ul>
 
 			<h3>Examples</h3>
 
 			<p>
-				When requests come in for /images/photo.jpg, actually serve /images/drawing.jpg.
+				When requests come in for /mobile, actually serve /mobile/index.
 			</p>
 
-			<code class="block"><span class="hl-directive">rewrite</span> <span class="hl-arg">/images/photo.jpg /images/drawing.jpg</span></code>
+			<code class="block"><span class="hl-directive">rewrite</span> <span class="hl-arg">/mobile /mobile/index</span></code>
 
 			<p>
-				Prevent access to hidden files (hidden files start with a dot):
+				If the file is not favicon.ico and it is not a valid file or directory, serve the maintenance page if present, or finally, rewrite to index.php.
 			</p>
 
 			<code class="block"><span class="hl-directive">rewrite</span> {
-    <span class="hl-subdirective">r</span>   ^\.(.*)
-    <span class="hl-subdirective">to</span>  /403.html
+    <span class="hl-subdirective">if</span> {file} not favicon.ico
+    <span class="hl-subdirective">to</span> {path} {path}/ /maintenance.html /index.php
 }</code>
 
 			<p>
-				Forward request path to index.php when no file extension is specified (applicable for PHP frameworks like <a href="http://phalconphp.com/en/">Phalcon</a>):
+				If user agent includes "mobile" and path is not a valid file/directory, rewrite to the mobile index page.
 			</p>
 
 			<code class="block"><span class="hl-directive">rewrite</span> {
-    <span class="hl-subdirective">regexp</span> .*
-    <span class="hl-subdirective">ext</span>    /
-    <span class="hl-subdirective">to</span>     /index.php?_url=/{path}&amp;{query}
+    <span class="hl-subdirective">if</span> if {>User-agent} has mobile
+    <span class="hl-subdirective">to</span> {path} {path}/ /mobile/index.php
+}</code>
+
+			<p>
+				If the request path starts with /source, respond with HTTP 403 Forbidden.
+			</p>
+
+			<code class="block"><span class="hl-directive">rewrite</span> {
+    <span class="hl-subdirective">regexp</span> ^/source
+    <span class="hl-subdirective">status</span> 403
+}</code>
+
+			<p>
+				Rewrite /app to /index with a query string. <code>{1}</code> is the matched group <code>(.*)</code>.
+			</p>
+
+			<code class="block"><span class="hl-directive">rewrite</span> <span class="hl-arg">/app</span> {
+    <span class="hl-subdirective">r</span>  (.*)
+    <span class="hl-subdirective">to</span> /index?path={1}
 }</code>
 
 
