@@ -13,7 +13,7 @@
 			</p>
 
 			<p>
-				Caddy supports SNI (Server Name Indication), so you can serve multiple HTTPS sites from the same port on your machine. In addition, Caddy implements OCSP stapling for all applicable certificates.
+				Caddy supports SNI (Server Name Indication), so you can serve multiple HTTPS sites from the same port on your machine. In addition, Caddy implements OCSP stapling for all qualifying certificates.
 			</p>
 
 			<p>
@@ -36,7 +36,7 @@
 			</ul>
 
 			<p>
-				This syntax enables TLS with the default settings and Caddy will still auto-configure HTTPS for this site, but it will use the email address you provide instead of prompting for one or using another one from a previous run.
+				Although the above syntax is not needed to enable TLS, it allows you to specify the email address used for your CA account, instead of prompting for one or using another one from a previous run.
 			</p>
 
 			<p>
@@ -51,7 +51,7 @@
 			</ul>
 
 			<p>
-				The above syntax uses Caddy's default TLS settings with your own certificate and key, which should be sufficient in most cases.
+				The above syntax uses Caddy's default TLS settings with your own certificate and key, which should be sufficient in most cases. You can use this multiple times to specify multiple certificate and key pairs.
 			</p>
 
 			<p>
@@ -62,6 +62,8 @@
     <span class="hl-subdirective">protocols</span> <i>min max</i>
     <span class="hl-subdirective">ciphers</span>   <i>ciphers...</i>
     <span class="hl-subdirective">clients</span>   <i>clientcas...</i>
+	<span class="hl-subdirective">load</span>      <i>dir</i>
+	<span class="hl-subdirective">max_certs</span> <i>limit</i>
 }</code>
 
 			<ul>
@@ -69,6 +71,8 @@
 				<li><b>min</b> and <b>max</b> are the minimum and maximum protocol versions to support, respectively. See below for valid values.</li>
 				<li><b>ciphers...</b> is a list of space-separated ciphers that will be supported. If you list any, only the ones you specify will be allowed. See below for valid values.</li>
 				<li><b>clientcas...</b> is a list of space-separated client root CAs used for verification during TLS client authentication. If used, clients will be asked to present their certificate by their browser, which will be verified against this list of client certificate authorities. A client will not be allowed to connect if their certificate was not signed by one of these root CAs.</li>
+				<li><b>dir</b> is a directory from which to load certificates and keys. The entire directory and its subfolders will be walked in search of .pem files. Each one must be a PEM-encoded bundle of the certificate (chain) and private key together.</li>
+				<li><b>limit</b> puts a limit on the number of certificates allowed to be issued on demand (during TLS handshake). It is only used if <a href="/docs/automatic-https#on-demand">On-Demand TLS</a> is enabled, but is strongly recommended in that case.</li>
 			</ul>
 
 

@@ -20,7 +20,7 @@
 				<li>The port is not explicitly 80</li>
 				<li>The scheme is not explicitly http</li>
 				<li>TLS is not turned off in site's configuration</li>
-				<li>Certificate and key are not already specified by you</li>
+				<li>Certificates and keys are not provided by you</li>
 				<li>Caddy is able to bind to ports 80 and 443</li>
 			</ul>
 
@@ -34,20 +34,26 @@
 
 			<iframe style="max-width: 640px;" width="100%" height="480" src="https://www.youtube-nocookie.com/embed/nk4EWHvvZtI?rel=0" frameborder="0" allowfullscreen></iframe>
 
+
 			<h2>Things to Know / FAQ</h2>
 
 			<p>
 				In order to fully enjoy this flagship feature, please read the following.
 			</p>
 
-			<h4>Binding to ports 80 and 443</h4>
+			<h4>Binding to ports 80 and 443 is required</h4>
 			<p>
-				This usually requires privilege escalation. On Linux systems, you can give Caddy permission to bind to port 80 and 443 without being root using <a href="http://man7.org/linux/man-pages/man8/setcap.8.html">setcap</a>, like so: <code>setcap cap_net_bind_service=+ep caddy</code>. Don't forget to configure all relevant firewalls to allow Caddy to use these ports for incoming and outgoing connections! And keep these ports free so Caddy can have claim on them.
+				This usually requires privilege escalation. On Linux systems, you can give Caddy permission to bind to port 80 and 443 without being root using <a href="http://man7.org/linux/man-pages/man8/setcap.8.html">setcap</a>, like so: <code>setcap cap_net_bind_service=+ep caddy</code>. Don't forget to configure all relevant firewalls to allow Caddy to use these ports for incoming and outgoing connections! Caddy must have claim on these ports to obtain certificates.
 			</p>
 
 			<h4>The .caddy folder</h4>
 			<p>
-				Caddy will create a folder in your home directory called <code>.caddy</code>. It uses this to store and manage cryptographic assets required to serve your site privately over HTTPS. <mark>Your sites' private keys are stored here. Take care to back up and protect this folder.</mark> If there is no home folder, the .caddy folder is created in the current working directory.
+				Caddy will create a folder in your home directory called <code>.caddy</code>. It uses this to store and manage cryptographic assets required to serve your site privately over HTTPS. <mark>Your sites' certificates and private keys are stored here. Take care to back up and protect this folder.</mark> If there is no home folder, the .caddy folder is created in the current working directory. The home folder is learned from the environment (<code>$HOME</code> or <code>%HOMEPATH%</code>).
+			</p>
+
+			<h4>Testing, experimenting, and advanced setups</h4>
+			<p>
+				To test your Caddy configuration, make sure you use the <code>-ca</code> flag to change the ACME endpoint to a staging or development URL, otherwise you are likely to hit rate limits which can block your access to HTTPS for up to a week. This is especially common when using process managers or containers. Caddy's default CA is <a href="https://letsencrypt.org">Let's Encrypt</a>, which has a staging endpoint that is not subject to the same rate limits.
 			</p>
 
 			<h4>Load balancing</h4>
@@ -61,8 +67,53 @@
 			</p>
 
 
+
+			<h2 id="on-demand">On-Demand TLS</h2>
+
 			<p>
-				The rest of this page explains more details about this feature, but it is not required knowledge for using Caddy.
+				Caddy pilots a new technology called On-Demand TLS. This means Caddy can obtain a certificate for your site during the first TLS handshake for a hostname that does not yet have a certificate.
+			</p>
+
+			<p>
+				To use on-demand TLS, use an address with only a port in your Caddyfile. For example, the standard HTTPS port is 443, so your Caddyfile might look like this:
+			</p>
+
+			<code class="block"><span class="hl-vhost">:443</span>
+<span class="hl-directive">proxy</span> <span class="hl-arg">/ localhost:4001 localhost:4002</span>
+<span class="hl-directive">tls</span> {
+	<span class="hl-subdirective">max_certs</span> 10
+}
+</code></code>
+
+			<p>
+				This Caddyfile will proxy all requests to port 443 to your backends no matter what the hostname is, for the first 10 unique hostnames. This means you can dynamically provision new DNS records and they will just start working, complete with HTTPS, and not limited to a single subdomain like you are with wildcard certificates.
+			</p>
+
+			<mark class="block">
+				<b>Warning:</b> Even though this feature is subject to strict rate limits, you should use the <i>max_certs</i> property of the <a href="/docs/tls">tls</a> directive to prevent attackers from issuing unlimited certificates over long periods of time.
+			</mark>
+
+			<p>
+				Once a certificate is obtained on-demand, it is stored on disk just the same as if you had specified the name in your Caddyfile. It is also stored in memory for quick retrieval during future handshakes.
+			</p>
+
+			<p>
+				This feature is subject to certain rate limits:
+			</p>
+
+			<ul>
+			 	<li>At most one certificate challenge happens at a time.</li>
+				<li>After 10 certificates are successfully obtained, new certificate challenges will not happen until 10 minutes after the last successful challenge.</li>
+				<li>A name that fails a challenge will not be allowed to be attempted again for 5 minutes.</li>
+			</ul>
+
+			<p>
+				Using the <code>-log</code> flag is recommended, since all certificate challenges are logged.
+			</p>
+
+
+			<p>
+				The rest of this page explains more details about automatic HTTPS, but it is not required knowledge for using Caddy.
 			</p>
 
 			<h2>Obtaining Certificates</h2>
