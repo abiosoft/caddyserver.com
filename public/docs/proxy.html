@@ -69,6 +69,10 @@
 					Indicates this proxy is forwarding WebSocket connections. It is shorthand for:
 					<code class="block"><span class="hl-subdirective">proxy_header</span> Connection {>Connection}
 <span class="hl-subdirective">proxy_header</span> Upgrade    {>Upgrade}</code>
+					<mark class="block">
+						HTTP/2 does not support protocol upgrade, so you will have to disable HTTP/2 in order to use WebSockets on secure connections.
+					</mark>
+
 				</li>
 			</ul>
 
