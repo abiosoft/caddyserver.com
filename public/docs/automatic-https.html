@@ -75,7 +75,7 @@
 			</p>
 
 			<p>
-				To use on-demand TLS, use an address with only a port in your Caddyfile. For example, the standard HTTPS port is 443, so your Caddyfile might look like this:
+				To enable on-demand TLS, use the <code>tls</code> directive with <code>max_certs</code>. For example, your Caddyfile might look like this:
 			</p>
 
 			<code class="block"><span class="hl-vhost">:443</span>
@@ -86,19 +86,23 @@
 </code></code>
 
 			<p>
-				This Caddyfile will proxy all requests to port 443 to your backends no matter what the hostname is, for the first 10 unique hostnames. This means you can dynamically provision new DNS records and they will just start working, complete with HTTPS, and not limited to a single subdomain like you are with wildcard certificates.
+				This Caddyfile will proxy all requests on port 443 to your backends&mdash;no matter what the hostname is&mdash;for the first 10 unique hostnames. This means you can dynamically provision new DNS records, and they will just start working with HTTPS. Unlike wildcard certificates, on-demand certificates are not limited to subdomains.
 			</p>
 
 			<mark class="block">
-				<b>Warning:</b> Even though this feature is subject to strict rate limits, you should use the <i>max_certs</i> property of the <a href="/docs/tls">tls</a> directive to prevent attackers from issuing unlimited certificates over long periods of time.
+				<b>Mitigating abuse:</b> This feature is intentionally rate-limited. The <i>max_certs</i> property of the <a href="/docs/tls">tls</a> directive sets a hard limit on how many new certificates are issued this way, so that even over a long period of time, attackers cannot issue unlimited certificates and fill up your disk space.
 			</mark>
 
 			<p>
-				Once a certificate is obtained on-demand, it is stored on disk just the same as if you had specified the name in your Caddyfile. It is also stored in memory for quick retrieval during future handshakes.
+				On-Demand TLS is a special kind of managed TLS, so all the requirements above still apply except for the one about not providing your own certificate and key: you may supplement on-demand TLS with your own certificates. And like regular managed TLS, HTTP will be redirected to HTTPS.
 			</p>
 
 			<p>
-				This feature is subject to certain rate limits:
+				Once a certificate is obtained on-demand, it is stored on disk just like any other managed certificates. It is also stored in memory for quick retrieval during future handshakes.
+			</p>
+
+			<p>
+				On-Demand TLS is subject to these rate limits:
 			</p>
 
 			<ul>
@@ -108,8 +112,12 @@
 			</ul>
 
 			<p>
-				Using the <code>-log</code> flag is recommended, since all certificate challenges are logged.
+				Note that rate limits are reset when the process exits. Using the <code>-log</code> flag is recommended, since all certificate challenges are logged.
 			</p>
+
+			<mark class="block">
+				<b>Testing your configuration:</b> If your CA has a staging endpoint, it is <i>strongly</i> recommended that you use it to test your configuration. Let's Encrypt is Caddy's default CA, and it has a staging endpoint that is not subject to tight rate limits.
+			</mark>
 
 
 			<p>
@@ -146,7 +154,7 @@
 			</p>
 
 			<p>
-				Once Caddy gets the new certificate, it swaps out the old certificate with the new one and restarts the listener to use it. On POSIX-compatible systems, this restart is graceful and incurs zero downtime. On Windows, the restart is forceful but very quick.
+				Once Caddy gets the new certificate, it swaps out the old certificate with the new one. This replacement incurs zero downtime.
 			</p>
 
 
@@ -160,7 +168,7 @@
 			<h2>OCSP Stapling</h2>
 
 			<p>
-				Caddy staples OCSP information to protect the privacy of your sites' clients. The cached OCSP status is checked on a regular basis, and if there was a change, the server will be restarted with the new information.
+				Caddy staples OCSP information of all certificates containing an OCSP link to protect the privacy of your sites' clients and reduce stress on OCSP servers. The cached OCSP status is checked on a regular basis, and if there is a change, the server will staple the new response.
 			</p>
 
 
