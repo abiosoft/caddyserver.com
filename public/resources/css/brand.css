@@ -1,0 +1,56 @@
+.bg {
+	padding: 100px 5%;
+}
+
+.bg h1 {
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	padding: 50px 0 25px;
+	text-align: center;
+	color: #2A4A6A;
+	text-shadow: none;
+}
+
+.bg p {
+  margin: 0 auto;
+  color: #2A4A6A;
+  text-align: center;
+  font-size: 18px;
+  max-width: 600px;
+}
+
+section {
+	padding: 50px 5% 100px;
+	box-shadow: 0 0 50px 10px rgba(0, 0, 0, .2);
+}
+
+hr {
+	border: 0;
+	border-top: 2px dotted #2A4A6A;
+}
+
+section h2 {
+	margin: 50px auto;
+}
+
+.gallery-item {
+	margin-bottom: 50px;
+	text-align: center;
+}
+
+.canvas {
+	line-height: .75em;
+	padding: 30px 5%;
+	margin-bottom: 15px;
+	border-radius: 10px;
+	border: 1px solid #DDD;
+}
+
+.canvas.transparent {
+	background-image: url('/resources/images/transparency.png');
+}
+
+.canvas.dark {
+	background-color: #333;
+	border: none;
+}
