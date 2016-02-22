@@ -327,6 +327,19 @@ mark.block {
 
 
 
+.gitter-open-chat-button {
+	background-color: #368BBC;
+	transition: all .2s ease;
+}
+
+.gitter-open-chat-button:hover {
+	background-color: #E42F72;
+}
+
+
+
+
+
 
 
 .hl-vhost {
