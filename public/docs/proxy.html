@@ -35,6 +35,7 @@
 	<span class="hl-subdirective">proxy_header</span> <i>name value</i>
 	<span class="hl-subdirective">without</span> <i>prefix</i>
 	<span class="hl-subdirective">except</span> <i>ignored_paths...</i>
+	<span class="hl-subdirective">insecure_skip_verify</span>
 	<span class="hl-subdirective"><i>preset</i></span>
 }</code>
 
@@ -48,6 +49,7 @@
 				<li><b>proxy_header</b> sets headers to be passed to the backend. The field name is <i>name</i> and the value is <i>value</i>. This option can be specified multiple times for multiple headers, and dynamic values can also be inserted using <a href="/docs/placeholders">request placeholders</a>.</li>
 				<li><b>prefix</b> is a URL prefix to trim before proxying the request upstream. A request to /api/foo without /api, for example, will result in a proxy request to /foo.</li>
 				<li><b>ignored_paths...</b> is a space-separated list of paths to exclude from proxying. Requests that match any of these paths will be passed thru.</li>
+				<li><b>insecure_skip_verify</b> overrides verification of the backend TLS certificate, essentially disabling security features over HTTPS.</li>
 				<li><b>preset</b> is an optional shorthand way of configuring the proxy to meet certain conditions. See presets below.</li>
 			</ul>
 
