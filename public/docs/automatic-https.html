@@ -97,6 +97,10 @@
 				On-Demand TLS is a special kind of managed TLS, so all the requirements above still apply except for the one about not providing your own certificate and key: you may supplement on-demand TLS with your own certificates. And like regular managed TLS, HTTP will be redirected to HTTPS.
 			</p>
 
+			<mark class="block">
+				<b>Future support:</b> This feature relies on the CA issuing certificates without delay. If instantaneous issuance becomes uncommon among ACME CAs, we may discontinue this feature in Caddy.
+			</mark>
+
 			<p>
 				Once a certificate is obtained on-demand, it is stored on disk just like any other managed certificates. It is also stored in memory for quick retrieval during future handshakes.
 			</p>

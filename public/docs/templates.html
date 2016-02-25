@@ -19,6 +19,10 @@
 				Some common uses of templates are to include the content of other files, show the current date or time, and hide or show certain parts of a page depending on the request path, cookies, or headers.
 			</p>
 
+			<p>
+				Note that <a href="/docs/errors">custom error pages</a> do not get executed as templates, even if this directive is enabled. Error pages are served by a separate middleware.
+			</p>
+
 			<h3>Syntax</h3>
 			
 			<code class="block"><span class="hl-directive">templates</span> <span class="hl-arg">[<i>path</i> [<i>extensions...</i>]]</span></code>

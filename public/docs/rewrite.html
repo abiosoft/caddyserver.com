@@ -43,7 +43,7 @@
 				<li><b>regexp</b> (shorthand: <b>r</b>) will match the path with the given regular expression <b>pattern</b>. <mark>Extremely high-load servers should avoid using regular expressions.</mark></li>
 				<li><b>extensions...</b> is a space-separated list of file extensions to include or ignore. Prefix an extension with <code>!</code> to exclude an extension. The forward slash <code>/</code> symbol matches paths without file extensions.</li>
 				<li><b>if</b> specifies a rewrite condition. Multiple ifs are AND-ed together. <b>a</b> and <b>b</b> are any string and may use <a href="/docs/placeholders">request placeholders</a>. <b>cond</b> is the condition, with possible values explained below.</li>
-				<li><b>status</b> will respond with the given status <b>code</b> instead of performing a rewrite. In other words, use either "status" or "to" in your rule, but not both. The code must be a number in the format 4xx.
+				<li><b>status</b> will respond with the given status <b>code</b> instead of performing a rewrite. In other words, use either "status" or "to" in your rule, but not both. The code must be a number in the format 2xx or 4xx.
 				<li><b>destinations...</b> is one or more space-separated paths to rewrite to, with support for <a href="/docs/placeholders">request placeholders</a> as well as numbered regular expression captures such as {1}, {2}, etc. Rewrite will check each destination in order and rewrite to the first destination that exists. Each one is checked as a file or, if ends with /, as a directory. The last destination will act as default if no other destination exists.</li>
 			</ul>
 

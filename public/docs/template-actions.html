@@ -68,8 +68,9 @@
 				RawQuery returns the query string. You can replace RawQuery with Host, Scheme, Fragment, String, or Query.Get "parameter".
 			</p>
 
-			<p><b>Truncate value to certain length:</b></p>
-			<pre><code class="html">{&#123;.Truncate "value" 3}}</code></pre>
+			<p><b>Truncate value to certain length:</b> (from beginning, or from end)</p>
+			<pre><code class="html">{&#123;.Truncate "value" 3}}  // "val"
+{&#123;.Truncate "value" -3}} // "lue"</code></pre>
 
 			<p><b>String replacement:</b></p>
 			<pre><code class="html">{&#123;.Replace "haystack" "needle" "replacement"}}</code></pre>
