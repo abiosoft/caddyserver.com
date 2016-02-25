@@ -69,56 +69,7 @@
 
 			<h3>How does Caddy perform compared to nginx or Apache?</h3>
 			<p>
-				This is a hard question to answer correctly for everyone because the performance of any web server depends on so many factors and the needs of the user. Basically, Caddy is fast. It's fast enough for most websites. It's faster than Apache. In fact, it's comparably fast to nginx, but slightly slower. What follows is a sample benchmark "comparing" nginx, Apache, and Caddy using default, out-of-the-box configurations (except that nginx's worker processes were changed to match the number of CPU cores allocated to Caddy):
-			</p>
-
-			<pre> # nginx
-
-$ wrk -t12 -c400 -d10m http://127.0.0.1:8080
-Running 10m test @ http://127.0.0.1:8080
-  12 threads and 400 connections
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency   276.85ms  709.25ms   2.18s    87.79%
-    Req/Sec     2.84k     1.16k    6.03k    85.43%
-  20003921 requests in 10.00m, 15.82GB read
-  Socket errors: connect 0, read 251, write 0, timeout 375
-Requests/sec:  33340.08
-Transfer/sec:     26.99MB
-
-
- # apache
-
-$ wrk -t12 -c400 -d10m http://127.0.0.1:8082
-Running 10m test @ http://127.0.0.1:8082
-  12 threads and 400 connections
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency    26.07ms   56.20ms   1.55s    99.39%
-    Req/Sec     1.51k   418.17     4.76k    72.73%
-  10685170 requests in 10.00m, 9.30GB read
-  Socket errors: connect 0, read 254, write 0, timeout 0
-Requests/sec:  17808.51
-Transfer/sec:     15.87MB
-
-
- # caddy
-
-$ wrk -t12 -c400 -d10m http://127.0.0.1:8081
-Running 10m test @ http://127.0.0.1:8081
-  12 threads and 400 connections
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency    12.92ms    3.56ms 163.68ms   85.09%
-    Req/Sec     2.64k   295.00     4.70k    73.90%
-  18550491 requests in 10.00m, 15.13GB read
-  Socket errors: connect 0, read 260, write 0, timeout 0
-Requests/sec:  30917.56
-Transfer/sec:     25.83MB</pre>
-
-			<p>
-				The usual benchmark disclaimers apply: actual mileage will vary, and these benchmarks are not absolute nor conclusive. It would be unwise to consider these benchmarks universally applicable or even correct, since the goals of a software configuration or benchmark are all so different depending on the situation.
-			</p>
-
-			<p>
-				Anyway, Caddy does well enough for most things. If you are concerned about top-notch performance and want to contribute, you are invited to run your own benchmarks, then submit issues and pull requests to help make Caddy faster.
+				It's fast. If your site only serves tens of thousands of requests per second on good hardware, then don't worry about it. In our tests&mdash;which have been confirmed by multiple trial runs on different hardware, verified independently by different developers&mdash;we've found that Caddy and nginx generally perform similarly for most static file needs, a notch above Apache. But this depends on many factors including system environment, hardware capabilities, network, software tuning, etc. We've also seen some tests where Apache performs better than nginx. Given the high degree of variance among these factors combined with your own needs and configurations, we'd rather you discover Caddy's performance for yourself. If you require extremely high throughput and you know what you're doing, do you own benchmarks. If you verify that Caddy is a bottleneck, we welcome your pull request to make it faster.
 			</p>
 
 
