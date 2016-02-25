@@ -70,7 +70,7 @@ main h6 {
 main h1 {
 	font-family: Lato;
 	font-weight: normal;
-	font-size: 80px;
+	font-size: 70px;
 	margin: .5em 0;
 	text-align: center;
 }
@@ -178,7 +178,7 @@ main hr {
 
 @media (max-width: 760px) {
 	main h1 {
-		font-size: 60px;
+		font-size: 55px;
 	}
 	
 	main ul,
