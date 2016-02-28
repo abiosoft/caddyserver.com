@@ -26,13 +26,14 @@
 			<h3>Syntax</h3>
       <code class="block"><span class="hl-directive">hugo</span> <span class="hl-arg">[<i>dir</i>]</span> {
 	<span class="hl-subdirective">styles</span> <i>file</i>
-	<span class="hl-subdirective">args</span>   <i>cmd</i>
+	<span class="hl-subdirective">flag1</span>   <i>value1</i>
+	<span class="hl-subdirective">flag2</span>   <i>value2</i>
 }</code>
 
 			<ul>
 				<li><b>dir</b> (optional) is the folder where the commands are going to be executed. By default, it is the current working directory. Default: <code>./</code>.</li>
 				<li><b>file</b> (optional) is the relative path to public folder of the admin UI styles. These styles won't replace the defaults, they will be added.</li>
-				<li><b>cmd</b> (optional) must be surrounded by double quotes and it corresponds to the Hugo flags you want to use.</li>
+				<li><b>flags</b> are optional and they refer to the Hugo available flags. Please use their long form without "--" in the beginning. If no value is set, it will be evaluated as "true".</li>
 			</ul>
 
       <p>
