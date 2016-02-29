@@ -316,6 +316,16 @@ footer .copyright a {
 }
 
 
+footer .ml-signup {
+	text-align: left;
+	font-weight: normal;
+	color: #000;
+	border-top: 1px solid #CCC;
+	padding-top: 10px;
+	margin-top: 10px;
+}
+
+
 .block {
 	display: block;
 }
@@ -323,6 +333,31 @@ mark.block {
 	padding: 10px;
 }
 
+
+#mc_embed_signup {
+	margin: 0px auto;
+}
+
+#mc_embed_signup input.email {
+	width: 80%;
+	font-size: 14px;
+    border: 1px solid #ABB0B2;
+    border-radius: 3px;
+    color: #343434;
+    padding: 4px 0.4em;
+    margin: 0;
+}
+
+#mc_embed_signup .button {
+	font-size: 12px;
+	padding: 8px 14px;
+	background: #047F86;
+	margin: 5px 0 0 0;
+	border: none;
+	border-radius: 3px;
+	color: #fff;
+	box-sizing: border-box;
+}
 
 
 
@@ -386,10 +421,6 @@ mark.block {
 	50% { opacity: 0.0; }
 	100% { opacity: 1.0; }
 }
-
-
-
-
 
 
 
