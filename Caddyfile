@@ -16,3 +16,6 @@ markdown /blog {
 # build server
 proxy /download/build localhost:5050
 proxy /features.json  localhost:5050
+
+# payment gateway
+proxy /stripe  localhost:5051

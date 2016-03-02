@@ -123,6 +123,108 @@ h3 {
 }
 
 
+.payment-box {
+	background: #EFEFEF;
+	padding: 20px 0;
+}
+
+.payment-box h3 {
+	margin-bottom: 0;
+}
+
+.payment-explanation {
+	max-width: 650px;
+	margin: 0 auto;
+}
+
+.payment-explanation p {
+	max-width: none;
+	color: #000;
+}
+
+.payment-input {
+	font-size: 18px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.payment-input input[type=text] {
+	padding: 10px 10px 10px 1.25em;
+	font-size: 18px;
+	width: 80px;
+	color: #1FB91F;
+}
+
+.payment-input .dollar-label {
+	position: relative;
+	left: 20px;
+	font-weight: normal;
+	color: #1FB91F;
+}
+
+.payment-input button {
+	color: #1fb91f;
+	border-color: #1fb91f;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	top: -2px;
+}
+
+.payment-input button:active {
+	top: 0px;
+}
+
+.payment-input button:active {
+	color: #FFF;
+	background: #1fb91f;
+	border-color: #FFF;
+}
+
+#amount-feedback {
+	text-align: center;
+	font-weight: bold;
+	font-size: 14px;
+	min-height: 1.5em;
+	margin-top: -8px;
+}
+
+.pay-subscribe-container {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.pay-subscribe-container input[type=checkbox] {
+	font-size: 16px;
+}
+
+#payment-success {
+	max-width: 600px;
+	margin: 0 auto;
+	background: #00A929;
+	padding: 15px;
+	display: none;
+}
+
+#payment-success h5,
+#payment-success p {
+	text-align: center;
+	color: #FFF;
+	font-size: 14px;
+	max-width: none;
+}
+
+#payment-success h5 {
+	font-size: 18px;
+}
+
+#payments-down {
+	text-align: center;
+	font-style: italic;
+	color: #CA0000;
+	display: none;
+	margin: 10px auto;
+}
+
 .icon-container {
 	text-align: center;
 }
@@ -137,6 +239,11 @@ h3 {
 	margin: 5px auto 20px;
 }
 
+.disabled {
+	opacity: .25;
+	cursor: default;
+}
+
 .download-link {
 	display: block;
 	padding: 7px 0;
@@ -147,11 +254,11 @@ h3 {
 	transition: transform .25s ease;
 }
 
-.download-link:hover {
+.download-link:not(.disabled):hover {
 	background: #FAFAFA;
 }
 
-.download-link:active {
+.download-link:not(.disabled):active {
 	transform: scale(.9);
 }
 
@@ -159,6 +266,11 @@ h3 {
 	cursor: default;
 	background: #FAFAFA;
 	border-color: transparent;
+}
+
+.download-link.disabled {
+	opacity: 1;
+	color: #3BADE3 !important;
 }
 
 .download-link > span {
@@ -184,6 +296,12 @@ h3 {
 
 
 
+@media (max-width: 960px) {
+	.use-case label {
+		display: block;
+		line-height: 1em;
+	}
+}
 
 
 

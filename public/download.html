@@ -17,6 +17,7 @@
 		<script src="/resources/js/jquery-2.1.3.min.js"></script>
 		<script src="/resources/js/common.js"></script>
 		<script src="/resources/js/sweetalert.min.js"></script>
+		<script src="https://checkout.stripe.com/checkout.js"></script>
 		<script src="/resources/js/download.js"></script>
 	</head>
 	<body>
@@ -32,7 +33,7 @@
 				<div class="buildserver-down">
 					<p>
 						<i class="fa fa-info-circle fa-2x"></i>
-						The build server is down at the moment. You can still download Caddy, but extra features are unavailable right now.
+						The build server is undergoing maintenance right now, but you can still download Caddy without extra features.
 					</p>
 				</div>
 
@@ -68,10 +69,58 @@
 				</div>
 				<div class="clear custom-builds" style="margin-bottom: 50px;"></div>
 
+				<div class=""
+				<div class="grid-container">
+					<div class="payment-box">
+						<div class="grid-100">
+							<h3><span class="custom-builds">2.&nbsp; </span>Payment</h3>
+						</div>
+
+						<div class="grid-100">
+							<div class="payment-explanation">
+								<p>
+									<b>Caddy is not free software.</b> About <a href="#cost-estimation" id="cost-estimation">$112,500</a> of work is poured into the project each year by the author and its core contributors. We do it out of love for the Web and your sites. All we ask that you pay what Caddy is worth to you, considering: the time it is saving you, the security it affords you, the money it is helping you or your company make, and the support you receive. <a href="#audits" id="audits" style="font-size: 14px;">How are funds used?</a>
+								</p>
+							</div>
+
+							<div class="pay-subscribe-container payments-online">
+								<label>
+									<input type="checkbox" id="subscribe-releases">
+									Email me when new versions are released
+								</label>
+								<a href="#about-emails" id="about-emails">[?]</a>
+							</div>
+
+							<form class="payment-input payments-online">
+								<label>
+									Amount:
+									<span class="dollar-label">$</span><input type="text" id="amount">
+								</label>
+								<button id="pay">Pay</button>
+							</form>
+
+							<div class="payment-explanation payments-online">
+								<div id="amount-feedback"></div>
+							</div>
+
+							<div id="payment-success">
+								<h5>Payment successful.<span class="result1"> You're a hero!</span></h5>
+								<p class="result1">Thank you! Seriously, we couldn't do it without your support. Let us know if you need anything and we'll try to help you out.</p>
+								<p class="result2">Thank you for your contribution! We hope you like it and will consider supporting the project again.</p>
+							</div>
+
+							<div id="payments-down">
+								Our payment gateway is undergoing maintenance, but you can still <a href="/donate">donate</a> using other trusted payment methods.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clear" style="margin-bottom: 50px;"></div>
+
 
 				<div class="grid-container">
-					<div class="grid-100 custom-builds">
-						<h3>2.&nbsp; Choose Platform</h3>
+					<div class="grid-100">
+						<h3><span class="custom-builds">3.&nbsp; </span>Choose Platform</h3>
 					</div>
 
 					<div class="grid-20 mobile-grid-50 icon-container">
