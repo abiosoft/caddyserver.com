@@ -2,9 +2,9 @@ var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimation
 
 $(function() {
 	var buildServerDown = false;
+	var stripePublishableKey = (window.location.hostname == "caddyserver.com") ? "pk_live_PRNBeH2wF2OD9fRO0bZ1Zj6i" : "pk_test_tvnNemXjiZkKVeNwRm0LKtQ1";
 
 	updateDownloadLinks();
-
 
 	// Get list of features
 	$.get("/features.json", function(data, status, jqxhr) {
@@ -41,6 +41,178 @@ $(function() {
 		updateDownloadLinks();
 	});
 
+	// See if payment gateway is up
+	$.get("/stripe/online", function(data, status, jqxhr) {
+		// Good, it's up!
+	}).fail(function() {
+		$('.payments-online').hide();
+		$('#payments-down').show();
+	});
+
+
+
+	// Stripe Checkout
+	var stripeAmount = 0; // stripeAmount is dollar amount * 100
+	var checkout = StripeCheckout.configure({
+		key: stripePublishableKey,
+		image: "/resources/images/caddy-leaf-circle.png",
+		name: "Caddy Web Server",
+		opened: function() {
+			// Report to Analytics
+			ga('send', 'event', 'Software', 'Payment', 'Payment Opened', stripeAmount/100);
+		},
+		closed: function() {
+			// This callback is called every time the Checkout popup closes,
+			// regardless of whether payment was complete or not.
+			
+			// Report to Analytics
+			ga('send', 'event', 'Software', 'Payment', 'Payment Closed', stripeAmount/100);
+		},
+		token: function(token) {
+			$.post("/stripe/charge", {
+				token_id: token.id,
+				email: token.email,
+				amount: stripeAmount,
+				description: "Download Caddy Web Server",
+				subscribe_releases: $('#subscribe-releases').prop('checked')
+			}).done(function(data) {
+				// Report to Analytics
+				ga('send', 'event', 'Software', 'Payment', 'Payment Success', stripeAmount/100);
+
+				if (stripeAmount > 2500) {
+					$('.result1').show();
+					$('.result2').hide();
+				} else {
+					$('.result1').hide();
+					$('.result2').show();
+				}
+				$('#amount').val("").keyup();
+				$('#payment-success').show('medium');
+			}).fail(function(jqxhr, status, error) {
+				// Report to Analytics
+				ga('send', 'event', 'Software', 'Payment', 'Payment Failed', stripeAmount/100);
+
+				sweetAlert({
+					type: "error",
+					title: "Error: " + error,
+					text: 'Your card was not charged. You can try again or <a href="/donate">donate</a> using a different payment method.<br><br><small><b>Error message:</b> '+jqxhr.responseText+'</small>',
+					html: true
+				});
+			});
+		}
+	});
+
+	var transactionFeeMin = 4; // minimum dollar amount we ask to help cover transaction fees
+	$('#amount').keyup(function(event) {
+		var val = normalizeAmount($(this).val());
+		if (!val) {
+			$('#amount-feedback').html('');
+			return;
+		}
+		var amount = parseFloat(val);
+		if (monetary(val) && !isNaN(amount)) {
+			if (amount <= 0) {
+				$('#amount-feedback').html('<span style="color: red;">Zero literally doesn\'t count. :(</span>');
+			} else if (amount < transactionFeeMin) {
+				$('#amount-feedback').html('<span style="color: red;">Please go higher to compensate for transaction fees.</span>');
+			} else if (amount < 10) {
+				$('#amount-feedback').html('<span style="color: #FF9100;">Thanks; maybe contribute again soon?</span>');
+			} else if (amount < 18) {
+				$('#amount-feedback').html('<span style="color: black;">Thanks, this buys a lunch.</span>');
+			} else if (amount < 25) {
+				$('#amount-feedback').html('<span style="color: black;">Thanks, this buys a dinner.</span>');
+			} else if (amount < 50) {
+				$('#amount-feedback').html('<span style="color: black;">Thank you for the support!</span>');
+			} else if (amount < 100) {
+				$('#amount-feedback').html('<span style="color: #1FB91F;">Thank you! We\'ll do our best to help you out.</span>');
+			} else if (amount < 200) {
+				$('#amount-feedback').html('<span style="color: #1FB91F;">Wow, thank you! This helps us a lot so we can help you. :)</span>');
+			} else {
+				$('#amount-feedback').html('<span style="color: #1FB91F;">WOAH, you\'re awesome! :D</span>');
+			}
+		} else {
+			$('#amount-feedback').html('<span style="color: red;">Invalid amount</span>');
+		}
+	});
+
+	// Show Checkout when user clicks Pay
+	$('#pay').click(function(event) {
+		var input = $('#amount').val();
+		var amount = normalizeAmount(input);
+
+		if (!amount) {
+			$('#amount-feedback').html('<span style="color: black;">Please type an amount.</span>');
+			$('#amount').focus();
+			return suppress(event);
+		}
+
+		if (!monetary(amount))
+		{
+			sweetAlert({
+				type: "error",
+				title: "Invalid Amount",
+				text: "Please type a simple monetary value only with numbers and maybe a decimal point. (Do not use dollar signs, letters, or symbols.) You typed: "+input,
+			});
+			return suppress(event);
+		}
+
+		amount = parseFloat(amount);
+		if (amount < transactionFeeMin) {
+			sweetAlert({
+				type: "warning",
+				title: "Transaction Fees",
+				text: "We have to cover transaction fees. Can you go just a few dollars higher?",
+			});
+			return suppress(event);
+		}
+
+		stripeAmount = Math.round(amount * 100); // I wish stripe sent the amount into Checkout's token callback
+
+		checkout.open({
+			name: "Caddy Web Server",
+			amount: stripeAmount,
+			locale: "auto"
+		});
+
+		return suppress(event);
+	});
+
+	// Close Checkout on back button
+	$(window).on('popstate', function() {
+		checkout.close();
+	});
+
+	// Show dialog that explains our cost estimation
+	$('#cost-estimation').click(function(event) {
+		sweetAlert({
+			title: "About Cost Valuation",
+			text: "The estimated cost is derived from the approximate number of hours put into the project by its author and a few key contributors averaged each year since the project's origin.",
+			confirmButtonText: "Got it!"
+		});
+		return suppress(event);
+	});
+
+	// Show dialog explaining how funds are used
+	$('#audits').click(function(event) {
+		sweetAlert({
+			title: "Fund Usage",
+			text: "Funds are used to pay the author and some developers so they can continue to actively develop the project and provide support to you.<br><br>After each fiscal year, funds permitting, we'll hire an external CPA to verify the expenditure on the account. Audit results will be made available for you to view.",
+			html: true
+		});
+		return suppress(event);
+	});
+
+	// Show dialog explaining mailing list
+	$('#about-emails').click(function(event) {
+		sweetAlert({
+			title: "Mailing List",
+			text: "We don't sell or share your email address, and we only send you email when new Caddy releases are available.<br><br>You can unsubscribe at any time.",
+			html: true
+		});
+		return suppress(event);
+	});
+
+
 	// Download when link clicked
 	$('.download-link').click(function(event) {
 		var $self = $(this);
@@ -67,7 +239,7 @@ $(function() {
 		$.ajax(url, { method: "HEAD" }).done(function(data, status, jqxhr) {
 			window.location = jqxhr.getResponseHeader("Location");
 		}).fail(function(jqxhr, status, error) {
-			swal({
+			sweetAlert({
 				type: "error",
 				title: "Error: " + error,
 				text: "Sorry about that. You can try again or download Caddy core from our backup site (without any extra features).",
@@ -86,6 +258,27 @@ $(function() {
 
 		return suppress(event);
 	});
+
+	// normalizeAmount sanitizes amt by trimming spaces
+	// replacing "," decimal with ".", if needed,
+	// and removing thousands separators.
+	// It does not change the original input value otherwise.
+	function normalizeAmount(amt) {
+		amt = amt.trim(amt);
+		var parts = amt.split(",");
+		if (parts.length == 2 && parts[1].length == 2) {
+			parts[0] = parts[0].replace(".", ""); // strip unneeded thousands sep
+			amt = parts.join(".");
+		} else {
+			amt = amt.replace(",", "");
+		}
+		return amt;
+	}
+
+	// monetary returns whether val looks like a valid monetary value.
+	function monetary(val) {
+		return /^((\d+(\.*\d{0,2})?)|(\d*\.\d{1,2}))$/.test(val);
+	}
 
 
 
