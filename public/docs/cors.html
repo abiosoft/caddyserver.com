@@ -26,20 +26,20 @@
 <code class="block"><span class="hl-directive">cors</span> <span class="hl-arg">[<i>path</i>] [<i>domains</i>]</span> { 
 	<span class="hl-subdirective">origin</span>           <i>origin</i>
 	<span class="hl-subdirective">methods</span>          <i>methods</i>
-	<span class="hl-subdirective">allowCredentials</span> <i>allowCredentials</i>
-	<span class="hl-subdirective">maxAge</span>           <i>maxAge</i>
-	<span class="hl-subdirective">allowedHeaders</span>   <i>allowedHeaders</i>
-	<span class="hl-subdirective">exposedHeaders</span>   <i>exposedHeaders</i>
+	<span class="hl-subdirective">allow_credentials</span> <i>allowCredentials</i>
+	<span class="hl-subdirective">max_age</span>           <i>maxAge</i>
+	<span class="hl-subdirective">allowed_headers</span>   <i>allowedHeaders</i>
+	<span class="hl-subdirective">exposed_headers</span>   <i>exposedHeaders</i>
 }</code>
 			<ul>
 				<li><b>path</b> is the file or directory this applies to (default is /).</li>
 				<li><b>domains</b> is a space-seperated list of domains to allow. If ommitted, all domains will be granted access.</li>
 				<li><b>origin</b> is a domain to grant access to. May be specified multiple times or ommitted.</li>
 				<li><b>methods</b> is set of http methods to allow. Default is these: POST,GET,OPTIONS,PUT,DELETE.</li>
-				<li><b>allowCredentials</b> sets the value of the Access-Control-Allow-Credentials header. Can be true or false. By default, header will not be included.</li>
-				<li><b>maxAge</b> is the length of time in seconds to cache preflight info. Not set by default.</li>
-				<li><b>allowedHeaders</b> is a comma-seperated list of request headers a client may send.</li>
-				<li><b>exposedHeaders</b> is a comma-seperated list of response headers a client may access.</li>
+				<li><b>allow_credentials</b> sets the value of the Access-Control-Allow-Credentials header. Can be true or false. By default, header will not be included.</li>
+				<li><b>max_age</b> is the length of time in seconds to cache preflight info. Not set by default.</li>
+				<li><b>allowed_headers</b> is a comma-seperated list of request headers a client may send.</li>
+				<li><b>exposed_headers</b> is a comma-seperated list of response headers a client may access.</li>
 			</ul>
 
 
@@ -66,10 +66,10 @@
     <span class="hl-subdirective">origin</span>           http://allowedSite.com
 	<span class="hl-subdirective">origin</span>           http://anotherSite.org https://anotherSite.org
     <span class="hl-subdirective">methods</span>          POST,PUT
-    <span class="hl-subdirective">allowCredentials</span> false
-	<span class="hl-subdirective">maxAge</span>           3600
-	<span class="hl-subdirective">allowedHeaders</span>   X-Custom-Header,X-Foobar
-	<span class="hl-subdirective">exposedHeaders</span>   X-Something-Special,SomethingElse
+    <span class="hl-subdirective">allow_credentials</span> false
+	<span class="hl-subdirective">max_age</span>           3600
+	<span class="hl-subdirective">allowed_headers</span>   X-Custom-Header,X-Foobar
+	<span class="hl-subdirective">exposed_headers</span>   X-Something-Special,SomethingElse
 }</code>
 			<footer>
 				&copy; 2016
