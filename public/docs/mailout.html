@@ -42,13 +42,14 @@
           <li>Full support for SMTP with SSL encryption (Port 465) or TLS encryption (Port 587). Of course unencrypted
             sending on Port 25 has not been deactivated.
           </li>
-          <li>Optional server side logging of sent emails. Logging after PGP encryption.</li>
+          <li>Optional server side logging of sent emails. When using PGP, the emails gets logged after encryption.
+            No plain text will be written to disk.</li>
         </ul>
       </p>
 
       <p>The mailout directive starts a service routine that runs during the lifetime of the server.
         This background service manages the sending of the emails. It opens a connection to the SMTP
-        server, sends the email and then waits for 30 seconds if another email should be send out.
+        server, sends the email and then waits for 30 seconds if another email should be sent out.
         If no email gets transferred through the channel, the service routine closes the connection to
         the SMTP server. For the next email the connection gets reopened.
       </p>
@@ -58,10 +59,10 @@
         ping fails, mailout service won't be available.</p>
 
       <p>
-        All email sending related errors gets logged in the error log file. The JSON API will not report
-        any failed sending of an email. If you enable email logging, no email gets lost despite SMTP errors.
-        If you do not provide a directory for email and error logging you will leave no trace on the hard disk
-        for a sent out email, theoretically.
+        All errors related to sending emails get logged in the mailout specific error log file.
+        The JSON API will not report any failed sending of an email. If you enable email logging, no email gets lost
+        despite SMTP errors. If you do not provide a directory for email and error logging you will leave no trace on
+        the hard disk for a sent out email, theoretically.
       </p>
 
       <h3 id="syntax">Syntax</h3>
@@ -280,7 +281,7 @@
 
       <h3 id="gmail">Gmail / Google Apps</h3>
 
-      <p>If you use Gmail as outgoing server these pages can help for trouble shooting:</p>
+      <p>If you use Gmail as outgoing server these pages can help for troubleshooting:</p>
       <ul>
         <li><a href="https://support.google.com/a/answer/176600" target="_blank"> Google SMTP settings to send mail from
           a printer, scanner, or app</a></li>
