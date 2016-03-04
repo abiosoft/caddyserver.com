@@ -80,9 +80,9 @@
 				HTTP/2 support. Disable it by setting to false. Necessary to use WebSockets on secure connections.
 			</p>
 
-			<h4 id="log">-log</h4>
+			<h4 id="log">-log <span class="auto-recommend">AUTO</span></h4>
 			<p>
-				Enable the process log. The value must be either the path to a log file, stdout, or stderr. Caddy will create the log file if it does not already exist. This file will be used to log information, warnings, and errors that occur during runtime. Note: At this time, this log file is not automatically managed, so it will get large on very busy production servers.
+				Enable the process log. The value must be either the path to a log file, stdout, or stderr. Caddy will create the log file if it does not already exist. This file will be used to log information and errors that occur during runtime. The log file is rotated when it gets large, so it is safe to use for long-running processes.
 			</p>
 
 			<h4 id="pidfile">-pidfile <span class="auto-recommend">AUTO</span></h4>
