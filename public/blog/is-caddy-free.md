@@ -41,7 +41,7 @@ So, starting today, we're inviting you to [support Caddy](/download#payment) by 
 - Ranking higher in search results due to automatic HTTPS
 - Or, just the humanity and goodwill inside you ("warm fuzzies" guaranteed)
 
-Keep in mind that commercial offerings for similar web servers cost anywhere from $80 one-time to $1900/yr. (And none of can do what Caddy does.) My [text editor](https://www.sublimetext.com) costs $70, even just your domain name probably costs ~$12/yr. (If you support us well enough, we'll send you swag!)
+Keep in mind that commercial offerings for similar web servers cost anywhere from $80 one-time to $1900/yr. (And none of them do what Caddy does.) My [text editor](https://www.sublimetext.com) costs $70, even just your domain name probably costs ~$12/yr. (If you support us well enough, we'll send you swag!)
 
 You can still download Caddy without paying, but think of it as a trial period. If you like it and keep using it, you're encouraged to come back and pay what it's worth to you or your company.
 
@@ -49,7 +49,7 @@ This is not a business plan. This is just open source.
 
 I am optimistic about this approach, because the open source community is incredible. I can't speak highly enough of the Go community which (overall) has been helpful when I have questions, forgiving when I make mistakes, diplomatic when I have requests, and supportive when I have announcements or something neat to show off. Let's Encrypt's team has been cooperative and encouraging (I hear [they like Caddy's client experience](https://www.youtube.com/watch?v=OE5UhQGg_Fo&feature=youtu.be&t=32m)). And it's amazing that over 60 people around the world have volunteered contributions to the project that have been merged in.
 
-We're lucky to lucky to have [Arroyo Networks](https://arroyonetworks.com) sponsoring Caddy. They reached out to me a couple months ago because they realize that Caddy will benefit their customers and they also believe in Caddy's core values. As a beginning graduate student, sponsorships like this are extremely productive. Outside my research, I only have time for one other job. If I can't be paid to work on Caddy, it won't happen.
+We're lucky to have [Arroyo Networks](https://arroyonetworks.com) sponsoring Caddy. They reached out to me a couple months ago because they realize that Caddy will benefit their customers and they also believe in Caddy's core values. As a beginning graduate student, sponsorships like this are extremely productive. Outside my research, I only have time for one other job. If I can't be paid to work on Caddy, it won't happen.
 
 If you or your company would be interested in sponsoring the project, please do [get in touch](https://matt.chat). We can also find ways to get Caddy to the benefit of your customers or improve your business internally.
 
