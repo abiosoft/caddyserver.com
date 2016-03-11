@@ -32,7 +32,7 @@ In less than a year, Caddy has well over 20,000 downloads -- many of which aren'
 
 I learned a lesson from my last project, [Papa Parse](http://papaparse.com). That project, [like Caddy](https://news.ycombinator.com/item?id=9452606), experienced a [very successful reception on Hacker News](https://news.ycombinator.com/item?id=8042051). It was picked up by numerous companies to enhance their product offering; government departments around the world use it, and even the United Nations and Wikimedia integrate it. But now I have to pay the bills, and inevitably, work goes where the money does.
 
-So, starting today, we're inviting you to [support Caddy](/download#payment) by honestly paying back the value it provides you. Consider:
+So, starting today, we're inviting you to [support Caddy](/download#payment) by voluntarily paying back the value it provides you. Consider:
 
 - The time you save by using Caddy
 - The values Caddy stands for
