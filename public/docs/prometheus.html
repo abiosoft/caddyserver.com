@@ -6,29 +6,25 @@
 	</head>
 	<body>
 		<main>
-			<h1>cors <div class="tag addon">Addon</div></h1>
+			<h1>prometheus <div class="tag addon">Addon</div></h1>
 
 			<div class="addon-message">
 				<div class="heading"><i class="fa fa-plus-circle"></i> Addon</div>
-				This directive is a Caddy extension. To get it, select this feature when you <a
-                                    href="/download">download</a> Caddy. Questions should be directed to its maintainer. <a
-                                    href="https://github.com/miekg/caddy-prometheus">https://github.com/miekg/caddy-prometheus</a>
+				This directive is a Caddy extension. To get it, select this feature when you <a href="/download">download</a> Caddy. Questions should be directed to its maintainer. <a href="https://github.com/miekg/caddy-prometheus">https://github.com/miekg/caddy-prometheus</a>
 			</div>
 
 			<p>
-                            prometheus gives you <a href="http://prometheus.io/">monitoring metrics</a> for your site.
+				prometheus integrates <a href="http://prometheus.io/">Prometheus monitoring metrics</a> for your site.
 			</p>
 
 			<p>
-                            Currently it exports four metrics: caddy_http_request_count_total, caddy_http_request_duration_seconds
-                            caddy_http_response_size_bytes and caddy_http_response_status_count_total.
-                            The metrics are available on /metrics.
+				It exports four metrics: caddy_http_request_count_total, caddy_http_request_duration_seconds, caddy_http_response_size_bytes, and caddy_http_response_status_count_total. The metrics are available at /metrics on the address you specify in the Caddyfile.
 			</p>
 
 			<h3>Syntax</h3>
 			
-<code class="block"><span class="hl-directive">prometheus</span> <span class="hl-arg">[<i>address</i>]</span> { 
-	<span class="hl-subdirective">address</span>           <i>address</i>
+<code class="block"><span class="hl-directive">prometheus</span> <span class="hl-arg">[<i>address</i>]</span> {
+	<span class="hl-subdirective">address</span> <i>address</i>
 }</code>
 			<ul>
 				<li><b>address</b> the address the prometheus HTTP server listens on (default is localhost:9180).</li>
@@ -38,17 +34,18 @@
 			<h3>Examples</h3>
 
 			<p>
-				Export metrics on localhost:9180/metrics.
+				Export metrics at default address:
 			</p>
 
 			<code class="block"><span class="hl-directive">prometheus</span></code>
 
 
 			<p>
-				Listen on a different address.
+				Listen on a different address:
 			</p>
 			
 			<code class="block"><span class="hl-directive">prometheus</span> <span class="hl-arg">localhost:2020</span></code>
+
 			<footer>
 				&copy; 2016
 			</footer>
