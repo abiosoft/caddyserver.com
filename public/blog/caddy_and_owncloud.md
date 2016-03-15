@@ -165,3 +165,12 @@ However, you need to create a `data` folder for ownCloud and give ownCloud (i.e.
 
     $ mkdir owncloud/data
     $ sudo chown -R www-data owncloud
+
+
+Concluding
+----------
+
+ownCloud works very well together with Caddy, which shows that Caddy becomes a more and more mature web server!
+
+This blogpost is cross-posted on my personal blog, where you can leave comments if you have any questions: [Serving ownCloud with Caddy](https://denbeke.be/blog/webdevelopment/serving-owncloud-with-caddy/)
+
