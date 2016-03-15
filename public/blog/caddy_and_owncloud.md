@@ -10,7 +10,7 @@ Running ownCloud with Caddy
 ownCloud
 --------
 
-A quick introduction to [ownCloud](https://owncloud.org) for those who never heard about it (as found on Wikipedia).
+A quick introduction to [ownCloud](https://owncloud.org) for those who never heard about it (as found on Wikipedia):
 
 > OwnCloud (stylized ownCloud) is a suite of client-server software for creating file hosting services and using them.
 > OwnCloud is functionally very similar to the widely used Dropbox, with the primary functional difference being that OwnCloud is free and open-source, and thereby allowing anyone to install and operate it without charge on a private server, with no limits on storage space (except for disk capacity or account quota) or the number of connected clients.
@@ -19,8 +19,8 @@ A quick introduction to [ownCloud](https://owncloud.org) for those who never hea
 Installing MariaDB
 ------------------
 
-OwnCloud requires MySQL (or in this case) MariaDB.  
-The following command will install MariaDB server and client, and will ask you for a root password.
+ownCloud requires a database server, so we'll start by installing MariaDB.  
+The following command will install MariaDB server and client:
 
     $ sudo apt-get install mariadb-server
 
@@ -37,7 +37,7 @@ Use the following command, and type your root password.
 
     $ mysql -u root -p
 
-Now we create a new database for ownCloud:
+Once logged in we create a new database for ownCloud:
 
     MariaDB [(none)]> create database owncloud;
 
@@ -55,12 +55,16 @@ Now you have a user `owncloud` with password `somepassword` which has access to 
 Installing PHP-FPM
 ------------------
 
-* Note: Install PHP >= 5.6, ownCloud doesn't play well with PHP-FPM 5.5.9.  
-* Note: At the time of writing PHP 7 isn't there yet, but it soon will be. Apparently [ownCloud does support](https://github.com/owncloud/core/issues/16641) PHP 7.
+Since PHP 7 was released a couple of months ago, there is no reason not to install this newer version.
 
-You also need to install PHP-FPM before you can actually install ownCloud.
+First we need to add the repository which contains PHP 7:
 
-    $ sudo apt-get install php5-fpm
+    $ sudo add-apt-repository ppa:ondrej/php-7.0
+    $ sudo apt-get update
+
+Now we can install PHP:
+
+    $ sudo apt-get install php7.0-fpm
 
 Simply installing PHP isn't enough, in order to have ownCloud working properly, you also need some extra PHP extensions.
 A list of all ownCloud requirements can be found [here](https://doc.owncloud.org/server/7.0/admin_manual/installation/source_installation.html).
@@ -75,53 +79,62 @@ The extensions below are recommended for ownCloud and not included in the defaul
 
 You can install them all at once:
 
-    $ sudo apt-get install php5-mysql php5-gd php5-curl php5-intl php5-mcrypt php5-imagick
+    $ sudo apt-get install php7.0-mysql php7.0-gd php7.0-curl php7.0-intl php7.0-mcrypt 
 
 If you need previews for videos and documents you also need to install the following (non-PHP) packages:
 
 - ffmpeg or avconv
 - LibreOffice
 
-
-To secure your PHP-FPM installation you better disable path fixing.  
-Add the line `fix.pathinfo=0` to the `/etc/php5/fpm/php.ini` file.
-
-*Don't forget to restart PHP-FPM: `sudo service php5-fpm restart`.*
+*Don't forget to restart PHP-FPM: `sudo service php7.0-fpm restart` after installing all extensions.*
 
 Caddyfile
 ---------
 
-The following Caddyfile should work with ownCloud.
+I made the following Caddyfile together with *mholt* and *dprandzioch*. The config contains everything you need for hosting OwnCloud server and also supports the desktop and mobile clients.
 
-    http://my-owncloud-site.com {
-        redir https://my-owncloud-site.com
-    }
+    my-owncloud-site.com {
     
-    https://my-owncloud-site.com {
         root owncloud
-        tls server.crt server.key
-        log access.log
-        errors error.log
+        log owncloud/access.log
+        errors owncloud/access.log
     
-        # PHP-FPM with Unix socket
-        fastcgi / /var/run/php5-fpm.sock php {
-            env PATH /bin
+        fastcgi / 127.0.0.1:9000 php {
+                env PATH /bin
         }
-        
-        # Rewrites for ownCloud
+    
         rewrite {
             regexp /index.php/.*
             to /index.php?{query}
         }
-        
-        # Rewrites for WebDav (i.e. desktop clients)
+    
+        # client support (e.g. os x calendar / contacts)
+        redir /.well-known/carddav /remote.php/carddav 301
+        redir /.well-known/caldav /remote.php/caldav 301
+    
+        # remove trailing / as it causes errors with php-fpm
         rewrite {
-            regexp /remote.php/.*
-            to /remote.php?{query}
+            r ^/remote.php/(webdav|caldav|carddav)(\/?)$
+            to /remote.php/{1}
         }
+    
+        rewrite {
+            r ^/remote.php/(webdav|caldav|carddav)/(.+)(\/?)$
+            to /remote.php/{1}/{2}
+        }
+    
+        # this is still insanely insecure as all user files are located
+        # within the docroot and intended .htaccess restrictions are not interpreted
+        # Deny access copied from the nginx config at
+        # https://doc.owncloud.org/server/8.0/admin_manual/installation/nginx_configuration.html
+        rewrite {
+            r  ^/(?:\.htaccess|data|config|db_structure\.xml|README)
+            status 403
+        }
+        
     }
 
-Feel free to check my personal blog if you need help [generating a self-signed certificate](https://denbeke.be/blog/servers/creating-a-self-signed-ssl-certificate-on-linux/).
+Thanks to Caddy's [Let's Encrypt](https://letsencrypt.org) integration, our OwnCloud installation is automatically secured and served over HTTPS. Access and error logs are written to the OwnCloud folder, and the data folder (together with other special files) is protected against requests from the outside.
 
 If you want to test your Caddyfile / PHP installation, you can create a `phpinfo.php` file in the `owncloud` directory, and put the following line into it:
 
@@ -136,15 +149,15 @@ Installing & Configuring ownCloud
 
 Now it's finally time to install ownCloud.
 
-Download the latest ownCloud version (at the time of writing `8.1.1` was the latest version, check this for yourself if you are following my tutorial):
+Download the latest ownCloud version (at the time of writing `9.0.0` was the latest version, check this for yourself):
 
-    $ wget https://download.owncloud.org/community/owncloud-8.1.1.zip
+    $ wget https://download.owncloud.org/community/owncloud-9.0.0.zip
 
 Unzip the files into the `owncloud` directory:
 
-    $ unzip owncloud-8.1.1.zip
+    $ unzip owncloud-9.0.0.zip
 
-Go to `https://my-owncloud-site.com` with your webbrowser (of course after Caddy is running with your Caddyfile).
+Go to `https://my-owncloud-site.com` with your web browser (of course after Caddy is running with your Caddyfile).
 
 If everything works fine, you will see the ownCloud configuration screen.
 
