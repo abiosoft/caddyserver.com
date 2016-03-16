@@ -1,11 +1,13 @@
 ---
 title: Running ownCloud with Caddy
 author: Mathias Beke
-date: 2015-09-15 12:00:00
+date: 2015-03-16 12:00:00
 ---
 
 Running ownCloud with Caddy
 ===========================
+
+In this post, I'll walk you through how to set up ownCloud with Caddy for a secure, personal cloud service.
 
 ownCloud
 --------
@@ -91,7 +93,7 @@ If you need previews for videos and documents you also need to install the follo
 Caddyfile
 ---------
 
-I made the following Caddyfile together with *mholt* and *dprandzioch*. The config contains everything you need for hosting OwnCloud server and also supports the desktop and mobile clients.
+I made the following Caddyfile together with *mholt* and *dprandzioch*. The config contains everything you need for hosting ownCloud server and also supports the desktop and mobile clients.
 
     my-owncloud-site.com {
     
@@ -104,7 +106,7 @@ I made the following Caddyfile together with *mholt* and *dprandzioch*. The conf
         }
     
         rewrite {
-            regexp /index.php/.*
+            r ^/index.php/.*$
             to /index.php?{query}
         }
     
@@ -123,10 +125,7 @@ I made the following Caddyfile together with *mholt* and *dprandzioch*. The conf
             to /remote.php/{1}/{2}
         }
     
-        # this is still insanely insecure as all user files are located
-        # within the docroot and intended .htaccess restrictions are not interpreted
-        # Deny access copied from the nginx config at
-        # https://doc.owncloud.org/server/8.0/admin_manual/installation/nginx_configuration.html
+        # .htacces / data / config / ... shouldn't be accessible from outside
         rewrite {
             r  ^/(?:\.htaccess|data|config|db_structure\.xml|README)
             status 403
@@ -134,7 +133,7 @@ I made the following Caddyfile together with *mholt* and *dprandzioch*. The conf
         
     }
 
-Thanks to Caddy's [Let's Encrypt](https://letsencrypt.org) integration, our OwnCloud installation is automatically secured and served over HTTPS. Access and error logs are written to the OwnCloud folder, and the data folder (together with other special files) is protected against requests from the outside.
+Thanks to Caddy's [Let's Encrypt](https://letsencrypt.org) integration, our ownCloud installation is automatically secured and served over HTTPS. Access and error logs are written to the ownCloud folder, and the data folder (together with other special files) is protected against requests from the outside.
 
 If you want to test your Caddyfile / PHP installation, you can create a `phpinfo.php` file in the `owncloud` directory, and put the following line into it:
 
@@ -157,8 +156,7 @@ Unzip the files into the `owncloud` directory:
 
     $ unzip owncloud-9.0.0.zip
 
-Go to `https://my-owncloud-site.com` with your web browser (of course after Caddy is running with your Caddyfile).
-
+Go to `https://my-owncloud-site.com` with your web browser.
 If everything works fine, you will see the ownCloud configuration screen.
 
 However, you need to create a `data` folder for ownCloud and give ownCloud (i.e. `www-data` user) write/read access to it.
@@ -170,7 +168,7 @@ However, you need to create a `data` folder for ownCloud and give ownCloud (i.e.
 Concluding
 ----------
 
-ownCloud works very well together with Caddy, which shows that Caddy becomes a more and more mature web server!
+Caddy's rapid development makes it a choice candidate for serving your OwnCloud installation securely and easily.
 
 This blogpost is cross-posted on my personal blog, where you can leave comments if you have any questions: [Serving ownCloud with Caddy](https://denbeke.be/blog/webdevelopment/serving-owncloud-with-caddy/)
 
