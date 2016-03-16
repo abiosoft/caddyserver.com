@@ -4,8 +4,7 @@ author: Mathias Beke
 date: 2016-03-16 12:00:00
 ---
 
-Running ownCloud with Caddy
-===========================
+*Editor's note: This is a guest post by [Mathias Beke](https://denbeke.be/blog/). We welcome [contributions](https://github.com/caddyserver/caddyserver.com/pulls) to the Caddy blog for any original content relevant to Caddy and the modern Web!*
 
 In this post, I'll walk you through how to set up ownCloud with Caddy for a secure, personal cloud service.
 
