@@ -1,7 +1,7 @@
 ---
 title: Running ownCloud with Caddy
 author: Mathias Beke
-date: 2015-03-16 12:00:00
+date: 2016-03-16 12:00:00
 ---
 
 Running ownCloud with Caddy
