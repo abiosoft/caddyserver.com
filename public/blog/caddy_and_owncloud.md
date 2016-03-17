@@ -7,7 +7,7 @@ date: 2016-03-16 12:00:00
 Running ownCloud with Caddy
 ===========================
 
-In this post, I'll walk you through how to set up ownCloud with Caddy for a secure, personal cloud service.
+In this post, I'll walk you through how to set up ownCloud with Caddy for a secure, personal cloud service. I wrote this guide while configuring on Ubuntu 14.
 
 **Update: Caddy's current release doesn't support WebDav yet, resulting in the desktop/mobile clients not working. Support for this is already included in the development branch, so you can either wait a until the next release, or compile Caddy yourself.**
 
@@ -89,6 +89,11 @@ If you need previews for videos and documents you also need to install the follo
 
 - ffmpeg or avconv
 - LibreOffice
+
+
+For optimal integration with Caddy, accepting PHP-FPM request on a TCP socket instead of a Unix socket is better:  
+Replace `listen = /run/php/php7.0-fpm.soc` to `listen = 127.0.0.1:9000` in `/etc/php/7.0/fpm/pool.d/www.conf`.
+
 
 *Don't forget to restart PHP-FPM: `sudo service php7.0-fpm restart` after installing all extensions.*
 
