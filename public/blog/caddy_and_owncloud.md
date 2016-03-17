@@ -9,6 +9,8 @@ Running ownCloud with Caddy
 
 In this post, I'll walk you through how to set up ownCloud with Caddy for a secure, personal cloud service.
 
+**Update: Caddy's current release doesn't support WebDav yet, resulting in the desktop/mobile clients not working. Support for this is already included in the development branch, so you can either wait a until the next release, or compile Caddy yourself.**
+
 ownCloud
 --------
 
@@ -61,7 +63,7 @@ Since PHP 7 was released a couple of months ago, there is no reason not to insta
 
 First we need to add the repository which contains PHP 7:
 
-    $ sudo add-apt-repository ppa:ondrej/php-7.0
+    $ sudo add-apt-repository ppa:ondrej/php
     $ sudo apt-get update
 
 Now we can install PHP:
@@ -130,6 +132,8 @@ I made the following Caddyfile together with *mholt* and *dprandzioch*. The conf
             r  ^/(?:\.htaccess|data|config|db_structure\.xml|README)
             status 403
         }
+        
+        header / Strict-Transport-Security "15768000"
         
     }
 
