@@ -8,7 +8,7 @@ cover: https://caddyserver.com/resources/images/blog/caddy-0_8-announcement-cove
 Today, I'm very excited to announce Caddy 0.8! It features [automatic HTTPS](/docs/automatic-https), zero-downtime restarts, and the ability to [embed Caddy](https://godoc.org/github.com/mholt/caddy/caddy) in your own Go programs. (**[Download](/download)**)
 
 <div style="text-align: center; margin-top: 15px;">
-<iframe src="//ghbtns.com/github-btn.html?user=mholt&repo=caddy&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="30px" style="vertical-align: middle;"></iframe>
+<iframe src="https://ghbtns.com/github-btn.html?user=mholt&repo=caddy&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="30px" style="vertical-align: middle;"></iframe>
 <a href="https://twitter.com/caddyserver" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @caddyserver</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div>
 

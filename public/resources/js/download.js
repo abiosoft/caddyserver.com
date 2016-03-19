@@ -114,15 +114,15 @@ $(function() {
 			if (amount <= 0) {
 				$('#amount-feedback').html('<span style="color: red;">Zero literally doesn\'t count. :(</span>');
 			} else if (amount < transactionFeeMin) {
-				$('#amount-feedback').html('<span style="color: red;">Please go higher to compensate for transaction fees.</span>');
+				$('#amount-feedback').html('<span style="color: red;">Please go higher so we can cover transaction fees.</span>');
 			} else if (amount < 10) {
 				$('#amount-feedback').html('<span style="color: #FF9100;">Thanks; maybe contribute again soon?</span>');
 			} else if (amount < 18) {
-				$('#amount-feedback').html('<span style="color: black;">Thanks, this buys a lunch.</span>');
+				$('#amount-feedback').html('<span style="color: black;">Thank you, this buys a lunch</span>');
 			} else if (amount < 25) {
-				$('#amount-feedback').html('<span style="color: black;">Thanks, this buys a dinner.</span>');
+				$('#amount-feedback').html('<span style="color: black;">Thank you, this buys a dinner</span>');
 			} else if (amount < 50) {
-				$('#amount-feedback').html('<span style="color: black;">Thank you for the support!</span>');
+				$('#amount-feedback').html('<span style="color: black;">Thank you very much for the support!</span>');
 			} else if (amount < 100) {
 				$('#amount-feedback').html('<span style="color: #1FB91F;">Thank you! We\'ll do our best to help you out.</span>');
 			} else if (amount < 200) {
@@ -180,26 +180,6 @@ $(function() {
 	// Close Checkout on back button
 	$(window).on('popstate', function() {
 		checkout.close();
-	});
-
-	// Show dialog that explains our cost estimation
-	$('#cost-estimation').click(function(event) {
-		sweetAlert({
-			title: "About Cost Valuation",
-			text: "The estimated cost is derived from the approximate number of hours put into the project by its author and a few key contributors averaged each year since the project's origin.",
-			confirmButtonText: "Got it!"
-		});
-		return suppress(event);
-	});
-
-	// Show dialog explaining how funds are used
-	$('#audits').click(function(event) {
-		sweetAlert({
-			title: "Fund Usage",
-			text: "Funds are used to pay the author and some developers so they can continue to actively develop the project and provide support to you.<br><br>After each fiscal year, funds permitting, we'll hire an external CPA to verify the expenditure on the account. Audit results will be made available for you to view.",
-			html: true
-		});
-		return suppress(event);
 	});
 
 	// Show dialog explaining mailing list

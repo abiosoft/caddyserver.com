@@ -9,7 +9,7 @@ There's been a lot of interest in HTTP/2 lately, particularly the server push fu
 I would like to [make a few comments](https://twitter.com/mholt6/status/644584867112488960) regarding some of the current hype of HTTP/2 and answer some confusion. Recently, [NGINX Inc. announced](https://www.nginx.com/blog/nginx-plus-r7-released/) that their commercial offering, NGINX Plus, "provides a fully supported implementation of the new HTTP/2 web standard." Several of the responses on Twitter, Hacker News, etc., express some disappointment that it does not support a highly-touted feature of HTTP/2, server push:
 
 <blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/bjornjohansen">@bjornjohansen</a> No HTTP/2 server-push support, so not really all that interesting.</p>&mdash; Daniel Aleksandersen (@Aeyoun) <a href="https://twitter.com/Aeyoun/status/644260508758089728">September 16, 2015</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 To be fair, Caddy does not have server push yet, either. And neither do most HTTP/2 servers. Allow me to suggest why.
 
