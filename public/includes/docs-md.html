@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{.Doc.title}} - Caddy Directives</title>
+		{{.Include "/includes/docs-head.html"}}
+	</head>
+	<body>
+		<main>
+			<h1>{{.Doc.title}} {{if .Doc.addonRepo}}<div class="tag addon">Addon</div>{{end}}</h1>
+			{{if .Doc.addonRepo}}
+			<div class="addon-message">
+				<div class="heading"><i class="fa fa-plus-circle"></i> Addon</div>
+				This directive is a Caddy extension. Questions should be directed to its maintainer. <a href="https://{{.Doc.addonRepo}}">{{.Doc.addonRepo}}</a>
+			</div>
+			{{end}}
+			{{.Doc.body}}
+		</main>
+
+		{{.Include "/includes/docs-nav.html"}}
+	</body>
+</html>
