@@ -12,6 +12,10 @@ markdown /blog {
 	template ../blog_post_template.html
 	template index ../blog_index_template.html
 }
+markdown /docs {
+	dev
+	template includes/docs-md.html
+}
 
 # build server
 proxy /download/build localhost:5050
