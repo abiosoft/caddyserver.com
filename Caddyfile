@@ -14,7 +14,7 @@ markdown /blog {
 }
 markdown /docs {
 	dev
-	template includes/docs-md.html
+	template ../docs_template.html
 }
 
 # build server
