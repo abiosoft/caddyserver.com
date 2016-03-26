@@ -20,6 +20,10 @@
 				This middleware implements an authorization layer based on JSON Web Tokens (JWT). You can learn more about using JWT in your application at <a href="https://jwt.io">jwt.io</a>.
 			</p>
 
+			<p>
+				This directive can be specified more than once.
+			</p>
+
 			<h3>Basic Syntax</h3>
 			
 			<code class="block"><span class="hl-directive">jwt</span> <span class="hl-arg"><i>path</i></span></code>
@@ -29,16 +33,8 @@
 			</ul>
 
 			<p>
-				By default every resource under path will be secured using JWT validation. To specify a list of resources that need to be secured, use:
+				By default every resource under path will be secured using JWT validation.
 			</p>
-
-			<code class="block"><span class="hl-directive">jwt</span> {
-	<span class="hl-subdirective">path</span> <i>resource</i>
-}</code>
-
-			<ul>
-				<li><b>resource</b> is a path to protect, one per line; the path keyword can be used multiple times.</li>
-			</ul>
 
 			<p>
 				<mark class="block"><b>Important:</b> You must set the secret used to construct your token in an environment variable named <code>JWT_SECRET</code>. Otherwise, your tokens will always silently fail validation. Caddy will start without this value set, but it must be present at the time of the request for the signature to be validated. 
@@ -57,10 +53,14 @@
 }</code>
 
 			<ul>
-				<li><b>resource</b> is a path to protect, one per block</li>
+				<li><b>resource</b> is a path to protect; one per block</li>
 				<li><b>claim</b> is a claim to either allow or deny</li>
 				<li><b>value</b> is the value of the claim to match</li>
 			</ul>
+
+			<p>
+				The <b>allow</b> and <b>deny</b> lines can be specified multiple times in the same block.
+			</p>
 
 			<p>
 				To authorize access based on a claim, use the <code>allow</code> syntax. To deny access, use the <code>deny</code> keyword. You can use multiple keywords to achieve complex access rules.  If any <code>allow</code> access rule returns true, access will be allowed. If a <code>deny</code> rule is true, access will be denied.  Deny rules will allow any other value for that claim.   
@@ -77,7 +77,6 @@
 	<span class="hl-subdirective">deny</span>  role member
 	<span class="hl-subdirective">allow</span> user someone
 }</code>
-
 
 			<p>
 				The middleware will deny everyone with <code>role: member</code> but will allow the specific user named <code>someone</code>. A different user with a <code>role: admin</code> or <code>role: foo</code> would be allowed because the deny rule will allow anyone that doesn't have role member.
