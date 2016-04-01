@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/caddy
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://caddyserver.com
+  * I am caddy (https://keybase.io/caddy) on keybase.
+  * I have a public key with fingerprint 6576 0C51 EDEA 2017 CEA2  CA15 155B 6D79 CA56 EA34
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "010185dcc93b2ea7a89d1282ab980514fe2a5618593ee2a2d5b89c01c969b37891ff0a",
+            "fingerprint": "65760c51edea2017cea2ca15155b6d79ca56ea34",
+            "host": "keybase.io",
+            "key_id": "155b6d79ca56ea34",
+            "kid": "010185dcc93b2ea7a89d1282ab980514fe2a5618593ee2a2d5b89c01c969b37891ff0a",
+            "uid": "d6e0ff2b7a534a9750d1354597147619",
+            "username": "caddy"
+        },
+        "service": {
+            "hostname": "caddyserver.com",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1459530533,
+    "expire_in": 157680000,
+    "prev": "fc5ba8a73ecfa63e5111bb15dcaff1d0d4b10efb907ec73063d18766ebfa0658",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.53
+Comment: https://keybase.io/crypto
+
+yMIeAnicrVJbSBRRGN7VDDWiC4pdoGQ0SrPlnJk5c9kMJaiHSLBMe5G2MzNndFJ3
+tp1Za1lUwiBSg9AiJFsN9KXViuihh8hLmlRuQRpLUNSCUEsvFSYkdDkjBT302Hk5
+l//7vvP9H//k6nRXtrtqU0P+UkZHwP10/ErIVfMjti3CKKYWZrwRpoEsb6RRI5bt
+azA0xssACKCENFWVOYUlWMSSrEFWYrEiSwBBXicsRgKFyByhR1ZDiiSrAKqyICuc
+KMlQ1wFmShjd8NeRYCBo+G0qKyBRACqCRCOYBVBU6aZiiCBCiqCJskpFCeZ4Sqw3
+LYdBzSnYIh7DpG/04lu29w/8f/YdWpbTBAJ0nVVEjDgeyyICGuQQj2QR8qIAZQdo
+kaAfNxGKVrFGE20pYehTs6ESJ1Wnjb/LTokEParZRLmBoGmbqtlIi/W2HbC8DtkO
+Bxz0KaL4fuv4FMOv0Rwpg3Itw/QzXkiRqm04wpD6QRxAHFfCkNMBI0h8hoOgWUuA
+Lucf0kwldRUpWMIiR1QdCxxBEEJFgTQurOtQAxqvQEB0RQYiUUUOCJwGJVEQiKJj
+ICCJcTo76TcZL09t4joqaRl1fmyHgoRpmRirXeFyZ7tWZqQ58+XKzlr7Z+ouf8l0
+Db7bteNBTtSLdl7Y7ZkLtaUVB561mtGpWKR/a6xsonK4kwwenfmWmg/Nk0dve9c8
+7qnoz7X2piJS5oc7eflZRWndsYn262ZF7cJY0cihwaVz90pPSLMJPid648DPM/HJ
+wtudh6u0rqFItL9t3Z7qjuDnvGqfz5jlFhYSc67Uxs2V4YfdvvKu5PGbL8eSGeW5
+Fe/3MVuO8PHRodeF7kTWyqXKxUTv9LXU7P39oQ2p7wWVluduz8B5g6tna4bLXoCw
+cDZVPTCE1795YsQ/DRdLoVdT01OrLpbmJxdnqtrBMam1+VIgfftH8rWvoOz5aNK+
+OhI/2D6ec6t8po//BV/HQaI=
+=tyGj
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/caddy
+
+==================================================================
