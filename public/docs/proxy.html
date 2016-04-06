@@ -12,6 +12,10 @@
 				proxy facilitates both a basic reverse proxy and a robust load balancer. The proxy has support for multiple backends and adding custom headers. The load balancing features include multiple policies, health checks, and failovers. Caddy can also proxy WebSocket connections.
 			</p>
 
+			<p>
+				This middleware adds a <a href="/docs/placeholders">placeholder</a> that can be used in <a href="/docs/log">log</a> formats: <b>{upstream}</b> - the name of the upstream host to which the request was proxied.
+			</p>
+
 
 
 			<h3>Syntax</h3>
@@ -91,7 +95,6 @@
 				<li><b>least_conn</b> - Select backend with the fewest active connections</li>
 				<li><b>round_robin</b> - Select backend in round-robin fashion</li>
 			</ul>
-
 
 
 			<h3>Examples</h3>
