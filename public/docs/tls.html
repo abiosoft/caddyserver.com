@@ -68,6 +68,7 @@
     <span class="hl-subdirective">clients</span>   <i>clientcas...</i>
 	<span class="hl-subdirective">load</span>      <i>dir</i>
 	<span class="hl-subdirective">max_certs</span> <i>limit</i>
+	<span class="hl-subdirective">key_type</span>  <i>type</i>
 }</code>
 
 			<ul>
@@ -77,6 +78,7 @@
 				<li><b>clientcas...</b> is a list of space-separated client root CAs used for verification during TLS client authentication. If used, clients will be asked to present their certificate by their browser, which will be verified against this list of client certificate authorities. A client will not be allowed to connect if their certificate was not signed by one of these root CAs.</li>
 				<li><b>dir</b> is a directory from which to load certificates and keys. The entire directory and its subfolders will be walked in search of .pem files. Each .pem file must contain the PEM-encoded certificate (chain) and key blocks, concatenated together.</li>
 				<li><b>limit</b> puts a limit on the number of certificates allowed to be issued on demand (during TLS handshake). Specifying this value enables <a href="/docs/automatic-https#on-demand">On-Demand TLS</a>. It must be a positive integer. This value gets reset after the process exits (but is preserved through reloads).</li>
+				<li><b>type</b> is the type of key to use when generating keys for certificates (only applies to managed TLS). Valid values are rsa2048, rsa4096, rsa8192, p256, and p384. Default is currently rsa2048.</li>
 			</ul>
 
 
