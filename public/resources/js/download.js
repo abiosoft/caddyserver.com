@@ -171,7 +171,8 @@ $(function() {
 		checkout.open({
 			name: "Caddy Web Server",
 			amount: stripeAmount,
-			locale: "auto"
+			locale: "auto",
+			bitcoin: true
 		});
 
 		return suppress(event);
