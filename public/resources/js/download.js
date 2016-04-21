@@ -112,17 +112,17 @@ $(function() {
 		var amount = parseFloat(val);
 		if (monetary(val) && !isNaN(amount)) {
 			if (amount <= 0) {
-				$('#amount-feedback').html('<span style="color: red;">Zero literally doesn\'t count. :(</span>');
+				$('#amount-feedback').html('<span style="color: red;">Aw man. :( But you can still download Caddy.</span>');
 			} else if (amount < transactionFeeMin) {
-				$('#amount-feedback').html('<span style="color: red;">Please go higher so we can cover transaction fees.</span>');
+				$('#amount-feedback').html('<span style="color: red;">Please go higher so we can cover transaction fees, thanks!</span>');
 			} else if (amount < 10) {
-				$('#amount-feedback').html('<span style="color: #FF9100;">Thanks; maybe contribute again soon?</span>');
+				$('#amount-feedback').html('<span style="color: #FF9100;">Thanks; maybe contribute again soon!</span>');
 			} else if (amount < 18) {
-				$('#amount-feedback').html('<span style="color: black;">Thank you, this buys a lunch</span>');
+				$('#amount-feedback').html('<span style="color: black;">Thanks, this buys a lunch</span>');
 			} else if (amount < 25) {
-				$('#amount-feedback').html('<span style="color: black;">Thank you, this buys a dinner</span>');
+				$('#amount-feedback').html('<span style="color: black;">Thanks, this buys a dinner</span>');
 			} else if (amount < 50) {
-				$('#amount-feedback').html('<span style="color: black;">Thank you very much for the support!</span>');
+				$('#amount-feedback').html('<span style="color: black;">Thank you very much for your support!</span>');
 			} else if (amount < 100) {
 				$('#amount-feedback').html('<span style="color: #1FB91F;">Thank you! We\'ll do our best to help you out.</span>');
 			} else if (amount < 200) {
