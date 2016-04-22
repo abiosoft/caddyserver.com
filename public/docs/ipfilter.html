@@ -29,6 +29,7 @@
 	<span class="hl-subdirective">country</span>    <i>countries ISO codes...</i>
 	<span class="hl-subdirective">database</span>   <i>db_path</i>
 	<span class="hl-subdirective">blockpage</span>  <i>block_page</i>
+	<span class="hl-subdirective">strict</span>
 }</code>
 			<ul>
 				<li><b>paths...</b> is a list of space-separated base paths to which to apply this filter rule (use / to match everything).</li>
@@ -37,6 +38,7 @@
 				<li><b>country...</b> list of space-separated country ISO codes. For a complete list of country codes, refer to <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assign">Wikipedia</a>.</li>
 				<li><b>db_path</b> is the path to the geo-IP database (relative to working directory). required only if the subdirective 'country' is used.</li>
 				<li><b>block_page</b> is an optional file that will be shown to blocked clients (relative to working directory).</li>
+				<li><b>strict</b> if specified ipfilter will not look into <code>X-Forwarded-For</code> header, this flag is essential if you are using <a href="/docs/realip">realip</a>.</li>
 			</ul>
 
 			<h3>Examples</h3>
