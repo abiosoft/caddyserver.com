@@ -38,7 +38,7 @@
 			</ul>
 
 			<p>
-				<mark class="block">Warnings:
+				Warnings:
 				<ul>
 					<li>
 						Unless you use TLS with connections to your upload destination
@@ -51,13 +51,12 @@
 						Your directory structure could be revealed.
 					</li>
 				</ul>
-				</mark>
 			</p>
 
 			<h3>Syntax</h3>
 			
 <code class="block"><span class="hl-directive">upload</span> <span class="hl-arg"><i>path</i></span> { 
-	<span class="hl-subdirective">to</span>            	     <i>"directory"</i>
+	<span class="hl-subdirective">to</span>                  <i>"directory"</i>
 	<span class="hl-subdirective">yes_without_tls</span>
 	<span class="hl-subdirective">filenames_form</span>      <i>none|NFC|NFD</i>
 	<span class="hl-subdirective">filenames_in</span>        <i>u0000–uff00 [u0000–uff00| …]</i>
@@ -113,7 +112,7 @@
 			</p>
 
 <code class="block"><span class="hl-directive">upload</span> <span class="hl-arg">/web/path</span> { 
-	<span class="hl-subdirective">to</span>            	     <i>"/var/tmp"</i>
+	<span class="hl-subdirective">to</span> <i>"/var/tmp"</i>
 }</code>
 
 			<p>
@@ -165,8 +164,7 @@ curl -X DELETE \
 				In the end a header <em>Authorization</em> is sent formatted like this along with the two latter values:
 			</p>
 
-<code class="block">
-Authorization: Signature keyId="(key_id)",algorithm="hmac-sha256",headers="timestamp token",signature="(see below)"
+<code class="block">Authorization: Signature keyId="(key_id)",algorithm="hmac-sha256",headers="timestamp token",signature="(see below)"
 Timestamp: (current UNIX time)
 Token: (some chars, to promote the timestamp to a full nonce)
 </code>
@@ -175,8 +173,7 @@ Token: (some chars, to promote the timestamp to a full nonce)
 				You can generate new keys easily on the shell:
 			</p>
 
-<code class="block">
-SECRET="$(openssl rand -base64 32)"
+<code class="block">SECRET="$(openssl rand -base64 32)"
 
 # printf "%s\n" "${SECRET}"
 # TWF0dCBIb2x0IGRvZXNuJ3QgdXBkYXRlIGhpcyBNYWM=
@@ -219,7 +216,7 @@ curl -T \
 			</p>
 
 <code class="block"><span class="hl-directive">upload</span> <span class="hl-arg"><i>/college/curriculum</i></span> { 
-	<span class="hl-subdirective">to</span>            	     <i>"/home/ellen_baker/inbox"</i>
+	<span class="hl-subdirective">to</span>                  <i>"/home/ellen_baker/inbox"</i>
 	<span class="hl-subdirective">filenames_form</span>      <i>NFC</i>
 	<span class="hl-subdirective">filenames_in</span>        <i>u0000–u007F u0100–u017F u0391–u03C9 u2018–u203D u2152–u217F</i>
 }</code>
@@ -229,7 +226,7 @@ curl -T \
 			</p>
 
 <code class="block"><span class="hl-directive">upload</span> <span class="hl-arg"><i>/binhost/gentoo</i></span> { 
-	<span class="hl-subdirective">to</span>            	     <i>"/var/portage/packages"</i>
+	<span class="hl-subdirective">to</span>                  <i>"/var/portage/packages"</i>
 	<span class="hl-subdirective">filenames_in</span>        <i>u0000–u007F</i>
 	<span class="hl-subdirective">hmac_keys_in</span>        <i>hina=aGluYQ==</i>
 	<span class="hl-subdirective">timestamp_tolerance</span> <i>0</i>
@@ -240,7 +237,7 @@ curl -T \
 			</p>
 
 <code class="block"><span class="hl-directive">upload</span> <span class="hl-arg"><i>/wp-uploads</i></span> { 
-	<span class="hl-subdirective">to</span>            	     <i>"/var/www/senpai/wp-uploads"</i>
+	<span class="hl-subdirective">to</span>                  <i>"/var/www/senpai/wp-uploads"</i>
 	<span class="hl-subdirective">filenames_in</span>        <i>u0000–u007F u0100–u017F u0391–u03C9 u2018–u203D u3000–u303f u3040–u309f u30a0–u30ff u4e00–9faf uff00–uffef</i>
 	<span class="hl-subdirective">hmac_keys_in</span>        <i>yui=eXVp hina=aGluYQ== olivia=b2xpdmlh james=amFtZXM=</i>
 	<span class="hl-subdirective">timestamp_tolerance</span> <i>3</i>
@@ -251,16 +248,12 @@ curl -T \
 
 			<p>
 				You can find a very nice overview of Unicode Character ranges here:
-				<a href="http://jrgraphix.net/research/unicode_blocks.php" title="Unicode Ranges displayed pleasantly">
-					http://jrgraphix.net/research/unicode_blocks.php
-				</a>
+				<a href="http://jrgraphix.net/research/unicode_blocks.php" title="Unicode Ranges displayed pleasantly">http://jrgraphix.net/research/unicode_blocks.php</a>
 			</p>
 
 			<p>
 				Here is the official list of Unicode blocks (no pictograms, only names):
-				<a href="http://www.unicode.org/Public/UCD/latest/ucd/Blocks.txt" title="official list of Unicode blocks">
-					http://www.unicode.org/Public/UCD/latest/ucd/Blocks.txt
-				</a>
+				<a href="http://www.unicode.org/Public/UCD/latest/ucd/Blocks.txt" title="official list of Unicode blocks">http://www.unicode.org/Public/UCD/latest/ucd/Blocks.txt</a>
 			</p>
 
 			<p>
@@ -268,15 +261,9 @@ curl -T \
 			</p>
 
 			<ul>
-				<li><a href="https://tools.ietf.org/html/draft-cavage-http-signatures-05" title="draft at the IETF">
-					https://tools.ietf.org/html/draft-cavage-http-signatures-05
-				</a></li>
-				<li><a href="https://github.com/joyent/gosign" title="gosign by Joyent for Golang">
-					github.com/joyent/gosign
-				</a> is an implementation in Golang</li>
-				<li><a href="https://github.com/joyent/node-http-signature" title="node-http-signature for NodeJS">
-					github.com/joyent/node-http-signature
-				</a> for Node.js</li>
+				<li><a href="https://tools.ietf.org/html/draft-cavage-http-signatures-05" title="draft at the IETF">https://tools.ietf.org/html/draft-cavage-http-signatures-05</a></li>
+				<li><a href="https://github.com/joyent/gosign" title="gosign by Joyent for Golang">github.com/joyent/gosign</a> is an implementation in Go</li>
+				<li><a href="https://github.com/joyent/node-http-signature" title="node-http-signature for NodeJS">github.com/joyent/node-http-signature</a> for Node.js</li>
 			</ul>
 		</main>
 
