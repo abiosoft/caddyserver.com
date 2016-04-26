@@ -60,6 +60,11 @@
 				CPU cap. Can be a percentage (e.g. "75%") or a number indicating how many cores to use (e.g. 3).
 			</p>
 
+			<h4 id="directives">-directives</h4>
+			<p>
+				Lists the directives recognized by Caddy. Caddy will terminate after printing; it will not serve sites.
+			</p>
+
 			<h4 id="email">-email <span class="auto-recommend">AUTO</span></h4>
 			<p>
 				Email address to use for SSL certificate generation if not <a href="/docs/tls">specified for a site in the Caddyfile</a>. It is not required, but is strongly recommended so you can recover your account if you lose your private key. If an email is not available, Caddy may prompt you for an email address during runtime. This option is recommended in automated environments if not <a href="/docs/tls">specified in the Caddyfile</a>.
@@ -68,6 +73,11 @@
 			<h4 id="cpu">-grace</h4>
 			<p>
 				Duration of the graceful shutdown period. If you reload extremely frequently (multiple times per second), make this duration short. Syntax is same as Go's <a href="https://golang.org/pkg/time/#ParseDuration">time.ParseDuration</a> function (5s, 1m30s, etc).
+			</p>
+
+			<h4 id="help">-help or -h</h4>
+			<p>
+				Show basic flag help. Caddy will terminate after showing help; it will not serve sites.
 			</p>
 
 			<h4 id="host">-host</h4>
@@ -100,9 +110,14 @@
 				Quiet mode. If quiet, Caddy will not print informational initialization output, only the addresses being served.
 			</p>
 
+			<h4 id="restart">-restart</h4>
+			<p>
+				Change the restart mode. By default, Caddy performs graceful restarts on Unix systems which starts a new process and kills the old one. You can force a non-graceful, "in-process" restart by setting the value of this option to <code>inproc</code>.
+			</p>
+
 			<h4 id="revoke">-revoke</h4>
 			<p>
-				Hostname for which to revoke the SSL certificate. Caddy will stop after revocation is complete; it will not serve sites if this option is used. The certificate must be under Caddy's management. <mark>Revocation is meant for compromised servers or private keys only. Do not revoke a certificate to renew it.</mark>
+				Hostname for which to revoke the SSL certificate. Caddy will stop after revocation is complete; it will not serve sites if this option is used. The certificate must be under Caddy's management. <mark>Revocation is meant for compromised private keys only. Do not revoke a certificate to renew it.</mark>
 			</p>
 
 			<h4 id="root">-root</h4>
@@ -112,7 +127,7 @@
 
 			<h4 id="root">-version</h4>
 			<p>
-				Prints the version. Caddy will terminate after printing; it does not serve sites if this option is used.
+				Prints the version. It also prints build information if not from a tagged release. Caddy will terminate after printing; it does not serve sites if this option is used.
 			</p>
 
 
@@ -197,6 +212,24 @@
 			<mark class="block">
 				Warning: If you pipe in a Caddyfile, it will be impossible to read from stdin later in the program because the parent process must send EOF to close the pipe so Caddy can unblock and start serving. This will cause problems, for instance, if Caddy has to prompt you for an email address or agreement to terms. So when piping input, use flags to avoid the need for stdin later.
 			</mark>
+
+
+
+			<h3 id="env">Environment Variables</h3>
+
+			<p>
+				Caddy recognizes certain environment variables.
+			</p>
+
+			<h4 id="home">HOME</h4>
+			<p>
+				The home folder. Caddy will create a .caddy folder here if using managed TLS (automatic HTTPS), and possibly persist other state here in the future or if configured to do so.
+			</p>
+
+			<h4 id="case_insensitive_path">CASE_SENSITIVE_PATH</h4>
+			<p>
+				If <code>0</code> or <code>false</code>, Caddy will treat request paths in a case-insensitive manner when accessing assets on the file system or matching requests for middleware handlers. The default is 1/true (case-sensitive paths).
+			</p>
 			
 
 			<footer>

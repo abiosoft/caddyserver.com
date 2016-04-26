@@ -84,6 +84,21 @@
 			<p><b>Strip HTML, leaving only the plain text:</b></p>
 			<pre><code class="html">{&#123;.StripHTML "Shows &lt;b&gt;only&lt;/b&gt; text content"}}</code></pre>
 
+			<p><b>Lower-case a string:</b></p>
+			<pre><code class="html">{&#123;.ToLower "Makes Me ONLY lowercase"}}</code></pre>
+
+			<p><b>Upper-case a string:</b></p>
+			<pre><code class="html">{&#123;.ToUpper "Makes me only UPPERCASE"}}</code></pre>
+
+			<p><b>Split a string by separator:</b></p>
+			<pre><code class="html">{&#123;.Split "123-456-7890", "-"}}</code></pre>
+
+			<p><b>Convert list of values to a slice (array):</b></p>
+			<pre><code class="html">{&#123;.Slice "a" "b" "c"}}</code></pre>
+
+			<p><b>Map keys to values:</b> (useful in advanced cases, with subtemplates, etc.)</p>
+			<pre><code class="html">{&#123;.Map "key1" "value1" "key2" "value2"}}</code></pre>
+
 
 			<h3 id="sanitize">Built-in Sanitization Functions</h3>
 

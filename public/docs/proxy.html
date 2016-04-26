@@ -12,6 +12,10 @@
 				proxy facilitates both a basic reverse proxy and a robust load balancer. The proxy has support for multiple backends and adding custom headers. The load balancing features include multiple policies, health checks, and failovers. Caddy can also proxy WebSocket connections.
 			</p>
 
+			<p>
+				This middleware adds a <a href="/docs/placeholders">placeholder</a> that can be used in <a href="/docs/log">log</a> formats: <b>{upstream}</b> - the name of the upstream host to which the request was proxied.
+			</p>
+
 
 
 			<h3>Syntax</h3>
@@ -41,7 +45,7 @@
 
 			<ul>
 				<li><b>from</b> is the base path to match for the request to be proxied.</li>
-				<li><b>to</b> is the destination endpoint to proxy to. At least one is required, but multiple may be specified. If a scheme (http/https) is not specified, http is used.</li>
+				<li><b>to</b> is the destination endpoint to proxy to. At least one is required, but multiple may be specified. If a scheme (http/https) is not specified, http is used. Unix sockets may also be used.</li>
 				<li><b>policy</b> is the load balancing policy to use; applies only with multiple backends. May be one of random, least_conn, or round_robin. Default is random.</li>
 				<li><b>fail_timeout</b> specifies how long to consider a backend as down after it has failed. While it is down, requests will not be routed to that backend. A backend is "down" if Caddy fails to communicate with it. The default value is 10 seconds ("10s").</li>
 				<li><b>max_fails</b> is the number of failures within fail_timeout that are needed before considering a backend to be down. If 0, the backend will never be marked as down. Default is 1.</li>
@@ -91,7 +95,6 @@
 				<li><b>least_conn</b> - Select backend with the fewest active connections</li>
 				<li><b>round_robin</b> - Select backend in round-robin fashion</li>
 			</ul>
-
 
 
 			<h3>Examples</h3>

@@ -17,10 +17,11 @@
 			<h3>Syntax</h3>
 			
 			<code class="block"><span class="hl-directive">fastcgi</span> <span class="hl-arg"><i>path endpoint</i> [<i>preset</i>]</span> {
-    <span class="hl-subdirective">ext</span>   <i>extension</i>
-    <span class="hl-subdirective">split</span> <i>splitval</i>
-    <span class="hl-subdirective">index</span> <i>indexfile</i>
-    <span class="hl-subdirective">env</span>   <i>key value</i>
+    <span class="hl-subdirective">ext</span>    <i>extension</i>
+    <span class="hl-subdirective">split</span>  <i>splitval</i>
+    <span class="hl-subdirective">index</span>  <i>indexfile</i>
+    <span class="hl-subdirective">env</span>    <i>key value</i>
+    <span class="hl-subdirective">except</span> <i>ignored_paths...</i>
 }</code>
 
 			<ul>
@@ -31,6 +32,7 @@
 				<li><b>splitval</b> specifies how to split the URL; the split value becomes the end of the first part and anything in the URL after it becomes part of the PATH_INFO CGI variable</li>
 				<li><b>indexfile</b> specifies the default file to try if a file is not specified by the URL</li>
 				<li><b>key value</b> sets an environment variable named <i>key</i> with the given <i>value</i>; the <b>env</b> property can be used multiple times</li>
+				<li><b>ignored_paths...</b> is a list of space-separated request paths to be excepted from fastcgi processing, even if it matches the base path</li>
 			</ul>
 
 			<h3>Presets</h3>
@@ -66,7 +68,7 @@
 				Forward all requests in /blog to a PHP site (like WordPress) being served with php-fpm:
 			</p>
 
-			<code class="block"><span class="hl-directive">fastcgi</span> <span class="hl-arg">/blog 127.0.0.1:9000 php</span></code>
+			<code class="block"><span class="hl-directive">fastcgi</span> <span class="hl-arg">/blog/ 127.0.0.1:9000 php</span></code>
 
 			<p>
 				With custom FastCGI configuration:
