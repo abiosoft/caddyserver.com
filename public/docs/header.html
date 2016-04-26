@@ -19,7 +19,7 @@
 			<ul>
 				<li><b>path</b> is the base path to match.</li>
 				<li><b>name</b> is the name of the field. Prefix with a hyphen <code>-</code> to remove the header.</li>
-				<li><b>value</b> is the value for the field.</li>
+				<li><b>value</b> is the value for the field. Dynamic values can also be inserted using <a href="/docs/placeholders">placeholders</a>.</li>
 			</ul>
 
 			<p>
@@ -53,6 +53,12 @@
     <span class="hl-subdirective">Access-Control-Allow-Methods</span> "GET, POST, OPTIONS"
     <span class="hl-subdirective">-Server</span>
 }</code>
+
+			<p>
+				Add a custom header on all pages with a dynamic value using a placeholder:
+			</p>
+
+			<code class="block"><span class="hl-directive">header</span> <span class="hl-arg">/ X-Backend-Server {hostname}</span></code>
 
 			<footer>
 				&copy; 2016
