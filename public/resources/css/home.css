@@ -59,6 +59,12 @@ main {
 	font-size: 12px;
 }
 
+.spons a {
+	margin: 0 15px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
 .features h3 {
 	font-size: 18px;
 }
