@@ -2,6 +2,7 @@
 title: The Caddy Community Forum
 author: Matt Holt
 date: 2016-05-27 08:00:00
+cover: https://caddyserver.com/resources/images/blog/caddy-forum-screenshot.png
 ---
 
 If you've been with the Caddy community for some amount of time now, you'll know that we went from only GitHub issues, expanding to a channel in [Gophers Slack](https://gophers.slack.com), then to Gitter. The number of site owners adopting Caddy has been growing fast, as has been the number of questions, so today I'm relieved to present a new, self-hosted [home for the Caddy community](https://forum.caddyserver.com).
@@ -10,6 +11,7 @@ The [Caddy community forum](https://forum.caddyserver.com) is for all discussion
 
 I hope you'll participate with us!
 
+<img src="/resources/images/blog/caddy-forum-screenshot.png" style="box-shadow: none;">
 
 ## Why move everyone again
 
