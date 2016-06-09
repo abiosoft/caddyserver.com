@@ -8,12 +8,12 @@ errors {
 	404 ../404.html
 }
 markdown /blog {
-	dev
+
 	template ../blog_post_template.html
 	template index ../blog_index_template.html
 }
 markdown /docs {
-	dev
+	
 	template ../docs_template.html
 }
 
