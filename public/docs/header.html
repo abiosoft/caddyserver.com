@@ -54,6 +54,23 @@
     <span class="hl-subdirective">-Server</span>
 }</code>
 
+                        <p>
+                                Add some security headers to all pages:
+                        </p>
+
+                        <code class="block"><span class="hl-directive">header</span> <span class="hl-arg">/</span> {
+    <span class="hl-comment"># Enable HTTP Strict Transport Security (HSTS) to force clients to always</span>
+    <span class="hl-comment"># connect via HTTPS (not recommended if only experimenting with HTTPS)</span>
+    <span class="hl-subdirective">Strict-Transport-Security</span>  "max-age=31536000s;"
+    <span class="hl-comment"># Enable cross-site filter (XSS) and tell browser to block detected attacks</span>
+    <span class="hl-subdirective">X-XSS-Protection</span> "1; mode=block"
+    <span class="hl-comment"># Prevent some browsers from MIME-sniffing a response away from the declared</span>
+    <span class="hl-comment"># content-type</span>
+    <span class="hl-subdirective">X-Content-Type-Options</span> "nosniff"
+    <span class="hl-comment"># Disallow the site to be rendered within a frame (clickjacking protection)</span>
+    <span class="hl-subdirective">X-Frame-Options</span> "DENY"
+}</code>
+
 			<p>
 				Add a custom header on all pages with a dynamic value using a placeholder:
 			</p>
