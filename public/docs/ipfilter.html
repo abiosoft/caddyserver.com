@@ -34,7 +34,9 @@
 			<ul>
 				<li><b>paths...</b> is a list of space-separated base paths to which to apply this filter rule (use / to match everything).</li>
 				<li><b>rule</b> either block or allow.</li>
-				<li><b>ip...</b> list or/and ranges of space-separated IPs to apply the rule to.</li>
+				<li><b>ip...</b> list or/and ranges of space-separated IPs to apply the rule to, there are two ways of ranging over IPs
+				<p><b>-</b> Ranging only over the last section of an IP e.g. <code>192.168.1.5-50</code> will translate into a range starts from <code>192.168.1.5</code> to <code>192.168.1.50</code> inclusively.</p>
+				<p><b>-</b> Ranging over the left out sections of an IP from <code>0</code> to <code>255</code> e.g. <code>192.168</code> will translate into a range starts from <code>192.168.0.0</code> to <code>192.168.255.255</code>.</p> </li>
 				<li><b>country...</b> list of space-separated country ISO codes. For a complete list of country codes, refer to <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assign">Wikipedia</a>.</li>
 				<li><b>db_path</b> is the path to the geo-IP database (relative to working directory). required only if the subdirective 'country' is used.</li>
 				<li><b>block_page</b> is an optional file that will be shown to blocked clients (relative to working directory).</li>
@@ -58,7 +60,7 @@
 
 			<code class="block"><span class="hl-directive">ipfilter</span> <span class="hl-arg">/</span> {
 	<span class="hl-subdirective">rule</span>       block
-	<span class="hl-subdirective">ip</span>         212.10.15.0-255 213.10.15.0-10 5.23.4.24
+	<span class="hl-subdirective">ip</span>         192.168 212.10.15.0-255 5.23.4.24
 	<span class="hl-subdirective">blockpage</span>  /local/data/default.html
 }</code>
 			<p>
