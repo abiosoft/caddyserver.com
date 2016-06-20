@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>minify - Caddy Directives</title>
+		{{.Include "/includes/docs-head.html"}}
+	</head>
+	<body>
+		<main>
+			<h1>minify <div class="tag addon">Addon</div></h1>
+
+			<div class="addon-message">
+				<div class="heading"><i class="fa fa-plus-circle"></i> Addon</div>
+				This directive is a Caddy extension. To get it, select this feature when you <a href="/download">download</a> Caddy. Questions should be directed to its maintainer. <a href="https://github.com/hacdias/caddy-minify">github.com/hacdias/caddy-minify</a>
+			</div>
+
+			<p>
+				minify enables minifying on your website. By default it will minify every css, javascript, html, svg, xml and json files. You can exclude some paths or single files so they're not minified.
+			</p>
+
+			<h3>Syntax</h3>
+      <code class="block"><span class="hl-directive">minify</span> </span> {
+	<span class="hl-subdirective">only</span> <i>foo...</i>
+	<span class="hl-subdirective">exclude</span> <i>bar...</i>
+}</code>
+
+			<ul>
+				<li><b>foo</b> (optional) are space separated single file paths or folders to include on minifying. By default the whole website will be minified. If this directive is set, only the files on the specified paths will be minified.</li>
+				<li><b>bar</b> (optional) are space separated single file paths or folders to exclude from minifying.</li>
+			</ul>
+
+			<h3 id="examples">Examples</h3>
+
+			Minify all of the supported files of the website:
+
+			<code class="block"><span class="hl-directive">minify</span></code>
+
+			Only minify the contents of <code>/assets</code> folder:
+
+			<code class="block"><span class="hl-directive">minify</span> </span> {
+	<span class="hl-subdirective">only</span> <i>/assets</i>
+}</code>
+
+			Minify the whole website except <code>/api</code>:
+
+			<code class="block"><span class="hl-directive">minify</span> </span> {
+	<span class="hl-subdirective">exclude</span> <i>/api</i>
+}</code>
+
+			Minify the files of <code>/assets</code> folder except <code>/assets/js</code>:
+
+			<code class="block"><span class="hl-directive">minify</span> </span> {
+	<span class="hl-subdirective">only</span> <i>/assets</i>
+	<span class="hl-subdirective">exclude</span> <i>/assets/js</i>
+}</code>
+
+			<footer>
+				&copy; 2016
+			</footer>
+		</main>
+
+		{{.Include "/includes/docs-nav.html"}}
+	</body>
+</html>
