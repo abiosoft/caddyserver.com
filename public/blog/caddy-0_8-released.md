@@ -114,7 +114,7 @@ If you find Caddy useful or if your company is using it, please consider [donati
 
 As usual, this release was a team effort. We've had contributors from all over the world, and I'm really happy with the way our community works together. (Feel free to [join the fun](https://github.com/mholt/caddy/issues)!)
 
-Major props to Sebastian Erhart, author of [lego](https://github.com/xenolf/lego) which powers Caddy's magic SSL features. We spent a lot of time trying to make this the best experience possible for you. And if you're interested in using Let's Encrypt on its own, lego is also a pure Go command line ACME client that doesn't have any external dependencies; pretty cool stuff.
+Major props to Sebastian Erhart, author of [lego](https://github.com/xenolf/lego) which powers Caddy's magic TLS features. We spent a lot of time trying to make this the best experience possible for you. And if you're interested in using Let's Encrypt on its own, lego is also a pure Go command line ACME client that doesn't have any external dependencies; pretty cool stuff.
 
 In no particular order, other contributions came from Abdulelah Alfuntukh, Luit van Drongelen, Carlisia Campos, tw4452852, Abiola Ibrahim, Michael Banzon, Tatsuhiko Kubo, AJ ONeal, Patel N Dipen, Benny Ng, Dave Goodchild, Austin Cherry, Guilherme Rezende, Bisser Nedkov, Marcelo Magallon, Paulo L F Casaretto, Zac Bergquist, and Karthic Rao. (Phew!) Also props to Erik Howard, jungle-boogie, and others who helped test and debug this version of Caddy. Thanks everyone!
 

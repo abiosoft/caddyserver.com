@@ -27,16 +27,21 @@
 				<li><b>{file}</b> - The name of the requested file (from request URI)</li>
 				<li><b>{fragment}</b> - The last part of the URL starting with "#"</li>
 				<li><b>{>Header}</b> - Any request header, where "Header" is the header field name</li>
-				<li><b>{host}</b> - The host portion of the request</li>
-				<li><b>{hostname}</b> - The name of the host that is processing the request</li>
+				<li><b>{host}</b> - The host value on the request</li>
+				<li><b>{hostname}</b> - The name of the host machine that is processing the request</li>
+				<li><b>{hostonly}</b> - Same as {host} but without port information</li>
 				<li><b>{method}</b> - The request method (GET, POST, etc.)</li>
 				<li><b>{path}</b> - The path portion of the URL (does not include query string or fragment)</li>
+				<li><b>{path_escaped}</b> - Query-escaped variant of {path}</li>
 				<li><b>{port}</b> - The client's port</li>
 				<li><b>{proto}</b> - The protocol string (e.g. "HTTP/1.1")</li>
 				<li><b>{query}</b> - The query string portion of the URL, without leading "?"</li>
+				<li><b>{query_escaped}</b> - The query-escaped variant of {query}</li>
 				<li><b>{remote}</b> - The client's IP address</li>
+				<li><b>{request}</b> - The entire HTTP request (sans body), compacted to one line</li>
 				<li><b>{scheme}</b> - The protocol/scheme used (usually http or https)</li>
 				<li><b>{uri}</b> - The request URI (includes path, query string, and fragment)</li>
+				<li><b>{uri_escaped}</b> - The query-escaped variant of {uri}</li>
 				<li><b>{when}</b> - Timestamp in the format <code>02/Jan/2006:15:04:05 -0700</code></li>
 			</ul>
 
