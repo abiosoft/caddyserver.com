@@ -91,11 +91,14 @@
 	<span class="hl-subdirective">/api-dev</span> /api       meta
 }</code>
 
-			redir {
-    if  {>X-Forwarded-Proto} is http
-    /   https://{uri}
-}
+			<p>
+				Redirect only if the forwarded protocol is HTTP:
+			</p>
 
+			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg">301</span> {
+	<span class="hl-subdirective">if</span> {>X-Forwarded-Proto} is http
+	<span class="hl-subdirective">/</span>  https://{host}{uri}
+}</code>
 			<footer>
 				&copy; 2016
 			</footer>
