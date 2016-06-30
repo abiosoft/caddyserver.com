@@ -5,6 +5,18 @@
 		{{.Include "/includes/docs-head.html"}}
 		<style>
 		h4 { margin-top: 15px; margin-bottom: -10px; }
+		table { 
+			border-collapse: collapse;
+			width: 100%;
+			margin: 1em 0;
+		}
+		th { text-align: left; background: #F2F2F2; }
+		th, td {
+			vertical-align: top;
+			padding: 7px;
+			border-bottom: 1px solid #E0E0E0;
+			font-size: 14px;
+		}
 		</style>
 	</head>
 	<body>
@@ -48,7 +60,7 @@
 
 			<h4>The .caddy folder</h4>
 			<p>
-				Caddy will create a folder in your home directory called <code>.caddy</code>. It uses this to store and manage cryptographic assets required to serve your site privately over HTTPS. <mark>Your sites' certificates and private keys are stored here. Take care to back up and protect this folder.</mark> If there is no home folder, the .caddy folder is created in the current working directory. The home folder is learned from the environment (<code>$HOME</code> or <code>%HOMEPATH%</code>).
+				Caddy will create a folder in your home directory called <code>.caddy</code>. It uses this to store and manage cryptographic assets required to serve your site privately over HTTPS. <mark>Your sites' certificates and private keys are stored here. Take care to back up and protect this folder.</mark> If there is no home folder, the .caddy folder is created in the current working directory unless <code>$CADDYPATH</code> is set. The home folder is learned from the environment (<code>$HOME</code> or <code>%HOMEPATH%</code>).
 			</p>
 
 			<h4>Testing, experimenting, and advanced setups</h4>
@@ -56,9 +68,9 @@
 				To test your Caddy configuration, make sure you use the <code>-ca</code> flag to change the ACME endpoint to a staging or development URL, otherwise you are likely to hit rate limits which can block your access to HTTPS for up to a week. This is especially common when using process managers or containers. Caddy's default CA is <a href="https://letsencrypt.org">Let's Encrypt</a>, which has a staging endpoint that is not subject to the same rate limits.
 			</p>
 
-			<h4>Load balancing</h4>
+			<h4>Behind a load balancer or proxy</h4>
 			<p>
-				If Caddy is behind a load balancer, it may have trouble validating the domain and obtaining certificates. It is your responsibility, then, to ensure SSL certificates are obtained and properly set up on all machines.
+				If Caddy is behind other infrastructure, it may have trouble validating the domain and obtaining certificates. It is your responsibility, then, to ensure SSL certificates are obtained and properly set up on all machines. In most cases, you can use the DNS challenge (described below) to obtain certificates, but this you have to configure manually.
 			</p>
 
 			<h4>Transparency reports</h4>
@@ -67,6 +79,118 @@
 			</p>
 
 
+			<h2 id="dns-challenge">DNS Challenge</h2>
+
+			<p>
+				There are three challenge types by which Caddy can obtain certificates. Caddy can use two of them without any configuration, but another one&mdash;the DNS challenge&mdash;requires configuration and can be used when the other challenge types would fail. Caddy supports <a href="https://github.com/caddyserver/dnsproviders">a number of DNS providers</a>.
+			</p>
+			<p>
+				To use the DNS challenge, you must do three things. 1) Download Caddy with your provider plugged in. 2) Tell Caddy which provider to use; this is done in the Caddyfile. 3) Give Caddy credentials to access your account to solve the challenge; this is done with environment variables.
+			</p>
+			
+			<h3>Enabling the DNS Challenge</h3>
+			<p>
+				In your Caddyfile, you will use the <a href="/docs/tls">tls</a> directive with the dns keyword like so:
+			</p>
+			<code class="block"><span class="hl-directive">tls</span> {
+	<span class="hl-subdirective">dns</span> <i>provider</i>
+}
+</code></code>
+			<p>
+				Replace "provider" with the name of your DNS provider (in the table below). You will also need to set environment variables with your account credentials:
+			</p>
+
+			<table>
+				<thead>
+					<tr>
+						<th>Provider Name</th>
+						<th>Environment Variables to Set</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>cloudflare</td>
+						<td>
+							CLOUDFLARE_EMAIL<br>
+							CLOUDFLARE_API_KEY
+						</td>
+					</tr>
+					<tr>
+						<td>digitalocean</td>
+						<td>
+							DO_AUTH_TOKEN
+						</td>
+					</tr>
+					<tr>
+						<td>dnsimple</td>
+						<td>
+							DNSIMPLE_EMAIL<br>
+							DNSIMPLE_API_KEY
+						</td>
+					</tr>
+					<tr>
+						<td>dyn</td>
+						<td>
+							DYN_CUSTOMER_NAME<br>
+							DYN_USER_NAME<br>
+							DYN_PASSWORD
+						</td>
+					</tr>
+					<tr>
+						<td>gandi</td>
+						<td>
+							GANDI_API_KEY
+						</td>
+					</tr>
+					<tr>
+						<td>googlecloud</td>
+						<td>
+							GCE_PROJECT
+						</td>
+					</tr>
+					<tr>
+						<td>namecheap</td>
+						<td>
+							NAMECHEAP_API_USER<br>
+							NAMECHEAP_API_KEY
+						</td>
+					</tr>
+					<tr>
+						<td>rfc2136</td>
+						<td>
+							RFC2136_NAMESERVER<br>
+							RFC2136_TSIG_ALGORITHM<br>
+							RFC2136_TSIG_KEY<br>
+							RFC2136_TSIG_SECRET
+						</td>
+					</tr>
+					<tr>
+						<td>googlecloud</td>
+						<td>
+							GCE_PROJECT
+						</td>
+					</tr>
+					<tr>
+						<td>route53</td>
+						<td>
+							AWS_ACCESS_KEY_ID<br>
+							AWS_SECRET_ACCESS_KEY
+						</td>
+					</tr>
+					<tr>
+						<td>vultr</td>
+						<td>
+							VULTR_API_KEY
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<p>
+				When you configure the DNS challenge, Caddy will use that challenge exclusively. Note that some providers may be slow to apply changes (on the order of minutes).
+			</p>
+
+			
 
 			<h2 id="on-demand">On-Demand TLS</h2>
 
@@ -78,7 +202,7 @@
 				To enable on-demand TLS, use the <code>tls</code> directive with <code>max_certs</code>. For example, your Caddyfile might look like this:
 			</p>
 
-			<code class="block"><span class="hl-vhost">:443</span>
+			<code class="block"><span class="hl-vhost">*.example.com</span>
 <span class="hl-directive">proxy</span> <span class="hl-arg">/ localhost:4001 localhost:4002</span>
 <span class="hl-directive">tls</span> {
 	<span class="hl-subdirective">max_certs</span> 10
@@ -86,7 +210,7 @@
 </code></code>
 
 			<p>
-				This Caddyfile will proxy all requests on port 443 to your backends&mdash;no matter what the hostname is&mdash;for the first 10 unique hostnames. This means you can dynamically provision new DNS records, and they will just start working with HTTPS. Unlike wildcard certificates, on-demand certificates are not limited to subdomains.
+				This Caddyfile will proxy all requests on subdomains to <code>example.com</code> to your backends for the first 10 unique hostnames. This means you can dynamically provision new DNS records, and they will just start working with HTTPS. Unlike wildcard certificates, on-demand certificates are not limited to subdomains.
 			</p>
 
 			<mark class="block">

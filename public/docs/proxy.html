@@ -26,7 +26,7 @@
 
 			<ul>
 				<li><b>from</b> is the base path to match for the request to be proxied</li>
-				<li><b>to</b> is the destination endpoint to proxy to</li>
+				<li><b>to</b> is the destination endpoint to proxy to (may include a port range)</li>
 			</ul>
 
 			However, advanced features including load balancing can be utilized with an expanded syntax:
@@ -35,10 +35,14 @@
 	<span class="hl-subdirective">policy</span> random | least_conn | round_robin
 	<span class="hl-subdirective">fail_timeout</span> <i>duration</i>
 	<span class="hl-subdirective">max_fails</span> <i>integer</i>
-	<span class="hl-subdirective">health_check</span> <i>path</i> [<i>duration</i>]
-	<span class="hl-subdirective">proxy_header</span> <i>name value</i>
+	<span class="hl-subdirective">health_check</span> <i>path</i>
+	<span class="hl-subdirective">health_check_interval</span> <i>interval_duration</i>
+	<span class="hl-subdirective">health_check_timeout</span> <i>timeout_duration</i>
+	<span class="hl-subdirective">header_upstream</span> <i>name value</i>
+	<span class="hl-subdirective">header_downstream</span> <i>name value</i>
 	<span class="hl-subdirective">without</span> <i>prefix</i>
 	<span class="hl-subdirective">except</span> <i>ignored_paths...</i>
+	<span class="hl-subdirective">upstream</span> <i>to</i>
 	<span class="hl-subdirective">insecure_skip_verify</span>
 	<span class="hl-subdirective"><i>preset</i></span>
 }</code>
@@ -49,10 +53,14 @@
 				<li><b>policy</b> is the load balancing policy to use; applies only with multiple backends. May be one of random, least_conn, or round_robin. Default is random.</li>
 				<li><b>fail_timeout</b> specifies how long to consider a backend as down after it has failed. While it is down, requests will not be routed to that backend. A backend is "down" if Caddy fails to communicate with it. The default value is 10 seconds ("10s").</li>
 				<li><b>max_fails</b> is the number of failures within fail_timeout that are needed before considering a backend to be down. If 0, the backend will never be marked as down. Default is 1.</li>
-				<li><b>health_check</b> will use <i>path</i> to check the health of each backend. If a backend returns a status code of 200-399, then that backend is considered healthy. If it doesn't, the backend is marked as unhealthy for <i>duration</i> and no requests are routed to it. If this option is not provided then health checks are disabled. The default duration is 10 seconds ("10s").</li>
-				<li><b>proxy_header</b> sets headers to be passed to the backend. The field name is <i>name</i> and the value is <i>value</i>. This option can be specified multiple times for multiple headers, and dynamic values can also be inserted using <a href="/docs/placeholders">request placeholders</a>.</li>
-				<li><b>prefix</b> is a URL prefix to trim before proxying the request upstream. A request to /api/foo without /api, for example, will result in a proxy request to /foo.</li>
-				<li><b>ignored_paths...</b> is a space-separated list of paths to exclude from proxying. Requests that match any of these paths will be passed thru.</li>
+				<li><b>health_check</b> will use <i>path</i> to check the health of each backend. If a backend returns a status code of 200-399, then that backend is considered healthy. If it doesn't, the backend is marked as unhealthy for at least <i>interval_duration</i> and no requests are routed to it. If this option is not provided then health checks are disabled.</li>
+				<li><b>health_check_interval</b> specifies the time between each health check on unhealthy backends. The default interval is 30 seconds ("30s").</li>
+				<li><b>health_check_timeout</b> sets a deadline for health check requests. If a health check does not respond withing <i>timeout_duration</i>, the health check is considered failed. The default is 60 seconds ("60s").</li>
+				<li><b>header_upstream</b> sets headers to be passed to the backend. The field name is <i>name</i> and the value is <i>value</i>. This option can be specified multiple times for multiple headers, and dynamic values can also be inserted using <a href="/docs/placeholders">request placeholders</a>. By default, existing header fields will be replaced, but you can add/merge field values by prefixing the field name with a plus sign (+). You can remove fields by prefixing the header name with a minus sign (-) and leaving the value blank.</li>
+				<li><b>header_downstream</b> modifies response headers coming back from the backend. It works the same way header_upstream does.</li>
+				<li><b>without</b> is a URL prefix to trim before proxying the request upstream. A request to /api/foo without /api, for example, will result in a proxy request to /foo.</li>
+				<li><b>except</b> is a space-separated list of paths to exclude from proxying. Requests that match any of <i>ignored_paths...</i> will be passed thru.</li>
+				<li><b>upstream</b> specifies another backend. It may use a port range like ":8080-8085" if desired. It is often used multiple times when there are many backends to route to.</li>
 				<li><b>insecure_skip_verify</b> overrides verification of the backend TLS certificate, essentially disabling security features over HTTPS.</li>
 				<li><b>preset</b> is an optional shorthand way of configuring the proxy to meet certain conditions. See presets below.</li>
 			</ul>
@@ -73,12 +81,19 @@
 					<b>websocket</b>
 					<br>
 					Indicates this proxy is forwarding WebSocket connections. It is shorthand for:
-					<code class="block"><span class="hl-subdirective">proxy_header</span> Connection {>Connection}
-<span class="hl-subdirective">proxy_header</span> Upgrade    {>Upgrade}</code>
+					<code class="block"><span class="hl-subdirective">header_upstream</span> Connection {>Connection}
+<span class="hl-subdirective">header_upstream</span> Upgrade    {>Upgrade}</code>
 					<mark class="block">
-						HTTP/2 does not support protocol upgrade, so you will have to disable HTTP/2 in order to use WebSockets on secure connections.
+						HTTP/2 does not support protocol upgrade.
 					</mark>
-
+				</li>
+				<li>
+					<b>transparent</b>
+					<br>
+					Passes thru host information from the original request as most backend apps would expect. Shorthand for:
+					<code class="block"><span class="hl-subdirective">header_upstream</span> Host {host}
+<span class="hl-subdirective">header_upstream</span> X-Real-IP {remote}
+<span class="hl-subdirective">header_upstream</span> X-Forwarded-Proto {scheme}</code>
 				</li>
 			</ul>
 
@@ -126,16 +141,14 @@
 			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg">/ web1.local:80 web2.local:90 web3.local:100</span> {
 	<span class="hl-subdirective">policy</span> round_robin
 	<span class="hl-subdirective">health_check</span> /health
-	<span class="hl-subdirective">proxy_header</span> Host {host}
-	<span class="hl-subdirective">proxy_header</span> X-Real-IP {remote}
-	<span class="hl-subdirective">proxy_header</span> X-Forwarded-Proto {scheme}
+	<span class="hl-subdirective">transparent</span>
 }</code>
 
 			<p>
 				Proxy WebSocket connections:
 			</p>
 
-			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg">/ localhost:8080</span> {
+			<code class="block"><span class="hl-directive">proxy</span> <span class="hl-arg">/stream localhost:8080</span> {
 	<span class="hl-subdirective">websocket</span>
 }</code>
 

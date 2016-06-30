@@ -9,7 +9,11 @@
 			<h1>header</h1>
 
 			<p>
-				header can add one or more fields to the response header.
+				header can manipulate response headers.
+			</p>
+
+			<p>
+				Note that if you wish to remove response headers from a proxied backend, you must do so in the <a href="/docs/proxy">proxy</a> directive.
 			</p>
 
 			<h3>Syntax</h3>
@@ -64,8 +68,7 @@
     <span class="hl-subdirective">Strict-Transport-Security</span>  "max-age=31536000;"
     <span class="hl-comment"># Enable cross-site filter (XSS) and tell browser to block detected attacks</span>
     <span class="hl-subdirective">X-XSS-Protection</span> "1; mode=block"
-    <span class="hl-comment"># Prevent some browsers from MIME-sniffing a response away from the declared</span>
-    <span class="hl-comment"># content-type</span>
+    <span class="hl-comment"># Prevent some browsers from MIME-sniffing a response away from the declared Content-Type</span>
     <span class="hl-subdirective">X-Content-Type-Options</span> "nosniff"
     <span class="hl-comment"># Disallow the site to be rendered within a frame (clickjacking protection)</span>
     <span class="hl-subdirective">X-Frame-Options</span> "DENY"

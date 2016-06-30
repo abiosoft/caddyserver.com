@@ -16,12 +16,16 @@
 				This is a unique directive in that <code>import</code> can appear outside of a server block. In other words, it can appear at the top of a Caddyfile where an address would normally be. Like other directives, however, it cannot be used inside of other directives.
 			</p>
 
+			<p>
+				Note that the the import path is relative to the Caddyfile, not the current working directory.
+			</p>
+
 			<h3>Syntax</h3>
 			
 			<code class="block"><span class="hl-directive">import</span> <span class="hl-arg"><i>pattern</i></span></code>
 
 			<ul>
-				<li><b>pattern</b> is the file or glob pattern (<code>*</code>) to include. Its contents will replace this line, as if that file's contents appeared here to begin with.</li>
+				<li><b>pattern</b> is the file or glob pattern (<code>*</code>) to include. Its contents will replace this line, as if that file's contents appeared here to begin with. This value is relative to the Caddyfile's location.</li>
 			</ul>
 
 
@@ -31,13 +35,13 @@
 				Import a shared configuration:
 			</p>
 
-			<code class="block"><span class="hl-directive">import</span> <span class="hl-arg">../config/common.conf</span></code>
+			<code class="block"><span class="hl-directive">import</span> <span class="hl-arg">config/common.conf</span></code>
 
 			<p>
 				Imports any files found in the vhosts folder:
 			</p>
 
-			<code class="block"><span class="hl-directive">import</span> <span class="hl-arg">vhosts/*</span></code>
+			<code class="block"><span class="hl-directive">import</span> <span class="hl-arg">../vhosts/*</span></code>
 
 
 

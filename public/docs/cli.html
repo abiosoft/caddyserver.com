@@ -47,7 +47,7 @@
 
 			<h4 id="ca">-ca</h4>
 			<p>
-				Base URL to the certificate authority's ACME server. Used for creating SSL certificates.
+				Base URL to the certificate authority's ACME server directory. Used for creating TLS certificates.
 			</p>
 
 			<h4 id="conf">-conf</h4>
@@ -60,14 +60,14 @@
 				CPU cap. Can be a percentage (e.g. "75%") or a number indicating how many cores to use (e.g. 3).
 			</p>
 
-			<h4 id="directives">-directives</h4>
+			<h4 id="plugins">-plugins</h4>
 			<p>
-				Lists the directives recognized by Caddy. Caddy will terminate after printing; it will not serve sites.
+				Lists the plugins registered with Caddy. Caddy will terminate after printing; it will not serve sites.
 			</p>
 
 			<h4 id="email">-email <span class="auto-recommend">AUTO</span></h4>
 			<p>
-				Email address to use for SSL certificate generation if not <a href="/docs/tls">specified for a site in the Caddyfile</a>. It is not required, but is strongly recommended so you can recover your account if you lose your private key. If an email is not available, Caddy may prompt you for an email address during runtime. This option is recommended in automated environments if not <a href="/docs/tls">specified in the Caddyfile</a>.
+				Email address to use for TLS certificate generation if not <a href="/docs/tls">specified for a site in the Caddyfile</a>. It is not required, but is strongly recommended so you can recover your account if you lose your private key. If an email is not available, Caddy may prompt you for an email address during runtime. This option is recommended in automated environments if not <a href="/docs/tls">specified in the Caddyfile</a>.
 			</p>
 
 			<h4 id="cpu">-grace</h4>
@@ -97,7 +97,7 @@
 
 			<h4 id="pidfile">-pidfile <span class="auto-recommend">AUTO</span></h4>
 			<p>
-				The pidfile to write. Used with automated environments. Caddy will write a file containing the process ID which is updated when Caddy restarts and the PID changes.
+				The pidfile to write. Used with automated environments. Caddy will write a file containing the current process ID.
 			</p>
 
 			<h4 id="port">-port</h4>
@@ -105,14 +105,14 @@
 				The default port to listen on.
 			</p>
 
+			<h4 id="quic">-quic</h4>
+			<p>
+				Enables experimental QUIC support. See <a href="https://github.com/mholt/caddy/wiki/QUIC">the QUIC wiki page</a> for more details how to experiment with QUIC.
+			</p>
+
 			<h4 id="quiet">-quiet</h4>
 			<p>
 				Quiet mode. If quiet, Caddy will not print informational initialization output, only the addresses being served.
-			</p>
-
-			<h4 id="restart">-restart</h4>
-			<p>
-				Change the restart mode. By default, Caddy performs graceful restarts on Unix systems which starts a new process and kills the old one. You can force a non-graceful, "in-process" restart by setting the value of this option to <code>inproc</code>.
 			</p>
 
 			<h4 id="revoke">-revoke</h4>
@@ -125,7 +125,12 @@
 				Path to the default site root from which to serve files.
 			</p>
 
-			<h4 id="root">-version</h4>
+			<h4 id="type">-type</h4>
+			<p>
+				Change the server type. Default is http. If your Caddyfile is for another server type, use this option to tell it which server type to use.
+			</p>
+
+			<h4 id="version">-version</h4>
 			<p>
 				Prints the version. It also prints build information if not from a tagged release. Caddy will terminate after printing; it does not serve sites if this option is used.
 			</p>
@@ -159,7 +164,7 @@
 
 			<h4 id="sigusr1">USR1</h4>
 			<p>
-				Reloads the configuration file, then gracefully restarts the server. This spins up a process with a different process ID.
+				Reloads the configuration file, then gracefully restarts the server.
 			</p>
 
 
@@ -224,6 +229,11 @@
 			<h4 id="home">HOME</h4>
 			<p>
 				The home folder. Caddy will create a .caddy folder here if using managed TLS (automatic HTTPS), and possibly persist other state here in the future or if configured to do so.
+			</p>
+
+			<h4 id="caddypath">CADDYPATH</h4>
+			<p>
+				If set, Caddy will use this folder to store assets instead of the default $HOME/.caddy.
 			</p>
 
 			<h4 id="case_insensitive_path">CASE_SENSITIVE_PATH</h4>

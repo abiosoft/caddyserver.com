@@ -55,7 +55,13 @@
 			</ul>
 
 			<p>
-				The above syntax uses Caddy's default TLS settings with your own certificate and key, which should be sufficient in most cases. You can use this multiple times to specify multiple certificate and key pairs.
+				Or to have Caddy generate and use an untrusted, self-signed certificate in memory:
+			</p>
+
+			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg">self_signed</span></code>
+
+			<p>
+				The above syntaxes use Caddy's default TLS settings with your own certificate and key or a self-signed certificate, which should be sufficient in most cases. You can use this directive multiple times to specify multiple certificate and key pairs.
 			</p>
 
 			<p>
@@ -65,18 +71,18 @@
 			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg">[<i>cert key</i>]</span> {
     <span class="hl-subdirective">protocols</span> <i>min max</i>
     <span class="hl-subdirective">ciphers</span>   <i>ciphers...</i>
-    <span class="hl-subdirective">clients</span>   <i><span class="hl-arg">[request|require|verify_if_given|]</span> clientcas...</i>
+    <span class="hl-subdirective">clients</span>   <i>[request|require|verify_if_given]</span> clientcas...</i>
 	<span class="hl-subdirective">load</span>      <i>dir</i>
 	<span class="hl-subdirective">max_certs</span> <i>limit</i>
 	<span class="hl-subdirective">key_type</span>  <i>type</i>
+	<span class="hl-subdirective">dns</span>       <i>provider</i>
 }</code>
 
 			<ul>
 				<li><b>cert</b> and <b>key</b> are the same as above.</li>
 				<li><b>min</b> and <b>max</b> are the minimum and maximum protocol versions to support, respectively. See below for valid values.</li>
 				<li><b>ciphers...</b> is a list of space-separated ciphers that will be supported. If you list any, only the ones you specify will be allowed. See below for valid values.</li>
-				<li><b>clientcas...</b> is a list of space-separated client root CAs used for verification during TLS client authentication. If used, clients will be asked to present their certificate by their browser, which will be verified against this list of client certificate authorities. A client will not be allowed to connect if their certificate was not signed by one of these root CAs.<br />
-				<li><b>clients</b> accepts special flags as first argument, which you should not set unless you need that for a backend or plugin:
+				<li><b>clientcas...</b> is a list of space-separated client root CAs used for verification during TLS client authentication. If used, clients will be asked to present their certificate by their browser, which will be verified against this list of client certificate authorities. A client will not be allowed to connect if their certificate was not signed by one of these root CAs. You may modify the strictness of client authentication using one of the keywords before the list of client CAs:
 					<ul>
 						<li><b>request</b> merely asks a client to provide a certificate, but will not fail if none is given or if an invalid one is presented.</li>
 						<li><b>require</b> requires a client certificate, but will not verify it.</li>
@@ -86,7 +92,8 @@
 				</li>
 				<li><b>dir</b> is a directory from which to load certificates and keys. The entire directory and its subfolders will be walked in search of .pem files. Each .pem file must contain the PEM-encoded certificate (chain) and key blocks, concatenated together.</li>
 				<li><b>limit</b> puts a limit on the number of certificates allowed to be issued on demand (during TLS handshake). Specifying this value enables <a href="/docs/automatic-https#on-demand">On-Demand TLS</a>. It must be a positive integer. This value gets reset after the process exits (but is preserved through reloads).</li>
-				<li><b>type</b> is the type of key to use when generating keys for certificates (only applies to managed TLS). Valid values are rsa2048, rsa4096, rsa8192, p256, and p384. Default is currently rsa2048.</li>
+				<li><b>type</b> is the type of key to use when generating keys for certificates (only applies to managed orTLS or self-signed certificates). Valid values are rsa2048, rsa4096, rsa8192, p256, and p384. Default is currently rsa2048.</li>
+				<li><b>provider</b> is the name of a DNS provider; specifying it enables the <a href="/docs/automatic-https#dns-challenge">DNS challenge</a>. Note that you need to give credentials for it to work.</li>
 			</ul>
 
 
@@ -99,13 +106,12 @@
 
 			<ul>
 				<li>tls1.2 (default <b>max</b>)</li>
-				<li>tls1.1</li>
-				<li>tls1.0 (default <b>min</b>)</li>
-				<li>ssl3.0 <mark>Note: SSL 3.0 is insecure and should not be used.</mark></li>
+				<li>tls1.1 (default <b>min</b>)</li>
+				<li>tls1.0</li>
 			</ul>
 
 			<p>
-				Note that setting the minimum protocol version too high will restrict the clients which are able to connect.
+				Note that setting the minimum protocol version too high will restrict the clients which are able to connect, but with the benefit of better privacy.
 			</p>
 
 			<p>
@@ -173,6 +179,13 @@
 			<code class="block"><span class="hl-directive">tls</span> {
 	<span class="hl-subdirective">load</span> /www/certificates
 }</code>
+
+
+			<p>
+				Serve a site with a self-signed certificate (untrusted by browsers):
+			</p>
+
+			<code class="block"><span class="hl-directive">tls</span> <span class="hl-arg">self_signed</span></code>
 
 			<footer>
 				&copy; 2016

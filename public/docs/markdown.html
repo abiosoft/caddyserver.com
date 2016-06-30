@@ -12,7 +12,7 @@
 			<h1>markdown</h1>
 
 			<p>
-				markdown serves <a href="http://daringfireball.net/projects/markdown/">Markdown</a> files as HTML pages on demand, but it can also generate a static site from Markdown so it doesn't have to render on-the-fly. You can specify whole custom templates or just the CSS and JavaScript files to be used on the pages to give them a custom look and behavior.
+				markdown serves <a href="http://daringfireball.net/projects/markdown/">Markdown</a> files as HTML pages on demand. You can specify whole custom templates or just the CSS and JavaScript files to be used on the pages to give them a custom look and behavior.
 			</p>
 
 
@@ -22,8 +22,6 @@
     <span class="hl-subdirective">ext</span>      <i>extensions...</i>
     <span class="hl-subdirective">[css|js]</span> <i>file</i>
     <span class="hl-subdirective">template</span> [<i>name</i>] <i>path</i>
-    <span class="hl-subdirective">sitegen</span>  [<i>static_path</i>]
-    <span class="hl-subdirective">dev</span>
 }</code>
 
 			<ul>
@@ -33,26 +31,11 @@
 				<li><b>js</b> indicates that the next argument is a JavaScript file to include on the page.</li>
 				<li><b>file</b> is the JS or CSS file to add to the page.</li>
 				<li><b>template</b> defines a template with the given <b>name</b> to be at the given <b>path</b>. To specify the default template, omit <i>name</i>. Markdown files can choose a template by using the name in its front matter.</li>
-				<li><b>sitegen</b> enables static site generation. Static (HTML) files will be dumped to <b>static_path</b>. If the path is omitted, generated_site is used. The path is relative to site root. This directory will be deleted (if it exists) every time the static site is generated.</li>
-				<li><b>dev</b> disables caching of the Markdown index. This is useful for local development when you want immediate updates to pages, but this may slow down large, busy sites in production.
 			</ul>
 
 			<p>
 				You can use the js and css arguments more than once to add more files to the default template. If you want to accept defaults, you should completely omit the curly braces.
 			</p>
-
-
-			<h3>Static Site Generation</h3>
-
-			<p>
-				If you specify <i>sitegen</i> in the Caddyfile, this directive will convert your Markdown files into static HTML. When the server starts, it will delete the existing generated static site (if it exists), then sweep all files in the base path for Markdown files and convert them to HTML. After Markdown files are changed, the static HTML file will be regenerated at intervals of 60 seconds (unless dev is used, in which case it happens immediately at request-time). <mark>Warning: If it exists, the entire static site directory is deleted before regenerating the site.</mark>
-			</p>
-
-			<p>
-				Static site generation is <i>not</i> required, but might be useful for very busy sites where rendering the template is computationally expensive.
-			</p>
-
-			<mark class="block">Static site generation is not recommended when using <a href="/docs/template-actions">templates</a> that access data out of requests, since the files are pre-generated before any requests happen. Thus, those values will be empty.</mark>
 
 
 			<h3>Front Matter (Document Metadata)</h3>
@@ -114,27 +97,6 @@ sitename: A Caddy site
 	&lt;/body&gt;
 &lt;/html&gt;</code></pre>
 
-
-			<p>
-				If you enable site generation, you can iterate the list of Markdown pages and link to them, for example:
-			</p>
-
-			<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-	&lt;head&gt;
-		&lt;title&gt;Document Index&lt;/title&gt;
-	&lt;/head&gt;
-	&lt;body&gt;
-	{&#123;range .Links}}
-		&lt;a href="{&#123;.URL}}"&gt;{&#123;.Title}}&lt;/a&gt;
-		&lt;br&gt;
-		{&#123;.Summary}}
-		&lt;hr&gt;
-	{&#123;end}}
-	&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-
-
 			<p>
 				Along with these template actions, all the standard <a href="/docs/template-actions">Caddy template actions</a> are available to you in Markdown templates.
 			</p>
@@ -166,15 +128,6 @@ sitename: A Caddy site
 	<span class="hl-subdirective">template</span> blog  blog.html
 	<span class="hl-subdirective">template</span> about about.html
 }</code>
-
-
-			<p>
-				Generate a static website which gets placed into the generated_site folder:
-			</p>
-			<code class="block"><span class="hl-directive">markdown</span> <span class="hl-arg">/blog</span> {
-	sitegen
-}</code>
-
 
 
 			<footer>

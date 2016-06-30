@@ -9,7 +9,7 @@
 			<h1>redir</h1>
 
 			<p>
-				redir sends the client an HTTP redirect status code if the URL matches the specified pattern.
+				redir sends the client an HTTP redirect status code if the URL matches the specified pattern. It is also possible to make a redirect conditional.
 			</p>
 
 
@@ -20,7 +20,7 @@
 
 			<ul>
 				<li><b>from</b> is the request path to match (it must match exactly)</li>
-				<li><b>to</b> is the path to redirect to</li>
+				<li><b>to</b> is the path to redirect to (may use <a href="/docs/placeholders">request placeholders</a>)</li>
 				<li><b>code</b> is the HTTP status code to respond with; must be in the range [300-308] excluding 306. May also be <code>meta</code> to issue meta tag redirect for browsers. Default is 301 Moved Permanently.</li>
 			</ul>
 
@@ -42,6 +42,23 @@
 			<p>
 				Each line defines a redirect and may optionally overwrite the redirect code defined at the top of the table. If no redirect code is specified, the default is used.
 			</p>
+
+			<p>
+				A group of redirects can also be conditional:
+			</p>
+
+			<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg">[<i>code</i>]</span> {
+	<span class="hl-subdirective">if</span>    <i>a cond b</i>
+	<span class="hl-subdirective">if_op</span> <i>[</i>and|or<i>]</i>
+	...
+}
+</code>
+
+			<ul>
+				<li><b>if</b> specifies a rewrite condition. Multiple ifs are AND-ed together by default. <b>a</b> and <b>b</b> are any string and may use <a href="/docs/placeholders">request placeholders</a>. <b>cond</b> is the condition, with possible values explained in <a href="/docs/rewrite#if">rewrite</a> (which also has an <code>if</code> statement).</li>
+				<li><b>if_op</b> specifies how the ifs are evaluated; the default is <code>and</code>.</li>
+			</ul>
+
 
 			<h3>Preserving Path</h3>
 
@@ -73,6 +90,11 @@
 	<span class="hl-subdirective">/todo</span>    /notes
 	<span class="hl-subdirective">/api-dev</span> /api       meta
 }</code>
+
+			redir {
+    if  {>X-Forwarded-Proto} is http
+    /   https://{uri}
+}
 
 			<footer>
 				&copy; 2016

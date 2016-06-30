@@ -15,7 +15,7 @@
 			<h3>Introduction</h3>
 
 			<p>
-				The term "Caddyfile" describes a text file that changes how an instance of Caddy works. It's similar in purpose to httpd.conf or nginx.conf. The Caddyfile file can be named anything, but by default, Caddy will look for a file called Caddyfile in the current directory. You can specify another location for the Caddyfile using the <code>-conf</code> <a href="/docs/cli">flag</a>:
+				The term "Caddyfile" describes a text file that changes how Caddy works. It's similar in purpose to httpd.conf or nginx.conf. The Caddyfile file can be named anything, but by default, Caddy will look for a file called Caddyfile in the current directory. You can specify another location for the Caddyfile using the <code>-conf</code> <a href="/docs/cli">flag</a>:
 			</p>
 
 			<pre><code class="bash">$ caddy -conf="/path/to/Caddyfile"</code></pre>
@@ -75,7 +75,7 @@
 <span class="hl-directive">foobar</span> <span class="hl-comment"># or go at the end</span></code>
 	
 			<p>
-				To configure multiple servers (virtual hosts) with a single Caddyfile, you must use curly braces around the server block:
+				To configure multiple servers (virtual hosts) with a single Caddyfile, you must use curly braces around the site block:
 			</p>
 
 			<code class="block"><span class="hl-vhost">mysite.com</span> {
@@ -99,6 +99,13 @@
 			<code class="block"><span class="hl-vhost">localhost:2020, https://site.com, http://mysite.com</span> {
 	...
 }</code>
+
+			<p>
+				Site addresses also be defined under a specific path, or have wildcards in place of domain labels from the left side:
+			</p>
+
+			<code class="block"><span class="hl-vhost">example.com/static</span></code>
+			<code class="block"><span class="hl-vhost">*.example.com</span></code>
 
 			<p>
 				Power users may wish to use environment variables. This is allowed in addresses and arguments. They must be enclosed in curly braces, and you can use either Unix or Windows variable formats:
