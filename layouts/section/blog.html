@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>The Caddy Blog</title>
+		<meta name="theme-color" content="#002132">
+		{{ partial "head" }}
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/frontpages.css">
+		<link rel="stylesheet" href="/resources/css/blog.css">
+		<style>
+		.subtitle {
+			text-align: center;
+			font-size: 20px;
+			margin-top: -20px;
+			margin-bottom: 50px;
+		}
+
+		.links {
+			max-width: 800px;
+			margin: 0 auto;
+			word-wrap: break-word;
+		}
+
+		.blog-link {
+			font-size: 28px;
+			font-family: 'Helvetica Neue', sans-serif;
+		}
+
+		.blog-link a {
+			text-decoration: none;
+		}
+
+		.date {
+			color: #AAA;
+			font-size: 14px;
+			text-transform: uppercase;
+			margin-top: 5px;
+			margin-bottom: 10px;
+		}
+		</style>
+	</head>
+	<body>
+
+		<main>
+			<section class="content">
+				<div class="grid-container">
+					<div class="grid-100">
+					<h1>The Caddy Blog</h1>
+					<div class="subtitle">
+						Your source for Caddy news, tips, and other things about the modern Web.
+					</div>
+
+					<div class="links">
+                    {{ range .Data.Pages }}
+						<div class="blog-link"><a href="{{ replace .Permalink ".html" "" }}">{{.Title}}</a></div>
+						<div class="date">{{.Date.Format "January 2, 2006"}}</div>
+						{{.Summary}}... <a href="{{ replace .Permalink ".html" "" }}">continue reading</a>
+						<hr>
+					{{end}}
+					</div>
+				</div>
+			</section>
+		</main>
+
+		{{ partial "footer" }}
+	</body>
+</html>

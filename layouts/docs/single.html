@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{ .Title}} - Caddy{{ if .Params.directive }} Directives{{ end }}</title>
+		{{ partial "docs/head" . }}
+		<link rel="stylesheet" href="/resources/css/highlight/atelier-lakeside.light.css">
+		<script src="/resources/js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+	</head>
+	<body>
+		<main>
+			<h1>{{ .Title}} {{if .Params.plugin }}<div class="tag addon">Addon</div>{{end}}</h1>
+			{{if .Params.plugin}}
+			<div class="addon-message">
+				<div class="heading"><i class="fa fa-plus-circle"></i> Addon</div>
+				This directive is a Caddy extension. To get it, select this feature when you <a href="/download">download</a> Caddy. Questions should be directed to its maintainer. <a href="https://{{ .Params.link }}">{{ replace .Params.link "https://" "" }}</a>
+			</div>
+			{{end}}
+			{{.Content}}
+
+			<footer>
+				&copy; {{ .Now.Year }}
+			</footer>
+		</main>
+		{{ partial "docs/nav" . }}
+	</body>
+</html>

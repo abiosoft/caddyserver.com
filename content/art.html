@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Caddy for Designers and Artists</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		<meta name="theme-color" content="#222">
+		<link rel="icon" href="/favicon.ico">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli|Lato|Open+Sans:300,400,700">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/resources/css/unsemantic.css">
+		<link rel="stylesheet" href="/resources/css/common.css">
+		<link rel="stylesheet" href="/resources/css/frontpages.css">
+		<link rel="stylesheet" href="/resources/css/art.css">
+		<script src="/resources/js/jquery-2.1.3.min.js"></script>
+		<script src="/resources/js/common.js"></script>
+	</head>
+	<body>
+
+		<main>
+
+			<h1>
+				Create Amazing Things
+				<br>
+				<span style="font-size: 28px;">For The Web</span>
+			</h1>
+
+
+			<div class="perspective-container">
+				<div class="grid-container">
+					<div class="grid-50 perspective-side">
+						<h3>See your art as it really is</h3>
+						<p>
+							Design sites on your own computer as if it was already a real website on the Internet. Caddy lets you see your work in your browser before you publish it for the world to see.
+						</p>
+
+						<h3>Loading with file:/// is way passé</h3>
+						<p>
+							When you load your site with a "real" domain name in your browser, you can do more than if it was loaded as a file.
+						</p>
+
+						<h3>Runs the same everywhere</h3>
+						<p>
+							Caddy runs the same on your computer as it does on your public web server. Configuration and setup never get in your way.
+						</p>
+					</div>
+					<div class="grid-50">
+						<img src="/resources/images/art-caddy3d.png" id="top-bg">
+					</div>
+				</div>
+			</div>
+
+
+			<div class="grid-container" style="margin-bottom: 100px;">
+				<div class="grid-100">
+					<h4>So&mdash;wait, what is it exactly?</h4>
+				</div>
+
+				<div class="grid-50">
+					<p>
+						Caddy is a <i>web server</i>. Every website you go to comes from a web server somewhere on the Internet. But what if you could load websites that you're designing on your own computer without making it public?
+					</p>
+				</div>
+
+				<div class="grid-50">
+					<p>
+						Caddy lets you do just that. Loading a page by going to File &#8594; Open has some limitations, but using Caddy to serve your site with a domain name sets your site free.
+					</p>
+				</div>
+			</div>
+
+
+<!--
+			<div class="grid-container">
+				<div class="grid-100">
+					<h4>Make your designs come to life in the browser</h4>
+
+					{ VIDEO }
+				</div>
+			</div>
+-->
+
+			<div class="grid-container">
+				<div class="grid-100">
+					<h4>Sample Caddyfiles</h4>
+				</div>
+
+				<div class="grid-50">
+					<code class="block"><span class="hl-vhost">localhost</span>
+
+<span class="hl-directive">ext</span> <span class="hl-arg">.html</span>
+<span class="hl-directive">errors</span> {
+    <span class="hl-subdirective">404</span> notfound.html
+    <span class="hl-subdirective">503</span> serviceunavail.html
+}
+</code>
+					<ul>
+						<li>Site's URL is the default "localhost"</li>
+						<li>Clean URLs by trying .html files</li>
+						<li>Allows you to design and test error pages for Not Found and Service Unavailable errors</li>
+					</ul>
+				</div>
+
+				<div class="grid-50">
+					<code class="block"><span class="hl-vhost">http://julia.design</span>
+
+<span class="hl-directive">root</span> <span class="hl-arg">/Users/julia/Sites/julia-design</span>
+<span class="hl-directive">markdown</span> {
+    <span class="hl-subdirective">css</span> /css/articles.css
+    <span class="hl-subdirective">js</span>  /js/interactions.js
+}
+</code>
+					<ul>
+						<li>Site's domain is "julia.design" - works by adding "127.0.0.1 julia.design" to hosts file</li>
+						<li>The site's files are located in Julia's /julia-design folder</li>
+						<li>Markdown files are rendered as HTML with Julia's CSS and JS files</li>
+					</ul>
+				</div>
+				<div class="clear" style="height: 100px;"></div>
+				<div class="grid-100" style="height: 200px;">
+					<div style="text-align: center;">
+						<a href="/download" class="button white"><i class="fa fa-download fa-lg"></i> Download Caddy</a>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		{{ partial "footer" . }}
+	</body>
+</html>
