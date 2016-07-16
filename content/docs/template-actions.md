@@ -111,6 +111,12 @@ RawQuery returns the query string. You can replace RawQuery with Host, Scheme, F
 {{.NowDate}}
 ```
 
+**Get extension from file path:**
+
+```html
+{{.Ext "path/filename.ext"}}
+```
+
 **Strip extension from file path:**
 
 ```html

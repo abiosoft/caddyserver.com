@@ -25,4 +25,4 @@ To protect all contents of /internal from being served directly:
 Part of an example Caddyfile that protects some resources but allows a proxy to grant access to them (the service listening on :9000 must set X-Accel-Redirect):
 
 <code class="block"><span class="hl-directive">internal</span> <span class="hl-arg">/internal</span>
-<span class="hl-directive">proxy</span>    <span class="hl-arg">/redirect http://localhost:9000</span></code>
+<span class="hl-directive">proxy</span>    <span class="hl-arg">/redirect http://<!-- -->localhost:9000</span></code>

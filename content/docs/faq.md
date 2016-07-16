@@ -59,3 +59,8 @@ It's fast. If your site only serves tens of thousands of requests per second on 
 ### Can Caddy be used to serve PHP sites?
 
 Yep, Caddy has a [fastcgi](/docs/fastcgi) directive that makes it really easy to serve PHP sites.
+
+
+### Where can I find more FAQ?
+
+We're transitioning FAQ to [this topic in the forum](https://forum.caddyserver.com/t/caddy-frequently-asked-questions-faq/13).

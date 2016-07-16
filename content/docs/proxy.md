@@ -62,9 +62,11 @@ The following presets are available:
     Indicates this proxy is forwarding WebSocket connections. It is shorthand for: <code class="block"><span class="hl-subdirective">header_upstream</span> Connection {>Connection}
 <span class="hl-subdirective">header_upstream</span> Upgrade {>Upgrade}</code>
 	<mark class="block">HTTP/2 does not support protocol upgrade.</mark>
+
 *   **transparent**  
     Passes thru host information from the original request as most backend apps would expect. Shorthand for: <code class="block"><span class="hl-subdirective">header_upstream</span> Host {host}
 <span class="hl-subdirective">header_upstream</span> X-Real-IP {remote}
+<span class="hl-subdirective">header_upstream</span> X-Forwarded-For {remote}
 <span class="hl-subdirective">header_upstream</span> X-Forwarded-Proto {scheme}</code>
 
 ### Policies

@@ -11,26 +11,42 @@ $(function() {
 		if (!data)
 			return;
 
-		var tpl = '<div class="grid-25 mobile-grid-50"><label><span class="directive"><input type="checkbox"> {{DIRECTIVE}}</span><span class="description">{{DESCRIPTION}}</span></label></div>';
+		var tpl = '<label class="feature-type-item" data-name="{{NAME}}"><input type="checkbox"{{CHECKED}}{{DISABLED}}> {{NAME}}<span class="feature-type-description">{{DESCRIPTION}}</span></label>';
+		var items = {
+			"servers": [],
+			"directives": [],
+			"dnsproviders": []
+		};
 
-		// List alphabetically
-		data.sort(function(a, b) {
-			if (a.directive < b.directive)
-				return -1;
-			else if (a.directive > b.directive)
-				return 1;
-			else
-				return 0;
-		});
-
-		// Render to page
 		for (var i = 0; i < data.length; i++) {
-			var featHTML = tpl.replace("{{DIRECTIVE}}", data[i].directive)
-			                  .replace("{{DESCRIPTION}}", data[i].description);
-			var $elem = $(featHTML);
-			$elem.insertBefore('#add-yours-container');
-			if ((i % 4) - 1 == 1)
-			 	$('#add-yours-container').before('<div class="clear"></div>');
+			if (data[i].type == "server")
+				items.servers.push(data[i]);
+			else if (data[i].type == "directive")
+				items.directives.push(data[i]);
+			else if (data[i].type == "dns_provider")
+				items.dnsproviders.push(data[i]);
+		}
+
+		for (var key in items) {
+			// List plugins alphabetically in their category
+			items[key].sort(function(a, b) {
+				if (a.name < b.name)
+					return -1;
+				else if (a.name > b.name)
+					return 1;
+				else
+					return 0;
+			});
+
+			// And render them to the page
+			for (var i = 0; i < items[key].length; i++) {
+				var item = items[key][i];
+				var featHTML = tpl.replace(/{{NAME}}/g, item.name || "")
+				                  .replace("{{DESCRIPTION}}", item.description || "")
+				                  .replace("{{CHECKED}}", (item.default || item.required) ? " checked" : "")
+				                  .replace("{{DISABLED}}", item.required ? " disabled" : "");
+				$('#feature-type-'+key+' .feature-type-list').append(featHTML);
+			}
 		}
 	}).fail(function() {
 		showBuildServerDown();
@@ -55,7 +71,7 @@ $(function() {
 	var stripeAmount = 0; // stripeAmount is dollar amount * 100
 	var checkout = StripeCheckout.configure({
 		key: stripePublishableKey,
-		image: "/resources/resources/images/caddy-leaf-circle.png",
+		image: "/resources/images/caddy-leaf-circle.png",
 		name: "Caddy Web Server",
 		opened: function() {
 			// Report to Analytics
@@ -285,7 +301,7 @@ function featureList() {
 	$('#features :checked').each(function() {
 		if ($(this).prop('disabled'))
 			return;
-		feat += $.trim($(this).parent().text()) + ",";
+		feat += $.trim($(this).parent().data("name")) + ",";
 	});
 	return feat.substr(0, feat.length-1);
 }

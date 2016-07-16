@@ -26,6 +26,6 @@ To have /api/status support JSONP:
 
 So for an endpoint that normally returns raw JSON like `{"status":"ok"}`, the following request:
 
-<code class="block">$ wget 'http://example.com/api/status?callback=func3022933'</code>
+<code class="block">$ wget 'http://<!-- -->example.com/api/status?callback=func3022933'</code>
 
 would return `func3022933({"status":"ok"});`.

@@ -11,7 +11,7 @@ Today, I'm very excited to announce Caddy 0.8! It features [automatic HTTPS](/do
 <div style="text-align: center; margin-top: 15px;">
 <iframe src="https://ghbtns.com/github-btn.html?user=mholt&repo=caddy&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="30px" style="vertical-align: middle;"></iframe>
 <a href="https://twitter.com/caddyserver" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @caddyserver</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p='https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div>
 
 Today, Internet users are [threatened with mass surveillance](https://www.schneier.com/blog/archives/2015/06/why_we_encrypt.html) and [invasive packet tampering](https://gist.github.com/Jarred-Sumner/90362639f96807b8315b) which undermines our privacy and destroys the integrity of what we read. Encryption can keep the Web safe and [reliable](http://http2-explained.haxx.se/content/en/part5.html#52-http2-for-https) if it's used everywhere, but this will never happen while site owners need extra financial and technical means to employ encryption if they can run their site more easily without it.
 

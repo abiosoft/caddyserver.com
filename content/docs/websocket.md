@@ -10,7 +10,7 @@ Any command can be executed as long as it takes input from stdin and writes to s
 
 Caddy will not make any effort to keep the backend process alive while a client is connected. It is the developer's responsibility to ensure the program does not terminate until the client is ready to close the connection or would be ready for it to terminate.
 
-<mark class="block">Note that HTTP/2 does not support protocol upgrade, so you will have to disable HTTP/2 in order to use this directive successfully on secure connections.</mark>
+<mark class="block">Note that HTTP/2 does not support protocol upgrade, so you may have to disable HTTP/2 in order to use this directive successfully on secure connections.</mark>
 
 ### Syntax
 

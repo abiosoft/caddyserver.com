@@ -31,11 +31,13 @@ To use Caddy with your own certificate and key:
 *   **cert** is the certificate file. If the certificate is signed by a CA, this certificate file should be a bundle: a concatenation of the server's certificate followed by the CA's certificate (root certificate usually not necessary).
 *   **key** is the server's private key file which matches the certificate file.
 
+You can use this directive multiple times to specify multiple certificate and key pairs.
+
 Or to have Caddy generate and use an untrusted, self-signed certificate in memory:
 
 <code class="block"><span class="hl-directive">tls</span> <span class="hl-arg">self_signed</span></code>
 
-The above syntaxes use Caddy's default TLS settings with your own certificate and key or a self-signed certificate, which should be sufficient in most cases. You can use this directive multiple times to specify multiple certificate and key pairs.
+The above syntaxes use Caddy's default TLS settings with your own certificate and key or a self-signed certificate, which should be sufficient in most cases.
 
 Advanced users may open a settings block for more control, optionally specifying their own certificate and key:
 
@@ -117,6 +119,6 @@ Load all certificates and keys from .pem files found in /www/certificates:
 	<span class="hl-subdirective">load</span> /www/certificates
 }</code>
 
-Serve a site with a self-signed certificate (untrusted by browsers):
+Serve a site with a self-signed certificate (untrusted by browsers, but convenient for local development):
 
 <code class="block"><span class="hl-directive">tls</span> <span class="hl-arg">self_signed</span></code>

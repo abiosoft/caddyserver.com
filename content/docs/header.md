@@ -41,10 +41,10 @@ Multiple custom headers for a specific path, while removing the Server field:
 }</code>
 
 
-                                Add some security headers to all pages:
+Add some security headers to all pages:
 
 
-                        <code class="block"><span class="hl-directive">header</span> <span class="hl-arg">/</span> {
+<code class="block"><span class="hl-directive">header</span> <span class="hl-arg">/</span> {
     <span class="hl-comment"># Enable HTTP Strict Transport Security (HSTS) to force clients to always</span>
     <span class="hl-comment"># connect via HTTPS (not recommended if only experimenting with HTTPS)</span>
     <span class="hl-subdirective">Strict-Transport-Security</span>  "max-age=31536000;"

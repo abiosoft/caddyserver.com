@@ -55,8 +55,7 @@ To configure multiple servers (virtual hosts) with a single Caddyfile, you must 
 
 <code class="block"><span class="hl-vhost">mysite.com</span> {
 	<span class="hl-directive">root</span> <span class="hl-arg">/www/mysite.com</span>
-}
-
+}<br>
 <span class="hl-vhost">sub.mysite.com</span> {
 	<span class="hl-directive">root</span> <span class="hl-arg">/www/sub.mysite.com</span>
 	<span class="hl-directive">gzip</span>
@@ -67,7 +66,7 @@ As with directives, the open curly brace must be at the end of the same line. Th
 
 For sites which share the same configuration, specify multiple addresses:
 
-<code class="block"><span class="hl-vhost">localhost:2020, https://site.com, http://mysite.com</span> {
+<code class="block"><span class="hl-vhost">localhost:2020, https://<!-- -->site.com, http://<!-- -->mysite.com</span> {
 	...
 }</code>
 
@@ -89,9 +88,9 @@ Addresses are specified in the form <code><span class="hl-vhost">scheme</span>:/
 <span class="hl-vhost">localhost</span>                <span class="hl-comment"># Host: localhost, Port: 2015</span>
 <span class="hl-vhost">localhost:8080</span>           <span class="hl-comment"># Host: localhost, Port: 8080</span>
 <span class="hl-vhost">example.com</span>              <span class="hl-comment"># Host: example.com, Port: 443</span>
-<span class="hl-vhost">http://example.com</span>       <span class="hl-comment"># Host: example.com, Port: 80</span>
-<span class="hl-vhost">https://example.com</span>      <span class="hl-comment"># Host: example.com, Port: 443</span>
-<span class="hl-vhost">http://example.com:1234</span>  <span class="hl-comment"># Host: example.com, Port: 1234</span>
+<span class="hl-vhost">http://<!-- -->example.com</span>       <span class="hl-comment"># Host: example.com, Port: 80</span>
+<span class="hl-vhost">https://<!-- -->example.com</span>      <span class="hl-comment"># Host: example.com, Port: 443</span>
+<span class="hl-vhost">http://<!-- -->example.com:1234</span>  <span class="hl-comment"># Host: example.com, Port: 1234</span>
 </code>
 
 ### Directives

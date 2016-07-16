@@ -2,4 +2,4 @@ baseurl: /
 languageCode: en-us
 metaDataFormat: yaml
 title: Caddy - The HTTP/2 Web Server with Fully Managed TLS
-uglyURLs: true
+uglyURLs: "true"

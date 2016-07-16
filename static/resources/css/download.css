@@ -61,66 +61,93 @@ h3 {
 }
 
 
-#features {
-	width: 100%;
+.feature-type {
+	border: 1px solid #484848;
+	height: 275px;
+	margin-bottom: 15px;
+	overflow: auto;
 }
 
-#features label,
-#features .label {
+.feature-type-header,
+.feature-type-item {
+	padding: 5px;
+	font-size: 14px;
+}
+
+.feature-type-header {
+	background-color: #484848;
+	color: #FFF;
+	font-size: 12px;
+	text-align: center;
+}
+
+.feature-type-header b {
+	font-size: 14px;
+}
+
+.feature-type-item {
+	display: block;
+	cursor: pointer;
+	border-bottom: 1px solid #CCC;
+}
+
+.feature-type-item:last-child {
+	border-bottom: none;
+}
+
+.feature-type-item:hover {
+	background: #F0F0F0;
+}
+
+.feature-type-description {
+	display: block;
+	font-size: 11px;
+	padding-left: 16px;
+}
+
+
+#features .add-yours {
 	display: block;
 	font-size: 14px;
 	cursor: pointer;
 	padding: 10px;
-	border: 1px solid transparent;
-	border-radius: 4px;
 	margin-bottom: 10px;
 	transition: transform .1s ease;
 	text-decoration: none;
-}
-
-#features label:hover,
-#features .label:hover {
-	border-color: #DDD;
-}
-
-#features label:active,
-#features .label:active {
-	transform: scale(.97);
-}
-
-#features .directive {
-	display: block;
-	font-size: 16px;
-	margin-bottom: 5px;
-}
-
-#features input[type=checkbox] {
-	margin-right: 5px;
-	cursor: pointer;
-}
-
-#features .description {
-	color: #777;
-	font-size: 13px;
-}
-
-#features .add-yours {
 	border: 1px dashed #CCC;
+	border-radius: 4px;
 }
 
 #features .add-yours:hover {
 	border-color: #0EADFF;
 }
 
-#features .add-yours .directive,
+#features .add-yours .title,
 #features .add-yours .description {
 	color: #777;
 }
 
-#features .add-yours:hover .directive,
+#features .add-yours:hover .title,
 #features .add-yours:hover .description {
 	color: #0EADFF;
 }
+
+#features .add-yours:active {
+	transform: scale(.97);
+}
+
+#features .add-yours .title {
+	display: block;
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+
+#features .add-yours .description {
+	color: #777;
+	font-size: 13px;
+	display: block;
+}
+
 
 
 .payment-box {
