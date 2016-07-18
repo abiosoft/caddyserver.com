@@ -5,7 +5,9 @@ date: 2016-07-19 08:00:00+00:00
 type: post
 ---
 
-Wow, where to begin. Caddy 0.9 is the biggest update yet. We completely overhauled the core design and TLS features, renovated addons into a new plugin model, added experimental QUIC support, fixed bugs, upgraded the Caddyfile, and made a significant number of other improvements and changes. I'll try to cover them all in this post and talk about what's coming next and in the future. Sorry (not sorry) for the long post.
+Wow, where to begin. Caddy 0.9 is the biggest update yet. We completely overhauled the core design and TLS features, renovated addons into a new plugin model, added experimental QUIC support, fixed bugs, upgraded the Caddyfile, and made a significant number of other improvements and changes. I'll try to cover them all in this post and talk about what's coming next and in the future. Sorry (not sorry) for the long post!
+
+For those finding Caddy for the first time: Caddy is an easy-to-use HTTP/2 web server that uses HTTPS&mdash;not HTTP&mdash;by default. With this release, we're bringing that TLS magic to more than just HTTP. We're also the first to usher in QUIC support.
 
 We consider this release stable, but as always, stay tuned for patch releases in the future and be sure to stay up-to-date. [Download Caddy 0.9 now.](/download)
 
@@ -63,7 +65,7 @@ On a less significant note, we renamed the `-directives` flag to `-plugins`.
 
 The HTTP server is a Caddy plugin, which means that Caddy is capable of serving other things too. While HTTP is the default type of server, imagine using Caddy to serve DNS, mail, SSH, git, and other server types with all the benefits of Caddy: easy install and configuration (Caddyfile), portability, good documentation, and most importantly, fully managed TLS.
 
-Caddy's TLS and HTTPS code were surgically separated so that Caddy's powerful TLS features can be used by any server type that benefits from TLS, not only HTTP. Imagine a mail server that uses STARTTLS without needing to fuss with certificates. Or an FTP server that's always (and only) secure. Or a git server that always supports HTTPS by default.
+Caddy's TLS and HTTPS code were surgically separated so that Caddy's powerful TLS features can be used by any server type that benefits from TLS, not only HTTP. Imagine a mail server that uses STARTTLS without needing to fuss with certificates. Or an FTP server that's always (and only) secure. Or a git server that always supports HTTPS by default. **The goal here is to make it easier than ever to serve secure connections, no matter what you're serving.**
 
 When implemented, other server types can be made available on Caddy's download page. Then using Caddy with an alternate server type is as easy as writing its Caddyfile and running `caddy -type dns` for example.
 
@@ -138,14 +140,29 @@ This enables HTTPS for the site using a self-signed certificate that is kept onl
 
 The `.caddy` folder is where Caddy stores its TLS assets and, in the future, perhaps other things. By default, it is in `$HOME/.caddy`, but you can set the `$CADDYPATH` environment variable now to change the full path of the `.caddy` folder.
 
-Within `.caddy`, we've moved the TLS assets from the `letsencrypt` folder to the `acme` folder and restructured slightly, grouping sites and accounts by CA hostname. This is because accounts are not transferrable to other CAs (for example, when switching between staging and production endpoints).
+Within `.caddy`, we've renamed the `letsencrypt` subfolder to `acme` since Caddy technically works with any ACME-compliant CA. We restructured the inside of that folder slightly, grouping sites and accounts by CA hostname. This is because accounts are not transferrable to other CAs (for example, when switching between staging and production endpoints).
 
-Caddy quietly makes this migration for you; you should not notice that it happened or have to do anything! And switching CAs using the `-ca` flag will work much better.
+Don't worry, though: Caddy quietly makes this migration for you; you should not notice that it happened or have to do anything! And switching CAs using the `-ca` flag will work much better.
+
+
+## Proxy Directive Improvements
+
+Before 0.9, proxy rules were chosen in the order they appeared in the Caddyfile. If two paths overlapped (consider `/a` and `/a/b`), it would always choose the one listed first in the file, even though the second one might be more specific; consequently the second one never was chosen. This has been changed so the order no longer matters; the rule with the specific matching path will be applied.
+
+Many upstreams can be specified at once using port ranges. For example, `proxy / localhost:8080-8090` specifies ten upstreams at localhost on the ports 8080 through 8090. There's also a new `upstream` subdirective to make it easier to list multiple upstreams on different lines.
+
+You have more control of headers. Until now, you could only set headers going up to the backend. But now you can set, add, or remove headers going either upstream or downstream. Use the `+` or `-` to add or remove, respectively. For example, `header_upstream -Server` will remove the `Server` header going up to the backend; `header_downstream +Server MyProxy` will add another `Server` header on its way back down to the client.
+
+We also added a new `transparent` preset if you want requests to the backend to have the original hostname, rather than the hostname of the backend. It also sets a few other headers; [check the docs](/docs/proxy) for details.
+
+## Redirect Conditions
+
+The [`redir` directive supports `if` statements](/docs/redir) for simple condition checking before applying the redirect rule. We wanted to avoid this complexity but apparently many legacy web applications still require the web server to do their programming for them. Redir and rewrite both have this same functionality now, including an `if_op` keyword to change the way multiple ifs are combined (default is AND but `if_op or` will use OR.)
 
 
 ## Breaking Changes to Proxy, Markdown, Import, and TLS
 
-The `proxy` directive no longer uses `proxy_header` which is now deprecated. Instead, you can now control upstream and downstream headers with `header_upstream` and `header_downstream`.
+The `proxy` directive no longer uses `proxy_header` which is deprecated and will be removed in a near-future version. Instead, you can now control upstream and downstream headers with `header_upstream` and `header_downstream`. 
 
 The `markdown` middleware no longer supports static site generation. We did this out of concern for scope creep, and I recommend using [Hugo](https://gohugo.io) for your static site needs. In fact, Henrique Dias helped move the Caddy website to Hugo. Thank you!
 
