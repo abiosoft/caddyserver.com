@@ -107,7 +107,7 @@ To enable on-demand TLS, use the `tls` directive with `max_certs`. For example, 
 
 This Caddyfile will proxy all requests on subdomains to `example.com` to your backends for the first 10 unique hostnames. This means you can dynamically provision new DNS records, and they will just start working with HTTPS. Unlike wildcard certificates, on-demand certificates are not limited to subdomains.
 
-<mark class="block">**Mitigating abuse:** This feature is intentionally rate-limited. The _max_certs_ property of the [tls](/docs/tls) directive sets a hard limit on how many new certificates are issued this way, so that even over a long period of time, attackers cannot issue unlimited certificates and fill up your disk space.</mark>
+<mark class="block">**Mitigating abuse:** This feature is intentionally rate-limited. The _max\_certs_ property of the [tls](/docs/tls) directive sets a hard limit on how many new certificates are issued this way, so that even over a long period of time, attackers cannot issue unlimited certificates and fill up your disk space.</mark>
 
 On-Demand TLS is a special kind of managed TLS, so all the requirements above still apply except for the one about not providing your own certificate and key: you may supplement on-demand TLS with your own certificates. And like regular managed TLS, HTTP will be redirected to HTTPS.
 
