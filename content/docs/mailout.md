@@ -35,9 +35,9 @@ The configuration options are as followed:
     <span class="hl-subdirective">to</span>  <i>["email-address1, ..."]</i>
     <span class="hl-subdirective">cc</span>  <i>["email-address2, ..."]</i>
     <span class="hl-subdirective">bcc</span> <i>["email-addressN, ..."]</i><br>
-    <span class="hl-subdirective">[email-address1]</span> <i>[path/to/pgp1.pub|ENV:MY_PGP_KEY_PATH1|https://<!-- -->keybase.io/user1/key.asc]</i>
-    <span class="hl-subdirective">[email-address2]</span> <i>[path/to/pgp2.pub|ENV:MY_PGP_KEY_PATH2|https://<!-- -->keybase.io/user2/key.asc]</i>
-    <span class="hl-subdirective">[email-addressN]</span> <i>[path/to/pgpN.pub|ENV:MY_PGP_KEY_PATHN|https://<!-- -->keybase.io/userN/key.asc]</i><br>
+    <span class="hl-subdirective">[email-address1]</span> <i>[path/to/pgp1.pub|ENV:MY_PGP_KEY_PATH1|https://keybase.io/user1/key.asc]</i>
+    <span class="hl-subdirective">[email-address2]</span> <i>[path/to/pgp2.pub|ENV:MY_PGP_KEY_PATH2|https://keybase.io/user2/key.asc]</i>
+    <span class="hl-subdirective">[email-addressN]</span> <i>[path/to/pgpN.pub|ENV:MY_PGP_KEY_PATHN|https://keybase.io/userN/key.asc]</i><br>
     <span class="hl-subdirective">subject</span> <i>"Email from {&#123;.variable1}} {&#123;.variableN}}"</i>
     <span class="hl-subdirective">body</span> <i>path/to/tpl.[txt|html]</i><br>
     <span class="hl-subdirective">username</span> <i>"ENV:MY_SMTP_USERNAME|username"</i>

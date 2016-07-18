@@ -52,7 +52,7 @@
 
                         <div class="meta">
                             By <b>{{ .Params.author }}</b>
-                            <span style="float: right;">{{ .Date}}</span>
+                            <span style="float: right;">{{ .Date.Format "January 2, 2006 @ 3:04 PM" }}</span>
                         </div>
 
                         {{ .Content }}

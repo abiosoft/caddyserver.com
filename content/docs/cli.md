@@ -49,10 +49,6 @@ The Caddyfile to use to configure Caddy. Must be a valid path to the file, eithe
 
 CPU cap. Can be a percentage (e.g. "75%") or a number indicating how many cores to use (e.g. 3).
 
-#### -plugins
-
-Lists the plugins registered with Caddy. Caddy will terminate after printing; it will not serve sites.
-
 #### -email <span class="auto-recommend">AUTO</span>
 
 Email address to use for TLS certificate generation if not [specified for a site in the Caddyfile](/docs/tls). It is not required, but is strongly recommended so you can recover your account if you lose your private key. If an email is not available, Caddy may prompt you for an email address during runtime. This option is recommended in automated environments if not [specified in the Caddyfile](/docs/tls).
@@ -80,6 +76,10 @@ Enable the process log. The value must be either the path to a log file, stdout,
 #### -pidfile <span class="auto-recommend">AUTO</span>
 
 The pidfile to write. Used with automated environments. Caddy will write a file containing the current process ID.
+
+#### -plugins
+
+Lists the plugins registered with Caddy. Caddy will terminate after printing; it will not serve sites.
 
 #### -port
 

@@ -38,13 +38,13 @@ Simply allow all domains to request any path:
 
 Protect specific paths only, and only allow a few domains:
 
-<code class="block"><span class="hl-directive">cors</span> <span class="hl-arg">/foo http://<!-- -->mysite.com http://<!-- -->anothertrustedsite.com</span></code>
+<code class="block"><span class="hl-directive">cors</span> <span class="hl-arg">/foo http://mysite.com http://anothertrustedsite.com</span></code>
 
 Full configuration:
 
 <code class="block"><span class="hl-directive">cors</span> <span class="hl-arg">/</span> {
-    <span class="hl-subdirective">origin</span>            http://<!-- -->allowedSite.com
-	<span class="hl-subdirective">origin</span>            http://<!-- -->anotherSite.org https://<!-- -->anotherSite.org
+    <span class="hl-subdirective">origin</span>            http://allowedSite.com
+	<span class="hl-subdirective">origin</span>            http://anotherSite.org https://anotherSite.org
     <span class="hl-subdirective">methods</span>           POST,PUT
     <span class="hl-subdirective">allow_credentials</span> false
 	<span class="hl-subdirective">max_age</span>           3600

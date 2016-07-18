@@ -19,7 +19,7 @@ log enables request logging. The request log is also known from some vernaculars
 <code class="block"><span class="hl-directive">log</span> <span class="hl-arg"><i>path file </i>[<i>format</i>]</span></code>
 
 *   **path** is the base path to match in order to be logged
-*   **file** is the log file to create (or append to)
+*   **file** is the log file to create (or append to), relative to current working directory
 *   **format** is the log format to use (default is Common Log Format)
 
 
