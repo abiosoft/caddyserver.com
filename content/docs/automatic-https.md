@@ -21,16 +21,16 @@ th, td {
 
 Caddy automatically enables HTTPS for all your sites, given that some reasonable criteria are met:
 
-*   The host is not localhost or an IP address
+*   The host is non-empty and not localhost or an IP address
 *   The port is not explicitly 80
 *   The scheme is not explicitly http
 *   TLS is not turned off in site's configuration
 *   Certificates and keys are not provided by you
-*   Caddy is able to bind to ports 80 and 443
+*   Caddy is able to bind to ports 80 and 443 (unless you use the DNS challenge)
 
 Caddy will also redirect all HTTP requests to their HTTPS equivalent if the plaintext variant of the hostname is not defined in the Caddyfile.
 
-All pertinent assets are fully managed, including renewals—no action is required by you. Here's a 28-second [video](https://www.youtube.com/watch?v=nk4EWHvvZtI) showing how it works:
+All pertinent assets are fully managed, including renewals&mdash;no action is required by you. Here's a 28-second [video](https://www.youtube.com/watch?v=nk4EWHvvZtI) showing how it works:
 
 <iframe style="max-width: 640px;" width="100%" height="480" src="https://www.youtube-nocookie.com/embed/nk4EWHvvZtI?rel=0" frameborder="0" allowfullscreen=""></iframe>
 
@@ -40,7 +40,7 @@ In order to fully enjoy this flagship feature, please read the following.
 
 #### Binding to ports 80 and 443 is required
 
-This usually requires privilege escalation. On Linux systems, you can give Caddy permission to bind to port 80 and 443 without being root using [setcap](http://man7.org/linux/man-pages/man8/setcap.8.html), like so: `setcap cap_net_bind_service=+ep caddy`. Don't forget to configure all relevant firewalls to allow Caddy to use these ports for incoming and outgoing connections! Caddy must have claim on these ports to obtain certificates.
+This usually requires privilege escalation. On Linux systems, you can give Caddy permission to bind to port 80 and 443 without being root using [setcap](http://man7.org/linux/man-pages/man8/setcap.8.html), like so: `setcap cap_net_bind_service=+ep caddy`. Don't forget to configure all relevant firewalls to allow Caddy to use these ports for incoming and outgoing connections! Caddy must have claim on these ports to obtain certificates unless you enable the DNS challenge.
 
 #### The .caddy folder
 

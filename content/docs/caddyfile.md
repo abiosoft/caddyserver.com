@@ -82,15 +82,19 @@ Power users may wish to use environment variables. This is allowed in addresses 
 
 ### Addresses
 
-Addresses are specified in the form <code><span class="hl-vhost">scheme</span>://<span class="hl-vhost">host</span>:<span class="hl-vhost">port</span></code>, where all but one are optional. The host portion is usually localhost or the domain name. The default port is 2015 (unless the site qualifies for [automatic HTTPS](/docs/automatic-https), in which case it's 443). The scheme portion is another way to specify a port. Valid schemes are "http" or "https" which represent, respectively, ports 80 and 443\. If both a scheme and port are specified, the port will override the scheme. For example:
+Addresses are specified in the form <code><span class="hl-vhost">scheme</span>://<span class="hl-vhost">host</span>:<span class="hl-vhost">port</span>/<span class="hl-vhost">path</span></code>, where all but one are optional. The host portion is usually localhost or the domain name. The default port is 2015 (unless the site qualifies for [automatic HTTPS](/docs/automatic-https), in which case it's 443). The scheme portion is another way to specify a port. Valid schemes are "http" or "https" which represent, respectively, ports 80 and 443\. If both a scheme and port are specified, the port will override the scheme. For example:
 
-<code class="block"><span class="hl-vhost">:2015</span>                    <span class="hl-comment"># Host: &lt;any&gt;, Port: 2015</span>
+<code class="block"><span class="hl-vhost">:2015</span>                    <span class="hl-comment"># Host: (any), Port: 2015</span>
 <span class="hl-vhost">localhost</span>                <span class="hl-comment"># Host: localhost, Port: 2015</span>
 <span class="hl-vhost">localhost:8080</span>           <span class="hl-comment"># Host: localhost, Port: 8080</span>
 <span class="hl-vhost">example.com</span>              <span class="hl-comment"># Host: example.com, Port: 443</span>
 <span class="hl-vhost">http://example.com</span>       <span class="hl-comment"># Host: example.com, Port: 80</span>
 <span class="hl-vhost">https://example.com</span>      <span class="hl-comment"># Host: example.com, Port: 443</span>
 <span class="hl-vhost">http://example.com:1234</span>  <span class="hl-comment"># Host: example.com, Port: 1234</span>
+<span class="hl-vhost">https://example.com:80</span>   <span class="hl-comment"># Error! HTTPS on port 80</span>
+<span class="hl-vhost">*.example.com</span>            <span class="hl-comment"># Hosts: *.example.com, Port: 443</span>
+<span class="hl-vhost">example.com/foo</span>          <span class="hl-comment"># Host: example.com, Port: 443, Path: /foo</span>
+<span class="hl-vhost">/foo</span>                     <span class="hl-comment"># Host: (any), Port: 2015, Path: /foo</span>
 </code>
 
 ### Directives
