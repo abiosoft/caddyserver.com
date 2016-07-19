@@ -132,11 +132,11 @@ $(function() {
 			} else if (amount < transactionFeeMin) {
 				$('#amount-feedback').html('<span style="color: red;">Please go higher so we can cover transaction fees, thanks!</span>');
 			} else if (amount < 10) {
-				$('#amount-feedback').html('<span style="color: #FF9100;">Thanks; maybe contribute again soon!</span>');
-			} else if (amount < 18) {
-				$('#amount-feedback').html('<span style="color: black;">Thanks, this buys a lunch</span>');
+				$('#amount-feedback').html('<span style="color: #FF9100;">Thanks, hope you like it!</span>');
+			} else if (amount < 15) {
+				$('#amount-feedback').html('<span style="color: black;">Thanks, this buys a lunch!</span>');
 			} else if (amount < 25) {
-				$('#amount-feedback').html('<span style="color: black;">Thanks, this buys a dinner</span>');
+				$('#amount-feedback').html('<span style="color: black;">Thanks, this buys a dinner!</span>');
 			} else if (amount < 50) {
 				$('#amount-feedback').html('<span style="color: black;">Thank you very much for your support!</span>');
 			} else if (amount < 100) {
