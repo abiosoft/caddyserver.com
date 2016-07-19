@@ -26,15 +26,15 @@ This simplified syntax pulls from master every 3600 seconds (1 hour) and only wo
 For more control or to use a private repository, use the following syntax:
 
 <code class="block"><span class="hl-directive">git</span> <span class="hl-arg"><i>repo</i> [<i>clonepath</i>]</span> {
-	<span class="hl-subdirective">repo</span>     <i>repo</i>
-	<span class="hl-subdirective">path</span>     <i>clonepath</i>
-	<span class="hl-subdirective">branch</span>   <i>branch</i>
-	<span class="hl-subdirective">key</span>      <i>key</i>
-	<span class="hl-subdirective">hook</span>     <i>path</i> [<i>secret</i>]
-	<span class="hl-subdirective">hook_type</span><i>type</i>
-	<span class="hl-subdirective">interval</span> <i>interval</i>
-	<span class="hl-subdirective">then</span>     <i>command</i> [<i>args...</i>]
-	<span class="hl-subdirective">then_long</span><i>command</i> [<i>args...</i>]
+	<span class="hl-subdirective">repo</span>     	<i>repo</i>
+	<span class="hl-subdirective">path</span>     	<i>clonepath</i>
+	<span class="hl-subdirective">branch</span>   	<i>branch</i>
+	<span class="hl-subdirective">key</span>      	<i>key</i>
+	<span class="hl-subdirective">hook</span>     	<i>path</i> [<i>secret</i>]
+	<span class="hl-subdirective">hook_type</span>	<i>type</i>
+	<span class="hl-subdirective">interval</span> 	<i>interval</i>
+	<span class="hl-subdirective">then</span>     	<i>command</i> [<i>args...</i>]
+	<span class="hl-subdirective">then_long</span>	<i>command</i> [<i>args...</i>]
 }</code>
 
 *   **repo** is the URL to the repository; SSH and HTTPS URLs are supported.
