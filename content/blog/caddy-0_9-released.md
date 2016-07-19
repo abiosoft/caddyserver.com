@@ -1,7 +1,7 @@
 ---
 title: Caddy 0.9 Released with All New Core
 author: Matt Holt
-date: 2016-07-19 08:00:00+00:00
+date: 2016-07-18 22:00:00+00:00
 type: post
 ---
 
@@ -207,6 +207,3 @@ You may also [implement new server types or plugins for Caddy](https://github.co
 ## Thank You
 
 As always, a huge thanks are in order to [all the contributors](https://github.com/mholt/caddy/commits/master) and donors who made this release possible. Your work does not go unnoticed, and it is highly appreciated! Thank you for making Caddy possible.
-
-
-
