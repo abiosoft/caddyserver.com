@@ -13,7 +13,7 @@
 			{{if .Params.plugin}}
 			<div class="addon-message">
 				<div class="heading"><i class="fa fa-plus-circle"></i> Addon</div>
-				This directive is a Caddy extension. To get it, select this feature when you <a href="/download">download</a> Caddy. Questions should be directed to its maintainer. <a href="https://{{ .Params.link }}">{{ replace .Params.link "https://" "" }}</a>
+				This directive is a Caddy extension. To get it, select this feature when you <a href="/download">download</a> Caddy. Questions should be directed to its maintainer. <a href="{{ .Params.link }}">{{ replace .Params.link "https://" "" }}</a>
 			</div>
 			{{end}}
 			{{.Content}}
