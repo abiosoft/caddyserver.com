@@ -11,13 +11,16 @@ minify enables minifying on your website. By default it will minify every css, j
 
 ### Syntax
 
-<code class="block"><span class="hl-directive">minify</span> </span> {
-	<span class="hl-subdirective">only</span> <i>foo...</i>
-	<span class="hl-subdirective">exclude</span> <i>bar...</i>
-}</code>
+<code class="block"><span class="hl-directive">minify</span> <span class="hl-arg"><i>paths...</i></span> {
+	<span class="hl-subdirective">if</span>    <i>a cond b</i>
+	<span class="hl-subdirective">if_op</span> <i>[</i>and|or<i>]</i>
+	...
+}
+</code>
 
-*   **foo** (optional) are space separated single file paths or folders to include on minifying. By default the whole website will be minified. If this directive is set, only the files on the specified paths will be minified.
-*   **bar** (optional) are space separated single file paths or folders to exclude from minifying.
++ **paths** are space separated file paths to minify. If nothing is specified, the whole website will be minified.
++ **if** specifies a condition. Multiple ifs are AND-ed together by default. **a** and **b** are any string and may use [request placeholders](https://caddyserver.com/docs/placeholders). **cond** is the condition, with possible values explained in [rewrite](https://caddyserver.com/docs/rewrite#if) (which also has an `if` statement).
++ **if_op** specifies how the ifs are evaluated; the default is `and`.
 
 ### Examples
 
@@ -27,19 +30,16 @@ Minify all of the supported files of the website:
 
 Only minify the contents of `/assets` folder:
 
-<code class="block"><span class="hl-directive">minify</span> </span> {
-	<span class="hl-subdirective">only</span> <i>/assets</i>
-}</code>
+<code class="block"><span class="hl-directive">minify</span> <span class="hl-arg">/assets</span></code>
 
 Minify the whole website except `/api`:
 
 <code class="block"><span class="hl-directive">minify</span> </span> {
-	<span class="hl-subdirective">exclude</span> <i>/api</i>
+	<span class="hl-subdirective">if</span> {path} not_match ^(\/api).*
 }</code>
 
 Minify the files of `/assets` folder except `/assets/js`:
 
-<code class="block"><span class="hl-directive">minify</span> </span> {
-	<span class="hl-subdirective">only</span> <i>/assets</i>
-	<span class="hl-subdirective">exclude</span> <i>/assets/js</i>
+<code class="block"><span class="hl-directive">minify</span> <span class="hl-arg">/assets</span></span> {
+	<span class="hl-subdirective">if</span> {path} not_match ^(\/assets\/js).*
 }</code>
