@@ -80,6 +80,8 @@ Power users may wish to use environment variables. This is allowed in addresses 
 <code class="block"><span class="hl-vhost">localhost:{$PORT}</span>
 <span class="hl-directive">root</span> <span class="hl-arg">{%SITE_ROOT%}</span></code>
 
+(Either syntax works on any platform.)
+
 ### Addresses
 
 Addresses are specified in the form <code><span class="hl-vhost">scheme</span>://<span class="hl-vhost">host</span>:<span class="hl-vhost">port</span>/<span class="hl-vhost">path</span></code>, where all but one are optional. The host portion is usually localhost or the domain name. The default port is 2015 (unless the site qualifies for [automatic HTTPS](/docs/automatic-https), in which case it's 443). The scheme portion is another way to specify a port. Valid schemes are "http" or "https" which represent, respectively, ports 80 and 443\. If both a scheme and port are specified, the port will override the scheme. For example:
