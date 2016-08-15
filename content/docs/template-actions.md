@@ -144,7 +144,7 @@ RawQuery returns the query string. You can replace RawQuery with Host, Scheme, F
 **Split a string by separator:**
 
 ```html
-{{.Split "123-456-7890", "-"}}
+{{.Split "123-456-7890" "-"}}
 ```
 
 **Convert list of values to a slice (array):**
