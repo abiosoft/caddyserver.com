@@ -31,7 +31,8 @@ Advanced users may open a block and make a complex rewrite rule:
 *   **extensions...** is a space-separated list of file extensions to include or ignore. Prefix an extension with `!` to exclude an extension. The forward slash `/` symbol matches paths without file extensions.
 *   **if** specifies a rewrite condition. Multiple ifs are AND-ed together. **a** and **b** are any string and may use [request placeholders](/docs/placeholders). **cond** is the condition, with possible values explained below.
 *   **if_op** specifies how the ifs are evaluated; the default is `and`.
-*   **status** will respond with the given status **code** instead of performing a rewrite. In other words, use either "status" or "to" in your rule, but not both. The code must be a number in the format 2xx or 4xx.*   **destinations...** is one or more space-separated paths to rewrite to, with support for [request placeholders](/docs/placeholders) as well as numbered regular expression captures such as {1}, {2}, etc. Rewrite will check each destination in order and rewrite to the first destination that exists. Each one is checked as a file or, if ends with /, as a directory. The last destination will act as default if no other destination exists.
+*   **status** will respond with the given status **code** instead of performing a rewrite. In other words, use either "status" or "to" in your rule, but not both. The code must be a number in the format 2xx or 4xx.
+*   **destinations...** is one or more space-separated paths to rewrite to, with support for [request placeholders](/docs/placeholders) as well as numbered regular expression captures such as {1}, {2}, etc. Rewrite will check each destination in order and rewrite to the first destination that exists. Each one is checked as a file or, if ends with /, as a directory. The last destination will act as default if no other destination exists.
 
 ### "if" conditions
 
@@ -62,7 +63,7 @@ If the file is not favicon.ico and it is not a valid file or directory, serve th
 If user agent includes "mobile" and path is not a valid file/directory, rewrite to the mobile index page.
 
 <code class="block"><span class="hl-directive">rewrite</span> {
-    <span class="hl-subdirective">if</span> if {>User-agent} has mobile
+    <span class="hl-subdirective">if</span> {>User-agent} has mobile
     <span class="hl-subdirective">to</span> {path} {path}/ /mobile/index.php
 }</code>
 

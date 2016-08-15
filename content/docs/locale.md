@@ -6,7 +6,7 @@ plugin: true
 link: https://github.com/simia-tech/caddy-locale
 ---
 
-locale detects the client's locale. It sets a header field named Detected-Locale with the value. It also creates a new [replacable value](/docs/placeholders) `{locale}` with the detected locale.
+locale detects the client's locale. It sets a header field named Detected-Locale with the value.
 
 ### Syntax
 

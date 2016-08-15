@@ -231,6 +231,15 @@ These functions are built into text/template but you may find them helpful.
 {{end}}
 ```
 
+**Range:** (iterate data; this example dumps request headers)
+
+```html
+{{range $field, $val := .Req.Header}}
+    {{$field}}: {{$val}}
+{{end}}
+```
+
+
 **Server-side comments:**
 
 ```html

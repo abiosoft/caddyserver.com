@@ -28,7 +28,7 @@ This directive should be used with [root](/docs/root), [basicauth](/docs/basicau
 
 ### Examples
 
-If you don't already have an Hugo website, don't worry. This plugin will auto-generate it for you. But that's not everything. I recommend you to take a look at Hugo [documentation](http://gohugo.io/themes/overview/) to learn more about themes, content types, and so on.
+If you don't already have an Hugo website, don't worry. This plugin will auto-generate it for you. But that's not everything. It is recommended that you take a look at Hugo [documentation](http://gohugo.io/themes/overview/) to learn more about themes, content types, and so on.
 
 A simple Caddyfile to use with Hugo static website generator:
 

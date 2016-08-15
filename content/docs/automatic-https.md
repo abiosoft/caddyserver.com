@@ -152,3 +152,5 @@ Caddy does not automatically revoke a certificate, but you can do this with the 
 ## OCSP Stapling
 
 Caddy staples OCSP information of all certificates containing an OCSP link to protect the privacy of your sites' clients and reduce stress on OCSP servers. The cached OCSP status is checked on a regular basis, and if there is a change, the server will staple the new response.
+
+When new OCSP responses are obtained, Caddy persists the staple to disk so that it can weather long OCSP responder outages. Like certificates, persisted OCSP responses are fully maintained within the .caddy folder.

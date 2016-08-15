@@ -52,7 +52,7 @@ Advanced users may open a settings block for more control, optionally specifying
 }</code>
 
 *   **cert** and **key** are the same as above.
-*   **min** and **max** are the minimum and maximum protocol versions to support, respectively. See below for valid values.
+*   **min** and **max** are the minimum and maximum protocol versions to support, respectively. See below for valid values. If min and max are the same, it need only be specified once.
 *   **ciphers...** is a list of space-separated ciphers that will be supported. If you list any, only the ones you specify will be allowed. See below for valid values.
 *   **clientcas...** is a list of space-separated client root CAs used for verification during TLS client authentication. If used, clients will be asked to present their certificate by their browser, which will be verified against this list of client certificate authorities. A client will not be allowed to connect if their certificate was not signed by one of these root CAs. You may modify the strictness of client authentication using one of the keywords before the list of client CAs:
     *   **request** merely asks a client to provide a certificate, but will not fail if none is given or if an invalid one is presented.
@@ -60,7 +60,7 @@ Advanced users may open a settings block for more control, optionally specifying
     *   **verify_if_given** will not fail if none is presented, but reject all that do not pass verification.
     *   The default, if no flag is set but a CA file found, is to do both: to require client certificates and validate them.
 *   **dir** is a directory from which to load certificates and keys. The entire directory and its subfolders will be walked in search of .pem files. Each .pem file must contain the PEM-encoded certificate (chain) and key blocks, concatenated together.
-*   **limit** puts a limit on the number of certificates allowed to be issued on demand (during TLS handshake). Specifying this value enables [On-Demand TLS](/docs/automatic-https#on-demand). It must be a positive integer. This value gets reset after the process exits (but is preserved through reloads).
+*   **limit** puts a limit on the number of certificates allowed to be issued on demand (during TLS handshake) for this site. Specifying this value enables [On-Demand TLS](/docs/automatic-https#on-demand). It must be a positive integer. This value gets reset after the process exits (but is preserved through reloads).
 *   **type** is the type of key to use when generating keys for certificates (only applies to managed orTLS or self-signed certificates). Valid values are rsa2048, rsa4096, rsa8192, p256, and p384\. Default is currently rsa2048.
 *   **provider** is the name of a DNS provider; specifying it enables the [DNS challenge](/docs/automatic-https#dns-challenge). Note that you need to give credentials for it to work.
 
