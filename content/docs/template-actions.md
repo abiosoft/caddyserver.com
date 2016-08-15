@@ -92,20 +92,8 @@ RawQuery returns the query string. You can replace RawQuery with Host, Scheme, F
 
 **Environment variables:**
 
-You can access environment variables directly because `Env` is a map.
 ```html
 {{.Env.ENV_VAR_NAME}}
-```
-For example the follow will output the `PATH` environment variable.
-```html
-{{.Env.PATH}}
-```
-You can use the following example to output all your environment variables.
-__For debugging purposes only. This is not recommended for production.__
-```html
-<table>{{range $name, $value := .Env}}
-	<tr><td>{{$name}}</td><td>{{$value}}</td></tr>
-{{end}}</table>
 ```
 
 **Truncate value to certain length:** (from beginning, or from end)
