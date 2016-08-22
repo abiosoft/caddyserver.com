@@ -8,17 +8,15 @@ redir sends the client an HTTP redirect status code if the URL matches the speci
 
 ### Syntax
 
-<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg"><i>from to code</i></span></code>
+<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg"><i>from to </i>[<i>code</i>]</span></code>
 
-*   **from** is the request path to match (it must match exactly)
-*   **to** is the path to redirect to (may use [request placeholders](/docs/placeholders))
-*   **code** is the HTTP status code to respond with; must be in the range [300-308] excluding 306\. May also be `meta` to issue meta tag redirect for browsers.
+*   **from** is the request path to match (it must match exactly, except for `/`, which is a catch-all).
+*   **to** is the path to redirect to (may use [request placeholders](/docs/placeholders)).
+*   **code** is the HTTP status code to respond with; must be in the range [300-308] excluding 306\. May also be `meta` to issue meta tag redirect for browsers. The default status code is 301 Moved Permanently.
 
-To create a "catch-all" redirect, omit the _from_ value:
+To create a permanent, "catch-all" redirect, omit the _from_ value:
 
-<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg"><i>to</i> [<i>code</i>]</span></code>
-
-The default status code is 301 Moved Permanently.
+<code class="block"><span class="hl-directive">redir</span> <span class="hl-arg"><i>to</i></span></code>
 
 If you have a lot of redirects, share a redirect code by making a table:
 
