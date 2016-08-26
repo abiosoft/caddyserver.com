@@ -12,6 +12,8 @@ hugo fills the gap between Hugo and the browser. [Hugo](http://gohugo.io/) is an
 
 Using this plugin, you won't need to have your own computer to edit posts, neither regenerate your static website, because you can do all of that just through your browser.
 
+**Requirements:** you need to have the hugo executable in your PATH. You can download it from its [official page](http://gohugo.io).
+
 ### Syntax
 
 <code class="block"><span class="hl-directive">hugo</span> <span class="hl-arg">[<i>dir</i>]</span> {
