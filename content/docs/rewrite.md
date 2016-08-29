@@ -22,7 +22,6 @@ Advanced users may open a block and make a complex rewrite rule:
     <span class="hl-subdirective">ext</span>    <i>extensions...</i>
     <span class="hl-subdirective">if</span>     <i>a cond b</i>
     <span class="hl-subdirective">if_op</span>  <i>[</i>and|or<i>]</i>
-    <span class="hl-subdirective">status</span> <i>code</i>
     <span class="hl-subdirective">to</span>     <i>destinations...</i>
 }</code>
 
@@ -31,7 +30,6 @@ Advanced users may open a block and make a complex rewrite rule:
 *   **extensions...** is a space-separated list of file extensions to include or ignore. Prefix an extension with `!` to exclude an extension. The forward slash `/` symbol matches paths without file extensions.
 *   **if** specifies a rewrite condition. Multiple ifs are AND-ed together. **a** and **b** are any string and may use [request placeholders](/docs/placeholders). **cond** is the condition, with possible values explained below.
 *   **if_op** specifies how the ifs are evaluated; the default is `and`.
-*   **status** will respond with the given status **code** instead of performing a rewrite. In other words, use either "status" or "to" in your rule, but not both. The code must be a number in the format 2xx or 4xx.
 *   **destinations...** is one or more space-separated paths to rewrite to, with support for [request placeholders](/docs/placeholders) as well as numbered regular expression captures such as {1}, {2}, etc. Rewrite will check each destination in order and rewrite to the first destination that exists. Each one is checked as a file or, if ends with /, as a directory. The last destination will act as default if no other destination exists.
 
 ### "if" conditions
@@ -67,15 +65,7 @@ If user agent includes "mobile" and path is not a valid file/directory, rewrite 
     <span class="hl-subdirective">to</span> {path} {path}/ /mobile/index.php
 }</code>
 
-If the request path starts with /source, respond with HTTP 403 Forbidden.
-
-<code class="block"><span class="hl-directive">rewrite</span> {
-    <span class="hl-subdirective">regexp</span> ^/source
-    <span class="hl-subdirective">status</span> 403
-}</code>
-
 Rewrite /app to /index with a query string. `{1}` is the matched group `(.*)`.
-
 
 <code class="block"><span class="hl-directive">rewrite</span> <span class="hl-arg">/app</span> {
     <span class="hl-subdirective">r</span>  (.*)
