@@ -14,7 +14,7 @@ Note that the the import path is relative to the Caddyfile, not the current work
 
 <code class="block"><span class="hl-directive">import</span> <span class="hl-arg"><i>pattern</i></span></code>
 
-*   **pattern** is the file or glob pattern (`*`) to include. Its contents will replace this line, as if that file's contents appeared here to begin with. This value is relative to the Caddyfile's location.
+*   **pattern** is the file or glob pattern (`*`) to include. Its contents will replace this line, as if that file's contents appeared here to begin with. This value is relative to the Caddyfile's location. Throws an error if it can't find any files.
 
 ### Examples
 
