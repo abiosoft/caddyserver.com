@@ -6,7 +6,7 @@ directive: true
 
 mime sets the Content-Type in a response based on the file extension in the request.
 
-Normally, Content-Type is detected automatically, but this is not always possible. If you encounter responses with the wrong Content-Type, you can use this middleware to correct it.
+Normally, Content-Type is detected automatically for static files by sniffing the content, but this is not always possible. If you encounter responses with the wrong Content-Type or are serving content other than static files, you can use this middleware to set the right Content-Type.
 
 ### Syntax
 

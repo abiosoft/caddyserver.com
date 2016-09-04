@@ -27,6 +27,7 @@ These values are obtained from the request.
 *   **{query_escaped}** - The query-escaped variant of {query}
 *   **{remote}** - The client's IP address
 *   **{request}** - The entire HTTP request (sans body), compacted to one line
+*   **{request_body}** - The request body, compacted to one line (max length 100 KB; JSON or XML only)
 *   **{scheme}** - The protocol/scheme used (usually http or https)
 *   **{uri}** - The request URI (includes path, query string, and fragment)
 *   **{uri_escaped}** - The query-escaped variant of {uri}

@@ -41,7 +41,8 @@ sitename = "A Caddy site"
 
 ```yaml
 ---
-template: blog title: Blog Homepage
+template: blog
+title: Blog Homepage
 sitename: A Caddy site
 ---
 ```

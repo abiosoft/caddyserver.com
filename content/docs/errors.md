@@ -22,7 +22,7 @@ The above syntax will simply enable error reporting on the server. To specify cu
     <span class="hl-subdirective"><i>what</i></span> <i>where</i>
 }</code>
 
-*   **what** can be an HTTP status code (4xx, 5xx) or log.
+*   **what** can be an HTTP status code (4xx, 5xx, or `*` for default error page) or log.
 *   **where** depends on what. If an error page, it is the HTML file of the error page (path is relative to site root). If log, it is the path to the log file (as described above) and you can enable [rotation](/docs/log#rotate) to manage the log files.
 
 ### Examples

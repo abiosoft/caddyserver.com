@@ -51,7 +51,7 @@ The Caddyfile can also have comments starting with the `#` character:
 <code class="block"><span class="hl-comment"># Comments can start a line</span>
 <span class="hl-directive">foobar</span> <span class="hl-comment"># or go at the end</span></code>
 
-To configure multiple servers (virtual hosts) with a single Caddyfile, you must use curly braces around the site block:
+To configure multiple servers (virtual hosts) with a single Caddyfile, you must use curly braces around each site block:
 
 <code class="block"><span class="hl-vhost">mysite.com</span> {
 	<span class="hl-directive">root</span> <span class="hl-arg">/www/mysite.com</span>
@@ -70,15 +70,19 @@ For sites which share the same configuration, specify multiple addresses:
 	...
 }</code>
 
-Site addresses also be defined under a specific path, or have wildcards in place of domain labels from the left side:
+Site addresses can also be defined under a specific path, or have wildcards in place of domain labels from the left side:
 
 <code class="block"><span class="hl-vhost">example.com/static</span>
 <span class="hl-vhost">*.example.com</span></code>
 
-Power users may wish to use environment variables. This is allowed in addresses and arguments. They must be enclosed in curly braces, and you can use either Unix or Windows variable formats:
+Note that using a path in your site address routes requests by longest matching prefix. If your base path is a directory, you may wish to suffix the path with a forward slash `/`.
+
+Use of environment variables is allowed in addresses and arguments. They must be enclosed in curly braces, and you can use either Unix or Windows variable formats:
 
 <code class="block"><span class="hl-vhost">localhost:{$PORT}</span>
 <span class="hl-directive">root</span> <span class="hl-arg">{%SITE_ROOT%}</span></code>
+
+(Either syntax works on any platform.)
 
 ### Addresses
 
@@ -93,8 +97,8 @@ Addresses are specified in the form <code><span class="hl-vhost">scheme</span>:/
 <span class="hl-vhost">http://example.com:1234</span>  <span class="hl-comment"># Host: example.com, Port: 1234</span>
 <span class="hl-vhost">https://example.com:80</span>   <span class="hl-comment"># Error! HTTPS on port 80</span>
 <span class="hl-vhost">*.example.com</span>            <span class="hl-comment"># Hosts: *.example.com, Port: 443</span>
-<span class="hl-vhost">example.com/foo</span>          <span class="hl-comment"># Host: example.com, Port: 443, Path: /foo</span>
-<span class="hl-vhost">/foo</span>                     <span class="hl-comment"># Host: (any), Port: 2015, Path: /foo</span>
+<span class="hl-vhost">example.com/foo/</span>         <span class="hl-comment"># Host: example.com, Port: 443, Path: /foo/</span>
+<span class="hl-vhost">/foo/</span>                    <span class="hl-comment"># Host: (any), Port: 2015, Path: /foo/</span>
 </code>
 
 ### Directives

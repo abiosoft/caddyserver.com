@@ -13,7 +13,7 @@ Note that if you wish to remove response headers from a proxied backend, you mus
 <code class="block"><span class="hl-directive">header</span> <span class="hl-arg"><i>path name value</i></span></code>
 
 *   **path** is the base path to match.
-*   **name** is the name of the field. Prefix with a hyphen `-` to remove the header.
+*   **name** is the name of the field. Prefix with a hyphen (`-`) to remove the header or a plus (`+`) to append instead of overwrite.
 *   **value** is the value for the field. Dynamic values can also be inserted using [placeholders](/docs/placeholders).
 
 This directive can be used multiple times, or you can group multiple custom header fields for the same path:
@@ -46,8 +46,8 @@ Add some security headers to all pages:
 
 <code class="block"><span class="hl-directive">header</span> <span class="hl-arg">/</span> {
     <span class="hl-comment"># Enable HTTP Strict Transport Security (HSTS) to force clients to always</span>
-    <span class="hl-comment"># connect via HTTPS (not recommended if only experimenting with HTTPS)</span>
-    <span class="hl-subdirective">Strict-Transport-Security</span>  "max-age=31536000;"
+    <span class="hl-comment"># connect via HTTPS (do not use if only testing)</span>
+    <span class="hl-subdirective">Strict-Transport-Security</span> "max-age=31536000;"
     <span class="hl-comment"># Enable cross-site filter (XSS) and tell browser to block detected attacks</span>
     <span class="hl-subdirective">X-XSS-Protection</span> "1; mode=block"
     <span class="hl-comment"># Prevent some browsers from MIME-sniffing a response away from the declared Content-Type</span>

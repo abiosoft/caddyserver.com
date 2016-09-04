@@ -90,6 +90,12 @@ Template actions are enclosed between `{{` and `}}` markers. Template words are 
 
 RawQuery returns the query string. You can replace RawQuery with Host, Scheme, Fragment, String, or Query.Get "parameter".
 
+**Environment variables:**
+
+```html
+{{.Env.ENV_VAR_NAME}}
+```
+
 **Truncate value to certain length:** (from beginning, or from end)
 
 ```html
@@ -144,7 +150,7 @@ RawQuery returns the query string. You can replace RawQuery with Host, Scheme, F
 **Split a string by separator:**
 
 ```html
-{{.Split "123-456-7890", "-"}}
+{{.Split "123-456-7890" "-"}}
 ```
 
 **Convert list of values to a slice (array):**
@@ -212,6 +218,15 @@ These functions are built into text/template but you may find them helpful.
 	No bananas or secret sauce
 {{end}}
 ```
+
+**Range:** (iterate data; this example dumps request headers)
+
+```html
+{{range $field, $val := .Req.Header}}
+    {{$field}}: {{$val}}
+{{end}}
+```
+
 
 **Server-side comments:**
 

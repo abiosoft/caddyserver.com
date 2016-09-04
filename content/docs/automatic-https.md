@@ -133,7 +133,7 @@ To serve a site over HTTPS, a valid SSL certificate is required from a trusted c
 
 If necessary, Caddy creates an account on the CA's server with (or without) your email address. Caddy may have to prompt you for an email address if it is not able to find one from the Caddyfile, in the command line flags, or on disk from a previous run. Also, if the CA's legal agreements have changed, you may be prompted to agree to them if you did not already do so with the `-agree` flag.
 
-Once the formalities are taken care of, Caddy generates a private key and a Certificate Signing Request (CSR) for each site. The private keys never leave the server and are safely stowed on your file system.
+Once the formalities are taken care of, Caddy generates a private key and a Certificate Signing Request (CSR) for each site. The private keys never leave the server and are safely stored on your file system.
 
 Caddy establishes a link with the CA's server. A brief cryptographic transaction takes place to prove that Caddy really is serving the sites it says it is. Once the CA server verifies this, it sends the certificate for that site over the wire to Caddy, which tucks it neatly away in the .caddy folder.
 
@@ -152,3 +152,5 @@ Caddy does not automatically revoke a certificate, but you can do this with the 
 ## OCSP Stapling
 
 Caddy staples OCSP information of all certificates containing an OCSP link to protect the privacy of your sites' clients and reduce stress on OCSP servers. The cached OCSP status is checked on a regular basis, and if there is a change, the server will staple the new response.
+
+When new OCSP responses are obtained, Caddy persists the staple to disk so that it can weather long OCSP responder outages. Like certificates, persisted OCSP responses are fully maintained within the .caddy folder.

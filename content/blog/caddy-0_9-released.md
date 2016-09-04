@@ -177,7 +177,7 @@ Those of you who use Caddy as a library in your own Go programs or who are perfo
 
 Caddy's `main()` is now at `github.com/mholt/caddy/caddy` and the logic for `main()` is in a function called `Run()` at `github.com/mholt/caddy/caddy/caddymain`. These changes allow more flexibility when extending or customizing Caddy for your own use.
 
-If you are a plugin author you should already be aware of the changes needed for 0.9 compatibility; there are described on [a temporary page in the Caddy wiki](https://github.com/mholt/caddy/wiki/Converting-Add-ons-to-Plugins). I've tried to make pull requests to your add-ons if they had not migrated to the new format.
+If you are a plugin author you should already be aware of the changes needed for 0.9 compatibility; they are described on [a temporary page in the Caddy wiki](https://github.com/mholt/caddy/wiki/Converting-Add-ons-to-Plugins). I've tried to make pull requests to your add-ons if they had not migrated to the new format.
 
 Caddy loses much of its global state in 0.9, so when you call `caddy.Start()` you now get an `Instance` back, which you can `Restart()`, `Stop()` or `Wait()` on. This allows you to run multiple server types at the same time in the same process.
 
