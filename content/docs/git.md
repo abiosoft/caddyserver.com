@@ -36,19 +36,17 @@ For more control or to use a private repository, use the following syntax:
 	<span class="hl-subdirective">args</span> 		<i>args</i>
 	<span class="hl-subdirective">then</span>     	<i>command</i> [<i>args...</i>]
 	<span class="hl-subdirective">then_long</span>	<i>command</i> [<i>args...</i>]
-	<span class="hl-subdirective">use_absolute_path</span>
 }</code>
 
 *   **repo** is the URL to the repository; SSH and HTTPS URLs are supported.
-*   **clonepath** is the path, relative to site root, to clone the repository into; default is site root.
+*   **clonepath** is the path to clone the repository into; default is site root. It can be absolute or relative (to site root).
 *   **branch** is the branch or tag to pull; default is master branch. Can be **`{latest}`** for most recent tag.
 *   **key** is the path to the SSH private key; only required for private repositories.
 *   **path** and **secret** are used to create a webhook which pulls the latest right after a push. This is limited to the [supported webhooks](#supported-webhooks). **secret** is currently supported for GitHub and Travis hooks only.
 *	**type** is webhook type to use. The webhook type is auto detected by default but it can be explicitly set to one of the [supported webhooks](#supported-webhooks). This is a requirement for [generic webhook](#generic_format).
 *   **interval** is the number of seconds between pulls; default is 3600 (1 hour), minimum 5. An interval of -1 (or specifying webhook) disables periodic pull.
-*	**args** is the additional cli args to pass to `git clone` e.g. `--depth=1`. 
+*	**args** is the additional cli args to pass to `git clone` e.g. `--depth=1`.
 *   **command** is a command to execute after successful pull; followed by **args** which are any arguments to pass to the command. You can have multiple lines of this for multiple commands. **then_long** is for long executing commands that should run in background.
-*	**use\_absolute\_path** configures **clonepath** to be handled as an absolute path; instead of relative.
 
 Each property in the block is optional. The path and repo may be specified on the first line, as in the first syntax, or
 they may be specified in the block with other values.
