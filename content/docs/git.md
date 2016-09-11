@@ -68,7 +68,7 @@ Public repository pulled into site root every hour:
 
 Public repository pulled into the "subfolder" directory in the site root:
 
-<code class="block"><span class="hl-directive">git</span> <span class="hl-arg">github.com/user/myproject /subfolder</span></code>
+<code class="block"><span class="hl-directive">git</span> <span class="hl-arg">github.com/user/myproject subfolder</span></code>
 
 Private repository pulled into the "subfolder" directory with tag v1.0 once per day:
 
