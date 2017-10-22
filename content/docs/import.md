@@ -8,7 +8,7 @@ import allows you to use configuration from another file. It gets replaced with 
 
 This is a unique directive in that `import` can appear outside of a server block. In other words, it can appear at the top of a Caddyfile where an address would normally be. Like other directives, however, it cannot be used inside of other directives.
 
-Note that the the import path is relative to the Caddyfile, not the current working directory.
+Note that the import path is relative to the Caddyfile, not the current working directory.
 
 ### Syntax
 
